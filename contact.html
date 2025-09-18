@@ -16,22 +16,49 @@
         <!-- Styles -->
         <link rel="stylesheet" href="css/base.css" />
         <link rel="stylesheet" href="css/components.css" />
+
+        <script src="/js/script.js" defer></script>
     </head>
 
     <body>
-        <header class="site-header">
+        <header class="site-header" role="banner">
             <div class="container nav-row">
                 <a class="brand" href="index.html" aria-current="page"
                     >themxstudio.</a
                 >
 
-                <nav aria-label="Primary">
+                <nav id="primary-menu" aria-label="Primary">
                     <ul class="menu">
                         <li><a href="about.html">About Me</a></li>
                         <li><a href="portfolio.html">Recent Works</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
+
+                <!-- Hamburger lives at the right edge -->
+                <button
+                    class="menu-toggle"
+                    aria-controls="primary-menu"
+                    aria-expanded="false"
+                    aria-label="Open main menu"
+                >
+                    <svg
+                        class="icon-menu"
+                        viewBox="0 0 24 24"
+                        width="28"
+                        height="28"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M3 6h18M3 12h18M3 18h18"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                    <span class="sr-only">Menu</span>
+                </button>
             </div>
         </header>
 

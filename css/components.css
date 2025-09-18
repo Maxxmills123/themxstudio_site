@@ -28,11 +28,12 @@
     padding: 6px 8px;
 }
 
+/* Push nav to the right of brand on desktop */
 nav {
     margin-left: auto;
 }
 
-/* ---------------- Menu ---------------- */
+/* ---------------- Menu (desktop) ---------------- */
 .menu {
     display: flex;
     align-items: center;
@@ -101,7 +102,7 @@ nav {
 
 /* ---------------- Hamburger button ---------------- */
 .menu-toggle {
-    display: none; /* visible only on mobile */
+    display: none; /* shown on mobile */
     background: none;
     border: none;
     padding: 0.25rem;
@@ -135,41 +136,81 @@ nav {
 
 /* ---------------- Mobile menu behavior ---------------- */
 @media (max-width: 768px) {
+    /* Layout: brand left, hamburger right */
+    .nav-row {
+        justify-content: space-between;
+    }
+
+    /* Hide the inline nav on mobile; we’ll show the drawer when toggled */
+    nav {
+        display: none;
+    }
+
+    /* The toggle is visible on mobile */
     .menu-toggle {
         display: inline-flex;
         align-items: center;
         justify-content: center;
     }
 
+    /* Position the dropdown panel under the hamburger, right-aligned */
     #primary-menu {
         position: absolute;
         top: 100%;
-        right: 0;
-        left: 0;
+        right: 0; /* align to right edge under the toggle */
+        left: auto; /* do not stretch full width */
+        width: 220px; /* adjust if you want wider/narrower */
+        z-index: 999;
+        display: block; /* ensure container exists even if nav was hidden above */
     }
 
+    /* Drawer container (hidden until active) */
     .menu {
         display: none;
         flex-direction: column;
         gap: 0;
         background: var(--BG);
-        border-top: 1px solid var(--NAV_SEP);
+        border: 1px solid var(--NAV_SEP);
         padding: 0.5rem;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        margin: 0;
+        list-style: none;
+    }
+
+    .menu.active {
+        display: flex;
     }
 
     .menu li {
         margin: 0;
     }
 
+    /* PLAIN TEXT links inside the drawer */
     .menu a {
         display: block;
-        padding: 0.875rem 1rem;
-        border-radius: 6px;
+        padding: 12px 16px; /* touch target */
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        border-radius: 0 !important;
+
+        color: var(--HEAD);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-decoration: none;
     }
 
-    .menu.active {
-        display: flex;
+    .menu a:hover,
+    .menu a:focus-visible {
+        text-decoration: underline;
+        outline: none; /* rely on underline */
+    }
+
+    .menu a[aria-current="page"] {
+        background: transparent;
+        color: var(--HEAD);
+        text-decoration: underline;
     }
 
     @media (prefers-reduced-motion: no-preference) {
