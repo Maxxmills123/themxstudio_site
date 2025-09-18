@@ -13,49 +13,97 @@
             rel="stylesheet"
         />
 
+        <!-- Styles -->
         <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
     </head>
+
     <body>
         <header class="site-header">
             <div class="container nav-row">
-                <a class="brand" href="index.html">MAXX MILLS</a>
+                <a class="brand" href="index.html" aria-current="page"
+                    >themxstudio.</a
+                >
 
-                <nav>
+                <nav aria-label="Primary">
                     <ul class="menu">
-                        <li><a href="about.html">ABOUT ME</a></li>
-                        <li><a href="portfolio.html">RECENT WORK</a></li>
-                        <li><a href="services.html">SERVICES</a></li>
-                        <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="portfolio.html">Recent Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
         <main>
-            <section class="hero container">
-                <h1 class="hero-title">Website ( + graphic) Design</h1>
+            <section class="hero-simple container">
+                <div class="media">
+                    <img
+                        class="mainphoto"
+                        src="/assets/hero2.jpg"
+                        alt="Couch, laptop with code, and sketchbook"
+                    />
 
-                <!-- Replace the background-image in CSS or swap this div for an <img> -->
-                <div
-                    class="photo"
-                    role="img"
-                    aria-label="Portrait of Maxx Mills"
-                ></div>
+                    <div class="subphotos">
+                        <img
+                            class="subphoto"
+                            src="/assets/hero1.jpg"
+                            alt="Additional work sample 1"
+                        />
+                        <img
+                            class="subphoto"
+                            src="/assets/hero3.jpg"
+                            alt="Additional work sample 2"
+                        />
+                    </div>
+                </div>
 
-                <ul class="caps">
-                    <li>/ Web Design (UX/UI)</li>
-                    <li>/ Web Development</li>
-                    <li>/ Brand & Graphic Design</li>
-                </ul>
+                <div class="content">
+                    <h1 class="hero-title">Website Design</h1>
 
-                <p class="tagline">
-                    Clean, accessible websites for brands and teams.
-                </p>
+                    <p class="tagline">
+                        From prototyping to front-end development, I design
+                        digital experiences that look sharp and work seamlessly.
+                        Every site I build is straightforward and simple for
+                        visitors to navigate. Grounded in UX research and
+                        accessibility standards, my websites are clean, fast,
+                        and effortless to use.
+                    </p>
+
+                    <p class="tagline">
+                        The MX Studio is a small, independent practice run by
+                        me. Because I handle design and development directly,
+                        you get agency-level work without the overhead or
+                        inflated costs. It’s lean, personal, and focused
+                        entirely on making your project shine.
+                    </p>
+
+                    <p class="cta-line pill">
+                        Like what you see?
+                        <a
+                            href="mailto:maxx@themxstudio.com?subject=Project%20inquiry"
+                            >Email me</a
+                        >
+                    </p>
+                </div>
             </section>
         </main>
 
         <footer class="container footer">
             <small>© <span id="year">2025</span> Maxx Mills</small>
         </footer>
+
+        <script>
+            // auto year
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            // mark active nav by URL (nice when you copy this header to other pages)
+            const here = location.pathname.split("/").pop() || "index.html";
+            document.querySelectorAll(".menu a, .brand").forEach((a) => {
+                const href = a.getAttribute("href") || "";
+                if (href === here) a.setAttribute("aria-current", "page");
+            });
+        </script>
     </body>
 </html>

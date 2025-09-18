@@ -1,0 +1,349 @@
+/* ===========================
+   Components (header, nav, hero)
+   =========================== */
+
+/* ---- Header & Nav ---- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--BG);
+    min-height: var(--HEADERH);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 0 var(--NAV_SEP);
+}
+
+.nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding-inline: var(--GUTTER);
+}
+
+.brand {
+    color: var(--HEAD);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    padding: 6px 8px;
+}
+
+nav {
+    margin-left: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 4vw, 48px);
+}
+
+.menu a {
+    color: var(--TEXT);
+    letter-spacing: 0.06em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: var(--NAV_BORDER_W) solid color-mix(in oklab, var(--BG) 75%, black);
+    box-shadow: 0 2px 5px var(--NAV_SHADOW);
+    transform-origin: center;
+    transition: transform 120ms var(--EASE), box-shadow 120ms var(--EASE),
+        border-color 120ms var(--EASE);
+}
+.menu a:hover,
+.menu a:focus-visible {
+    border-color: color-mix(in oklab, var(--BG) 65%, black);
+    box-shadow: 0 3px 9px var(--NAV_SHADOW);
+    transform: scale(1.08);
+}
+.menu a:active {
+    transform: scale(0.96);
+}
+.menu a[aria-current="page"] {
+    background: var(--HEAD); /* your brand color */
+    color: white;
+}
+.menu a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu a {
+        transition: box-shadow 120ms ease, border-color 120ms ease;
+    }
+    .menu a:hover,
+    .menu a:focus-visible,
+    .menu a:active {
+        transform: none;
+    }
+}
+@media (max-width: 1000px) {
+    .menu {
+        gap: 12px;
+    }
+    .menu a {
+        padding: 6px 10px;
+    }
+}
+
+/* ===========================
+   Hero Layout
+   =========================== */
+
+.hero-simple {
+    display: grid;
+    grid-template-columns: 45% 55%; /* photo takes majority */
+    gap: 40px;
+    align-items: start;
+    padding-block: 40px;
+    width: 100%; /* full width */
+    min-height: calc(100vh - var(--HEADERH));
+}
+
+/* LEFT: big image */
+.hero-simple .media {
+    width: 100%;
+}
+.hero-simple .mainphoto {
+    width: 100%; /* fill the left column */
+    height: auto;
+    max-height: 90vh; /* stops it from overshooting screen height */
+    object-fit: cover;
+    display: block;
+}
+
+/* RIGHT: text + subphotos */
+.hero-simple .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    max-width: 600px; /* keeps paragraphs at readable width */
+}
+
+.hero-title {
+    color: var(--HEAD);
+    font-size: clamp(2rem, 4vw, 6rem);
+    line-height: 1;
+    margin: 0;
+    white-space: nowrap;
+    max-width: none;
+    text-align-last: left;
+}
+
+.hero-simple .content .tagline {
+    color: var(--TEXT);
+    max-width: 65ch; /* keeps lines a nice readable length */
+    margin: 0;
+    text-align: justify; /* straight left + right edges */
+    text-justify: inter-word;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        white-space: normal; /* allow wrapping on tiny screens */
+    }
+}
+
+.hero-simple .content .tagline {
+    max-width: 65ch;
+    margin: 0;
+}
+
+/* subphotos under text */
+.hero-simple .subphotos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.hero-simple .subphoto {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+/* Responsive: stack */
+@media (max-width: 900px) {
+    .hero-simple {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .hero-simple .content {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .hero-simple .subphotos {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mainphotoport {
+    width: 20%; /* fill the left column */
+    height: auto;
+    max-height: 90vh; /* stops it from overshooting screen height */
+    object-fit: cover;
+    display: block;
+}
+/* Each row: give the left column real space and allow shrinking without overflow */
+.row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); /* left a bit wider */
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 60px;
+    padding-top: 40px;
+}
+
+/* Left column = responsive grid that USES the whole width */
+.photos {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(260px, 1fr)
+    ); /* fills the row */
+    gap: 20px; /* space between images */
+    width: 100%;
+}
+
+/* Images fill their cell but keep aspect ratio */
+.mainphotoport {
+    width: 100%; /* stretch to cell width */
+    height: auto; /* keep ratio */
+    display: block;
+    object-fit: contain; /* no crop */
+    padding-left: 40px;
+}
+
+/* Text column */
+.textbox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px; /* keeps paragraphs readable */
+}
+
+.textbox h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--HEAD);
+}
+
+.textbox p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--TEXTC);
+}
+
+/* Responsive: stack rows on mobile */
+@media (max-width: 900px) {
+    .row {
+        grid-template-columns: 1fr; /* stack images above text */
+        gap: 20px;
+    }
+    .photos {
+        justify-content: center;
+    }
+    .mainphotoport {
+        flex: 1 1 100%; /* images stack vertically */
+    }
+}
+
+.mainphotoport1 {
+    width: 30%; /* fill the left column */
+    height: auto;
+    max-height: 90vh; /* stops it from overshooting screen height */
+    display: block;
+}
+
+.about {
+    display: grid;
+    grid-template-columns: 30% 50%; /* left photo smaller, text wider */
+    gap: 40px;
+    align-items: start;
+    padding-block: 60px;
+}
+
+.about-photo img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    padding-left: 40px;
+}
+
+.about-text {
+    max-width: 700px;
+}
+
+.about-text a {
+    color: var(--HEAD); /* use your accent color */
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7);
+    display: grid;
+    place-items: center; /* centering, will be inactive until shown */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+.modal.is-open {
+    display: grid;
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    aspect-ratio: 8.5/11;
+    width: min(60vw, 720px);
+    max-height: calc(100vh - 96px);
+    position: relative;
+    margin: 0;
+}
+.pdf-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.icon-btn {
+    position: absolute;
+    top: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.close {
+    right: 8px;
+    font-size: 22px;
+}
+.download {
+    right: 58px;
+}

@@ -13,30 +13,105 @@
             rel="stylesheet"
         />
 
+        <!-- Styles -->
         <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
+
+        <script src="/js/script.js" defer></script>
     </head>
+
     <body>
         <header class="site-header">
             <div class="container nav-row">
-                <a class="brand" href="index.html"
-                    >MAXX<br /><span class="indent">MILLS</span></a
+                <a class="brand" href="index.html" aria-current="page"
+                    >themxstudio.</a
                 >
+
                 <nav aria-label="Primary">
                     <ul class="menu">
-                        <li>
-                            <a href="about.hmtl" aria-current="page"
-                                >[ ABOUT / WHY ME ]</a
-                            >
-                        </li>
-                        <li><a href="portfolio.html">[ RECENT WORK ]</a></li>
-                        <li><a href="services.html">[ SERVICES ]</a></li>
-                        <li><a href="contact.html">[ CONTACT ]</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="portfolio.html">Recent Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
+        <main class="about">
+            <!-- Left column: photo -->
+            <div class="about-photo">
+                <img src="/assets/me.jpeg" alt="Portrait of Maxx Mills" />
+            </div>
+
+            <!-- Right column: text -->
+            <div class="about-text">
+                <h1>Hey</h1>
+                <p>
+                    I’m Maxx Mills, a Master’s student in Interaction Design at
+                    the University of Queensland with a background in interior
+                    design. My work bridges creativity and technology, using
+                    design thinking to shape digital experiences.
+                </p>
+                <p>
+                    Through my independent practice, The MX Studio, I’m building
+                    a portfolio of web design and development projects. What
+                    started as curiosity turned into a genuine
+                    passion—designing, coding, and refining digital products is
+                    now how I bring ideas to life.
+                </p>
+                <p>
+                    I’m focused on growing my skills, showcasing my work, and
+                    collaborating on projects that push me forward.
+                </p>
+
+                <p>
+                    View my
+                    <a
+                        href="/assets/MaxxMills_CV copy.pdf"
+                        class="js-open-resume"
+                        >resume</a
+                    >.
+                </p>
+
+                <div id="resumeModal" class="modal" aria-hidden="true">
+                    <div class="modal-content">
+                        <button
+                            id="closeResume"
+                            class="icon-btn close"
+                            aria-label="Close"
+                        >
+                            &times;
+                        </button>
+                        <a
+                            class="icon-btn download"
+                            href="/assets/MaxxMills_CV copy.pdf"
+                            download
+                            >Download</a
+                        >
+                        <iframe
+                            src="/assets/MaxxMills_CV copy.pdf#zoom=page-fit"
+                            class="pdf-frame"
+                            title="Resume"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+
         <footer class="container footer">
             <small>© <span id="year">2025</span> Maxx Mills</small>
         </footer>
+
+        <script>
+            // auto year
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            // mark active nav by URL (nice when you copy this header to other pages)
+            const here = location.pathname.split("/").pop() || "index.html";
+            document.querySelectorAll(".menu a, .brand").forEach((a) => {
+                const href = a.getAttribute("href") || "";
+                if (href === here) a.setAttribute("aria-current", "page");
+            });
+        </script>
     </body>
 </html>

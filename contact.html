@@ -13,30 +13,43 @@
             rel="stylesheet"
         />
 
+        <!-- Styles -->
         <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
     </head>
+
     <body>
         <header class="site-header">
             <div class="container nav-row">
-                <a class="brand" href="index.html"
-                    >MAXX<br /><span class="indent">MILLS</span></a
+                <a class="brand" href="index.html" aria-current="page"
+                    >themxstudio.</a
                 >
+
                 <nav aria-label="Primary">
                     <ul class="menu">
-                        <li><a href="about.html">[ ABOUT / WHY ME ]</a></li>
-                        <li><a href="portfolio.html">[ RECENT WORK ]</a></li>
-                        <li><a href="services.html">[ SERVICES ]</a></li>
-                        <li>
-                            <a href="contact.html" aria-current="page"
-                                >[ CONTACT ]</a
-                            >
-                        </li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="portfolio.html">Recent Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
+
         <footer class="container footer">
             <small>© <span id="year">2025</span> Maxx Mills</small>
         </footer>
+
+        <script>
+            // auto year
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            // mark active nav by URL (nice when you copy this header to other pages)
+            const here = location.pathname.split("/").pop() || "index.html";
+            document.querySelectorAll(".menu a, .brand").forEach((a) => {
+                const href = a.getAttribute("href") || "";
+                if (href === here) a.setAttribute("aria-current", "page");
+            });
+        </script>
     </body>
 </html>

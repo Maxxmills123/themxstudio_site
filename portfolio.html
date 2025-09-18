@@ -13,30 +13,118 @@
             rel="stylesheet"
         />
 
+        <!-- Styles -->
         <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/components.css" />
     </head>
+
     <body>
         <header class="site-header">
             <div class="container nav-row">
-                <a class="brand" href="index.html"
-                    >MAXX<br /><span class="indent">MILLS</span></a
+                <a class="brand" href="index.html" aria-current="page"
+                    >themxstudio.</a
                 >
+
                 <nav aria-label="Primary">
                     <ul class="menu">
-                        <li><a href="about.html">[ ABOUT / WHY ME ]</a></li>
-                        <li>
-                            <a href="portfolio.html" aria-current="page"
-                                >[ RECENT WORK ]</a
-                            >
-                        </li>
-                        <li><a href="services.html">[ SERVICES ]</a></li>
-                        <li><a href="contact.html">[ CONTACT ]</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="portfolio.html">Recent Works</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
+        <main>
+            <section class="row">
+                <div class="photos">
+                    <img
+                        class="mainphotoport"
+                        src="/assets/yttp/one.png"
+                        alt=""
+                    />
+                    <img
+                        class="mainphotoport"
+                        src="/assets/yttp/two.png"
+                        alt=""
+                    />
+                    <img
+                        class="mainphotoport"
+                        src="/assets/yttp/three.png"
+                        alt=""
+                    />
+                </div>
+                <div class="textbox">
+                    <h2>Design Proposal - Youth to the People</h2>
+                    <p>
+                        Youth to the People pop-up is a brand-immersive
+                        environment that translates their California skincare
+                        ethos into space. The proposal uses organic forms and
+                        breathable layouts to echo the “superfood, clean beauty”
+                        identity.
+                    </p>
+                    <p>
+                        The layout balances product display with social,
+                        experiential zones, encouraging both discovery and
+                        community interaction. It frames the pop-up not as a
+                        store but as a temporary cultural presence that matches
+                        Gasworks’ creative energy.
+                    </p>
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="photos">
+                    <img
+                        class="mainphotoport"
+                        src="/assets/lattice/section.png"
+                        alt=""
+                    />
+                    <img
+                        class="mainphotoport"
+                        src="/assets/lattice/floor.png"
+                        alt=""
+                    />
+                    <img
+                        class="mainphotoport"
+                        src="/assets/lattice/hero.png"
+                        alt=""
+                    />
+                </div>
+                <div class="textbox">
+                    <h2>Design Proposal - 'LATTICE' studio</h2>
+                    <p>
+                        The proposed commercial space for Haji Oh’s Lattice
+                        project is framed as a clean, contemporary environment
+                        that balances artistry with usability. The design
+                        emphasizes interweaving lines and latticed structures to
+                        create both visual rhythm and functional zoning.
+                    </p>
+                    <p>
+                        The space is intended to draw attention to both the
+                        displayed works and the architectural frame itself,
+                        encouraging pause and interaction. Overall, it positions
+                        itself as a flexible yet striking platform for commerce
+                        and creative display.
+                    </p>
+                </div>
+            </section>
+        </main>
+
         <footer class="container footer">
             <small>© <span id="year">2025</span> Maxx Mills</small>
         </footer>
+
+        <script>
+            // auto year
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            // mark active nav by URL (nice when you copy this header to other pages)
+            const here = location.pathname.split("/").pop() || "index.html";
+            document.querySelectorAll(".menu a, .brand").forEach((a) => {
+                const href = a.getAttribute("href") || "";
+                if (href === here) a.setAttribute("aria-current", "page");
+            });
+        </script>
     </body>
 </html>
