@@ -110,7 +110,7 @@ h2 {
 
 /* ---- One honest tagline rule (no duplicates) ---- */
 .tagline {
-    max-width: 65ch;
+    max-width: 100%;
     margin: 0;
     line-height: 1.45;
     letter-spacing: 0.02em;
@@ -118,6 +118,7 @@ h2 {
     color: var(--HEAD);
     text-wrap: pretty;
     text-align: left;
+    font-size: 1.5rem;
 }
 
 /* ---- Mobile tweak when you want edge-to-edge hero ---- */

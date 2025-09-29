@@ -1,4 +1,6 @@
-/* ---- Header & Nav ---- */
+/* ===========================
+   1) Header & Nav
+   =========================== */
 .site-header {
     position: sticky;
     top: 0;
@@ -9,16 +11,13 @@
     align-items: center;
     box-shadow: 0 1px 0 var(--NAV_SEP);
 }
-
 .nav-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 12px;
     width: 100%;
     padding-inline: var(--GUTTER);
 }
-
 .brand {
     color: var(--HEAD);
     font-weight: 900;
@@ -27,13 +26,13 @@
     line-height: 1;
     padding: 6px 8px;
 }
-
-/* Push nav to the right of brand on desktop */
 nav {
     margin-left: auto;
 }
 
-/* ---------------- Menu (desktop) ---------------- */
+/* ===========================
+   2) Desktop Menu
+   =========================== */
 .menu {
     display: flex;
     align-items: center;
@@ -42,7 +41,6 @@ nav {
     margin: 0;
     padding: 0;
 }
-
 .menu a {
     color: var(--TEXT);
     letter-spacing: 0.06em;
@@ -56,29 +54,25 @@ nav {
     transition: transform 120ms var(--EASE), box-shadow 120ms var(--EASE),
         border-color 120ms var(--EASE);
 }
-
 .menu a:hover,
 .menu a:focus-visible {
     border-color: color-mix(in oklab, var(--BG) 65%, black);
     box-shadow: 0 3px 9px var(--NAV_SHADOW);
     transform: scale(1.08);
 }
-
 .menu a:active {
     transform: scale(0.96);
 }
-
 .menu a[aria-current="page"] {
     background: var(--HEAD);
-    color: white;
+    color: #fff;
 }
-
 .menu a:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
 }
 
-/* ---- Motion safe ---- */
+/* Motion safe */
 @media (prefers-reduced-motion: reduce) {
     .menu a {
         transition: box-shadow 120ms ease, border-color 120ms ease;
@@ -90,7 +84,7 @@ nav {
     }
 }
 
-/* ---- Tablet tweaks ---- */
+/* Tablet tweaks */
 @media (max-width: 1000px) {
     .menu {
         gap: 12px;
@@ -100,28 +94,26 @@ nav {
     }
 }
 
-/* ---------------- Hamburger button ---------------- */
+/* ===========================
+   3) Mobile Menu & Toggle
+   =========================== */
 .menu-toggle {
-    display: none; /* shown on mobile */
+    display: none;
     background: none;
-    border: none;
+    border: 0;
     padding: 0.25rem;
     cursor: pointer;
     line-height: 0;
     color: var(--HEAD);
 }
-
 .menu-toggle:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
 }
-
 .menu-toggle svg {
     width: 28px;
     height: 28px;
 }
-
-/* Screen reader only */
 .sr-only {
     position: absolute !important;
     width: 1px;
@@ -134,37 +126,30 @@ nav {
     border: 0;
 }
 
-/* ---------------- Mobile menu behavior ---------------- */
 @media (max-width: 768px) {
-    /* Layout: brand left, hamburger right */
     .nav-row {
         justify-content: space-between;
     }
-
-    /* Hide the inline nav on mobile; we’ll show the drawer when toggled */
     nav {
         display: none;
-    }
-
-    /* The toggle is visible on mobile */
+    } /* hide inline nav; use drawer */
     .menu-toggle {
         display: inline-flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* Position the dropdown panel under the hamburger, right-aligned */
+    /* dropdown wrapper under toggle */
     #primary-menu {
         position: absolute;
         top: 100%;
-        right: 0; /* align to right edge under the toggle */
-        left: auto; /* do not stretch full width */
-        width: 220px; /* adjust if you want wider/narrower */
+        right: 0;
+        width: 220px;
         z-index: 999;
-        display: block; /* ensure container exists even if nav was hidden above */
+        display: block;
     }
 
-    /* Drawer container (hidden until active) */
+    /* drawer list */
     .menu {
         display: none;
         flex-direction: column;
@@ -175,124 +160,80 @@ nav {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
         margin: 0;
         list-style: none;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
     }
-
     .menu.active {
         display: flex;
+        opacity: 1;
+        transform: translateY(0);
     }
-
     .menu li {
         margin: 0;
     }
-
-    /* PLAIN TEXT links inside the drawer */
     .menu a {
         display: block;
-        padding: 12px 16px; /* touch target */
+        padding: 12px 16px;
         background: transparent !important;
         border: 0 !important;
         box-shadow: none !important;
         transform: none !important;
         border-radius: 0 !important;
-
         color: var(--HEAD);
         font-weight: 600;
         letter-spacing: 0.02em;
         text-decoration: none;
     }
-
     .menu a:hover,
     .menu a:focus-visible {
         text-decoration: underline;
-        outline: none; /* rely on underline */
+        outline: none;
     }
-
     .menu a[aria-current="page"] {
-        background: transparent;
-        color: var(--HEAD);
         text-decoration: underline;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-        .menu {
-            opacity: 0;
-            transform: translateY(-8px);
-            transition: opacity 0.18s ease, transform 0.18s ease;
-        }
-        .menu.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
     }
 }
 
 /* ===========================
-   Hero Layout
+   4) Hero Layout (centered text, images below)
    =========================== */
-
 .hero-simple {
-    display: grid;
-    grid-template-columns: 45% 55%; /* photo takes majority */
-    gap: 40px;
-    align-items: start;
-    padding-block: 40px;
-    width: 100%; /* full width */
+    text-align: center;
+    padding: 2.5rem 1rem;
     min-height: calc(100vh - var(--HEADERH));
 }
-
-/* LEFT: big image */
-.hero-simple .media {
-    width: 100%;
-}
-.hero-simple .mainphoto {
-    width: 100%; /* fill the left column */
-    height: auto;
-    max-height: 90vh; /* stops it from overshooting screen height */
-    object-fit: cover;
-    display: block;
-}
-
-/* RIGHT: text + subphotos */
 .hero-simple .content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    gap: 20px;
-    max-width: 600px; /* keeps paragraphs at readable width */
+    max-width: 1000px;
+    margin: 0 auto 2rem;
 }
-
 .hero-title {
     color: var(--HEAD);
     font-size: clamp(2rem, 4vw, 6rem);
-    line-height: 1;
+    line-height: 2;
     margin: 0;
-    white-space: nowrap;
-    max-width: none;
-    text-align-last: left;
+    text-wrap: balance;
 }
-
 .hero-simple .content .tagline {
     color: var(--TEXT);
-    max-width: 65ch; /* keeps lines a nice readable length */
+    max-width: none;
     margin: 0;
-    text-align: justify; /* straight left + right edges */
-    text-justify: inter-word;
     line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-top: 20px;
 }
-
-@media (max-width: 600px) {
-    .hero-title {
-        white-space: normal; /* allow wrapping on tiny screens */
-    }
+.hero-simple .media {
+    display: block;
 }
-
-.hero-simple .content .tagline {
-    max-width: 65ch;
-    margin: 0;
+.hero-simple .media img,
+.hero-simple .subphoto {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 1rem;
+    object-fit: cover;
 }
-
-/* subphotos under text */
 .hero-simple .subphotos {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -300,151 +241,98 @@ nav {
     width: 100%;
     margin-top: 20px;
 }
-
-.hero-simple .subphoto {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    border-radius: 4px;
-}
-
-/* Responsive: stack */
 @media (max-width: 900px) {
-    .hero-simple {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-    .hero-simple .content {
-        align-items: flex-start;
-        text-align: left;
-    }
     .hero-simple .subphotos {
         grid-template-columns: 1fr;
     }
 }
-
-.mainphotoport {
-    width: 20%; /* fill the left column */
-    height: auto;
-    max-height: 90vh; /* stops it from overshooting screen height */
-    object-fit: cover;
-    display: block;
+@media (max-width: 600px) {
+    .hero-title {
+        text-wrap: wrap;
+    }
 }
-/* Each row: give the left column real space and allow shrinking without overflow */
+
+/* ===========================
+   5) Portfolio Rows / Photos / Text blocks
+   =========================== */
 .row {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); /* left a bit wider */
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 40px;
     align-items: start;
     margin-bottom: 60px;
     padding-top: 40px;
 }
-
-/* Left column = responsive grid that USES the whole width */
 .photos {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(260px, 1fr)
-    ); /* fills the row */
-    gap: 20px; /* space between images */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
     width: 100%;
 }
-
-/* Images fill their cell but keep aspect ratio */
-.mainphotoport {
-    width: 100%; /* stretch to cell width */
-    height: auto; /* keep ratio */
+.mainphotoport,
+.mainphotoport1 {
+    width: 100%;
+    height: auto;
     display: block;
-    object-fit: contain; /* no crop */
+    object-fit: contain;
+}
+/* optional nudge */
+.mainphotoport {
     padding-left: 40px;
 }
-
-/* Text column */
-.textbox {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 600px; /* keeps paragraphs readable */
-}
-
-.textbox h2 {
-    margin: 0;
-    font-size: 2rem;
-    color: var(--HEAD);
-}
-
-.textbox p {
-    margin: 0;
-    line-height: 1.5;
-    color: var(--TEXTC);
-}
-
-/* Responsive: stack rows on mobile */
 @media (max-width: 900px) {
     .row {
-        grid-template-columns: 1fr; /* stack images above text */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
     .photos {
         justify-content: center;
     }
-    .mainphotoport {
-        flex: 1 1 100%; /* images stack vertically */
-    }
 }
 
-.mainphotoport1 {
-    width: 30%; /* fill the left column */
-    height: auto;
-    max-height: 90vh; /* stops it from overshooting screen height */
-    display: block;
-}
-
+/* ===========================
+   6) About section
+   =========================== */
 .about {
     display: grid;
-    grid-template-columns: 30% 50%; /* left photo smaller, text wider */
+    grid-template-columns: 30% 50%;
     gap: 40px;
     align-items: start;
     padding-block: 60px;
 }
-
 .about-photo img {
     width: 100%;
     border-radius: 8px;
     object-fit: cover;
     padding-left: 40px;
 }
-
 .about-text {
     max-width: 700px;
 }
-
 .about-text a {
-    color: var(--HEAD); /* use your accent color */
+    color: var(--HEAD);
     font-weight: 600;
     text-decoration: underline;
 }
 
+/* ===========================
+   7) PDF Modal
+   =========================== */
 .modal {
-    display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.7);
     display: grid;
-    place-items: center; /* centering, will be inactive until shown */
+    place-items: center;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 .modal.is-open {
-    display: grid;
     visibility: visible;
     opacity: 1;
 }
-
 .modal-content {
     background: #fff;
     border-radius: 8px;
@@ -461,7 +349,6 @@ nav {
     height: 100%;
     border: 0;
 }
-
 .icon-btn {
     position: absolute;
     top: 8px;
