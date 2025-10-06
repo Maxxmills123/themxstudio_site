@@ -1,0 +1,32 @@
+.legal-container {
+  max-width: min(60ch, 60%); /* keeps it narrow and readable */
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  color: var(--text-color, #222);
+  font-family: var(--font-body, "Albert Sans", sans-serif);
+  line-height: 1.7;
+  text-align: justify; /* neat paragraph edges */
+}
+
+.legal-container h1,
+.legal-container h2 {
+  color: var(--secondary, #000);
+  text-align: left; /* headings stay aligned */
+}
+
+.legal-container h1 {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.legal-container h2 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.legal-footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: color-mix(in srgb, var(--text-color, #222), transparent 30%);
+  font-size: 0.9rem;
+}

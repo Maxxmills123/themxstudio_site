@@ -1,136 +1,26 @@
-/* ===========================
-   Base (tokens, reset, layout)
-   =========================== */
-
-/* ---- Design tokens ---- */
 :root {
-    /* Colors */
-    --TEXT: #261b1b;
-    --HEAD: #fa7071;
-    --BG: #f0f0f0;
+  --font-body: "Albert Sans", sans-serif;
 
-    /* Navigation */
-    --NAV_BORDER_W: 1px;
-    --NAV_SHADOW: rgba(0, 0, 0, 0.22);
-
-    /* Layout */
-    --GUTTER: clamp(12px, 3vw, 40px);
-    --HEADERH: 68px;
-
-    /* Motion */
-    --EASE: cubic-bezier(0.2, 0.8, 0.2, 1);
-
-    /* Derived */
-    --NAV_SEP: color-mix(in oklab, var(--BG) 70%, black);
-}
-
-/* ---- Reset-ish ---- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+  --background-color: #f8f5f4;
+  --text: #f3f3f3;
+  --secondary: #1e1e1e;
+  --nav-surface: #ffffff;
+  --border: color-mix(in srgb, var(--text), transparent 85%);
 }
 
 html,
 body {
-    height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    margin: 0;
-    background: var(--BG);
-    color: var(--TEXT);
-    font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-        Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+  font-family: var(--font-body);
+  background: var(--background-color);
+  color: var(--text);
+  font-weight: 300;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* ---- Layout wrappers ---- */
-.container {
-    width: 100%;
-    padding-inline: var(--GUTTER);
-    margin-inline: auto;
-}
-
-main {
-    min-height: 70vh;
-}
-
-/* ---- Type ---- */
-h1,
-h2 {
-    margin: 0;
-    font-weight: 700;
-    color: var(--HEAD);
-    line-height: 1;
-}
-h2 {
-    margin-bottom: 0.5rem;
-}
-
-/* ---- Footer ---- */
-.footer {
-    padding: 36px var(--GUTTER) 56px;
-}
-
-/* ---- Utilities ---- */
-.section {
-    padding: 24px 0 8px;
-}
-.bullets li {
-    margin: 0.5rem 0;
-}
-
-.pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: var(--NAV_BORDER_W) solid color-mix(in oklab, var(--BG) 75%, black);
-    box-shadow: 0 2px 5px var(--NAV_SHADOW);
-    color: var(--NAV_TEXT);
-}
-
-/* ---- One honest tagline rule (no duplicates) ---- */
-.tagline {
-    max-width: 100%;
-    margin: 0;
-    line-height: 1.45;
-    letter-spacing: 0.02em;
-    font-weight: 500;
-    color: var(--HEAD);
-    text-wrap: pretty;
-    text-align: left;
-    font-size: 1.5rem;
-}
-
-/* ---- Mobile tweak when you want edge-to-edge hero ---- */
-@media (max-width: 1000px) {
-    .container {
-        padding-inline: var(--GUTTER);
-    }
-}
-
-.container {
-    width: 100%;
-    max-width: none; /* full-width header/nav */
-    padding-inline: var(--GUTTER);
-    margin-inline: auto;
+p {
+    color: var(--secondary);
 }

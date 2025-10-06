@@ -1,135 +1,100 @@
 <!DOCTYPE html>
-<html lang="en-AU">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Maxx Mills</title>
+<html lang="en">
+  <head>
+    <!-- ===== Meta & SEO ===== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MX Studio — Brisbane-based web design and SEO studio creating modern, high-performance websites for small businesses and creative professionals."
+    />
+    <meta name="author" content="MX Studio" />
 
-        <!-- Google Font: PT Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"
-        />
+    <title>Web Design Brisbane | The MX Studio</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="css/base.css" />
-        <link rel="stylesheet" href="css/components.css" />
+    <!-- ===== Favicon ===== -->
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
 
-        <script src="/js/script.js" defer></script>
-    </head>
+    <!-- ===== Fonts ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ===== Stylesheets ===== -->
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
 
-    <body>
-        <header class="site-header" role="banner">
-            <div class="container nav-row">
-                <a class="brand" href="index.html" aria-current="page"
-                    >themxstudio.</a
-                >
+    <!-- ===== Main Script ===== -->
+    <script src="./js/main.js" defer></script>
+  </head>
 
-                <nav id="primary-menu" aria-label="Primary">
-                    <ul class="menu">
-                        <li><a href="about.html">About Me</a></li>
-                        <li><a href="portfolio.html">Recent Works</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+  <body>
+    <!-- =======================
+     Site Header (Nav only)
+     ======================= -->
+    <header class="site-header">
+      <nav class="primary-nav" aria-label="Main navigation">
+        <div class="nav-inner">
+          <!-- Left: Brand -->
+          <a class="brand" href="index.html" aria-label="TheMXStudio Home">
+            the<span>mx</span>studio
+          </a>
 
-                <!-- Hamburger lives at the right edge -->
-                <button
-                    class="menu-toggle"
-                    aria-controls="primary-menu"
-                    aria-expanded="false"
-                    aria-label="Open main menu"
-                >
-                    <svg
-                        class="icon-menu"
-                        viewBox="0 0 24 24"
-                        width="28"
-                        height="28"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M3 6h18M3 12h18M3 18h18"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            fill="none"
-                            stroke-linecap="round"
-                        />
-                    </svg>
-                    <span class="sr-only">Menu</span>
-                </button>
-            </div>
-        </header>
+          <!-- Center: Rounded pill with links -->
+          <div class="nav-center-card" role="group" aria-label="Main sections">
+            <a href="about.html">About</a>
+            <a href="services.html">Web Design &amp; SEO</a>
+            <a href="contact.html">Contact</a>
+          </div>
 
-        <main>
-            <section class="hero-simple container">
-                <div class="content">
-                    <h1 class="hero-title">( Website Design )</h1>
+          <!-- Right: Email button -->
+          <a
+            class="btn btn-black"
+            href="mailto:hello@themxstudio.com?subject=Project%20Enquiry&body=Hi%20MX%20Studio,%20I%E2%80%99d%20love%20to%20chat%20about..."
+          >
+            Send us an email
+          </a>
+        </div>
+      </nav>
 
-                    <p class="tagline">
-                            From prototyping to front-end development, I design
-                        digital experiences that look sharp and work seamlessly.
-                        Every site I build is straightforward and simple for
-                        visitors to navigate. Grounded in UX research and
-                        accessibility standards, my websites are clean, fast,
-                        and effortless to use.
-                    </p>
+      <p>content will go here...</p>
+    </header>
 
-                    <p class="tagline">
-                            The MX Studio is a small, independent practice run by
-                        me. Because I handle design and development directly,
-                        you get agency-level work without the overhead or
-                        inflated costs. It’s lean, personal, and focused
-                        entirely on making your project shine.
-                    </p>
+    <!-- ===== Footer ===== -->
+    <footer id="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img
+            src="assets/images/logo.svg"
+            alt="MX Studio logo"
+            class="footer-logo"
+          />
+          <p class="footer-tagline">Design. Develop. Optimise.</p>
+        </div>
 
-                    <p class="cta-line pill">
-                        Like what you see?
-                        <a
-                            href="mailto:maxx@themxstudio.com?subject=Project%20inquiry"
-                            >Email me</a
-                        >
-                    </p>
-                </div>
-                <div class="media">
-                    <img
-                        class="mainphoto"
-                        src="/assets/hero2.jpg"
-                        alt="Couch, laptop with code, and sketchbook"
-                    />
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./terms.html">Terms</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
 
-                    <div class="subphotos">
-                        <img
-                            class="subphoto"
-                            src="/assets/hero1.jpg"
-                            alt="Additional work sample 1"
-                        />
-                        <img
-                            class="subphoto"
-                            src="/assets/hero3.jpg"
-                            alt="Additional work sample 2"
-                        />
-                    </div>
-                </div>
-            </section>
-        </main>
+        <div class="footer-meta">
+          <p>
+            &copy; <span id="year"></span> TheMXStudio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
 
-        <footer class="container footer">
-            <small>© <span id="year">2025</span> Maxx Mills</small>
-        </footer>
-
-        <script>
-            // auto year
-            document.getElementById("year").textContent =
-                new Date().getFullYear();
-
-            // mark active nav by URL (nice when you copy this header to other pages)
-            const here = location.pathname.split("/").pop() || "index.html";
-            document.querySelectorAll(".menu a, .brand").forEach((a) => {
-                const href = a.getAttribute("href") || "";
-                if (href === here) a.setAttribute("aria-current", "page");
-            });
-        </script>
-    </body>
+    <script>
+      // Auto-update copyright year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

@@ -1,42 +1,100 @@
 <!DOCTYPE html>
-<html lang="en-AU">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Maxx Mills</title>
+<html lang="en">
+  <head>
+    <!-- ===== Meta & SEO ===== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MX Studio — Brisbane-based web design and SEO studio creating modern, high-performance websites for small businesses and creative professionals."
+    />
+    <meta name="author" content="MX Studio" />
 
-        <!-- Google Font: PT Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"
-        />
+    <title> Services | The MX Studio</title>
 
-        <link rel="stylesheet" href="css/base.css" />
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="container nav-row">
-                <a class="brand" href="index.html"
-                    >MAXX<br /><span class="indent">MILLS</span></a
-                >
-                <nav aria-label="Primary">
-                    <ul class="menu">
-                        <li><a href="about.html">[ ABOUT / WHY ME ]</a></li>
-                        <li><a href="portfolio.html">[ RECENT WORK ]</a></li>
-                        <li>
-                            <a href="services.html" aria-current="page"
-                                >[ SERVICES ]</a
-                            >
-                        </li>
-                        <li><a href="contact.html">[ CONTACT ]</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <footer class="container footer">
-            <small>© <span id="year">2025</span> Maxx Mills</small>
-        </footer>
-    </body>
+    <!-- ===== Favicon ===== -->
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+
+    <!-- ===== Fonts ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ===== Stylesheets ===== -->
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+
+    <!-- ===== Main Script ===== -->
+    <script src="./js/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- =======================
+     Site Header (Nav only)
+     ======================= -->
+    <header class="site-header">
+      <nav class="primary-nav" aria-label="Main navigation">
+        <div class="nav-inner">
+          <!-- Left: Brand -->
+          <a class="brand" href="index.html" aria-label="TheMXStudio Home">
+            the<span>mx</span>studio
+          </a>
+
+          <!-- Center: Rounded pill with links -->
+          <div class="nav-center-card" role="group" aria-label="Main sections">
+            <a href="about.html">About</a>
+            <a href="services.html" aria-current="page">Web Design &amp; SEO</a>
+            <a href="contact.html">Contact</a>
+          </div>
+
+          <!-- Right: Email button -->
+          <a
+            class="btn btn-black"
+            href="mailto:hello@themxstudio.com?subject=Project%20Enquiry&body=Hi%20MX%20Studio,%20I%E2%80%99d%20love%20to%20chat%20about..."
+          >
+            Send us an email
+          </a>
+        </div>
+      </nav>
+
+      <p>services will go here...</p>
+    </header>
+
+    <!-- ===== Footer ===== -->
+    <footer id="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img
+            src="assets/images/logo.svg"
+            alt="MX Studio logo"
+            class="footer-logo"
+          />
+          <p class="footer-tagline">Design. Develop. Optimise.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./terms.html">Terms</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-meta">
+          <p>
+            &copy; <span id="year"></span> TheMXStudio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Auto-update copyright year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

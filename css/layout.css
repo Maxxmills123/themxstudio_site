@@ -1,0 +1,65 @@
+/* ===========================
+   Header & Nav Layout (no hero)
+   =========================== */
+.site-header {
+  background: var(--background-color);
+  color: var(--border);
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+}
+
+.primary-nav {
+  width: 100%;
+}
+
+/* brand | center pill | button */
+.nav-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 4vw, 2rem);
+}
+
+/* Make sure nothing is inheriting accidental centering */
+.site-header,
+.primary-nav {
+  text-align: initial;
+}
+
+/* Pin items */
+.brand {
+  justify-self: start;
+} /* hard-left */
+.nav-center-card {
+  justify-self: center;
+} /* true center */
+.btn {
+  justify-self: end;
+} /* hard-right */
+
+/* Responsive */
+@media (max-width: 820px) {
+  .nav-inner {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.8rem;
+  }
+  .nav-center-card {
+    width: 100%;
+    max-width: 520px;
+  }
+  .btn {
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+    justify-self: center;
+  }
+}
