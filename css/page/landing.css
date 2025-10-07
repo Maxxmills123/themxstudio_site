@@ -1,0 +1,391 @@
+/* =================================
+   Global sanity
+   ================================= */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* no horizontal scroll */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Media should never exceed container */
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =================================
+   Layout: hero + stack
+   ================================= */
+#main-content {
+  min-height: 90dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 0;
+  overflow: visible;
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+/* =================================
+   Hero
+   ================================= */
+.hero {
+  display: grid;
+  place-content: center;
+  padding: clamp(16px, 3vh, 32px) clamp(16px, 6vw, 64px);
+  background: var(--background-color, #f9f8f7);
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
+
+#hero.hero {
+  padding-block: clamp(10px, 2vh, 24px);
+}
+
+.hero-content {
+  max-width: 900px;
+  width: 100%;
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
+
+.hero-content h1 {
+  margin: 0 0 0.5rem;
+  text-align: left;
+  color: var(--background-color);
+  font-size: clamp(1.6rem, 1rem + 2.2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content p {
+  margin: 0;
+  max-width: 65ch;
+  line-height: 1.55;
+  color: var(--secondary);
+  font-size: clamp(1rem, 0.9rem + 0.6vw, 1.15rem);
+  text-align: justify;
+  padding-left: clamp(0.5rem, 3vw, 2rem);
+  padding-block: 0.5rem;
+}
+
+/* Background pill */
+.bg-text {
+  display: inline-block;
+  padding: clamp(0.7rem, 1vw + 0.6rem, 1.2rem) clamp(1rem, 1.5vw + 0.9rem, 2rem);
+  border-radius: 40px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--pill-bg) center / cover no-repeat;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.bg-text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+/* Shrink/dim hero when needed */
+.hero-content.dimmed {
+  transform: scale(0.9);
+}
+.hero-content.dimmed * {
+  filter: grayscale(80%) brightness(0.9);
+  opacity: 0.2;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+.hero-content.dimmed .btn-black {
+  filter: none;
+  opacity: 1;
+}
+
+/* =================================
+   Full-bleed helper
+   ================================= */
+.mx-fullbleed {
+  width: 100%;
+  margin-inline: calc(50% - 50vw);
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+/* =================================
+   Expand Rows (Accordion)
+   ================================= */
+.expand-stack.container {
+  display: grid;
+  grid-auto-rows: auto;
+  align-self: end;
+}
+
+.expand-row {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  padding: clamp(12px, 2.2vw, 22px) clamp(16px, 4vw, 40px);
+  background: transparent;
+}
+
+.expand-row.is-active {
+  z-index: 2;
+}
+
+/* Header (click target) */
+.row-head {
+  display: grid;
+  gap: 6px;
+  cursor: pointer;
+  min-height: 30px;
+}
+
+.expand-row h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 0.9rem + 2.2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+/* Optional kicker */
+.row-kicker {
+  font-size: clamp(0.95rem, 0.85rem + 1vw, 1.05rem);
+  color: color-mix(in oklab, currentColor 85%, transparent);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 320ms cubic-bezier(0.2, 0.95, 0.15, 1.25),
+    opacity 220ms cubic-bezier(0.2, 0.6, 0.1, 1);
+}
+
+.expand-row.is-active .row-kicker {
+  max-height: 4rem;
+  opacity: 1;
+  margin-top: 4px;
+}
+
+/* Body */
+.row-more {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  will-change: height, opacity;
+  margin-top: 0;
+  padding-top: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-anchor: none;
+}
+.expand-row.is-active .row-more {
+  opacity: 1;
+}
+
+/* Lists inside reveals */
+.row-more .tight {
+  padding-left: 1.1rem;
+  margin: 0;
+}
+.row-more .tight li {
+  margin: 0.35rem 0;
+  list-style: none;
+  padding-left: 0.25rem;
+  position: relative;
+}
+.row-more .tight li::before {
+  content: "•";
+  position: absolute;
+  left: max(-1.1rem, -1.5rem);
+  top: 0.15em;
+  line-height: 1;
+}
+
+/* =================================
+   Themes
+   ================================= */
+.bg-dark {
+  background: var(--accent);
+  color: var(--secondary);
+}
+.bg-dark .row-more p,
+.bg-dark .row-more span {
+  display: block;
+  font-size: clamp(0.7rem, 0.65rem + 0.4vw, 0.9rem);
+  line-height: 1.55;
+  max-width: 30ch;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  text-align: justify;
+}
+.bg-dark .row-more span {
+  font-weight: 800;
+}
+
+.bg-light {
+  position: relative;
+  color: var(--background-color);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  background: url("/assets/images/MXHERO.webp") center / cover no-repeat;
+}
+.bg-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+.bg-light .row-more p {
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0 auto;
+  padding: 0.75rem 0.6rem;
+  color: #2a2a2a;
+  text-align: left;
+}
+
+.bg-peach {
+  background: var(--peach);
+  color: var(--secondary);
+  position: relative;
+}
+.bg-peach::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+.bg-peach > * {
+  position: relative;
+  z-index: 1;
+}
+.bg-peach .row-more p {
+  line-height: 1.6;
+  max-width: 58ch;
+  margin: 0 auto;
+  padding: 0.75rem 0.6rem;
+  text-align: left;
+  color: #2a211d;
+}
+
+/* =================================
+   Accessibility
+   ================================= */
+.row-head:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-more,
+  .row-kicker,
+  .expand-row {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =================================
+   Why TheMXStudio grid
+   ================================= */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  justify-items: center;
+  align-items: start;
+  max-width: min(1100px, 90vw);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  text-align: left;
+}
+
+.why-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  max-width: 320px;
+}
+
+.why-item h3 {
+  font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem);
+  font-weight: 100;
+  margin: 0 0 0.25rem 0;
+  color: var(--secondary);
+  text-align: left;
+  width: 100%;
+}
+
+.why-item p {
+  font-size: clamp(0.5rem, 0.45rem + 0.3vw, 0.6rem);
+  line-height: 1.3;
+  font-weight: 300;
+  color: var(--secondary);
+  margin: 0;
+  text-align: left;
+  width: 80%;
+  max-width: 26ch;
+}
+
+/* =================================
+   Responsive
+   ================================= */
+@media (max-width: 850px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  .why-item {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 1.5rem 1rem;
+    min-height: 55vh;
+  }
+
+  .hero-content p {
+    font-size: clamp(0.95rem, 3.6vw, 1.05rem);
+    padding: 0.75rem 1.25rem;
+    text-align: justify;
+  }
+
+  .hero-content .btn {
+    display: block;
+    max-width: 240px;
+    margin: 0.5rem auto;
+    text-align: center;
+  }
+
+  .expand-row {
+    padding: clamp(10px, 2.5vw, 16px) clamp(12px, 4vw, 24px);
+  }
+
+  .expand-row h2 {
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+    text-align: left;
+  }
+
+  .row-more {
+    max-height: none;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+  }
+}

@@ -1,19 +1,61 @@
+/* ================================
+   Design Tokens
+   ================================ */
 :root {
   --font-body: "Albert Sans", sans-serif;
 
+  --accent: #c6e98d;
+  --peach: #91fdff;
+
   --background-color: #f8f5f4;
-  --text: #f3f3f3;
-  --secondary: #1e1e1e;
+  --text: #f3f3f3; /* light text for dark surfaces */
+  --secondary: #1e1e1e; /* dark text for light surfaces */
+
   --nav-surface: #ffffff;
+  --pill-bg: url("/assets/images/MXHERO.webp");
+
   --border: color-mix(in srgb, var(--text), transparent 85%);
+}
+
+/* ================================
+   Base / Reset
+   ================================ */
+html {
+  scroll-behavior: smooth;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: clip; /* prevent horizontal scroll without nuking transforms */
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Media should never exceed its container */
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Long words/URLs won't blow out the layout */
+:where(p, li, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: anywhere;
+}
+
+/* ================================
+   Typography
+   ================================ */
 body {
   font-family: var(--font-body);
   background: var(--background-color);
@@ -21,6 +63,39 @@ body {
   font-weight: 300;
 }
 
+/* Default paragraphs on light backgrounds */
 p {
-    color: var(--secondary);
+  color: var(--secondary);
+}
+
+/* ================================
+   Layout Helpers
+   ================================ */
+.mx-fullbleed {
+  width: 100%;
+  margin: 0; /* avoid negative margins that fake extra width */
+  overflow-x: clip; /* belt and suspenders */
+}
+
+/* Keep top-level chrome from causing horizontal scroll */
+header,
+nav {
+  overflow-x: clip;
+}
+
+/* ================================
+   Components / Patterns
+   ================================ */
+/* Expanded rows scale only vertically, so they won't cause horizontal overflow */
+.expand-row {
+  transform-origin: center top;
+}
+
+/* Custom bullets in lists inside .row-more .tight sections */
+.row-more .tight {
+  position: relative;
+}
+.row-more .tight li::before {
+  left: max(calc(-1 * var(--rm-li-indent)), -1.5rem);
+  /* guardrail so the bullet can't go past the viewport edge */
 }

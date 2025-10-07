@@ -3,14 +3,17 @@
   <head>
     <!-- ===== Meta & SEO ===== -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <meta
       name="description"
       content="MX Studio — Brisbane-based web design and SEO studio creating modern, high-performance websites for small businesses and creative professionals."
     />
     <meta name="author" content="MX Studio" />
 
-    <title>Contact| The MX Studio</title>
+    <title>Contact | The MX Studio</title>
 
     <!-- ===== Favicon ===== -->
     <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
@@ -29,6 +32,7 @@
 
     <!-- ===== Main Script ===== -->
     <script src="./js/main.js" defer></script>
+    <script src="./js/nav.js" defer></script>
   </head>
 
   <body>
@@ -43,24 +47,69 @@
             the<span>mx</span>studio
           </a>
 
-          <!-- Center: Rounded pill with links -->
+          <!-- Center: Rounded pill (desktop only) -->
           <div class="nav-center-card" role="group" aria-label="Main sections">
             <a href="about.html">About</a>
             <a href="services.html">Web Design &amp; SEO</a>
             <a href="contact.html" aria-current="page">Contact</a>
           </div>
 
-          <!-- Right: Email button -->
+          <!-- Middle on MOBILE: CTA -->
           <a
-            class="btn btn-black"
+            class="btn btn-black nav-cta"
             href="mailto:hello@themxstudio.com?subject=Project%20Enquiry&body=Hi%20MX%20Studio,%20I%E2%80%99d%20love%20to%20chat%20about..."
           >
             Send us an email
           </a>
+
+          <!-- Right on MOBILE: Hamburger toggle -->
+          <button
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-label="Open menu"
+            aria-controls="primary-menu"
+          >
+            <svg
+              class="icon icon-menu"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="icon icon-close"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              aria-hidden="true"
+              hidden
+            >
+              <path
+                d="M6 6l12 12M18 6l-12 12"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="primary-menu" class="nav-menu" hidden>
+          <ul class="nav-list">
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Web Design &amp; SEO</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
       </nav>
-
-      <p>contact info will go here...</p>
     </header>
 
     <!-- ===== Footer ===== -->
