@@ -1,10 +1,11 @@
+// START: NAV JS
 // mobile-nav-toggle.js
-// Stable mobile dropdown for .primary-nav
-// - Outside click (capture, path-aware)
-// - Esc close
-// - Link click close
-// - Only reacts on real breakpoint flips (matchMedia change)
-// - Cooldown after scroll-lock to ignore phantom resizes
+// Fullscreen slide-in mobile menu for .primary-nav
+// - Outside click and scrim click to close
+// - Esc to close
+// - Link click closes
+// - Scroll-lock on open
+// - Breakpoint-aware (matches CSS max-width: 900px)
 
 (function () {
   const nav = document.querySelector(".primary-nav");
@@ -12,11 +13,13 @@
 
   const toggle = nav.querySelector(".nav-toggle");
   const menu = nav.querySelector("#primary-menu");
+  const scrim = nav.querySelector(".nav-scrim");
   if (!toggle || !menu) return;
 
+  // Match CSS animation time for panel + icon morph
+  const TRANSITION_MS = 600;
+
   const links = Array.from(nav.querySelectorAll(".nav-list a"));
-  const iconMenu = toggle.querySelector(".icon-menu");
-  const iconClose = toggle.querySelector(".icon-close");
 
   // Match the CSS breakpoint exactly
   const MQ = window.matchMedia("(max-width: 900px)");
@@ -28,15 +31,23 @@
   let suppressResizeUntil = 0;
   let ignoreOutsideClickOnce = false; // blocks the outside-click that follows toggle
 
-  function setIcons(open) {
-    if (iconMenu) iconMenu.hidden = !!open;
-    if (iconClose) iconClose.hidden = !open;
+  // Icons are animated via CSS with [aria-expanded]; no DOM hiding.
+  function setIcons(_open) {
+    // no-op — keep both SVGs in the DOM; CSS handles cross-fade/rotate
   }
 
   function applyState() {
     const open = isOpen();
     nav.classList.toggle("is-open", isMobile() && open);
-    menu.hidden = !isMobile() ? true : !open;
+
+    // For sliding panels, keep menu in DOM while animating, then hide
+    if (!isMobile()) {
+      menu.hidden = true;
+      scrim && (scrim.hidden = true);
+      return;
+    }
+    menu.hidden = !open;
+    scrim && (scrim.hidden = !open);
   }
 
   function lockScroll() {
@@ -50,27 +61,48 @@
 
   function openMenu() {
     if (!isMobile()) return;
+
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Close menu");
     setIcons(true);
 
-    nav.classList.add("is-open");
+    // 1) Unhide so styles can compute
     menu.hidden = false;
-    lockScroll();
+    if (scrim) scrim.hidden = false;
 
-    // Ignore immediate jitter resizes after scroll-lock
-    suppressResizeUntil = performance.now() + 500;
+    // 2) Force the START state explicitly (matches closed CSS)
+    // This guarantees the first frame is off-screen & hidden
+    menu.style.transform = "translateX(100%)";
+    menu.style.visibility = "hidden";
 
-    // Prevent the very next outside-click from closing us (same user tap)
-    ignoreOutsideClickOnce = true;
-    setTimeout(() => {
-      ignoreOutsideClickOnce = false;
-    }, 0);
+    // 3) Force a reflow so the browser commits the START state
+    // eslint-disable-next-line no-unused-expressions
+    menu.getBoundingClientRect();
 
-    const first = menu.querySelector(
-      "a, button, [tabindex]:not([tabindex='-1'])"
-    );
-    first?.focus({ preventScroll: true });
+    // 4) Next animation frame: switch to OPEN state so it animates
+    requestAnimationFrame(() => {
+      // remove the inline START so CSS can animate to the open state
+      menu.style.removeProperty("transform");
+      menu.style.removeProperty("visibility");
+
+      nav.classList.add("is-open"); // CSS will animate translateX to 0
+
+      lockScroll();
+
+      // guard resize jitter after scroll-lock
+      suppressResizeUntil = performance.now() + 500;
+
+      // prevent immediate outside-click close from same tap
+      ignoreOutsideClickOnce = true;
+      setTimeout(() => {
+        ignoreOutsideClickOnce = false;
+      }, 0);
+
+      const first = menu.querySelector(
+        "a, button, [tabindex]:not([tabindex='-1'])"
+      );
+      first?.focus({ preventScroll: true });
+    });
   }
 
   function closeMenu() {
@@ -78,9 +110,17 @@
     toggle.setAttribute("aria-label", "Open menu");
     setIcons(false);
 
+    // Remove open state to start slide-out
     nav.classList.remove("is-open");
-    menu.hidden = true;
+
+    // Hide after the animation finishes so it doesn’t pop
+    setTimeout(() => {
+      menu.hidden = true;
+      if (scrim) scrim.hidden = true;
+    }, TRANSITION_MS);
+
     unlockScroll();
+    toggle.focus({ preventScroll: true });
   }
 
   function toggleMenu() {
@@ -93,6 +133,12 @@
     e.stopPropagation();
     toggleMenu();
   });
+
+  // Scrim click closes
+  scrim &&
+    scrim.addEventListener("click", () => {
+      if (isOpen() && isMobile()) closeMenu();
+    });
 
   // Outside click — capture phase and path-aware so SVGs/slots don’t trick it
   document.addEventListener(
@@ -113,10 +159,7 @@
   // Esc close
   document.addEventListener("keydown", (e) => {
     if (!isOpen() || !isMobile()) return;
-    if (e.key === "Escape") {
-      closeMenu();
-      toggle.focus({ preventScroll: true });
-    }
+    if (e.key === "Escape") closeMenu();
   });
 
   // Link click closes
@@ -129,9 +172,9 @@
     const mobileNow = isMobile();
     if (mobileNow !== lastIsMobile) {
       if (!mobileNow) {
-        closeMenu(); // desktop: force closed
+        closeMenu(); // force closed on desktop
       } else {
-        applyState(); // mobile: reflect current aria
+        applyState(); // reflect current aria on mobile
       }
       lastIsMobile = mobileNow;
     }
@@ -139,12 +182,11 @@
   MQ.addEventListener?.("change", onMediaFlip);
   MQ.addListener?.(onMediaFlip); // legacy
 
-  // Best-effort ignore random resizes without breakpoint change
+  // Best-effort: ignore random resizes without breakpoint change
   window.addEventListener(
     "resize",
     () => {
       if (performance.now() < suppressResizeUntil) return;
-      // If we’re still mobile, just ensure DOM matches aria. No closing.
       if (isMobile()) applyState();
     },
     { passive: true }
@@ -162,3 +204,4 @@
   setIcons(isOpen());
   applyState();
 })();
+// END: NAV JS

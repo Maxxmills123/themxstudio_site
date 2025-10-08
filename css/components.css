@@ -1,25 +1,24 @@
-/* ===========================
-   Navigation Components (Paste-over)
-   =========================== */
+/* =========================================
+   NAVIGATION CSS (Structural cleanup only)
+   ========================================= */
 
-/* Heights for body offset */
+/* ---------- Root variables / offsets ---------- */
 :root {
   --nav-h-desktop: 72px;
   --nav-h-mobile: 56px;
   --nav-h: var(--nav-h-desktop);
 }
 @media (max-width: 900px) {
-  :root {
-    --nav-h: var(--nav-h-mobile);
-  }
+  :root { --nav-h: var(--nav-h-mobile); }
 }
 
-/* Fixed header at the top, always */
+/* Ensure content isn't hidden under fixed nav */
+body { padding-top: var(--nav-h); }
+
+/* ---------- Fixed header ---------- */
 .primary-nav {
-  position: fixed; /* ← fixed again */
-  top: 0;
-  left: 0;
-  right: 0;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   z-index: 9999;
   background: var(--background-color);
   border-bottom: 1px solid transparent;
@@ -28,28 +27,24 @@
   padding-right: max(0px, env(safe-area-inset-right));
 }
 
-/* Inner grid anchors the absolute dropdown */
-.primary-nav .nav-inner {
-  position: relative; /* ← anchor for .nav-menu */
-  display: grid;
-  grid-template-columns: auto 1fr auto; /* brand | center | cta/toggle (desktop) */
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem clamp(16px, 3vw, 24px);
-}
-
 /* Divider when scrolled or menu open */
 .primary-nav.is-scrolled,
 .primary-nav.is-open {
   border-bottom-color: color-mix(in srgb, var(--secondary), transparent 90%);
 }
 
-/* Content offset so it doesn't hide under fixed nav */
-body {
-  padding-top: var(--nav-h);
+/* ---------- Inner grid ---------- */
+/* Desktop default: brand | center(abs centered) | phone | CTA */
+.primary-nav .nav-inner {
+  position: relative; /* lets us absolutely center the pill */
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem clamp(16px, 3vw, 24px);
 }
 
-/* Brand */
+/* ---------- Brand ---------- */
 .brand {
   font-weight: 200;
   font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem);
@@ -58,18 +53,18 @@ body {
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
-.brand span {
-  font-weight: 700;
-}
+.brand span { font-weight: 700; }
 .brand:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
   border-radius: 6px;
 }
 
-/* Center pill (desktop) */
+/* ---------- Center pill (desktop; perfectly centered) ---------- */
 .nav-center-card {
-  transform: translateX(-3rem);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* exact page center */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,9 +73,8 @@ body {
   border: 1px solid var(--border);
   border-radius: 9999px;
   padding: 0.35rem 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  margin: 0 0.25rem;
-  justify-self: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  z-index: 1; /* above brand text if they overlap */
 }
 .nav-center-card a {
   text-decoration: none;
@@ -94,7 +88,6 @@ body {
 .nav-center-card a[aria-current="page"] {
   background: color-mix(in srgb, var(--secondary), transparent 90%);
   font-weight: 500;
-  position: relative;
 }
 .nav-center-card a:hover {
   background: color-mix(in srgb, var(--secondary), transparent 90%);
@@ -104,48 +97,71 @@ body {
   outline-offset: 2px;
 }
 
-/* CTA */
+/* ---------- CTA (desktop) ---------- */
 .nav-cta {
   white-space: nowrap;
   justify-self: end;
 }
 
-/* Toggle */
+/* ---------- Phone link (desktop: icon + text) ---------- */
+.nav-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--secondary);
+  font-weight: 300;
+}
+.nav-phone img {
+  width: 1.5rem; height: 1.5rem;
+  display: inline-block;
+  fill: currentColor; /* if SVG inline */
+  color: var(--accent);
+}
+.nav-phone span { display: inline; }
+
+/* Animate wobble on hover (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .nav-phone:hover img {
+    animation: wobble 0.6s ease-in-out;
+    filter: hue-rotate(120deg) saturate(1.4);
+  }
+}
+
+/* Keyframes for wobble animation */
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-15deg); }
+  30% { transform: rotate(12deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(8deg); }
+  75% { transform: rotate(-6deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ---------- Toggle base (hidden on desktop) ---------- */
 .nav-toggle {
-  display: none; /* hidden on desktop */
+  display: none;               /* hidden on desktop by default */
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.4rem;
   color: var(--secondary);
   line-height: 0;
-}
-.nav-toggle svg {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.3s ease;
-}
-.nav-toggle svg path {
-  stroke: var(--secondary, #222);
-  stroke-width: 2.2;
-}
-.nav-toggle .icon-close {
-  display: none;
-}
-.nav-toggle[aria-expanded="true"] .icon-menu {
-  display: none;
-}
-.nav-toggle[aria-expanded="true"] .icon-close {
-  display: inline;
+  position: relative;
+  width: 40px;                 /* comfy tap target */
+  height: 40px;                /* comfy tap target */
+  overflow: visible;           /* avoid clipping bars */
 }
 
-/* ===========================
-   Mobile / Tablet
-   =========================== */
+/* =========================================
+   MOBILE / TABLET
+   ========================================= */
 @media (max-width: 900px) {
-  /* Brand | CTA | spacer | Toggle */
+  /* Brand | spacer | Phone(icon) | Toggle */
   .primary-nav .nav-inner {
-    grid-template-columns: auto auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     column-gap: 0.6rem;
     row-gap: 0;
     padding: 0.5rem clamp(12px, 4vw, 20px);
@@ -158,145 +174,181 @@ body {
     text-overflow: ellipsis;
   }
 
-  .nav-center-card {
-    display: none;
-  }
+  .nav-center-card { display: none; } /* hide pill on mobile for space */
+  .nav-cta { display: none !important; }
 
-  .nav-cta {
-    font-weight: 600;
-    font-size: clamp(0.72rem, 0.6rem + 1vw, 0.82rem);
-    line-height: 1.2;
-    padding: 0.28rem 0.7rem;
-    border-radius: 9999px;
-    justify-self: start;
+  /* Phone on mobile: icon only, right next to hamburger */
+  .nav-phone {
+    grid-column: 3; grid-row: 1;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 300;
+    text-decoration: none;
+    color: var(--secondary);
+    padding: 0.28rem 0.2rem;
+    border-radius: 8px;
+    gap: 0.5rem;
   }
+  .nav-phone span { display: none; } /* hide number on mobile */
+  .nav-phone img { display: inline-block; }
 
+  /* Toggle visible on mobile; sits at far right */
   .nav-toggle {
-    display: inline-flex; /* visible on mobile */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    order: 3;
-    grid-column: 4;
-    grid-row: 1;
+    grid-column: 4; grid-row: 1;
   }
 
-  /* Ultra narrow: hide CTA to guarantee toggle visibility */
-  @media (max-width: 360px) {
-    .nav-cta {
-      display: none;
-    }
-    .primary-nav .nav-inner {
-      grid-template-columns: auto 1fr auto;
-    }
-  }
-
-  /* Dropdown panel (anchored to .nav-inner) */
+  /* ---------- Fullscreen slide-in menu ---------- */
   .nav-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--background-color);
-    padding: 1rem 1.25rem;
-    /* no display:none; JS uses [hidden] */
-    transform: translateY(-4px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease,
-      visibility 0s linear 0.3s;
-    z-index: 999;
-    max-height: calc(100svh - var(--nav-h)); /* panel never grows page */
+    position: fixed; inset: 0; top: var(--nav-h);
+    height: calc(100svh - var(--nav-h));
+    background: var(--accent);
+    padding: 1.25rem clamp(16px, 4vw, 28px);
     overflow: auto;
     overscroll-behavior: contain;
-    will-change: transform, opacity;
+
+    transform: translateX(100%);
+    opacity: 1;
+    visibility: hidden;
+    transition: transform 1000ms cubic-bezier(0.25, 0.8, 0.25, 1),
+      visibility 0s linear 1000ms;
+    z-index: 10000;
+    will-change: transform;
     contain: layout paint;
   }
   .primary-nav.is-open .nav-menu {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
-    pointer-events: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+    transition: transform 1000ms cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0s;
   }
-
   .nav-menu .nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 1rem;
   }
   .nav-menu .nav-list a {
-    display: block;
-    width: 100%;
+    display: block; width: 100%;
+    font-weight: 700;
     text-decoration: none;
-    font-size: 1.05rem;
-    padding: 0.5rem 0;
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    padding: 0.6rem 0;
     color: var(--secondary);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid color-mix(in srgb, var(--secondary), transparent 90%);
     transition: color 0.2s ease;
   }
-  .nav-menu .nav-list a:last-child {
-    border-bottom: none;
+  .nav-menu .nav-list a:last-child { border-bottom: none; }
+
+  /* ---------- Scrim behind panel (simple fade) ---------- */
+  .nav-scrim {
+    position: fixed;
+    inset: var(--nav-h) 0 0 0;
+    backdrop-filter: blur(2px);
+    opacity: 0; visibility: hidden;
+    transition: opacity 700ms ease, visibility 0s linear 700ms;
+    z-index: 9999;
+  }
+  .primary-nav.is-open .nav-scrim {
+    opacity: 1; visibility: visible;
+    transition: opacity 700ms ease, visibility 0s;
   }
 
   /* Lock scroll when menu is open */
-  html.nav-lock,
-  body.nav-lock {
-    overflow: hidden;
+  html.nav-lock, body.nav-lock {
+    overflow: hidden !important;
+    height: 100%;
   }
 }
 
-/* ===========================
-   Touch fallback polish
-   =========================== */
+/* Ultra-narrow: when you switch to 3 columns, put the toggle in col 3 */
+@media (max-width: 360px) {
+  .nav-phone { display: none; }
+  .primary-nav .nav-inner { grid-template-columns: auto 1fr auto; }
+  .nav-toggle {
+    grid-column: 3; grid-row: 1;
+    display: inline-flex;
+    justify-self: end;
+  }
+}
+
+/* =========================================
+   TOUCH POLISH
+   ========================================= */
 @media (hover: none) and (pointer: coarse) {
   .primary-nav .nav-inner {
-    grid-template-columns: auto auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     column-gap: 0.6rem;
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
     padding-top: max(0.5rem, env(safe-area-inset-top));
   }
-  .nav-center-card {
-    display: none;
-  }
+  .nav-center-card { display: none; }
   .brand {
     font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.9rem);
     max-width: 60vw;
   }
-  .nav-cta {
-    font-weight: 600;
-    font-size: clamp(0.72rem, 0.6rem + 1vw, 0.82rem);
-    line-height: 1.2;
-    padding: 0.28rem 0.7rem;
-    border-radius: 9999px;
-  }
-  .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    order: 3;
-    grid-column: 4;
-    grid-row: 1;
-  }
 }
 
 /* ===========================
-   Accessibility
+   Hamburger → X (simple, even, visible)
    =========================== */
+
+/* Stage inside the toggle */
+.nav-toggle .burger {
+  position: relative;
+  width: 28px;   /* icon width */
+  height: 20px;  /* fits bars at 0, 8, 16 */
+  display: inline-block;
+}
+
+/* Bars */
+.nav-toggle .burger i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2.4px;                       /* visible thickness */
+  background: var(--secondary, #222);  /* matches theme */
+  border-radius: 1px;
+  transition:
+    transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    top 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 200ms ease;
+}
+
+/* Closed positions */
+.nav-toggle .burger i:nth-child(1) { top: 0; }
+.nav-toggle .burger i:nth-child(2) { top: 8px; }
+.nav-toggle .burger i:nth-child(3) { top: 16px; }
+
+/* Open → clean, centered X */
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(1) {
+  top: 8px; transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(2) {
+  opacity: 0; transform: scaleX(0.6);
+}
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(3) {
+  top: 8px; transform: rotate(-45deg);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .burger i { transition: none !important; }
+}
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
 .primary-nav a:focus-visible,
-.nav-toggle:focus-visible {
+.nav-toggle:focus-visible,
+.nav-phone:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .nav-menu {
-    transition: none !important;
-  }
+  .nav-menu { transition: none !important; }
 }
 
 /* Base button */
@@ -327,16 +379,8 @@ body {
   color: #fff;
   border-color: #000;
 }
-
-.btn-black:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-.btn-black:active {
-  transform: translateY(0);
-  opacity: 0.95;
-}
+.btn-black:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-black:active { transform: translateY(0); opacity: 0.95; }
 
 /* Outline version */
 .btn-outline-black {
@@ -347,22 +391,12 @@ body {
   border-radius: 9999px;
   transition: all 0.25s ease;
 }
-
-.btn-outline-black:hover {
-  background: #000;
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-.btn-outline-black:active {
-  transform: translateY(0);
-  opacity: 0.95;
-}
+.btn-outline-black:hover { background: #000; color: #fff; transform: translateY(-1px); }
+.btn-outline-black:active { transform: translateY(0); opacity: 0.95; }
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
-  .btn,
-  .btn-outline-black {
+  .btn, .btn-outline-black {
     font-size: 0.95rem;
     padding: 0.55rem 1.1rem;
     width: auto;
@@ -382,7 +416,6 @@ body {
   font-family: var(--font-body, "Albert Sans", sans-serif);
   border-top: 1px solid color-mix(in srgb, var(--text), transparent 85%);
 }
-
 .footer-inner {
   max-width: 100%;
   margin: 0 auto;
@@ -392,50 +425,23 @@ body {
   gap: 1rem;
   padding: 0 1.5rem;
 }
-
 .footer-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 0.5rem;
 }
-
-.footer-logo {
-  width: 220px;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  opacity: 0.95;
-}
-
-.footer-tagline {
-  font-size: 0.9rem;
-  color: color-mix(in srgb, var(--text), transparent 30%);
-  margin: 0;
-}
-
+.footer-logo { width: 220px; height: auto; margin: 0; padding: 0; opacity: 0.95; }
+.footer-tagline { font-size: 0.9rem; color: color-mix(in srgb, var(--text), transparent 30%); margin: 0; }
 .footer-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
+  list-style: none; display: flex; gap: 1.5rem;
+  margin: 0; padding: 0; justify-content: center;
 }
-
 .footer-nav a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.95rem;
+  color: var(--text); text-decoration: none; font-size: 0.95rem;
   transition: opacity 0.2s ease;
 }
-.footer-nav a:hover {
-  opacity: 0.7;
-}
-
+.footer-nav a:hover { opacity: 0.7; }
 .footer-meta p {
-  text-align: right;
-  font-size: 0.85rem;
+  text-align: right; font-size: 0.85rem;
   color: color-mix(in srgb, var(--text), transparent 30%);
 }
 
@@ -447,17 +453,8 @@ body {
     gap: 1.2rem;
     padding: 0 1rem;
   }
-  .footer-brand {
-    align-items: center;
-  }
-  .footer-meta {
-    text-align: center;
-  }
-  .footer-nav ul {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .footer-logo {
-    margin: 0 auto;
-  }
+  .footer-brand { align-items: center; }
+  .footer-meta { text-align: center; }
+  .footer-nav ul { justify-content: center; flex-wrap: wrap; }
+  .footer-logo { margin: 0 auto; }
 }
