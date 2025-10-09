@@ -38,48 +38,70 @@ iframe {
 }
 
 /* =================================
-   Hero
+   Hero (Revised for responsive sizing)
    ================================= */
 .hero {
   display: grid;
   place-content: center;
-  padding: clamp(16px, 3vh, 32px) clamp(16px, 6vw, 64px);
+  padding: clamp(24px, 4vh, 64px) clamp(24px, 8vw, 96px);
   background: var(--background-color, #f9f8f7);
   transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
 }
 
 #hero.hero {
-  padding-block: clamp(10px, 2vh, 24px);
+  padding-block: clamp(16px, 3vh, 32px);
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 950px;
   width: 100%;
   transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
 }
 
+/* ---------- Desktop typography ---------- */
 .hero-content h1 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
   text-align: left;
   color: var(--background-color);
-  font-size: clamp(1.6rem, 1rem + 2.2vw, 2.6rem);
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.4rem);
   font-weight: 700;
   line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content p {
   margin: 0;
-  max-width: 65ch;
-  line-height: 1.55;
+  font-weight: 300;
+  max-width: 75ch;
+  line-height: 1.6;
   color: var(--secondary);
-  font-size: clamp(1rem, 0.9rem + 0.6vw, 1.15rem);
+  font-size: 1rem;
   text-align: justify;
-  padding-left: clamp(0.5rem, 3vw, 2rem);
-  padding-block: 0.5rem;
+  padding-left: clamp(0.75rem, 3vw, 2rem);
+  padding-block: 0.75rem;
 }
 
-/* Background pill */
+/* ---------- Mobile overrides ---------- */
+@media (max-width: 768px) {
+  .hero-content {
+    max-width: 100% !important;
+    justify-items: left !important;
+    text-align: center !important;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.6rem, 1.1rem + 4vw, 2.4rem);
+    text-align: left;
+  }
+
+  .hero-content p {
+    max-width: 68ch;
+    font-size: clamp(1rem, 0.9rem + 1.2vw, 1.15rem);
+    padding-left: 0.5rem;
+  }
+}
+
+/* ---------- Background pill ---------- */
 .bg-text {
   display: inline-block;
   padding: clamp(0.7rem, 1vw + 0.6rem, 1.2rem) clamp(1rem, 1.5vw + 0.9rem, 2rem);
@@ -100,18 +122,24 @@ iframe {
   z-index: -1;
 }
 
-/* Shrink/dim hero when needed */
+/* Shrink hero */
 .hero-content.dimmed {
   transform: scale(0.9);
 }
-.hero-content.dimmed * {
+
+/* Dim everything that is NOT the CTA, NOT inside it, and NOT an ancestor of it */
+.hero-content.dimmed *:not(.btn-cta):not(.btn-cta *):not(:has(.btn-cta)) {
   filter: grayscale(80%) brightness(0.9);
-  opacity: .1;
+  opacity: 0.1;
   transition: filter 0.5s ease, opacity 0.5s ease;
 }
-.hero-content.dimmed .btn-black {
-  filter: none;
-  opacity: 1;
+
+/* Keep CTA fully visible and above the dim layer */
+.hero-content .btn-cta {
+  position: relative;
+  z-index: 2;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 /* =================================
@@ -323,7 +351,7 @@ iframe {
 
 .why-item h3 {
   font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem);
-  font-weight: 100;
+  font-weight: 300;
   margin: 0 0 0.25rem 0;
   color: var(--secondary);
   text-align: left;
@@ -387,5 +415,102 @@ iframe {
     max-height: none;
     overflow-y: auto;
     padding-bottom: 2rem;
+  }
+}
+
+/* ================================
+   Layout Helpers
+   ================================ */
+.mx-fullbleed {
+  width: 100%;
+  margin: 0;
+  overflow-x: clip;
+}
+
+/* Keep top-level chrome from causing horizontal scroll */
+header,
+nav {
+  overflow-x: clip;
+}
+
+/* ================================
+   Components / Patterns
+   ================================ */
+.expand-row {
+  transform-origin: center top;
+}
+
+/* Custom bullets guardrail */
+.row-more .tight {
+  position: relative;
+}
+.row-more .tight li::before {
+  left: max(calc(-1 * var(--rm-li-indent)), -1.5rem);
+}
+
+/* Always-open row: non-interactive header, links still work */
+#how-it-works {
+  cursor: default !important;
+}
+#how-it-works .row-head {
+  pointer-events: none;
+}
+#how-it-works a,
+#how-it-works button {
+  pointer-events: auto;
+}
+
+/* ================================
+   Row-head cue: hover/wobble for ACCORDION HEADERS ONLY
+   ================================ */
+
+/* Base transition only for interactive headers */
+.expand-row:not(#how-it-works) .row-head {
+  transition: transform 200ms ease, box-shadow 200ms ease, padding 200ms ease;
+  will-change: transform;
+  transform-origin: center bottom;
+}
+
+/* Desktop: slight hover cue */
+@media (min-width: 769px) and (hover: hover) {
+  .expand-row:not(#how-it-works) .row-head:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* Mobile: see-saw wobble every 6s while visible */
+@keyframes mx-wobble-seesaw {
+  0%,
+  96% {
+    transform: none;
+  }
+  97% {
+    transform: rotate(-3deg) translateX(-1px) scale(1.015);
+  }
+  98.5% {
+    transform: rotate(3deg) translateX(1px) scale(1.015);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .expand-row:not(#how-it-works) .row-head.is-visible {
+    animation: mx-wobble-seesaw 6s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+/* Pause wobble globally when any non-sticky panel is open */
+.mx-accordion-open .expand-row:not(#how-it-works) .row-head.is-visible {
+  animation: none !important;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .expand-row:not(#how-it-works) .row-head {
+    transition: none !important;
+    animation: none !important;
   }
 }

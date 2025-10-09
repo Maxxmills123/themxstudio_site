@@ -5,7 +5,7 @@
   --font-body: "Albert Sans", sans-serif;
 
   --accent: #c6e98d;
-  --peach: #91fdff;
+  --peach: #9bedff;
 
   --background-color: #f8f5f4;
   --text: #f3f3f3; /* light text for dark surfaces */
@@ -66,36 +66,4 @@ body {
 /* Default paragraphs on light backgrounds */
 p {
   color: var(--secondary);
-}
-
-/* ================================
-   Layout Helpers
-   ================================ */
-.mx-fullbleed {
-  width: 100%;
-  margin: 0; /* avoid negative margins that fake extra width */
-  overflow-x: clip; /* belt and suspenders */
-}
-
-/* Keep top-level chrome from causing horizontal scroll */
-header,
-nav {
-  overflow-x: clip;
-}
-
-/* ================================
-   Components / Patterns
-   ================================ */
-/* Expanded rows scale only vertically, so they won't cause horizontal overflow */
-.expand-row {
-  transform-origin: center top;
-}
-
-/* Custom bullets in lists inside .row-more .tight sections */
-.row-more .tight {
-  position: relative;
-}
-.row-more .tight li::before {
-  left: max(calc(-1 * var(--rm-li-indent)), -1.5rem);
-  /* guardrail so the bullet can't go past the viewport edge */
 }
