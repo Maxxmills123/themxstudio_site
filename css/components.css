@@ -120,7 +120,7 @@ body {
    4) BRAND
    ========================================= */
 .brand {
-  font-weight: 100;
+  font-weight: 500;
   font-size: clamp(1.35rem, 0.9rem + 1vw, 2.1rem);
   line-height: 1; /* keeps computed height tight */
   text-decoration: none;
@@ -132,7 +132,7 @@ body {
   margin-left: var(--brand-offset-x);
 }
 .brand span {
-  font-weight: 700;
+  font-weight: 500;
 }
 .brand:focus-visible {
   outline: 2px solid currentColor;
@@ -151,7 +151,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.45rem; /* tighter gap */
- 
+
   padding: 0.08rem 0.5rem; /* minimal vertical padding */
   z-index: 1;
 }
@@ -401,7 +401,7 @@ body {
     text-decoration: none;
     font-size: clamp(1.15rem, 3vw, 1.45rem);
     padding: 0.5rem 0;
-    color: var(--secondary);
+    color: var(--background-color);
     border-bottom: 1px solid
       color-mix(in srgb, var(--secondary), transparent 90%);
   }
@@ -814,5 +814,36 @@ body {
   .primary-nav .nav-inner {
     padding-left: 18px !important; /* nudge left edge */
     padding-right: 25px !important; /* nudge right edge */
+  }
+}
+/* =========================================
+   MOBILE: GRADIENT BORDER AROUND NAV PILL
+   ========================================= */
+@media (max-width: 900px) {
+  .primary-nav::before {
+    border: none;
+
+    /* smoother alternating conic gradient */
+    background: linear-gradient(
+          var(--background-color),
+          var(--background-color)
+        )
+        padding-box,
+      conic-gradient(
+          from 45deg,
+          var(--accent) 0%,
+          color-mix(in srgb, var(--accent) 70%, var(--background-color) 30%) 20%,
+          var(--background-color) 40%,
+          color-mix(in srgb, var(--background-color) 70%, var(--accent) 30%) 60%,
+          var(--accent) 80%,
+          color-mix(in srgb, var(--accent) 60%, white 20%) 100%
+        )
+        border-box;
+
+    border: 3px solid transparent;
+    border-radius: 9999px;
+
+    /* subtle lift shadow */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
   }
 }
