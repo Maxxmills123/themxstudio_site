@@ -1,36 +1,100 @@
 /* =========================================
-   NAVIGATION CSS (Structural cleanup only)
+   NAVIGATION CSS (tight pill + rounded drawer + full-viewport blur)
    ========================================= */
 
-/* ---------- Root variables / offsets ---------- */
+/* =========================================
+   0) ROOT VARIABLES / OFFSETS
+   ========================================= */
 :root {
-  --nav-h-desktop: 72px;
-  --nav-h-mobile: 56px;
+  /* Heights (no longer force the nav; used mainly for body padding fallback) */
+  --nav-h-desktop: 30px;
+  --nav-h-mobile: 60px;
   --nav-h: var(--nav-h-desktop);
+  --nav-top-gap: 15px;
+
+  /* Pill background tuning (tighter) */
+  --nav-pill-edge-gap: clamp(12px, 4vw, 48px);
+  --nav-pill-pad-y: 2px; /* legacy token; no longer used for pill size */
+  --nav-pill-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+
+  /* Shared horizontal pad for both content and pill edges */
+  --nav-x-pad-desktop: clamp(16px, 3vw, 24px);
+  --nav-x-pad-mobile: clamp(12px, 4vw, 20px);
+  --nav-x-pad: var(--nav-x-pad-desktop);
+
+  /* Micro-nudge so brand never kisses the pill edge */
+  --brand-offset-x: 10px;
+
+  /* Drawer geometry */
+  --drawer-gap-top: 20px; /* space under nav */
+  --drawer-gap-bottom: 8svh; /* do not reach bottom */
+  --drawer-radius: 18px; /* rounded edges */
+  --drawer-blur: 10px; /* backdrop blur strength */
+  --drawer-shadow: -18px 0 28px rgba(0, 0, 0, 0.18);
+  --nav-pill-nudge-y: 0px; /* no artificial vertical offset */
+
+  /* Pill is content height + this total allowance (top+bottom) */
+  /* Slightly taller on desktop vs your last version */
+  --pill-extra: -6px;
 }
 @media (max-width: 900px) {
   :root {
     --nav-h: var(--nav-h-mobile);
+    --nav-pill-edge-gap: clamp(8px, 5vw, 20px);
+    --nav-x-pad: var(--nav-x-pad-mobile);
+    /* Slightly taller pill on mobile by reducing inset */
+    --pill-extra: 3px;
   }
 }
 
-/* Ensure content isn't hidden under fixed nav */
+/* =========================================
+   1) GLOBAL PAGE OFFSETS
+   ========================================= */
+html {
+  scroll-behavior: smooth;
+}
 body {
-  padding-top: var(--nav-h);
+  /* account for the nav’s top gap so content never sits under the nav */
+  padding-top: calc(var(--nav-h) + var(--nav-top-gap));
 }
 
-/* ---------- Fixed header ---------- */
+/* =========================================
+   2) PRIMARY NAV BAR + PILL BACKGROUND
+   ========================================= */
 .primary-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: var(--background-color);
-  border-bottom: 1px solid transparent;
+  inset: var(--nav-top-gap) 0 auto 0;
+  z-index: 10000; /* above page, below drawer */
+  background: transparent; /* pill supplies the surface */
+  border-bottom: 1px solid transparent; /* divider on scroll/open */
   transition: border-color 200ms ease;
   padding-left: max(0px, env(safe-area-inset-left));
   padding-right: max(0px, env(safe-area-inset-right));
+  isolation: isolate; /* make own stacking context */
+
+  /* Let the nav height be determined by its content */
+  display: grid;
+  align-items: center;
+}
+
+/* Pill that hugs content by using top/bottom insets (no fixed height) */
+.primary-nav::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--nav-x-pad) + max(0px, env(safe-area-inset-left)));
+  right: calc(var(--nav-x-pad) + max(0px, env(safe-area-inset-right)));
+
+  /* pill block-size = nav height minus 2 * --pill-extra */
+  top: var(--pill-extra);
+  bottom: var(--pill-extra);
+
+  background: var(--background-color);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  box-shadow: var(--nav-pill-shadow);
+  z-index: 2; /* above nav blur, below content */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* Divider when scrolled or menu open */
@@ -39,24 +103,33 @@ body {
   border-bottom-color: color-mix(in srgb, var(--secondary), transparent 90%);
 }
 
-/* ---------- Inner grid ---------- */
+/* =========================================
+   3) NAV INNER GRID (DESKTOP DEFAULT)
+   ========================================= */
 .primary-nav .nav-inner {
   position: relative;
+  z-index: 3; /* links/logo above pill and blur */
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: 220px 1fr auto auto;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem clamp(16px, 3vw, 24px);
+  gap: 0.6rem;
+  padding: 0.18rem var(--nav-x-pad); /* trimmed to avoid bloating pill */
 }
 
-/* ---------- Brand ---------- */
+/* =========================================
+   4) BRAND
+   ========================================= */
 .brand {
-  font-weight: 200;
-  font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem);
+  font-weight: 100;
+  font-size: clamp(1.35rem, 0.9rem + 1vw, 2.1rem);
+  line-height: 1; /* keeps computed height tight */
   text-decoration: none;
   color: var(--secondary);
   letter-spacing: 0.2px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: var(--brand-offset-x);
 }
 .brand span {
   font-weight: 700;
@@ -67,7 +140,9 @@ body {
   border-radius: 6px;
 }
 
-/* ---------- Center pill ---------- */
+/* =========================================
+   5) CENTER PILL NAV (DESKTOP ONLY, TIGHTER)
+   ========================================= */
 .nav-center-card {
   position: absolute;
   left: 50%;
@@ -75,54 +150,56 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  background: var(--nav-surface);
-  border: 1px solid var(--border);
-  border-radius: 9999px;
-  padding: 0.35rem 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  gap: 0.45rem; /* tighter gap */
+ 
+  padding: 0.08rem 0.5rem; /* minimal vertical padding */
   z-index: 1;
 }
 .nav-center-card a {
   text-decoration: none;
   color: var(--secondary);
   font-size: 0.95rem;
-  padding: 0.4rem 0.7rem;
+  padding: 0.12rem 0.5rem; /* small; avoids forcing pill taller */
   border-radius: 9999px;
   transition: background-color 150ms ease, opacity 150ms ease;
   white-space: nowrap;
+  line-height: 1.05;
 }
 .nav-center-card a[aria-current="page"] {
-  background: color-mix(in srgb, var(--secondary), transparent 90%);
+  background: color-mix(in srgb, var(--accent), transparent 60%);
   font-weight: 500;
 }
 .nav-center-card a:hover {
-  background: color-mix(in srgb, var(--secondary), transparent 90%);
+  background: color-mix(in srgb, var(--accent), transparent 60%);
 }
 .nav-center-card a:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
 
-/* ---------- CTA (desktop) ---------- */
+/* =========================================
+   6) CTA BUTTON (DESKTOP)
+   ========================================= */
 .nav-cta {
   white-space: nowrap;
   justify-self: end;
 }
 
-/* ---------- Phone link ---------- */
+/* =========================================
+   7) PHONE LINK (DESKTOP)
+   ========================================= */
 .nav-phone {
   display: inline-flex;
   align-items: center;
   justify-self: end;
-  gap: 0.5rem;
+  gap: 0.45rem;
   text-decoration: none;
   color: var(--secondary);
   font-weight: 300;
 }
 .nav-phone img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   display: inline-block;
   fill: currentColor;
   color: var(--accent);
@@ -131,7 +208,7 @@ body {
   display: inline;
 }
 
-/* Hover wobble */
+/* Hover wobble (desktop only) */
 @media (hover: hover) and (pointer: fine) {
   .nav-phone:hover img {
     animation: wobble 0.6s ease-in-out;
@@ -162,41 +239,79 @@ body {
   }
 }
 
-/* ---------- Toggle (hidden desktop) ---------- */
+/* =========================================
+   8) HAMBURGER TOGGLE (SMALLER)
+   ========================================= */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.4rem;
+  padding: 0.15rem; /* snug */
   color: var(--secondary);
   line-height: 0;
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px; /* smaller button */
   overflow: visible;
+}
+.nav-toggle .burger {
+  position: relative;
+  width: 20px;
+  height: 14px; /* smaller icon */
+  display: inline-block;
+}
+.nav-toggle .burger i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px; /* slimmer lines */
+  background: var(--secondary, #222);
+  border-radius: 1px;
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    top 300ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 200ms ease;
+}
+.nav-toggle .burger i:nth-child(1) {
+  top: 0;
+}
+.nav-toggle .burger i:nth-child(2) {
+  top: 7px;
+}
+.nav-toggle .burger i:nth-child(3) {
+  top: 14px;
+}
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.6);
+}
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(3) {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .burger i {
+    transition: none !important;
+  }
 }
 
 /* =========================================
-   MOBILE / TABLET
+   9) MOBILE / TABLET (<=900px)
    ========================================= */
 @media (max-width: 900px) {
   .primary-nav .nav-inner {
     grid-template-columns: auto 1fr auto auto;
     column-gap: 0.6rem;
-    padding: 0.5rem clamp(12px, 4vw, 20px);
+    padding: 0.12rem var(--nav-x-pad); /* very slim block padding */
   }
-
   .brand {
     font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.9rem);
     max-width: 60vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-
-  .nav-center-card {
-    display: none;
-  }
+  .nav-center-card,
   .nav-cta {
     display: none !important;
   }
@@ -208,7 +323,7 @@ body {
     align-items: center;
     font-weight: 300;
     color: var(--secondary);
-    padding: 0.28rem 0.2rem;
+    padding: 0.02rem 0.1rem; /* minimal to avoid inflating pill */
     border-radius: 8px;
     gap: 0.5rem;
   }
@@ -226,73 +341,140 @@ body {
     grid-column: 4;
   }
 
+  /* Drawer: rounded, not full height, blur everything behind it */
   .nav-menu {
     position: fixed;
-    inset: 0;
-    top: var(--nav-h);
-    height: calc(100svh - var(--nav-h));
+    right: clamp(8px, 3vw, 16px);
+    left: auto;
+    top: calc(var(--nav-h) + var(--drawer-gap-top) + var(--nav-top-gap));
+    bottom: calc(var(--drawer-gap-bottom) + env(safe-area-inset-bottom));
+    width: min(64svw, 480px);
     background: var(--accent);
-    box-shadow: -8px 0 12px rgba(0, 0, 0, 0.15);
-    padding: 1.25rem clamp(16px, 4vw, 28px);
+    border-radius: var(--drawer-radius);
+    box-shadow: var(--drawer-shadow);
+    padding: 1.1rem clamp(16px, 4vw, 28px);
     overflow: auto;
     overscroll-behavior: contain;
-    transform: translateX(100%);
+    transform: translate3d(calc(100% + 24px), 0, 0);
     opacity: 1;
     visibility: hidden;
-    transition: transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1),
-      visibility 0s linear 600ms;
-    z-index: 10000;
+    transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      visibility 0s linear 700ms;
+    z-index: 10002; /* above scrim and nav */
+    will-change: transform;
+    backface-visibility: hidden;
+    contain: paint;
   }
   .primary-nav.is-open .nav-menu {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
     visibility: visible;
-    transition: transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0s;
+    transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s;
+  }
+  .nav-menu::before {
+    /* subtle inner edge highlight */
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -18px;
+    width: 18px;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0));
+    border-top-left-radius: var(--drawer-radius);
+    border-bottom-left-radius: var(--drawer-radius);
   }
 
+  /* Drawer list */
   .nav-menu .nav-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 1rem;
+    gap: 0.9rem;
   }
   .nav-menu .nav-list a {
+    text-align: left;
     display: block;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
-    padding: 0.6rem 0;
+    font-size: clamp(1.15rem, 3vw, 1.45rem);
+    padding: 0.5rem 0;
     color: var(--secondary);
     border-bottom: 1px solid
       color-mix(in srgb, var(--secondary), transparent 90%);
-    transition: color 0.2s ease;
   }
   .nav-menu .nav-list a:last-child {
     border-bottom: none;
   }
 
-  .nav-scrim {
+  /* Email pills in drawer */
+  .primary-nav .nav-menu .nav-list a.email {
+    display: inline-block;
+    font-size: clamp(0.95rem, 2.4vw, 1.05rem) !important;
+    font-weight: 300 !important;
+    opacity: 0.9 !important;
+    letter-spacing: 0.2px !important;
+    line-height: 1.1 !important;
+    padding: 0.45rem 0.7rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--secondary), transparent 75%);
+    border: 1px solid color-mix(in srgb, var(--secondary), transparent 80%);
+    text-decoration: none;
+    border-bottom: none !important;
+  }
+  .primary-nav .nav-menu .nav-list li:has(> a.email) + li:has(> a.email) {
+    margin-top: -0.5rem; /* tighten just between two email pills */
+  }
+
+  /* SCRIM: blur the WHOLE page except nav pill and drawer
+     - Full-viewport coverage (ignores nav height and top-gap)
+     - Lives behind the nav within its stacking context so the pill stays crisp
+     - Drawer sits above it via higher z-index
+  */
+  .primary-nav .nav-scrim {
     position: fixed;
-    inset: var(--nav-h) 0 0 0;
-    backdrop-filter: blur(0.5px);
+    inset: -6px; /* full-viewport with overscan to kill seams */
+    z-index: -1; /* behind nav’s stacking context so pill stays crisp */
+    background: rgba(
+      255,
+      255,
+      255,
+      0.001
+    ); /* keeps WebKit rendering backdrop */
+    -webkit-backdrop-filter: blur(var(--drawer-blur)) brightness(1);
+    backdrop-filter: blur(var(--drawer-blur)) brightness(1);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 600ms ease, visibility 0s linear 700ms;
-    z-index: 9999;
+    transition: opacity 300ms ease, visibility 0s linear 300ms;
+    will-change: opacity;
+    backface-visibility: hidden;
+    pointer-events: none;
+    transform: translateZ(0);
   }
   .primary-nav.is-open .nav-scrim {
     opacity: 1;
     visibility: visible;
-    transition: opacity 600ms ease, visibility 0s;
+    transition: opacity 300ms ease, visibility 0s;
   }
 
-  html.nav-lock,
-  body.nav-lock {
-    overflow: hidden !important;
-    height: 100%;
+  /* Move scroll indicator up slightly on mobile so it’s not hugging the edge */
+  .scroll-indicator {
+    bottom: calc(10px + max(14px, env(safe-area-inset-bottom) + 8px));
   }
 }
 
+/* Even smaller phones get a proportional bump too */
+@media (max-width: 420px) {
+  .scroll-indicator {
+    bottom: calc(8px + max(12px, env(safe-area-inset-bottom) + 6px));
+  }
+}
+
+/* =========================================
+   10) VERY SMALL PHONES (<=360px)
+   ========================================= */
 @media (max-width: 360px) {
   .nav-phone {
     display: none;
@@ -307,15 +489,16 @@ body {
 }
 
 /* =========================================
-   TOUCH POLISH
+   11) TOUCH POLISH (TABLET LANDSCAPE ETC.)
    ========================================= */
 @media (hover: none) and (pointer: coarse) {
   .primary-nav .nav-inner {
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: 220px 1fr auto auto;
     column-gap: 0.6rem;
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
-    padding-top: max(0.5rem, env(safe-area-inset-top));
+    padding-top: max(0.2rem, env(safe-area-inset-top));
+    padding-bottom: 0.2rem;
   }
   .nav-center-card {
     display: none;
@@ -326,55 +509,23 @@ body {
   }
 }
 
-/* ===========================
-   Hamburger → X
-   =========================== */
-.nav-toggle .burger {
-  position: relative;
-  width: 28px;
-  height: 20px;
-  display: inline-block;
-}
-.nav-toggle .burger i {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2.4px;
-  background: var(--secondary, #222);
-  border-radius: 1px;
-  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    top 300ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 200ms ease;
-}
-.nav-toggle .burger i:nth-child(1) {
-  top: 0;
-}
-.nav-toggle .burger i:nth-child(2) {
-  top: 8px;
-}
-.nav-toggle .burger i:nth-child(3) {
-  top: 16px;
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(1) {
-  top: 8px;
-  transform: rotate(45deg);
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0.6);
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(3) {
-  top: 8px;
-  transform: rotate(-45deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-toggle .burger i {
-    transition: none !important;
+/* =========================================
+   12) DESKTOP HOTFIX REMOVED: let height follow content
+   ========================================= */
+/* Keep center pill vertically centered relative to the nav */
+@media (min-width: 901px) {
+  .primary-nav .nav-inner {
+    align-items: center;
+    padding-block: 0.18rem; /* small, doesn’t inflate pill */
+  }
+  .nav-center-card {
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
 /* =========================================
-   ACCESSIBILITY
+   13) ACCESSIBILITY OUTLINES
    ========================================= */
 .primary-nav a:focus-visible,
 .nav-toggle:focus-visible,
@@ -384,16 +535,15 @@ body {
   border-radius: 4px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .nav-menu {
+  .nav-menu,
+  .nav-toggle .burger i {
     transition: none !important;
   }
 }
 
-/* ===========================
-   Base Buttons (slimmer)
-   =========================== */
-
-/* Shared black-pill style */
+/* =========================================
+   14) BASE BUTTONS (SLIMMER)
+   ========================================= */
 .btn-black,
 .btn-cta {
   display: inline-flex;
@@ -401,7 +551,7 @@ body {
   justify-content: center;
   background: var(--secondary);
   color: var(--background-color);
-  padding: 0.4rem 1rem;
+  padding: 0.38rem 0.9rem; /* slimmer */
   border: none;
   border-radius: 9999px;
   font-size: 0.95rem;
@@ -411,80 +561,34 @@ body {
   transition: transform 0.25s ease;
   cursor: pointer;
 }
-
 .btn-cta {
   font-size: 1.5rem !important;
-  font-weight: 300 !important;
-  margin-left: 1rem; /* adjust this value to taste */
+  font-weight: 600 !important;
+  background: var(--accent) !important;
+  color: var(--secondary) !important;
+  margin-left: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 6px 24px rgba(0, 0, 0, 0.2);
 }
-
-/* Hover / tap feedback */
 .btn-black:hover,
 .btn-cta:hover {
   transform: scale(1.1);
 }
-
 .btn-black:active,
 .btn-cta:active {
   transform: scale(1);
 }
-
-/* Mobile: keep size controlled and stable */
 @media (max-width: 600px) {
   .btn-black,
   .btn-cta {
-    font-size: 0.9rem;
-    padding: 0.38rem 0.9rem;
-    transform: none; /* disables scaling on mobile to avoid jumpy layout */
+    font-size: 0.9rem !important;
+    padding: 0.34rem 0.85rem;
+    transform: none;
   }
 }
 
-/* ===========================
-   CTA: Text-Only Version
-   =========================== */
-
-.cta-row {
-  display: flex;
-  font-size: 1rem !important;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  max-width: 50ch;
-}
-
-.cta-p {
-  font-size: 1.5rem !important;
-  font-weight: 300 !important;
-  line-height: 1;
-  margin: 0;
-  text-align: left !important;
-  white-space: normal;
-}
-
-.cta-p .textitalic {
-  font-style: italic;
-  font-weight: 300;
-}
-
-.hero-content {
-  text-align: left !important;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-}
-
-@media (max-width: 768px) {
-  .cta-p {
-    font-size: 1.5rem !important;
-    line-height: 1.25 !important;
-  }
-}
-
-/* ===========================
-   Footer Styles
-   =========================== */
+/* =========================================
+   15) FOOTER
+   ========================================= */
 #site-footer {
   background-color: var(--secondary);
   color: var(--text);
@@ -562,5 +666,153 @@ body {
   }
   .footer-logo {
     margin: 0 auto;
+  }
+}
+
+/* =========================================
+   16) HERO + SCROLL INDICATOR
+   ========================================= */
+.hero {
+  position: relative;
+}
+
+.scroll-indicator {
+  --arrow-base-w: 10px;
+  --arrow-base-h: 10px;
+  --arrow-stretch-x: 3;
+  --arrow-stretch-y: 2;
+  --arrow-gap: 1px;
+  --arrow-stroke: 1.5;
+  --bounce-distance: 4px;
+
+  position: absolute;
+  left: 50%;
+  bottom: max(14px, calc(env(safe-area-inset-bottom) + 8px));
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding-bottom: 10px;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--arrow-gap);
+}
+.scroll-indicator:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.scroll-indicator__arrows svg {
+  width: var(--arrow-base-w);
+  height: var(--arrow-base-h);
+  stroke: currentColor;
+  stroke-width: var(--arrow-stroke);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: scale(var(--arrow-stretch-x), var(--arrow-stretch-y));
+  transform-origin: center;
+  display: block;
+  animation: mx-bounce 2s ease-in-out infinite;
+}
+.scroll-indicator__arrows svg:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.scroll-indicator__arrows svg:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes mx-bounce {
+  0%,
+  100% {
+    transform: translateY(0)
+      scale(var(--arrow-stretch-x), var(--arrow-stretch-y));
+  }
+  50% {
+    transform: translateY(var(--bounce-distance))
+      scale(var(--arrow-stretch-x), var(--arrow-stretch-y));
+  }
+}
+@media (max-width: 420px) {
+  .scroll-indicator {
+    --arrow-base-w: 15px;
+    --arrow-base-h: 12px;
+    --arrow-stroke: 1.6;
+    --arrow-gap: -5px;
+    --bounce-distance: 3px;
+    bottom: calc(8px + max(12px, env(safe-area-inset-bottom) + 6px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator__arrows svg {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   17) EMAIL PILLS (GLOBAL FALLBACK, NON-MOBILE PREVIEWS)
+   ========================================= */
+.primary-nav .nav-menu .nav-list a.email {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--secondary), transparent 75%);
+  border: 1px solid color-mix(in srgb, var(--secondary), transparent 80%);
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+/* =========================================
+   NAV-ONLY BLUR WHEN OPEN (SEAMLESS WITH SCRIM)
+   ========================================= */
+
+/* Default: no nav-local blur */
+.primary-nav::after {
+  content: none;
+}
+
+/* When OPEN: add a nav-local blur layer under the pill so the excess around the pill blurs, but not the pill itself. */
+.primary-nav.is-open::after {
+  content: "";
+  position: absolute;
+  inset: -6px; /* overscan to overlap scrim */
+  -webkit-backdrop-filter: blur(var(--drawer-blur)) brightness(1);
+  backdrop-filter: blur(var(--drawer-blur)) brightness(1);
+  background: rgba(
+    255,
+    255,
+    255,
+    0.001
+  ); /* keeps WebKit rendering without darkening */
+  z-index: 1; /* pill is z:2, content z:3 */
+  pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Keep the pill crisp above the nav blur */
+.primary-nav::before {
+  z-index: 2;
+}
+.primary-nav .nav-inner {
+  z-index: 3;
+}
+
+/* Safety: shared blur token */
+.nav-menu,
+.nav-scrim,
+.primary-nav::after {
+  --drawer-blur: 10px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --pill-extra: -2px !important;
+  }
+  .primary-nav .nav-inner {
+    padding-left: 18px !important; /* nudge left edge */
+    padding-right: 25px !important; /* nudge right edge */
   }
 }

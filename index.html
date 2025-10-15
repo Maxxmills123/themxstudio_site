@@ -51,8 +51,9 @@
           <!-- Center: Rounded pill (desktop only) -->
           <div class="nav-center-card" role="group" aria-label="Main sections">
             <a href="about.html">About</a>
-            <a href="services.html">Web Design &amp; SEO</a>
+            <a href="services.html">Web Design Services</a>
             <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
           </div>
 
           <!-- Mobile phone link (hidden on desktop via CSS) -->
@@ -76,7 +77,7 @@
             class="btn btn-black nav-cta"
             href="mailto:hello@themxstudio.com?subject=Project%20Enquiry&body=Hi%20MX%20Studio,%20I%E2%80%99d%20love%20to%20chat%20about..."
           >
-            Send us an email
+            Send us an email!
           </a>
 
           <!-- Right on MOBILE: Hamburger toggle -->
@@ -95,9 +96,18 @@
         <!-- Fullscreen mobile menu (slides in) -->
         <div id="primary-menu" class="nav-menu" hidden>
           <ul class="nav-list">
+            <li>
+              <a class="email" href="mailto:hello@themxstudio.com"
+                >hello@themxstudio.com</a
+              >
+            </li>
+            <li>
+              <a class="email" href="tel:0421709047">0421&nbsp;709&nbsp;047</a>
+            </li>
             <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Web Design &amp; SEO</a></li>
+            <li><a href="services.html">Web Design Services</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
 
@@ -107,113 +117,52 @@
       <!-- END: NAV HTML -->
     </header>
     <main id="main-content">
-      <section id="hero" class="hero" aria-labelledby="hero-title">
+      <section id="hero" class="hero bg-wave" aria-labelledby="hero-title">
         <div class="hero-content">
-          <h1 id="hero-title" class="bg-text">
-            Conversion based Web Design and SEO for Small Businesses in
+          <h1 id="hero-title">
+            Conversion Based Web Design and SEO for Small Businesses in
             Brisbane.
           </h1>
-
-          <p>
-            We hard-code every site from scratch — no WordPress, no Wix. SEO is
-            baked into every element so your website ranks higher and resonates
-            deeper, turning visitors into loyal customers.
-          </p>
-          <div class="cta-row">
-            <p class="cta-p">
-              First impressions form in a fraction of a second. Your website is
-              your first impression -
-              <span class="textitalic"> dress accordingly.</span>
-            </p>
-            <a href="#" class="btn-cta"> Make It Happen </a>
-          </div>
-        </div>
-      </section>
-      <section
-        class="mx-fullbleed expand-stack container"
-        aria-label="Why, Pricing, and Process"
-      >
-        <article class="expand-row bg-dark" aria-expanded="false">
-          <header class="row-head">
-            <h2>See Your Site Come to Life</h2>
-          </header>
-
-          <div class="row-more" id="row1-more">
-            <div
-              class="why-grid"
-              role="group"
-              aria-label="Why The MX Studio key points"
-            >
-              <div class="why-item">
-                <h3 class="process">The Process...</h3>
-              </div>
-              <div class="why-item">
-                <h3>#1 Talk About Your Needs</h3>
+          <div class="cta-container">
+            <div class="cta-row">
+              <p>
+                We hand-code every site from scratch — no WordPress, no Wix. SEO
+                is baked into every element so your website ranks higher and
+                resonates deeper, turning visitors into loyal customers.
+              </p>
+              <div class="cta-p">
                 <p>
-                  We start with a simple chat about what you want your website
-                  to do — who it’s for, and what results you’re chasing.
+                  First impressions form in a fraction of a second. Your website
+                  is your first impression –
+                  <span class="textitalic">dress accordingly.</span>
                 </p>
-              </div>
-
-              <div class="why-item">
-                <h3>2# Develop a Strategy</h3>
-                <p>
-                  We plan out the structure, content, and design direction so
-                  everything works together toward your goals.
-                </p>
-              </div>
-
-              <div class="why-item">
-                <h3>#3 We Build Your Webiste</h3>
-                <p>
-                  Your website gets handcrafted — SEO-ready and beautiful on
-                  every device. You review it, I fine-tune it, and then we
-                  launch.
-                </p>
-              </div>
-
-              <div class="why-item">
-                <h3>#4 Launch and Support</h3>
-                <p>
-                  After launch, I stay available for updates, fixes, or advice.
-                  You’re never left hanging.
-                </p>
-              </div>
-
-              <div class="why-item">
-                <h3 class="andthatsit">... and thats it!</h3>
+                <a href="#contact" class="btn-cta" data-hero-cta
+                  >Get Started Today</a
+                >
               </div>
             </div>
           </div>
-        </article>
-        <article class="expand-row bg-peach" aria-expanded="false">
-          <header class="row-head">
-            <h2>How Are We Different?</h2>
-          </header>
-          <div class="row-more" id="row3-more">
-            <p>INCOMPLETE</p>
-          </div>
-        </article>
-
-        <!-- Bottom row (ALWAYS OPEN) -->
-        <article
-          id="how-it-works"
-          class="expand-row bg-light is-active"
-          aria-expanded="true"
+        </div>
+        <!-- Triple scroll arrows (no text) -->
+        <button
+          class="scroll-indicator"
+          type="button"
+          aria-label="Scroll to content"
+          aria-controls="how-it-works"
+          onclick="document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' });"
         >
-          <header class="row-head">
-            <h2>Affordable web design</h2>
-          </header>
-          <div
-            class="row-more"
-            id="row2-more"
-            style="height: auto; opacity: 1; overflow: visible"
-          >
-            <p>
-              INCOMPLETE
-            </p>
-          </div>
-        </article>
+          <span class="scroll-indicator__arrows" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 8l8 8 8-8" />
+            </svg>
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 8l8 8 8-8" />
+            </svg>
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 8l8 8 8-8" />
+            </svg>
+          </span>
+        </button>
       </section>
     </main>
     <!-- ===== Footer ===== -->

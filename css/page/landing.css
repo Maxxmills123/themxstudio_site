@@ -1,11 +1,17 @@
-/* =================================
-   Global sanity
-   ================================= */
+/* =======================================================================
+   0) GLOBAL RESET / SANITY
+   =======================================================================*/
 html,
 body {
   height: 100%;
   margin: 0;
   overflow-x: hidden; /* no horizontal scroll */
+}
+
+/* Keep a reserved gutter so layout doesn't jump when scrollbars appear */
+html {
+  scrollbar-gutter: stable both-edges;
+  -webkit-text-size-adjust: 100%;
 }
 
 *,
@@ -25,492 +31,406 @@ iframe {
   display: block;
 }
 
-/* =================================
-   Layout: hero + stack
-   ================================= */
+/* =======================================================================
+   1) GLOBAL TOKENS / THEME VARS
+   =======================================================================*/
+:root {
+  /* Fixed nav height used for viewport math + band offset */
+  --nav-h: 72px;
+
+  /* HERO BAND controls (kept for compatibility) */
+  --hero-band-underlap: 8px;
+  --hero-band-top-gap: 0px;
+  --hero-band-height: 42vh;
+  --hero-band-spacer: 0px;
+  --hero-wave-dur: 16s;
+  --hero-wave-amp: 10px;
+  --hero-overscan: 112%;
+  --hero-bg-base: 0px;
+  --hero-band-height-baseline: 0px;
+  --hero-content-lift: 0px;
+
+  /* viewport-width helper */
+  --vw: 100vw;
+
+  /* hero padding + edge insets */
+  --hero-pad-y: clamp(24px, 4vh, 64px);
+  --hero-pad-x: clamp(24px, 8vw, 96px);
+  --hero-edge-inset: clamp(10px, 2.4vw, 28px);
+  --hero-edge-inset-mobile: clamp(10px, 4vw, 20px);
+  --hero-h1-gap: clamp(14px, 2.6vh, 32px);
+
+  /* Fixed h1 height: exactly 1/3 viewport */
+  --hero-h1-height: 33.333vh;
+
+  /* Guaranteed coverage buffer above the page top */
+  --hero-top-overshoot: 12vh;
+
+  /* colors: ensure these exist globally
+     --background-color, --secondary, --accent, --peach, etc. */
+}
+
+/* Mobile nav height */
+@media (max-width: 900px) {
+  :root {
+    --nav-h: 56px;
+  }
+}
+
+/* Prefer small-viewport width (mobile truth) */
+@supports (width: 100svw) {
+  :root {
+    --vw: 100svw;
+  }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hero-wave-dur: 0s;
+    --hero-wave-amp: 0px;
+  }
+}
+
+/* =======================================================================
+   2) PAGE LAYOUT (MAIN GRID)
+   =======================================================================*/
 #main-content {
-  min-height: 90dvh;
+  min-height: calc(100dvh - var(--nav-h)); /* below the fixed nav */
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto; /* hero first, content second */
   gap: 0;
   overflow: visible;
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
 }
 
-/* =================================
-   Hero (Revised for responsive sizing)
-   ================================= */
+/* =======================================================================
+   3) HERO WRAPPER
+   =======================================================================*/
 .hero {
-  display: grid;
-  place-content: center;
-  padding: clamp(24px, 4vh, 64px) clamp(24px, 8vw, 96px);
-  background: var(--background-color, #f9f8f7);
+  display: block; /* grid inside .hero-content handles layout */
+  min-height: calc(100svh - var(--nav-h)); /* stable viewport on mobile */
+  background: var(--background-color);
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+
+  /* allow the band to paint above the hero */
+  overflow: visible;
+
   transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+
+  /* variables for the h1 windowed text */
+  --hero-image: url("/assets/images/MXHERO.webp");
+  --hero-bg-pos: center center;
+  --hero-bg-size: cover;
 }
 
-#hero.hero {
-  padding-block: clamp(16px, 3vh, 32px);
+/* svh fallback */
+@supports not (min-height: 100svh) {
+  .hero {
+    min-height: calc(100dvh - var(--nav-h));
+  }
 }
 
+/* =======================================================================
+   3.5) HERO BAND THAT MOVES WITH H1, OVERREACHES TO TOP
+   =======================================================================*/
 .hero-content {
-  max-width: 950px;
   width: 100%;
-  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+  max-width: 100%;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transform: translateY(var(--hero-content-lift));
+  transition: transform 180ms ease-out, opacity 0.5s ease, filter 0.5s ease;
+
+  display: grid;
+  grid-template-rows: var(--hero-h1-height) 1fr;
+  grid-template-columns: 100%;
+  align-items: stretch;
+  justify-items: stretch;
+
+  height: calc(100vh - var(--nav-h));
+  padding: 0;
 }
 
-/* ---------- Desktop typography ---------- */
+/* Band starts above the page top by an overshoot buffer,
+   then covers nav + safe area + H1 + H1 bottom padding */
+.hero-content::before {
+  content: "";
+  position: absolute;
+
+  top: calc(
+    -1 * (var(--nav-h) + env(safe-area-inset-top, 0px) +
+          var(--hero-top-overshoot))
+  );
+  left: 0;
+  right: 0;
+
+  height: calc(
+    var(--nav-h) + env(safe-area-inset-top, 0px) + var(--hero-h1-height) +
+      var(--h1-pad-b, 0px) + var(--hero-top-overshoot)
+  );
+
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0.18)
+    ),
+    var(--hero-image) var(--hero-bg-pos) / var(--hero-bg-size) no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Fallback for engines without env() support */
+@supports not (padding: env(safe-area-inset-top)) {
+  .hero-content::before {
+    top: calc(-1 * (var(--nav-h) + var(--hero-top-overshoot)));
+    height: calc(
+      var(--nav-h) + var(--hero-h1-height) + var(--h1-pad-b, 0px) +
+        var(--hero-top-overshoot)
+    );
+  }
+}
+
+/* =======================================================================
+   4) HEADLINE (H1) WITH FIXED HEIGHT (1/3 viewport)
+   =======================================================================*/
 .hero-content h1 {
-  margin: 0 0 0.75rem;
-  text-align: left;
-  color: var(--background-color);
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.4rem);
+  grid-row: 1;
+  grid-column: 1;
+
+  height: var(--hero-h1-height);
+  min-height: var(--hero-h1-height);
+
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
   font-weight: 700;
-  line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
+  line-height: 1.12;
 
-.hero-content p {
+  display: flex;
+  align-items: flex-end; /* sit on the bottom of its 1/3 row */
+  justify-content: center;
+  text-align: center;
+  text-wrap: pretty;
+  hyphens: auto;
+
+  width: 100vw;
   margin: 0;
-  font-weight: 300;
-  max-width: 75ch;
-  line-height: 1.6;
-  color: var(--secondary);
-  font-size: 1rem;
-  text-align: justify;
-  padding-left: clamp(0.75rem, 3vw, 2rem);
-  padding-block: 0.75rem;
+  padding: 0 clamp(1rem, 5vw, 3rem);
+
+  /* expose band height to the pseudo via shared token */
+  --h1-pad-b: clamp(1rem, 2.6vh, 2.25rem);
+  padding-bottom: var(--h1-pad-b);
+
+  position: relative;
+  color: var(--background-color);
+  z-index: 2;
+  background: none;
 }
 
-/* ---------- Mobile overrides ---------- */
+/* kill any old background on H1 itself */
+.hero-content h1::before {
+  content: none;
+}
+
+/* =======================================================================
+   5) CTA CONTAINER — CENTERED IN LOWER 2/3
+   =======================================================================*/
+.cta-container {
+  grid-row: 2;
+  grid-column: 1;
+
+  height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+  min-height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+  max-width: min(90%, 1200px);
+  width: 100%;
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(0.75rem, 1.6vh, 1.5rem) clamp(1rem, 4vw, 2rem);
+}
+
+/* CTA Row wrapper */
+.cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* justified text with centered last line */
+  text-align: justify;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  hyphens: auto;
+
+  gap: clamp(0.75rem, 1.8vh, 1.5rem);
+  width: 100%;
+}
+
+/* CTA Paragraph styling with responsive sizing */
+.cta-p {
+  font-size: clamp(1.05rem, 2.2vw, 1.6rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.6;
+  margin: 0 auto !important;
+
+  text-align: justify !important;
+  text-align-last: center !important;
+  -moz-text-align-last: center !important;
+
+  max-width: min(90%, 60ch) !important;
+  color: var(--secondary);
+}
+
+.cta-p .textitalic {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Regular CTA paragraphs */
+.cta-row > p {
+  font-size: clamp(0.95rem, 1.9vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: min(90%, 60ch);
+  color: var(--secondary);
+
+  text-align: justify;
+  text-align-last: center;
+  -moz-text-align-last: center;
+}
+
+/* CTA Button with responsive sizing */
+.btn-cta {
+  margin-top: clamp(0.6rem, 1.2vh, 1.25rem);
+  font-size: clamp(0.95rem, 1.7vw, 1.15rem) !important;
+  padding: clamp(0.7rem, 1.4vw, 1.05rem) clamp(1.2rem, 2.6vw, 2rem) !important;
+  align-self: center;
+}
+
+/* =======================================================================
+   13) RESPONSIVE: TABLET (<=1024px)
+   =======================================================================*/
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: clamp(2rem, 5.5vw, 3.6rem) !important;
+    padding: 0 clamp(1rem, 4vw, 2.25rem);
+    --h1-pad-b: clamp(0.9rem, 2.2vh, 2rem);
+    padding-bottom: var(--h1-pad-b) !important;
+    line-height: 1.15;
+  }
+
+  .cta-p {
+    font-size: clamp(0.95rem, 2.1vw, 1.4rem) !important;
+  }
+  .cta-row > p {
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  }
+
+  .btn-cta {
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem) !important;
+    padding: clamp(0.65rem, 1.3vw, 1rem) clamp(1.1rem, 2.3vw, 1.8rem) !important;
+  }
+}
+
+/* =======================================================================
+   14) RESPONSIVE: MOBILE (<=768px)
+   =======================================================================*/
 @media (max-width: 768px) {
-  .hero-content {
-    max-width: 100% !important;
-    justify-items: left !important;
-    text-align: center !important;
+  :root {
+    --hero-h1-height: 30vh;
+  } /* slightly smaller for better proportions */
+
+  .hero-content h1 {
+    font-size: clamp(1.75rem, 7.6vw, 3.1rem) !important;
+    padding: 0 clamp(1rem, 3vw, 1.5rem);
+    --h1-pad-b: clamp(0.85rem, 2vh, 1.6rem);
+    padding-bottom: var(--h1-pad-b) !important;
+    line-height: 1.18;
+  }
+
+  .cta-container {
+    height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+    min-height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+    padding: clamp(0.6rem, 1.2vh, 1rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  .cta-p {
+    font-size: clamp(0.95rem, 3.2vw, 1.25rem) !important;
+    max-width: 95% !important;
+  }
+  .cta-row > p {
+    font-size: clamp(0.85rem, 2.7vw, 1.1rem);
+    max-width: 95%;
+  }
+
+  .btn-cta {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem) !important;
+    padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.1rem, 4vw, 1.8rem) !important;
+    margin-top: clamp(0.5rem, 1.2vh, 1rem);
+  }
+}
+
+/* =======================================================================
+   15) RESPONSIVE: ULTRA-SMALL PHONES (<=420px)
+   =======================================================================*/
+@media (max-width: 420px) {
+  :root {
+    --hero-h1-height: 28vh;
   }
 
   .hero-content h1 {
-    font-size: clamp(1.6rem, 1.1rem + 4vw, 2.4rem);
-    text-align: left;
+    font-size: clamp(1.55rem, 7vw, 2.5rem) !important;
+    padding: 0 0.75rem;
+    --h1-pad-b: clamp(0.65rem, 1.5vh, 1.25rem);
+    padding-bottom: var(--h1-pad-b) !important;
   }
 
-  .hero-content p {
-    max-width: 68ch;
-    font-size: clamp(1rem, 0.9rem + 1.2vw, 1.15rem);
-    padding-left: 0.5rem;
+  .cta-container {
+    height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+    min-height: calc(100vh - var(--nav-h) - var(--hero-h1-height));
+    padding: 0.75rem 1rem;
   }
-}
 
-/* ---------- Background pill ---------- */
-.bg-text {
-  display: inline-block;
-  padding: clamp(0.7rem, 1vw + 0.6rem, 1.2rem) clamp(1rem, 1.5vw + 0.9rem, 2rem);
-  border-radius: 40px;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background: var(--pill-bg) center / cover no-repeat;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+  .cta-p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+  }
+  .cta-row > p {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+  }
 
-.bg-text::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: -1;
-}
-
-/* Shrink hero */
-.hero-content.dimmed {
-  transform: scale(0.9);
-}
-
-/* Dim everything that is NOT the CTA, NOT inside it, and NOT an ancestor of it */
-.hero-content.dimmed *:not(.btn-cta):not(.btn-cta *):not(:has(.btn-cta)) {
-  filter: grayscale(80%) brightness(0.9);
-  opacity: 0.1;
-  transition: filter 0.5s ease, opacity 0.5s ease;
-}
-
-/* Keep CTA fully visible and above the dim layer */
-.hero-content .btn-cta {
-  position: relative;
-  z-index: 2;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* =================================
-   Full-bleed helper
-   ================================= */
-.mx-fullbleed {
-  width: 100%;
-  margin-inline: calc(50% - 50vw);
-  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-}
-
-/* =================================
-   Expand Rows (Accordion)
-   ================================= */
-.expand-stack.container {
-  display: grid;
-  grid-auto-rows: auto;
-  align-self: end;
-}
-
-.expand-row {
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  padding: clamp(12px, 2.2vw, 22px) clamp(16px, 4vw, 40px);
-  background: transparent;
-}
-
-.expand-row.is-active {
-  z-index: 2;
-}
-
-/* Header (click target) */
-.row-head {
-  display: grid;
-  gap: 6px;
-  cursor: pointer;
-  min-height: 30px;
-}
-
-.expand-row h2 {
-  margin: 0;
-  font-size: clamp(1.2rem, 0.9rem + 2.2vw, 1.8rem);
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  line-height: 1.2;
-}
-
-/* Optional kicker */
-.row-kicker {
-  font-size: clamp(0.95rem, 0.85rem + 1vw, 1.05rem);
-  color: color-mix(in oklab, currentColor 85%, transparent);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 320ms cubic-bezier(0.2, 0.95, 0.15, 1.25),
-    opacity 220ms cubic-bezier(0.2, 0.6, 0.1, 1);
-}
-
-.expand-row.is-active .row-kicker {
-  max-height: 4rem;
-  opacity: 1;
-  margin-top: 4px;
-}
-
-/* Body */
-.row-more {
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  will-change: height, opacity;
-  margin-top: 0;
-  padding-top: 0;
-  -webkit-overflow-scrolling: touch;
-  overflow-anchor: none;
-}
-.expand-row.is-active .row-more {
-  opacity: 1;
-}
-
-/* Lists inside reveals */
-.row-more .tight {
-  padding-left: 1.1rem;
-  margin: 0;
-}
-.row-more .tight li {
-  margin: 0.35rem 0;
-  list-style: none;
-  padding-left: 0.25rem;
-  position: relative;
-}
-.row-more .tight li::before {
-  content: "•";
-  position: absolute;
-  left: max(-1.1rem, -1.5rem);
-  top: 0.15em;
-  line-height: 1;
-}
-
-/* =================================
-   Themes
-   ================================= */
-.bg-dark {
-  background: var(--accent);
-  color: var(--secondary);
-}
-.bg-dark .row-more p,
-.bg-dark .row-more span {
-  display: block;
-  font-size: clamp(0.7rem, 0.65rem + 0.4vw, 0.9rem);
-  line-height: 1.55;
-  max-width: 30ch;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
-  text-align: justify;
-}
-.bg-dark .row-more span {
-  font-weight: 800;
-}
-
-.bg-light {
-  position: relative;
-  color: var(--background-color);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  background: url("/assets/images/MXHERO.webp") center / cover no-repeat;
-}
-.bg-light::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: -1;
-}
-.bg-light .row-more p {
-  line-height: 1.6;
-  max-width: 60ch;
-  margin: 0 auto;
-  padding: 0.75rem 0.6rem;
-  color: #2a2a2a;
-  text-align: left;
-}
-
-.bg-peach {
-  background: var(--peach);
-  color: var(--secondary);
-  position: relative;
-}
-.bg-peach::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 0;
-}
-.bg-peach > * {
-  position: relative;
-  z-index: 1;
-}
-.bg-peach .row-more p {
-  line-height: 1.6;
-  max-width: 58ch;
-  margin: 0 auto;
-  padding: 0.75rem 0.6rem;
-  text-align: left;
-  color: #2a211d;
-}
-
-/* =================================
-   Accessibility
-   ================================= */
-.row-head:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
-  border-radius: 8px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .row-more,
-  .row-kicker,
-  .expand-row {
-    transition: none !important;
-    transform: none !important;
+  .btn-cta {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem) !important;
+    padding: 0.6rem 0.9rem !important;
   }
 }
 
-/* =================================
-   Why TheMXStudio grid
-   ================================= */
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(2rem, 4vw, 3rem);
-  justify-items: center;
-  align-items: start;
-  max-width: min(1100px, 90vw);
-  margin: 0 auto;
-  padding: clamp(1rem, 3vw, 2rem) 0;
-  text-align: left;
-}
-
-.why-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.8rem;
-  max-width: 320px;
-}
-
-.why-item h3 {
-  font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem);
-  font-weight: 300;
-  margin: 0 0 0.25rem 0;
-  color: var(--secondary);
-  text-align: left;
-  width: 100%;
-}
-
-.why-item p {
-  font-size: clamp(0.5rem, 0.45rem + 0.3vw, 0.6rem);
-  line-height: 1.3;
-  font-weight: 300;
-  color: var(--secondary);
-  margin: 0;
-  text-align: left;
-  width: 80%;
-  max-width: 26ch;
-}
-
-/* =================================
-   Responsive
-   ================================= */
-@media (max-width: 850px) {
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-bottom: 2rem;
-  }
-  .why-item {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding: 1.5rem 1rem;
-    min-height: 55vh;
+/* =======================================================================
+   16) SAFE-AREA SUPPORT (NOTCHES)
+   =======================================================================*/
+@supports (padding: max(0px)) {
+  .hero-content h1 {
+    padding-left: max(clamp(1rem, 5vw, 3rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1rem, 5vw, 3rem), env(safe-area-inset-right));
+    padding-bottom: var(--h1-pad-b); /* stay in sync with the band */
   }
 
-  .hero-content p {
-    font-size: clamp(0.95rem, 3.6vw, 1.05rem);
-    padding: 0.75rem 1.25rem;
-    text-align: justify;
-  }
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      padding-left: max(clamp(1rem, 3vw, 1.5rem), env(safe-area-inset-left));
+      padding-right: max(clamp(1rem, 3vw, 1.5rem), env(safe-area-inset-right));
+      padding-bottom: var(--h1-pad-b) !important;
+    }
 
-  .hero-content .btn {
-    display: block;
-    max-width: 240px;
-    margin: 0.5rem auto;
-    text-align: center;
-  }
-
-  .expand-row {
-    padding: clamp(10px, 2.5vw, 16px) clamp(12px, 4vw, 24px);
-  }
-
-  .expand-row h2 {
-    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
-    text-align: left;
-  }
-
-  .row-more {
-    max-height: none;
-    overflow-y: auto;
-    padding-bottom: 2rem;
-  }
-}
-
-/* ================================
-   Layout Helpers
-   ================================ */
-.mx-fullbleed {
-  width: 100%;
-  margin: 0;
-  overflow-x: clip;
-}
-
-/* Keep top-level chrome from causing horizontal scroll */
-header,
-nav {
-  overflow-x: clip;
-}
-
-/* ================================
-   Components / Patterns
-   ================================ */
-.expand-row {
-  transform-origin: center top;
-}
-
-/* Custom bullets guardrail */
-.row-more .tight {
-  position: relative;
-}
-.row-more .tight li::before {
-  left: max(calc(-1 * var(--rm-li-indent)), -1.5rem);
-}
-
-/* Always-open row: non-interactive header, links still work */
-#how-it-works {
-  cursor: default !important;
-}
-#how-it-works .row-head {
-  pointer-events: none;
-}
-#how-it-works a,
-#how-it-works button {
-  pointer-events: auto;
-}
-
-/* ================================
-   Row-head cue: hover/wobble for ACCORDION HEADERS ONLY
-   ================================ */
-
-/* Base transition only for interactive headers */
-.expand-row:not(#how-it-works) .row-head {
-  transition: transform 200ms ease, box-shadow 200ms ease, padding 200ms ease;
-  will-change: transform;
-  transform-origin: center bottom;
-}
-
-/* Desktop: slight hover cue */
-@media (min-width: 769px) and (hover: hover) {
-  .expand-row:not(#how-it-works) .row-head:hover {
-    transform: scale(1.02);
-  }
-}
-
-/* Mobile: see-saw wobble every 6s while visible */
-@keyframes mx-wobble-seesaw {
-  0%,
-  96% {
-    transform: none;
-  }
-  97% {
-    transform: rotate(-3deg) translateX(-1px) scale(1.015);
-  }
-  98.5% {
-    transform: rotate(3deg) translateX(1px) scale(1.015);
-  }
-  100% {
-    transform: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .expand-row:not(#how-it-works) .row-head.is-visible {
-    animation: mx-wobble-seesaw 6s ease-in-out infinite;
-    will-change: transform;
-  }
-}
-
-/* Pause wobble globally when any non-sticky panel is open */
-.mx-accordion-open .expand-row:not(#how-it-works) .row-head.is-visible {
-  animation: none !important;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .expand-row:not(#how-it-works) .row-head {
-    transition: none !important;
-    animation: none !important;
+    .cta-container {
+      padding-left: max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-left));
+      padding-right: max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-right));
+    }
   }
 }

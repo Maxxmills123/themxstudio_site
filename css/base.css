@@ -4,10 +4,9 @@
 :root {
   --font-body: "Albert Sans", sans-serif;
 
-  --accent: #c6e98d;
-  --peach: #9bedff;
+  --accent: #ddffab;
 
-  --background-color: #f8f5f4;
+  --background-color: #fffcf9;
   --text: #f3f3f3; /* light text for dark surfaces */
   --secondary: #1e1e1e; /* dark text for light surfaces */
 

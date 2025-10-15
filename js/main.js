@@ -1,12 +1,18 @@
-// ===================================================
-// Accordion + Hero dim (instant reactions)
-// - One row permanently open (#how-it-works)
-// - Close on outside click and near-top scroll
-// - Center active row on small screens
-// - Mobile wobble: see-saw every 6s for visible headers
-// - Pause wobble when any non-sticky panel is open
-// - Clicking the ALWAYS-OPEN row acts like clicking "out": undim + unpause wobble
-// ===================================================
+/* ===================================================
+   HERO BAND METRICS (retired)
+   We keep a stub so other code calling __setHeroBand() won't explode.
+=================================================== */
+(function () {
+  window.__setHeroBand = function noop() {};
+})();
+
+/* ===================================================
+   Accordion + Hero skim/dim (instant reactions)
+   - Starts CLOSED (including #how-it-works)
+   - Close on outside click and near-top scroll
+   - Center active row on small screens (only when toggling)
+   - DOES NOT auto-scroll on page load
+=================================================== */
 (function () {
   const rows = Array.from(document.querySelectorAll(".expand-row"));
   if (!rows.length) return;
@@ -15,7 +21,6 @@
   const root = document.documentElement;
   const ALWAYS_OPEN_ID = "how-it-works";
 
-  // Motion prefs
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
@@ -24,7 +29,16 @@
   const OPEN_EASING = "cubic-bezier(0.25, 0.9, 0.25, 1)";
   const CLOSE_EASING = "cubic-bezier(0.3, 0.6, 0.15, 1)";
 
-  // ---------- Utilities ----------
+  // Prevent the browser from restoring scroll to a previously open accordion
+  try {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  } catch {}
+
+  // No-op stub is present; call it to keep existing hooks consistent
+  const triggerBand = () => {
+    if (typeof window.__setHeroBand === "function") window.__setHeroBand();
+  };
+
   const anyOpenNonSticky = () =>
     rows.some(
       (r) =>
@@ -70,6 +84,7 @@
       panel.style.opacity = "1";
       panel._anim = null;
       centerActiveRow(row);
+      triggerBand();
       return;
     }
 
@@ -86,14 +101,13 @@
       panel.style.opacity = "1";
       panel._anim = null;
       centerActiveRow(row);
+      triggerBand();
     };
   }
 
   function collapse(row) {
-    if (row.id === ALWAYS_OPEN_ID) return;
     const panel = row.querySelector(".row-more");
     if (!panel) return;
-
     if (panel._anim) panel._anim.cancel();
     const current = panel.offsetHeight;
 
@@ -101,6 +115,7 @@
       panel.style.height = "0px";
       panel.style.opacity = "0";
       panel._anim = null;
+      triggerBand();
       return;
     }
 
@@ -119,72 +134,61 @@
       panel.style.height = "0px";
       panel.style.opacity = "0";
       panel._anim = null;
+      triggerBand();
     };
   }
 
   function closeAll(except = null) {
     rows.forEach((row) => {
-      if (row.id === ALWAYS_OPEN_ID) return;
       if (row !== except && row.getAttribute("aria-expanded") === "true") {
         row.classList.remove("is-active");
         row.setAttribute("aria-expanded", "false");
         collapse(row);
       }
     });
-    if (!except) setDimPauseState(false); // undim immediately if nothing left open
+    if (!except) setDimPauseState(false);
   }
 
   function toggleRow(row) {
     const wasOpen = row.getAttribute("aria-expanded") === "true";
 
-    // Clicking the ALWAYS-OPEN row should behave like "clicking out"
     if (row.id === ALWAYS_OPEN_ID) {
-      // Close any other open non-sticky rows
       closeAll(null);
-      // Ensure undim + wobble resume immediately
       setDimPauseState(false);
+      triggerBand();
       return;
     }
 
     if (wasOpen) {
-      // Close this non-sticky row
       row.classList.remove("is-active");
       row.setAttribute("aria-expanded", "false");
       collapse(row);
       setDimPauseState(anyOpenNonSticky());
+      triggerBand();
     } else {
-      // Open this row, close others
       closeAll(row);
       row.classList.add("is-active");
       row.setAttribute("aria-expanded", "true");
-      setDimPauseState(true); // dim instantly
+      setDimPauseState(true);
       expand(row);
+      triggerBand();
     }
   }
 
-  // ---------- Init ----------
   rows.forEach((row) => {
     const panel = row.querySelector(".row-more");
     row.style.cursor = "pointer";
     row.setAttribute("tabindex", "0");
     row.setAttribute("role", "button");
 
-    if (row.id === ALWAYS_OPEN_ID) {
-      row.classList.add("is-active");
-      row.setAttribute("aria-expanded", "true");
-      if (panel) {
-        panel.style.display = "block";
-        panel.style.height = "auto";
-        panel.style.opacity = "1";
-        panel.style.overflow = "visible";
-      }
-    } else {
-      if (panel) {
-        panel.style.height = "0px";
-        panel.style.opacity = "0";
-        panel.style.overflow = "clip";
-        panel.style.setProperty("overflow-anchor", "none");
-      }
+    row.classList.remove("is-active");
+    row.setAttribute("aria-expanded", "false");
+    if (panel) {
+      panel.style.display = "block";
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+      panel.style.overflow = "clip";
+      panel.style.setProperty("overflow-anchor", "none");
     }
 
     row.addEventListener("click", (e) => {
@@ -200,17 +204,22 @@
     });
   });
 
-  // Initial flags: only dim if a non-sticky is actually open (false on load)
-  setDimPauseState(anyOpenNonSticky());
+  // Ensure nothing autoscrolls on first paint
+  window.addEventListener("pageshow", () => {}, { once: true });
 
-  // Close all when scrolling to the very top
+  setDimPauseState(false);
+  triggerBand();
+
   let ticking = false;
   window.addEventListener(
     "scroll",
     () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          if (window.scrollY <= 2) closeAll();
+          if (window.scrollY <= 2) {
+            closeAll();
+            triggerBand();
+          }
           ticking = false;
         });
         ticking = true;
@@ -219,9 +228,11 @@
     { passive: true }
   );
 
-  // Close when clicking outside any row
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".expand-row")) closeAll();
+    if (!e.target.closest(".expand-row")) {
+      closeAll();
+      triggerBand();
+    }
   });
 
   // ---------- Mobile wobble visibility ----------
@@ -234,12 +245,9 @@
     if (!heads.length) return;
 
     function setVisible(el, yes) {
-      // Force restart the CSS animation by toggling class if it's already set
       if (yes) {
         el.classList.remove("is-visible");
-        // Force reflow so animation restarts consistently
-        // eslint-disable-next-line no-unused-expressions
-        el.offsetWidth;
+        el.offsetWidth; // restart CSS animation
         el.classList.add("is-visible");
       } else {
         el.classList.remove("is-visible");
@@ -249,8 +257,9 @@
       heads.forEach((h) => setVisible(h, false));
     }
 
-    // Prefer IntersectionObserver
-    let io = null;
+    let ioInstance = null,
+      teardown = null;
+
     function ioSetup() {
       if (!("IntersectionObserver" in window)) return null;
       const observer = new IntersectionObserver(
@@ -267,8 +276,6 @@
       return observer;
     }
 
-    // Manual fallback
-    let teardownManual = null;
     function manualSetup() {
       let rafId = null;
       function check() {
@@ -286,16 +293,13 @@
       }
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", onScroll);
-      check(); // run once on load
+      check();
       return () => {
         window.removeEventListener("scroll", onScroll);
         window.removeEventListener("resize", onScroll);
         if (rafId) cancelAnimationFrame(rafId);
       };
     }
-
-    let ioInstance = null;
-    let teardown = null;
 
     function setup() {
       if (ioInstance) {
@@ -309,7 +313,6 @@
       clearAll();
 
       if (!mobileMQ.matches || reducedMQ.matches) return;
-
       ioInstance = ioSetup();
       if (!ioInstance) teardown = manualSetup();
     }
@@ -320,4 +323,14 @@
     if (reducedMQ.addEventListener) reducedMQ.addEventListener("change", setup);
     else reducedMQ.addListener(setup);
   })();
+})();
+
+/* ===================================================
+   Scroll indicator: ALWAYS visible (no auto-hide)
+=================================================== */
+(function () {
+  const el = document.querySelector(".scroll-indicator");
+  if (!el) return;
+  el.style.opacity = "1";
+  el.style.pointerEvents = "auto";
 })();
