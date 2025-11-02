@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
+  <url>
+    <loc>https://themxstudio.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/mainpages/about.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/mainpages/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/mainpages/work.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/mainpages/faq.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/mainpages/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/blog/blog.html</loc>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/otherservices/branding.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/otherservices/seo.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/otherservices/googlebusiness.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/websiteservices/webdesign.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/websiteservices/webredesign.html</loc>
+  </url>
+  <url>
+    <loc>https://themxstudio.com/websiteservices/webmaintenance.html</loc>
+  </url>
+
+</urlset>
