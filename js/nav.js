@@ -1,12 +1,4 @@
-// START: NAV JS
-// mobile-nav-toggle.js
-// Fullscreen slide-in mobile menu for .primary-nav
-// - Outside click and scrim click to close
-// - Esc to close
-// - Link click closes
-// - Scroll-lock on open
-// - Breakpoint-aware (matches CSS max-width: 900px)
-
+// nav drawer
 (function () {
   const nav = document.querySelector(".primary-nav");
   if (!nav) return;
@@ -16,38 +8,20 @@
   const scrim = nav.querySelector(".nav-scrim");
   if (!toggle || !menu) return;
 
-  // Match CSS animation time for panel + icon morph
   const TRANSITION_MS = 600;
-
   const links = Array.from(nav.querySelectorAll(".nav-list a"));
-
-  // Match the CSS breakpoint exactly
-  const MQ = window.matchMedia("(max-width: 900px)");
-  const isMobile = () => MQ.matches;
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
 
-  // State guards
-  let lastIsMobile = isMobile();
   let suppressResizeUntil = 0;
-  let ignoreOutsideClickOnce = false; // blocks the outside-click that follows toggle
+  let ignoreOutsideClickOnce = false;
 
-  // Icons are animated via CSS with [aria-expanded]; no DOM hiding.
-  function setIcons(_open) {
-    // no-op — keep both SVGs in the DOM; CSS handles cross-fade/rotate
-  }
+  function setIcons(_open) {}
 
   function applyState() {
     const open = isOpen();
-    nav.classList.toggle("is-open", isMobile() && open);
-
-    // For sliding panels, keep menu in DOM while animating, then hide
-    if (!isMobile()) {
-      menu.hidden = true;
-      scrim && (scrim.hidden = true);
-      return;
-    }
+    nav.classList.toggle("is-open", open);
     menu.hidden = !open;
-    scrim && (scrim.hidden = !open);
+    if (scrim) scrim.hidden = !open;
   }
 
   function lockScroll() {
@@ -60,39 +34,27 @@
   }
 
   function openMenu() {
-    if (!isMobile()) return;
-
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Close menu");
     setIcons(true);
 
-    // 1) Unhide so styles can compute
     menu.hidden = false;
     if (scrim) scrim.hidden = false;
 
-    // 2) Force the START state explicitly (matches closed CSS)
-    // This guarantees the first frame is off-screen & hidden
+    // prime transform so the transition animates in
     menu.style.transform = "translateX(100%)";
     menu.style.visibility = "hidden";
-
-    // 3) Force a reflow so the browser commits the START state
-    // eslint-disable-next-line no-unused-expressions
     menu.getBoundingClientRect();
 
-    // 4) Next animation frame: switch to OPEN state so it animates
     requestAnimationFrame(() => {
-      // remove the inline START so CSS can animate to the open state
       menu.style.removeProperty("transform");
       menu.style.removeProperty("visibility");
 
-      nav.classList.add("is-open"); // CSS will animate translateX to 0
-
+      nav.classList.add("is-open");
       lockScroll();
 
-      // guard resize jitter after scroll-lock
       suppressResizeUntil = performance.now() + 500;
 
-      // prevent immediate outside-click close from same tap
       ignoreOutsideClickOnce = true;
       setTimeout(() => {
         ignoreOutsideClickOnce = false;
@@ -110,10 +72,8 @@
     toggle.setAttribute("aria-label", "Open menu");
     setIcons(false);
 
-    // Remove open state to start slide-out
     nav.classList.remove("is-open");
 
-    // Hide after the animation finishes so it doesn’t pop
     setTimeout(() => {
       menu.hidden = true;
       if (scrim) scrim.hidden = true;
@@ -127,24 +87,21 @@
     isOpen() ? closeMenu() : openMenu();
   }
 
-  // Toggle button
   toggle.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     toggleMenu();
   });
 
-  // Scrim click closes
   scrim &&
     scrim.addEventListener("click", () => {
-      if (isOpen() && isMobile()) closeMenu();
+      if (isOpen()) closeMenu();
     });
 
-  // Outside click — capture phase and path-aware so SVGs/slots don’t trick it
   document.addEventListener(
     "click",
     (e) => {
-      if (!isOpen() || !isMobile()) return;
+      if (!isOpen()) return;
       if (ignoreOutsideClickOnce) return;
 
       const path = e.composedPath ? e.composedPath() : [];
@@ -156,43 +113,23 @@
     { capture: true }
   );
 
-  // Esc close
   document.addEventListener("keydown", (e) => {
-    if (!isOpen() || !isMobile()) return;
+    if (!isOpen()) return;
     if (e.key === "Escape") closeMenu();
   });
 
-  // Link click closes
-  links.forEach((a) =>
-    a.addEventListener("click", () => isMobile() && closeMenu())
-  );
+  links.forEach((a) => a.addEventListener("click", () => closeMenu()));
 
-  // Only react on actual breakpoint flips; ignore generic resizes
-  function onMediaFlip() {
-    const mobileNow = isMobile();
-    if (mobileNow !== lastIsMobile) {
-      if (!mobileNow) {
-        closeMenu(); // force closed on desktop
-      } else {
-        applyState(); // reflect current aria on mobile
-      }
-      lastIsMobile = mobileNow;
-    }
-  }
-  MQ.addEventListener?.("change", onMediaFlip);
-  MQ.addListener?.(onMediaFlip); // legacy
-
-  // Best-effort: ignore random resizes without breakpoint change
+  // keep transitions happy during resize; state is width-agnostic now
   window.addEventListener(
     "resize",
     () => {
       if (performance.now() < suppressResizeUntil) return;
-      if (isMobile()) applyState();
+      applyState();
     },
     { passive: true }
   );
 
-  // Scroll border toggle
   function updateScrollState() {
     if (window.scrollY > 2) nav.classList.add("is-scrolled");
     else nav.classList.remove("is-scrolled");
@@ -200,8 +137,149 @@
   updateScrollState();
   window.addEventListener("scroll", updateScrollState, { passive: true });
 
-  // Initial state
   setIcons(isOpen());
   applyState();
 })();
-// END: NAV JS
+
+// mobile drawer accordions
+(function () {
+  const root = document;
+  const nav = root.querySelector(".primary-nav");
+  const navMenu = root.querySelector(".nav-menu");
+  if (!navMenu) return;
+
+  function setOpenState(acc, open) {
+    if (!acc) return;
+    acc.classList.toggle("open", open);
+    const btn = acc.querySelector(".nav-accordion-toggle");
+    if (btn) btn.setAttribute("aria-expanded", String(open));
+  }
+
+  function closeAllAccordions(except) {
+    navMenu.querySelectorAll(".nav-accordion.open").forEach((acc) => {
+      if (acc !== except) setOpenState(acc, false);
+    });
+  }
+
+  navMenu.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".nav-accordion-toggle");
+    if (!toggle) return;
+
+    const acc = toggle.closest(".nav-accordion");
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    closeAllAccordions(acc);
+    setOpenState(acc, !open);
+  });
+
+  navMenu.addEventListener("keydown", (e) => {
+    const toggle = e.target.closest(".nav-accordion-toggle");
+    if (!toggle) {
+      if (e.key === "Escape") {
+        closeAllAccordions();
+        const navToggle = root.querySelector(
+          '.nav-toggle[aria-expanded="true"]'
+        );
+        if (nav && nav.classList.contains("is-open")) {
+          nav.classList.remove("is-open");
+          if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggle.click();
+    }
+  });
+
+  root.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target)) {
+      closeAllAccordions();
+    }
+  });
+
+  navMenu.addEventListener("click", (e) => {
+    const link = e.target.closest(".nav-accordion-menu a");
+    if (!link) return;
+
+    const acc = e.target.closest(".nav-accordion");
+    setOpenState(acc, false);
+
+    const navToggle = root.querySelector('.nav-toggle[aria-expanded="true"]');
+    if (nav && nav.classList.contains("is-open")) {
+      nav.classList.remove("is-open");
+      if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+})();
+
+// desktop dropdown (hover + focus)
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdown = document.querySelector(".nav-drop");
+  if (!dropdown) return;
+  const trigger = dropdown.querySelector(".nav-drop-trigger");
+
+  let hoverTimer;
+
+  function open() {
+    dropdown.classList.add("open");
+  }
+
+  function close() {
+    dropdown.classList.remove("open");
+  }
+
+  trigger.addEventListener("click", (e) => {
+    e.preventDefault();
+    dropdown.classList.toggle("open");
+  });
+
+  dropdown.addEventListener("mouseenter", () => {
+    clearTimeout(hoverTimer);
+    open();
+  });
+
+  dropdown.addEventListener("mouseleave", () => {
+    hoverTimer = setTimeout(close, 150);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) close();
+  });
+});
+
+// desktop dropdown (chevron swap + keyboard focus mgmt)
+document.addEventListener("DOMContentLoaded", () => {
+  const drop = document.querySelector(".nav-drop");
+  if (!drop) return;
+
+  const trigger = drop.querySelector(".nav-drop-trigger");
+  const menu = drop.querySelector(".nav-drop-menu");
+  const chev = trigger.querySelector(".chev");
+
+  function open() {
+    drop.classList.add("open");
+    if (chev) chev.textContent = "▴";
+  }
+
+  function close() {
+    drop.classList.remove("open");
+    if (chev) chev.textContent = "▾";
+  }
+
+  drop.addEventListener("mouseenter", open);
+  drop.addEventListener("mouseleave", close);
+
+  trigger.addEventListener("click", (e) => e.preventDefault());
+
+  document.addEventListener("click", (e) => {
+    if (!drop.contains(e.target)) close();
+  });
+
+  drop.addEventListener("focusin", open);
+  drop.addEventListener("focusout", (e) => {
+    if (!drop.contains(e.relatedTarget)) close();
+  });
+
+  close();
+});

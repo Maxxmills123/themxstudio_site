@@ -1,193 +1,169 @@
-/* =========================================
-   NAVIGATION CSS (tight pill + rounded drawer + full-viewport blur)
-   ========================================= */
-
-/* =========================================
-   0) ROOT VARIABLES / OFFSETS
-   ========================================= */
+/* tokens */
 :root {
-  /* Heights (no longer force the nav; used mainly for body padding fallback) */
-  --nav-h-desktop: 30px;
-  --nav-h-mobile: 60px;
-  --nav-h: var(--nav-h-desktop);
-  --nav-top-gap: 15px;
-
-  /* Pill background tuning (tighter) */
-  --nav-pill-edge-gap: clamp(12px, 4vw, 48px);
-  --nav-pill-pad-y: 2px; /* legacy token; no longer used for pill size */
+  --nav-pill-edge-gap: clamp(8px, 5vw, 20px);
   --nav-pill-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-
-  /* Shared horizontal pad for both content and pill edges */
   --nav-x-pad-desktop: clamp(16px, 3vw, 24px);
   --nav-x-pad-mobile: clamp(12px, 4vw, 20px);
-  --nav-x-pad: var(--nav-x-pad-desktop);
-
-  /* Micro-nudge so brand never kisses the pill edge */
+  --nav-x-pad: var(--nav-x-pad-mobile);
   --brand-offset-x: 10px;
-
-  /* Drawer geometry */
-  --drawer-gap-top: 20px; /* space under nav */
-  --drawer-gap-bottom: 8svh; /* do not reach bottom */
-  --drawer-radius: 18px; /* rounded edges */
-  --drawer-blur: 10px; /* backdrop blur strength */
+  --drawer-gap-top: 20px;
+  --drawer-gap-bottom: 8svh;
+  --drawer-radius: 15px;
+  --drawer-blur: 10px;
   --drawer-shadow: -18px 0 28px rgba(0, 0, 0, 0.18);
-  --nav-pill-nudge-y: 0px; /* no artificial vertical offset */
-
-  /* Pill is content height + this total allowance (top+bottom) */
-  /* Slightly taller on desktop vs your last version */
-  --pill-extra: -6px;
+  --pill-extra: -2px;
+  --drawer-anchor: clamp(52px, 7vh, 76px);
+  --glass-blur: 50px;
+  --glass-sat: 1.1;
+  --glass-light-bg: rgba(255, 255, 255, 0.5);
+  --glass-light-stroke: rgba(255, 255, 255, 0);
+  --glass-dark-bg: rgba(255, 255, 255, 0.3);
+  --glass-dark-stroke: rgba(255, 255, 255, 0.1);
 }
-@media (max-width: 900px) {
+
+/* DESKTOP ONLY - very restrictive */
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
   :root {
-    --nav-h: var(--nav-h-mobile);
-    --nav-pill-edge-gap: clamp(8px, 5vw, 20px);
-    --nav-x-pad: var(--nav-x-pad-mobile);
-    /* Slightly taller pill on mobile by reducing inset */
-    --pill-extra: 3px;
+    --nav-pill-edge-gap: clamp(12px, 4vw, 48px);
+    --nav-x-pad: var(--nav-x-pad-desktop);
+    --pill-extra: 0px;
+    --drawer-anchor: clamp(56px, 6vh, 80px);
   }
 }
 
-/* =========================================
-   1) GLOBAL PAGE OFFSETS
-   ========================================= */
+/* reset */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 html {
   scroll-behavior: smooth;
 }
-body {
-  /* account for the nav’s top gap so content never sits under the nav */
-  padding-top: calc(var(--nav-h) + var(--nav-top-gap));
+:where(main, #main, #main-content, body) > :first-child {
+  margin-top: 0;
 }
 
-/* =========================================
-   2) PRIMARY NAV BAR + PILL BACKGROUND
-   ========================================= */
+/* nav */
 .primary-nav {
   position: fixed;
-  inset: var(--nav-top-gap) 0 auto 0;
-  z-index: 10000; /* above page, below drawer */
-  background: transparent; /* pill supplies the surface */
-  border-bottom: 1px solid transparent; /* divider on scroll/open */
-  transition: border-color 200ms ease;
+  inset: 0 0 auto 0;
+  top: 1rem;
+  z-index: 10000;
+  background: transparent;
+  border-bottom: 1px solid transparent;
   padding-left: max(0px, env(safe-area-inset-left));
   padding-right: max(0px, env(safe-area-inset-right));
-  isolation: isolate; /* make own stacking context */
-
-  /* Let the nav height be determined by its content */
   display: grid;
   align-items: center;
+  isolation: isolate;
+  transition: border-color 200ms ease;
 }
 
-/* Pill that hugs content by using top/bottom insets (no fixed height) */
+/* nav pill */
 .primary-nav::before {
   content: "";
   position: absolute;
   left: calc(var(--nav-x-pad) + max(0px, env(safe-area-inset-left)));
   right: calc(var(--nav-x-pad) + max(0px, env(safe-area-inset-right)));
-
-  /* pill block-size = nav height minus 2 * --pill-extra */
   top: var(--pill-extra);
   bottom: var(--pill-extra);
-
   background: var(--background-color);
   border: 1px solid var(--border);
   border-radius: 9999px;
   box-shadow: var(--nav-pill-shadow);
-  z-index: 2; /* above nav blur, below content */
-  will-change: transform;
-  backface-visibility: hidden;
+  z-index: 2;
 }
 
-/* Divider when scrolled or menu open */
-.primary-nav.is-scrolled,
-.primary-nav.is-open {
-  border-bottom-color: color-mix(in srgb, var(--secondary), transparent 90%);
+/* nav glass - all devices */
+:root {
+  color-scheme: light dark;
 }
 
-/* =========================================
-   3) NAV INNER GRID (DESKTOP DEFAULT)
-   ========================================= */
+@media (prefers-color-scheme: light) {
+  .primary-nav::before {
+    background: var(--glass-light-bg);
+    border-color: var(--glass-light-stroke);
+    -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+    backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .primary-nav::before {
+    background: var(--glass-dark-bg);
+    border-color: var(--glass-dark-stroke);
+    -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+    backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  }
+}
+
+/* blur fallback */
+@supports not (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  @media (prefers-color-scheme: light) {
+    .primary-nav::before {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .primary-nav::before {
+      background: rgba(22, 22, 23, 0.5);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+/* nav grid - MOBILE DEFAULT */
 .primary-nav .nav-inner {
   position: relative;
-  z-index: 3; /* links/logo above pill and blur */
+  z-index: 3;
   display: grid;
-  grid-template-columns: 220px 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.18rem var(--nav-x-pad); /* trimmed to avoid bloating pill */
+  column-gap: 0.6rem;
+  padding: 0.12rem var(--nav-x-pad);
 }
 
-/* =========================================
-   4) BRAND
-   ========================================= */
+/* brand - MOBILE DEFAULT */
 .brand {
+  margin-left: var(--brand-offset-x);
   font-weight: 500;
-  font-size: clamp(1.35rem, 0.9rem + 1vw, 2.1rem);
-  line-height: 1; /* keeps computed height tight */
-  text-decoration: none;
-  color: var(--secondary);
+  font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.9rem);
+  line-height: 1;
   letter-spacing: 0.2px;
+  color: var(--secondary);
+  text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-left: var(--brand-offset-x);
+  max-width: 60vw;
 }
-.brand span {
-  font-weight: 500;
-}
+
 .brand:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
   border-radius: 6px;
 }
 
-/* =========================================
-   5) CENTER PILL NAV (DESKTOP ONLY, TIGHTER)
-   ========================================= */
+/* center links - HIDDEN BY DEFAULT */
 .nav-center-card {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem; /* tighter gap */
-
-  padding: 0.08rem 0.5rem; /* minimal vertical padding */
-  z-index: 1;
-}
-.nav-center-card a {
-  text-decoration: none;
-  color: var(--secondary);
-  font-size: 0.95rem;
-  padding: 0.12rem 0.5rem; /* small; avoids forcing pill taller */
-  border-radius: 9999px;
-  transition: background-color 150ms ease, opacity 150ms ease;
-  white-space: nowrap;
-  line-height: 1.05;
-}
-.nav-center-card a[aria-current="page"] {
-  background: color-mix(in srgb, var(--accent), transparent 60%);
-  font-weight: 500;
-}
-.nav-center-card a:hover {
-  background: color-mix(in srgb, var(--accent), transparent 60%);
-}
-.nav-center-card a:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  display: none !important;
 }
 
-/* =========================================
-   6) CTA BUTTON (DESKTOP)
-   ========================================= */
+/* dropdown - HIDDEN BY DEFAULT */
+.nav-drop {
+  display: none !important;
+}
+
+/* right actions - HIDDEN BY DEFAULT */
 .nav-cta {
-  white-space: nowrap;
-  justify-self: end;
+  display: none !important;
 }
 
-/* =========================================
-   7) PHONE LINK (DESKTOP)
-   ========================================= */
+/* nav phone - MOBILE DEFAULT */
 .nav-phone {
   display: inline-flex;
   align-items: center;
@@ -196,28 +172,387 @@ body {
   text-decoration: none;
   color: var(--secondary);
   font-weight: 300;
+  grid-column: 3;
+  padding: 0.02rem 0.1rem;
+  border-radius: 8px;
 }
+
+.nav-phone span {
+  display: none;
+}
+
 .nav-phone img {
   width: 1.25rem;
   height: 1.25rem;
   display: inline-block;
-  fill: currentColor;
   color: var(--accent);
 }
-.nav-phone span {
-  display: inline;
+
+/* hamburger - SHOWN BY DEFAULT */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem;
+  color: var(--secondary);
+  width: 28px;
+  height: 28px;
+  line-height: 0;
+  grid-column: 4;
+  transform: translateX(-8px);
 }
 
-/* Hover wobble (desktop only) */
-@media (hover: hover) and (pointer: fine) {
+.nav-toggle .burger {
+  position: relative;
+  width: 20px;
+  height: 14px;
+  display: inline-block;
+}
+
+.nav-toggle .burger i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--secondary, #222);
+  border-radius: 1px;
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    top 300ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 200ms ease;
+}
+
+.nav-toggle .burger i:nth-child(1) {
+  top: 0;
+}
+
+.nav-toggle .burger i:nth-child(2) {
+  top: 7px;
+}
+
+.nav-toggle .burger i:nth-child(3) {
+  top: 14px;
+}
+
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.6);
+}
+
+.nav-toggle[aria-expanded="true"] .burger i:nth-child(3) {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .burger i {
+    transition: none !important;
+  }
+}
+
+/* Mobile drawer menu - DEFAULT */
+.nav-menu {
+  position: fixed;
+  right: clamp(8px, 3vw, 16px);
+  left: auto;
+  top: calc(var(--drawer-anchor) + var(--drawer-gap-top));
+  bottom: calc(var(--drawer-gap-bottom) + env(safe-area-inset-bottom));
+  width: min(64svw, 480px);
+  border-radius: var(--drawer-radius);
+  box-shadow: var(--drawer-shadow);
+  padding: 1.1rem clamp(16px, 4vw, 28px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  transform: translate3d(calc(100% + 24px), 0, 0);
+  visibility: hidden;
+  transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s linear 700ms;
+  z-index: 10002;
+  will-change: transform;
+  backface-visibility: hidden;
+  contain: paint;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+}
+
+@media (prefers-color-scheme: light) {
+  .nav-menu {
+    background: var(--glass-light-bg);
+    border-color: var(--glass-light-stroke);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-menu {
+    background: var(--glass-dark-bg);
+    border-color: var(--glass-dark-stroke);
+  }
+}
+
+.primary-nav.is-open .nav-menu {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s;
+}
+
+.nav-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 18px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0));
+  border-top-left-radius: var(--drawer-radius);
+  border-bottom-left-radius: var(--drawer-radius);
+  pointer-events: none;
+}
+
+.nav-menu .nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.nav-menu .nav-list a {
+  display: block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  padding: 0.5rem 0;
+  color: var(--secondary);
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary), transparent 90%);
+}
+
+.nav-menu .nav-list a:last-child {
+  border-bottom: none;
+}
+
+.primary-nav .nav-menu .nav-list a.email {
+  display: inline-block;
+  font-size: clamp(0.95rem, 2.4vw, 1.05rem);
+  font-weight: 300;
+  opacity: 0.9;
+  letter-spacing: 0.2px;
+  line-height: 1.1;
+  padding: 0.45rem 0.7rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent), transparent 75%);
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 80%);
+  border-bottom: none;
+}
+
+.primary-nav .nav-menu .nav-list li:has(> a.email) + li:has(> a.email) {
+  margin-top: -0.5rem;
+}
+
+.primary-nav .nav-scrim {
+  position: fixed;
+  inset: -6px;
+  z-index: -1;
+  -webkit-backdrop-filter: blur(var(--drawer-blur)) brightness(1);
+  backdrop-filter: blur(var(--drawer-blur)) brightness(1);
+  background: rgba(255, 255, 255, 0.001);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 0s linear 300ms;
+  pointer-events: none;
+}
+
+.primary-nav.is-open .nav-scrim {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms ease, visibility 0s;
+}
+
+/* tiny phones */
+@media (max-width: 360px) {
+  .nav-phone {
+    display: none;
+  }
+  .primary-nav .nav-inner {
+    grid-template-columns: auto 1fr auto;
+  }
+  .nav-toggle {
+    grid-column: 3;
+    justify-self: end;
+  }
+}
+
+/* DESKTOP ONLY STYLES - very restrictive */
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+  /* Desktop nav grid */
+  .primary-nav .nav-inner {
+    grid-template-columns: 220px 1fr auto auto;
+    gap: 0.6rem;
+    padding: 0.18rem var(--nav-x-pad);
+    align-items: center;
+    padding-block: 0.18rem;
+  }
+
+  /* Desktop brand */
+  .brand {
+    font-size: clamp(1.35rem, 0.9rem + 1vw, 2.1rem);
+    max-width: unset;
+  }
+
+  /* Show center links on desktop */
+  .nav-center-card {
+    display: flex !important;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.08rem 0.5rem;
+    z-index: 1;
+  }
+
+  .nav-center-card a {
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    padding: 0.12rem 0.5rem;
+    border-radius: 9999px;
+    line-height: 1.05;
+    transition: background-color 150ms ease, opacity 150ms ease;
+  }
+
+  .nav-center-card a[aria-current="page"],
+  .nav-center-card a:hover {
+    background: color-mix(in srgb, var(--accent), transparent 80%);
+  }
+
+  .nav-center-card a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  /* Show dropdown on desktop */
+  .nav-drop {
+    display: inline-block !important;
+    position: relative;
+  }
+
+  .nav-drop-trigger {
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    padding: 0.12rem 0.5rem;
+    border-radius: 9999px;
+    transition: background 0.15s ease;
+  }
+
+  .nav-drop-trigger:hover {
+    background: color-mix(in srgb, var(--accent), transparent 60%);
+  }
+
+  .nav-drop-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    margin-top: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1000;
+    -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+    backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  }
+
+  .nav-drop::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 20px;
+  }
+
+  .nav-drop:hover .nav-drop-menu,
+  .nav-drop-menu:hover {
+    display: flex;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .nav-drop-menu {
+      background: var(--glass-light-bg);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .nav-drop-menu {
+      background: var(--glass-dark-bg);
+    }
+  }
+
+  .nav-drop-menu a {
+    padding: 0.5rem 0.8rem;
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    transition: background 0.15s ease;
+  }
+
+  .nav-drop-menu a:hover {
+    background: color-mix(in srgb, var(--accent), transparent 80%);
+  }
+
+  /* Show CTA on desktop */
+  .nav-cta {
+    display: block !important;
+    white-space: nowrap;
+    justify-self: end;
+  }
+
+  /* Desktop phone styles */
+  .nav-phone {
+    grid-column: unset;
+    padding: unset;
+    border-radius: unset;
+  }
+
+  .nav-phone span {
+    display: inline;
+  }
+
+  /* Hide hamburger on desktop */
+  .nav-toggle {
+    display: none !important;
+  }
+
+  /* Hide mobile menu on desktop */
+  .nav-menu,
+  .nav-scrim {
+    display: none !important;
+  }
+
+  /* Desktop animations */
   .nav-phone:hover img {
     animation: wobble 0.6s ease-in-out;
     filter: hue-rotate(120deg) saturate(1.4);
   }
 }
+
+/* animations */
 @keyframes wobble {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0);
   }
   15% {
     transform: rotate(-15deg);
@@ -235,298 +570,61 @@ body {
     transform: rotate(-6deg);
   }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(0);
   }
 }
 
-/* =========================================
-   8) HAMBURGER TOGGLE (SMALLER)
-   ========================================= */
-.nav-toggle {
-  display: none;
+/* nav accordion */
+.nav-accordion {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-accordion-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
   background: none;
   border: none;
-  cursor: pointer;
-  padding: 0.15rem; /* snug */
+  font: inherit;
   color: var(--secondary);
-  line-height: 0;
-  position: relative;
-  width: 28px;
-  height: 28px; /* smaller button */
-  overflow: visible;
-}
-.nav-toggle .burger {
-  position: relative;
-  width: 20px;
-  height: 14px; /* smaller icon */
-  display: inline-block;
-}
-.nav-toggle .burger i {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px; /* slimmer lines */
-  background: var(--secondary, #222);
-  border-radius: 1px;
-  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    top 300ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 200ms ease;
-}
-.nav-toggle .burger i:nth-child(1) {
-  top: 0;
-}
-.nav-toggle .burger i:nth-child(2) {
-  top: 7px;
-}
-.nav-toggle .burger i:nth-child(3) {
-  top: 14px;
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(1) {
-  top: 7px;
-  transform: rotate(45deg);
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0.6);
-}
-.nav-toggle[aria-expanded="true"] .burger i:nth-child(3) {
-  top: 7px;
-  transform: rotate(-45deg);
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav-toggle .burger i {
-    transition: none !important;
-  }
+  font-weight: 600;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  padding: 0.5rem 0;
+  cursor: pointer;
 }
 
-/* =========================================
-   9) MOBILE / TABLET (<=900px)
-   ========================================= */
-@media (max-width: 900px) {
-  .primary-nav .nav-inner {
-    grid-template-columns: auto 1fr auto auto;
-    column-gap: 0.6rem;
-    padding: 0.12rem var(--nav-x-pad); /* very slim block padding */
-  }
-  .brand {
-    font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.9rem);
-    max-width: 60vw;
-  }
-  .nav-center-card,
-  .nav-cta {
-    display: none !important;
-  }
-
-  .nav-phone {
-    grid-column: 3;
-    justify-self: end;
-    display: inline-flex;
-    align-items: center;
-    font-weight: 300;
-    color: var(--secondary);
-    padding: 0.02rem 0.1rem; /* minimal to avoid inflating pill */
-    border-radius: 8px;
-    gap: 0.5rem;
-  }
-  .nav-phone span {
-    display: none;
-  }
-  .nav-phone img {
-    display: inline-block;
-  }
-
-  .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    grid-column: 4;
-  }
-
-  /* Drawer: rounded, not full height, blur everything behind it */
-  .nav-menu {
-    position: fixed;
-    right: clamp(8px, 3vw, 16px);
-    left: auto;
-    top: calc(var(--nav-h) + var(--drawer-gap-top) + var(--nav-top-gap));
-    bottom: calc(var(--drawer-gap-bottom) + env(safe-area-inset-bottom));
-    width: min(64svw, 480px);
-    background: var(--accent);
-    border-radius: var(--drawer-radius);
-    box-shadow: var(--drawer-shadow);
-    padding: 1.1rem clamp(16px, 4vw, 28px);
-    overflow: auto;
-    overscroll-behavior: contain;
-    transform: translate3d(calc(100% + 24px), 0, 0);
-    opacity: 1;
-    visibility: hidden;
-    transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      visibility 0s linear 700ms;
-    z-index: 10002; /* above scrim and nav */
-    will-change: transform;
-    backface-visibility: hidden;
-    contain: paint;
-  }
-  .primary-nav.is-open .nav-menu {
-    transform: translate3d(0, 0, 0);
-    visibility: visible;
-    transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s;
-  }
-  .nav-menu::before {
-    /* subtle inner edge highlight */
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -18px;
-    width: 18px;
-    pointer-events: none;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0));
-    border-top-left-radius: var(--drawer-radius);
-    border-bottom-left-radius: var(--drawer-radius);
-  }
-
-  /* Drawer list */
-  .nav-menu .nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.9rem;
-  }
-  .nav-menu .nav-list a {
-    text-align: left;
-    display: block;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: clamp(1.15rem, 3vw, 1.45rem);
-    padding: 0.5rem 0;
-    color: var(--background-color);
-    border-bottom: 1px solid
-      color-mix(in srgb, var(--secondary), transparent 90%);
-  }
-  .nav-menu .nav-list a:last-child {
-    border-bottom: none;
-  }
-
-  /* Email pills in drawer */
-  .primary-nav .nav-menu .nav-list a.email {
-    display: inline-block;
-    font-size: clamp(0.95rem, 2.4vw, 1.05rem) !important;
-    font-weight: 300 !important;
-    opacity: 0.9 !important;
-    letter-spacing: 0.2px !important;
-    line-height: 1.1 !important;
-    padding: 0.45rem 0.7rem;
-    border-radius: 9999px;
-    background: color-mix(in srgb, var(--secondary), transparent 75%);
-    border: 1px solid color-mix(in srgb, var(--secondary), transparent 80%);
-    text-decoration: none;
-    border-bottom: none !important;
-  }
-  .primary-nav .nav-menu .nav-list li:has(> a.email) + li:has(> a.email) {
-    margin-top: -0.5rem; /* tighten just between two email pills */
-  }
-
-  /* SCRIM: blur the WHOLE page except nav pill and drawer
-     - Full-viewport coverage (ignores nav height and top-gap)
-     - Lives behind the nav within its stacking context so the pill stays crisp
-     - Drawer sits above it via higher z-index
-  */
-  .primary-nav .nav-scrim {
-    position: fixed;
-    inset: -6px; /* full-viewport with overscan to kill seams */
-    z-index: -1; /* behind nav’s stacking context so pill stays crisp */
-    background: rgba(
-      255,
-      255,
-      255,
-      0.001
-    ); /* keeps WebKit rendering backdrop */
-    -webkit-backdrop-filter: blur(var(--drawer-blur)) brightness(1);
-    backdrop-filter: blur(var(--drawer-blur)) brightness(1);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 300ms ease, visibility 0s linear 300ms;
-    will-change: opacity;
-    backface-visibility: hidden;
-    pointer-events: none;
-    transform: translateZ(0);
-  }
-  .primary-nav.is-open .nav-scrim {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 300ms ease, visibility 0s;
-  }
-
-  /* Move scroll indicator up slightly on mobile so it’s not hugging the edge */
-  .scroll-indicator {
-    bottom: calc(10px + max(14px, env(safe-area-inset-bottom) + 8px));
-  }
+.nav-accordion-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0 0.6rem 1rem;
+  display: none;
 }
 
-/* Even smaller phones get a proportional bump too */
-@media (max-width: 420px) {
-  .scroll-indicator {
-    bottom: calc(8px + max(12px, env(safe-area-inset-bottom) + 6px));
-  }
+.nav-accordion.open .nav-accordion-menu {
+  display: block;
 }
 
-/* =========================================
-   10) VERY SMALL PHONES (<=360px)
-   ========================================= */
-@media (max-width: 360px) {
-  .nav-phone {
-    display: none;
-  }
-  .primary-nav .nav-inner {
-    grid-template-columns: auto 1fr auto;
-  }
-  .nav-toggle {
-    grid-column: 3;
-    justify-self: end;
-  }
+.nav-accordion-menu a {
+  display: block;
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 100;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  padding: 0.35rem 0;
 }
 
-/* =========================================
-   11) TOUCH POLISH (TABLET LANDSCAPE ETC.)
-   ========================================= */
-@media (hover: none) and (pointer: coarse) {
-  .primary-nav .nav-inner {
-    grid-template-columns: 220px 1fr auto auto;
-    column-gap: 0.6rem;
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-    padding-top: max(0.2rem, env(safe-area-inset-top));
-    padding-bottom: 0.2rem;
-  }
-  .nav-center-card {
-    display: none;
-  }
-  .brand {
-    font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.9rem);
-    max-width: 60vw;
-  }
+.nav-accordion-toggle .chevron {
+  float: right;
+  transition: transform 0.25s ease;
 }
 
-/* =========================================
-   12) DESKTOP HOTFIX REMOVED: let height follow content
-   ========================================= */
-/* Keep center pill vertically centered relative to the nav */
-@media (min-width: 901px) {
-  .primary-nav .nav-inner {
-    align-items: center;
-    padding-block: 0.18rem; /* small, doesn’t inflate pill */
-  }
-  .nav-center-card {
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+.nav-accordion.open .chevron {
+  transform: rotate(180deg);
 }
 
-/* =========================================
-   13) ACCESSIBILITY OUTLINES
-   ========================================= */
+/* a11y */
 .primary-nav a:focus-visible,
 .nav-toggle:focus-visible,
 .nav-phone:focus-visible {
@@ -534,24 +632,14 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
-@media (prefers-reduced-motion: reduce) {
-  .nav-menu,
-  .nav-toggle .burger i {
-    transition: none !important;
-  }
-}
 
-/* =========================================
-   14) BASE BUTTONS (SLIMMER)
-   ========================================= */
+/* buttons */
 .btn-black,
 .btn-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--secondary);
-  color: var(--background-color);
-  padding: 0.38rem 0.9rem; /* slimmer */
+  padding: 0.38rem 0.9rem;
   border: none;
   border-radius: 9999px;
   font-size: 0.95rem;
@@ -561,215 +649,248 @@ body {
   transition: transform 0.25s ease;
   cursor: pointer;
 }
+
+.btn-black {
+  background: var(--secondary);
+  color: var(--background-color);
+}
+
 .btn-cta {
-  font-size: 1.5rem !important;
-  font-weight: 600 !important;
-  background: var(--accent) !important;
-  color: var(--secondary) !important;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--secondary);
   margin-left: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 6px 24px rgba(0, 0, 0, 0.2);
 }
+
 .btn-black:hover,
 .btn-cta:hover {
   transform: scale(1.1);
 }
+
 .btn-black:active,
 .btn-cta:active {
   transform: scale(1);
 }
+
 @media (max-width: 600px) {
   .btn-black,
   .btn-cta {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
     padding: 0.34rem 0.85rem;
     transform: none;
   }
 }
 
-/* =========================================
-   15) FOOTER
-   ========================================= */
+/* FOOTER - MOBILE FIRST */
 #site-footer {
-  background-color: var(--secondary);
+  background: var(--accent);
   color: var(--text);
   width: 100%;
-  margin: 0;
-  padding: clamp(2rem, 4vw, 3rem) 0;
-  font-family: var(--font-body, "Albert Sans", sans-serif);
+  padding: clamp(2rem, 4vw, 3rem) 0 2.5rem;
   border-top: 1px solid color-mix(in srgb, var(--text), transparent 85%);
+  margin-top: auto;
 }
+
+/* Footer layout - MOBILE DEFAULT (single column) */
 .footer-inner {
   max-width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "punch"
+    "nav"
+    "brand"
+    "copy";
+  grid-template-columns: 1fr;
   align-items: center;
+  text-align: center;
   gap: 1rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
+
+/* Footer brand */
 .footer-brand {
+  grid-area: brand;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0.5rem;
+  align-items: center;
+  align-self: center;
 }
+
 .footer-logo {
-  width: 220px;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  opacity: 0.95;
+  font-size: clamp(5rem, 20vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--secondary);
+  opacity: 1;
+  margin: 0 auto;
+  width: clamp(180px, 55vw, 260px);
 }
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.3rem;
+}
+
+.footer-social a {
+  color: var(--secondary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: opacity 0.25s ease;
+}
+
+.footer-social a:hover {
+  opacity: 0.7;
+}
+
 .footer-tagline {
-  font-size: 0.9rem;
-  color: color-mix(in srgb, var(--text), transparent 30%);
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--secondary), transparent 30%);
   margin: 0;
 }
+
+/* Footer nav */
+.footer-nav {
+  margin-top: 2rem;
+  grid-area: nav;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer-nav ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.6rem;
   margin: 0;
   padding: 0;
-  justify-content: center;
+  align-items: center;
 }
+
 .footer-nav a {
-  color: var(--text);
+  color: var(--secondary);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 2.5rem;
+  font-weight: 700;
   transition: opacity 0.2s ease;
 }
-.footer-nav a:hover {
-  opacity: 0.7;
+
+/* Footer punch */
+.footer-punch {
+  grid-area: punch;
+  margin: 0;
+  color: var(--secondary);
+  font-size: clamp(1.2rem, 5.5vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-wrap: balance;
+  align-self: center;
 }
-.footer-meta p {
-  text-align: right;
-  font-size: 0.85rem;
-  color: color-mix(in srgb, var(--text), transparent 30%);
+
+/* Footer copy */
+.footer-copy {
+  grid-area: copy;
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+  text-align: center;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--secondary), transparent 35%);
 }
-@media (max-width: 700px) {
+
+/* DESKTOP FOOTER ONLY - very restrictive */
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
   .footer-inner {
+    /* Same layout as mobile, but can be adjusted here */
+    grid-template-areas:
+      "punch"
+      "nav"
+      "brand"
+      "copy";
     grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.2rem;
-    padding: 0 1rem;
-  }
-  .footer-brand {
     align-items: center;
-  }
-  .footer-meta {
     text-align: center;
-  }
-  .footer-nav ul {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .footer-logo {
+    gap: 1.5rem; /* Slightly more gap on desktop */
+    padding: 0 clamp(2rem, 4vw, 4rem); /* More padding on desktop */
+    max-width: 1200px; /* Optional max-width for desktop */
     margin: 0 auto;
   }
+
+  .footer-logo {
+    font-size: clamp(6rem, 20vw, 12rem); /* Slightly larger on desktop */
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .footer-punch {
+    font-size: clamp(1.8rem, 2vw, 2.5rem); /* Bigger text on desktop */
+  }
+
+  .footer-nav a {
+    font-size: 2.8rem; /* Slightly larger links on desktop */
+  }
 }
 
-/* =========================================
-   16) HERO + SCROLL INDICATOR
-   ========================================= */
-.hero {
-  position: relative;
+/* top blur tokens */
+:root {
+  --top-blur-height: 45px;
+  --top-blur-strength: 20px;
+  --top-blur-tint: color-mix(in srgb, var(--secondary), transparent 85%);
 }
 
-/* =========================================
-   17) EMAIL PILLS (GLOBAL FALLBACK, NON-MOBILE PREVIEWS)
-   ========================================= */
-.primary-nav .nav-menu .nav-list a.email {
-  display: inline-block;
-  padding: 0.4rem 0.7rem;
-  border-radius: 9999px;
-  background: color-mix(in srgb, var(--secondary), transparent 75%);
-  border: 1px solid color-mix(in srgb, var(--secondary), transparent 80%);
-  text-decoration: none;
-  border-bottom: none !important;
-}
-
-/* =========================================
-   NAV-ONLY BLUR WHEN OPEN (SEAMLESS WITH SCRIM)
-   ========================================= */
-
-/* Default: no nav-local blur */
-.primary-nav::after {
-  content: none;
-}
-
-/* When OPEN: add a nav-local blur layer under the pill so the excess around the pill blurs, but not the pill itself. */
-.primary-nav.is-open::after {
+/* top blur */
+body::before {
   content: "";
-  position: absolute;
-  inset: -6px; /* overscan to overlap scrim */
-  -webkit-backdrop-filter: blur(var(--drawer-blur)) brightness(1);
-  backdrop-filter: blur(var(--drawer-blur)) brightness(1);
-  background: rgba(
-    255,
-    255,
-    255,
-    0.001
-  ); /* keeps WebKit rendering without darkening */
-  z-index: 1; /* pill is z:2, content z:3 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--top-blur-height);
   pointer-events: none;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  -webkit-backdrop-filter: blur(var(--top-blur-strength));
+  backdrop-filter: blur(var(--top-blur-strength));
+  background: linear-gradient(
+    to bottom,
+    var(--top-blur-tint) 0%,
+    color-mix(in srgb, var(--secondary), transparent 85%) 25%,
+    color-mix(in srgb, var(--secondary), transparent 95%) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: topBlurFade 1.2s ease forwards 0.2s;
+  z-index: 9000;
 }
 
-/* Keep the pill crisp above the nav blur */
-.primary-nav::before {
-  z-index: 2;
-}
-.primary-nav .nav-inner {
-  z-index: 3;
-}
-
-/* Safety: shared blur token */
-.nav-menu,
-.nav-scrim,
-.primary-nav::after {
-  --drawer-blur: 10px;
-}
-
-@media (max-width: 900px) {
-  :root {
-    --pill-extra: -2px !important;
+/* animations */
+@keyframes topBlurFade {
+  from {
+    opacity: 0;
   }
-  .primary-nav .nav-inner {
-    padding-left: 18px !important; /* nudge left edge */
-    padding-right: 25px !important; /* nudge right edge */
+  to {
+    opacity: 1;
   }
 }
-/* =========================================
-   MOBILE: GRADIENT BORDER AROUND NAV PILL
-   ========================================= */
-@media (max-width: 900px) {
-  .primary-nav::before {
-    border: none;
 
-    /* smoother alternating conic gradient */
+/* blur fallback */
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  body::before {
     background: linear-gradient(
-          var(--background-color),
-          var(--background-color)
-        )
-        padding-box,
-      conic-gradient(
-          from 45deg,
-          var(--accent) 0%,
-          color-mix(in srgb, var(--accent) 70%, var(--background-color) 30%) 20%,
-          var(--background-color) 40%,
-          color-mix(in srgb, var(--background-color) 70%, var(--accent) 30%) 60%,
-          var(--accent) 80%,
-          color-mix(in srgb, var(--accent) 60%, white 20%) 100%
-        )
-        border-box;
-
-    border: 3px solid transparent;
-    border-radius: 9999px;
-
-    /* subtle lift shadow */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+      to bottom,
+      color-mix(in srgb, var(--accent), transparent 65%) 0%,
+      color-mix(in srgb, var(--accent), transparent 85%) 40%,
+      transparent 100%
+    );
   }
+}
+
+/* helpers */
+body.no-top-blur::before {
+  display: none;
 }

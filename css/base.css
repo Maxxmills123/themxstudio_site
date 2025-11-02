@@ -1,24 +1,18 @@
-/* ================================
-   Design Tokens
-   ================================ */
 :root {
   --font-body: "Albert Sans", sans-serif;
-
-  --accent: #461dcb;
-
-  --background-color: #fbf8f3;
-  --text: #f3f3f3; /* light text for dark surfaces */
-  --secondary: #1e1e1e; /* dark text for light surfaces */
-
-  --nav-surface: #ffffff;
+  --accent: #c2f58b;
+  --background-color: #fefefe;
+  --text: #f8f8f8;
+  --secondary: #000000;
+  --nav-surface: #fefefe;
   --pill-bg: url("/assets/images/MXHERO.webp");
-
   --border: color-mix(in srgb, var(--text), transparent 85%);
 }
 
-/* ================================
-   Base / Reset
-   ================================ */
+body {
+  font-family: var(--font-body);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -27,7 +21,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: clip; /* prevent horizontal scroll without nuking transforms */
+  background-color: var(--secondary);
 }
 
 *,
@@ -36,7 +30,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Media should never exceed its container */
 img,
 svg,
 video,
@@ -46,23 +39,7 @@ iframe {
   height: auto;
   display: block;
 }
-
-/* Long words/URLs won't blow out the layout */
-:where(p, li, h1, h2, h3, h4, h5, h6) {
-  overflow-wrap: anywhere;
-}
-
-/* ================================
-   Typography
-   ================================ */
-body {
-  font-family: var(--font-body);
-  background: var(--background-color);
-  color: var(--text);
-  font-weight: 300;
-}
-
-/* Default paragraphs on light backgrounds */
-p {
-  color: var(--secondary);
+.bold {
+  font-weight: 700;
+  color: inherit;
 }
