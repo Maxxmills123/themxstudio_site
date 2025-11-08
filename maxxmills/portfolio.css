@@ -1,0 +1,1057 @@
+/* ------------------------------ Root + Tokens ------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+:root {
+  --font-body: "Albert Sans", sans-serif;
+  --accent: #1a1a1a;
+  --background-color: #fefefe;
+  --text: #f8f8f8;
+  --secondary: #000000;
+  --accent2: #ff4bd2;
+  --glow-40: #ff38bd;
+  --glow-60: #922828;
+
+  --btn-bg: rgba(255, 255, 255, 0.1);
+  --btn-bg-hover: rgba(255, 255, 255, 0.18);
+  --btn-text: #ffffff;
+  --focus-ring: 2px solid #ffffff;
+
+  --header-pad: 16px;
+  --z-header: 50;
+  --z-scrim: 60;
+  --z-drawer: 70;
+  --scrim: rgba(0, 0, 0, 0.12);
+  --drawer-width: min(88vw, 380px);
+  --drawer-bg: var(--background-color);
+  --drawer-text: var(--accent);
+  --glass-bg: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  --glass-blur: 24px;
+  --glass-sat: 1.2;
+
+  /* Halo tunables */
+  --halo-band: 15px; /* inner rim width hugging the photo */
+  --ring-min: 5px; /* outward feather min */
+  --ring-max: 60px; /* outward feather max */
+  --fade-blur: 80px; /* long feather blur */
+  --fade-blur-near: 40px; /* quick falloff right after the rim */
+  --seam-bloom: 8px; /* micro-bloom to hide rim→glow seam */
+
+  /* Rim presence vs melt */
+  --band-alpha: 0.1;
+  --feather-alpha-near: 20;
+  --feather-alpha-far: 20;
+
+  /* Lift */
+  --lift-1: 0 10px 10px rgba(0, 0, 0, 0.16);
+  --lift-2: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+  /* Motion */
+  --pulse-speed: 3s; /* width expand/contract */
+  --color-hold: 2s; /* exact time per color slice */
+  --cycle-steps: 40; /* number of color slices (↑ for smoother) */
+  --cycle-speed: 20s;
+
+  /* runtime color variable used by the halo */
+  --ring-color: #ff66cc; /* initial (pink) */
+}
+
+/* ------------------------------ Base Layout ------------------------------ */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: var(--background-color);
+  color: var(--text);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+.site-header {
+  position: fixed;
+  top: var(--header-pad);
+  right: var(--header-pad);
+  z-index: var(--z-header);
+  pointer-events: none;
+}
+
+/* ------------------------------ Hamburger ------------------------------ */
+.hamburger {
+  pointer-events: auto;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline-offset: 4px;
+}
+.hamburger:focus-visible {
+  outline: var(--focus-ring);
+}
+.hamburger-lines {
+  position: relative;
+  width: 44px;
+  height: 28px;
+  display: inline-block;
+}
+.hamburger .line {
+  position: absolute;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease,
+    background 0.2s ease;
+  will-change: transform, opacity, width, background;
+}
+.hamburger .line-top {
+  top: 5px;
+  width: 24px;
+}
+.hamburger .line-bottom {
+  bottom: 5px;
+  width: 36px;
+}
+.hamburger[aria-expanded="true"] .line-top {
+  width: 36px;
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] .line-bottom {
+  width: 36px;
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ------------------------------ Drawer ------------------------------ */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: var(--z-scrim);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.drawer-scrim[data-show] {
+  opacity: 1;
+}
+
+.drawer {
+  position: fixed;
+  top: var(--header-pad);
+  right: var(--header-pad);
+  bottom: var(--header-pad);
+  width: var(--drawer-width);
+  height: auto;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  border: 1px solid color-mix(in srgb, var(--glass-border) 80%, transparent);
+  box-shadow: var(--glass-shadow);
+  border-radius: 18px;
+  color: var(--drawer-text);
+  z-index: var(--z-drawer);
+  transform: translateX(120%);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+.drawer::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask: radial-gradient(
+    circle,
+    #000 calc(100% - 1.5px),
+    transparent calc(100% - 1.5px)
+  );
+  mask: radial-gradient(
+    circle,
+    #000 calc(100% - 1.5px),
+    transparent calc(100% - 1.5px)
+  );
+  backdrop-filter: blur(8px) saturate(1.15);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+}
+.drawer[aria-hidden="true"] {
+  transform: translateX(120%);
+}
+.drawer[aria-hidden="false"] {
+  transform: translateX(0);
+}
+
+.drawer-list li,
+.drawer-actions {
+  transform: translateX(16px);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.drawer[aria-hidden="false"] .drawer-list li,
+.drawer[aria-hidden="false"] .drawer-actions {
+  transform: translateX(0);
+  opacity: 1;
+}
+.drawer-list li:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.drawer-list li:nth-child(2) {
+  transition-delay: 0.08s;
+}
+.drawer-list li:nth-child(3) {
+  transition-delay: 0.11s;
+}
+.drawer-list li:nth-child(4) {
+  transition-delay: 0.14s;
+}
+.drawer-list li:nth-child(5) {
+  transition-delay: 0.17s;
+}
+
+.drawer-nav {
+  margin: 0;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  gap: 28px;
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+}
+.drawer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+.drawer-list a {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(1.125rem, 2.6vw, 1.5rem);
+  color: var(--drawer-text);
+  padding: 10px 8px;
+  border-radius: 10px;
+  outline-offset: 4px;
+}
+.drawer-list a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 60%, white);
+}
+.drawer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ------------------------------ Buttons ------------------------------ */
+.btn-accent2 {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--accent2) 80%, white);
+  background: var(--accent2);
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: transform 0.2s ease, background 0.25s ease,
+    border-color 0.25s ease;
+  outline-offset: 4px;
+}
+.btn-accent2:hover,
+.btn-accent2:focus-visible {
+  background: color-mix(in srgb, var(--accent2) 25%, white 75%);
+  border-color: color-mix(in srgb, var(--accent2) 55%, white);
+  transform: translateY(-1px);
+}
+.btn-accent2:focus-visible {
+  outline: 2px solid var(--accent2);
+}
+
+.drawer-close {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--drawer-text);
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+.drawer-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.drawer-close:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+/* ------------------------------ Drawer Close Icon ------------------------------ */
+.drawer-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  outline-offset: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.drawer-x:focus-visible {
+  outline: var(--focus-ring);
+}
+.drawer[aria-hidden="false"] .drawer-x {
+  opacity: 1;
+  pointer-events: auto;
+}
+.x-lines {
+  position: relative;
+  width: 44px;
+  height: 28px;
+  display: inline-block;
+}
+.x-line {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  background: var(--accent);
+  border-radius: 3px;
+}
+.x-line-a {
+  transform: rotate(45deg);
+}
+.x-line-b {
+  transform: rotate(-45deg);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* ------------------------------ Intro Layout ------------------------------ */
+.full-screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  background: var(--background-color);
+  padding-bottom: env(safe-area-inset-bottom);
+  color: var(--accent);
+  text-align: center;
+}
+
+.intro {
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+.intro-wrapper {
+  max-width: 600px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 16px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* ------------------------------ Intro Text ------------------------------ */
+.intro-name {
+  font-size: clamp(2.4rem, 6vw, 3.5rem);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+.intro-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--accent);
+  margin: 0 auto 1.5rem;
+  max-width: 60ch;
+  text-align: center;
+}
+
+/* ------------------------------ Animatable Properties ------------------------------ */
+@property --ring-w {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: var(--ring-min);
+}
+@property --fade-blur {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: var(--fade-blur);
+}
+@property --ring-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #ff66cc;
+}
+
+/* ------------------------------ Photo + Halo Layers ------------------------------ */
+/* Keep the image still */
+.intro-photo-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  isolation: isolate;
+  transform-style: flat;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.intro-photo {
+  width: clamp(220px, 30vw, 300px);
+  height: clamp(220px, 30vw, 300px);
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* Halo layers */
+.intro-photo-wrap::before,
+.intro-photo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main ring */
+.intro-photo-wrap::after {
+  color: var(--ring-color);
+  --ring-w: var(--ring-min);
+
+  box-shadow: 0 0 0 var(--halo-band)
+      color-mix(
+        in srgb,
+        currentColor calc(var(--band-alpha) * 100%),
+        transparent
+      ),
+    0 0 var(--seam-bloom) calc(var(--halo-band) + 1px)
+      color-mix(in srgb, currentColor 22%, transparent),
+    0 0 var(--fade-blur-near)
+      calc(var(--halo-band) + calc(var(--ring-w) * 0.25))
+      color-mix(
+        in srgb,
+        currentColor calc(var(--feather-alpha-near) * 100%),
+        transparent
+      ),
+    0 0 var(--fade-blur) calc(var(--halo-band) + var(--ring-w))
+      color-mix(
+        in srgb,
+        currentColor calc(var(--feather-alpha-far) * 100%),
+        transparent
+      ),
+    0 8px 25px -5px color-mix(in srgb, currentColor 30%, transparent);
+
+  filter: drop-shadow(var(--lift-1)) drop-shadow(var(--lift-2));
+
+  /* Smoother color stepping with more slices; smoother pulse easing */
+  animation: halo-colors-24 var(--cycle-speed)
+      steps(var(--cycle-steps), jump-none) infinite,
+    halo-pulse var(--pulse-speed) ease-in-out infinite;
+  will-change: --ring-w, --ring-color, box-shadow, filter;
+}
+
+/* Glossy rim highlight */
+.intro-photo-wrap::before {
+  background: conic-gradient(
+      from 210deg at 50% 50%,
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.12) 16%,
+      rgba(255, 255, 255, 0) 24% 76%,
+      rgba(255, 255, 255, 0.12) 84%,
+      rgba(255, 255, 255, 0.4) 100%
+    ),
+    radial-gradient(
+      closest-side at 50% 45%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.15) 70%,
+      rgba(0, 0, 0, 0.22) 100%
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.42;
+  animation: rim-breathe 4.5s ease-in-out infinite;
+}
+@keyframes halo-colors-24 {
+  /* pink zone (330-315) */
+  0% {
+    --ring-color: hsl(330 90% 72%);
+  }
+  4.1667% {
+    --ring-color: hsl(325 88% 71%);
+  }
+  8.3333% {
+    --ring-color: hsl(320 85% 70%);
+  }
+
+  /* lavender / light purple (300-275) */
+  12.5% {
+    --ring-color: hsl(300 80% 73%);
+  }
+  16.6667% {
+    --ring-color: hsl(290 78% 74%);
+  }
+  20.8333% {
+    --ring-color: hsl(280 76% 75%);
+  }
+
+  /* soft periwinkle → pastel blue (260-230) */
+  25% {
+    --ring-color: hsl(260 78% 76%);
+  }
+  29.1667% {
+    --ring-color: hsl(245 80% 77%);
+  }
+  33.3333% {
+    --ring-color: hsl(230 82% 78%);
+  }
+
+  /* light blue (220-200) */
+  37.5% {
+    --ring-color: hsl(220 85% 77%);
+  }
+  41.6667% {
+    --ring-color: hsl(210 86% 76%);
+  }
+  45.8333% {
+    --ring-color: hsl(200 88% 75%);
+  }
+
+  /* aqua-mint bridge (185-165) */
+  50% {
+    --ring-color: hsl(185 85% 74%);
+  }
+  54.1667% {
+    --ring-color: hsl(175 80% 72%);
+  }
+  58.3333% {
+    --ring-color: hsl(165 78% 70%);
+  }
+
+  /* mint (155-150) */
+  62.5% {
+    --ring-color: hsl(155 76% 68%);
+  }
+  66.6667% {
+    --ring-color: hsl(150 75% 66%);
+  }
+  70.8333% {
+    --ring-color: hsl(150 72% 64%);
+  }
+
+  /* cool soft green (145-135) */
+  75% {
+    --ring-color: hsl(145 70% 63%);
+  }
+  79.1667% {
+    --ring-color: hsl(140 68% 62%);
+  }
+  83.3333% {
+    --ring-color: hsl(135 65% 61%);
+  }
+
+  /* return path toward pink (200-260-315) */
+  87.5% {
+    --ring-color: hsl(200 70% 70%);
+  }
+  91.6667% {
+    --ring-color: hsl(260 75% 72%);
+  }
+  95.8333% {
+    --ring-color: hsl(315 88% 71%);
+  }
+  100% {
+    --ring-color: hsl(330 90% 72%);
+  }
+}
+
+/* Width pulse for the donut: widen then settle, smoother easing */
+@keyframes halo-pulse {
+  0% {
+    --ring-w: var(--ring-min);
+  }
+  2.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.07
+    );
+  }
+  5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.12
+    );
+  }
+  7.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.16
+    );
+  }
+  10% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.18
+    );
+  }
+  12.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.22
+    );
+  }
+  15% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.28
+    );
+  }
+  17.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.33
+    );
+  }
+  20% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.38
+    );
+  }
+  22.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.43
+    );
+  }
+  25% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.48
+    );
+  }
+  27.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.53
+    );
+  }
+  30% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.58
+    );
+  }
+  32.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.63
+    );
+  }
+  35% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.69
+    );
+  }
+  37.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.74
+    );
+  }
+  40% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.78
+    );
+  }
+  42.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.83
+    );
+  }
+  45% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.88
+    );
+  }
+  47.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.94
+    );
+  }
+
+  50% {
+    --ring-w: var(--ring-max);
+  }
+
+  52.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.94
+    );
+  }
+  55% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.88
+    );
+  }
+  57.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.83
+    );
+  }
+  60% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.78
+    );
+  }
+  62.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.74
+    );
+  }
+  65% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.69
+    );
+  }
+  67.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.63
+    );
+  }
+  70% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.58
+    );
+  }
+  72.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.53
+    );
+  }
+  75% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.48
+    );
+  }
+  77.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.43
+    );
+  }
+  80% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.38
+    );
+  }
+  82.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.33
+    );
+  }
+  85% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.28
+    );
+  }
+  87.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.22
+    );
+  }
+  90% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.18
+    );
+  }
+  92.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.12
+    );
+  }
+  95% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.08
+    );
+  }
+  97.5% {
+    --ring-w: calc(
+      var(--ring-min) + (var(--ring-max) - var(--ring-min)) * 0.03
+    );
+  }
+  100% {
+    --ring-w: var(--ring-min);
+  }
+}
+
+/* Rim brightness breathe */
+@keyframes rim-breathe {
+  0%,
+  100% {
+    opacity: 0.38;
+  }
+  50% {
+    opacity: 0.52;
+  }
+}
+
+/* ------------------------------ Accessibility Helper ------------------------------ */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ------------------------------ Responsive Tweaks ------------------------------ */
+@media (max-width: 600px) {
+  .intro-name {
+    font-size: 3rem !important;
+  }
+  .intro-desc {
+    font-size: 1.25rem !important;
+    line-height: 1.7 !important;
+    max-width: 32ch !important;
+  }
+  .intro-photo {
+    width: 280px !important;
+    height: 280px !important;
+  }
+  .drawer-list a {
+    font-size: 1.35rem !important;
+  }
+  .btn-accent2 {
+    font-size: 1.15rem !important;
+  }
+  :root {
+    --drawer-width: 85vw;
+  }
+  .drawer {
+    top: var(--header-pad);
+    right: 12px;
+    bottom: var(--header-pad);
+    left: auto;
+    width: var(--drawer-width);
+    max-width: 320px;
+    min-height: 70vh;
+    height: auto;
+    padding: 20px 16px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .drawer-nav {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .intro-name {
+    font-size: 2.7rem !important;
+  }
+  .intro-desc {
+    font-size: 1.18rem !important;
+    max-width: 30ch !important;
+  }
+  .intro-photo {
+    width: 260px !important;
+    height: 260px !important;
+  }
+  .drawer-list a {
+    font-size: 1.28rem !important;
+  }
+  .btn-accent2 {
+    font-size: 1.08rem !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1366px) {
+  .intro-name {
+    font-size: 3.4rem !important;
+  }
+  .intro-desc {
+    font-size: 1.3rem !important;
+    line-height: 1.75 !important;
+    max-width: 34ch !important;
+  }
+  .intro-photo {
+    width: 320px !important;
+    height: 320px !important;
+  }
+  .drawer-list a {
+    font-size: 1.5rem !important;
+  }
+  .btn-accent2 {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-height: 500px) and (hover: none) and (pointer: coarse) {
+  .intro-name {
+    font-size: 2.6rem !important;
+  }
+  .intro-desc {
+    font-size: 1.15rem !important;
+    max-width: 32ch !important;
+  }
+  .intro-photo {
+    width: 260px !important;
+    height: 260px !important;
+  }
+}
+
+/* overflow safety */
+.drawer,
+.drawer-nav,
+.drawer-list,
+.drawer-actions {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.intro-wrapper {
+  max-width: 100%;
+}
+.mega-footer {
+  min-height: 100vh;
+  background: var(--accent2);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  padding: 48px 24px 72px; /* bottom pad so content doesn't collide with copy */
+  position: relative;
+  text-align: center;
+}
+
+/* central stack */
+.footer-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* make the name dominate the viewport width elegantly */
+.footer-name {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  /* as big as possible, capped sensibly */
+  font-size: clamp(2.5rem, 16vw, 12rem);
+  max-width: 92vw;
+  text-wrap: balance; /* nicer wrapping where supported */
+}
+
+/* email */
+.footer-email a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  font-weight: 600;
+}
+
+/* nav links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: opacity 0.2s ease;
+}
+.footer-link:hover,
+.footer-link:focus-visible {
+  opacity: 0.75;
+}
+
+/* social buttons */
+.footer-social {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-btn {
+  background: #fff;
+  color: var(--accent2);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.footer-btn:hover,
+.footer-btn:focus-visible {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+/* copyright pinned to the bare bottom */
+.footer-copy {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 16px; /* 16px from bottom */
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  text-align: center;
+}
+
+/* small screens: tighten gaps a bit so the name can scale larger */
+@media (max-width: 420px) {
+  .footer-stack {
+    gap: 22px;
+  }
+}

@@ -37,11 +37,11 @@
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Close menu");
     setIcons(true);
-
+dd
     menu.hidden = false;
     if (scrim) scrim.hidden = false;
 
-    // prime transform so the transition animates in
+
     menu.style.transform = "translateX(100%)";
     menu.style.visibility = "hidden";
     menu.getBoundingClientRect();
