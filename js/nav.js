@@ -1,21 +1,27 @@
-// nav drawer
+// =========================
+// NAV DRAWER (mobile/overlay)
+// =========================
 (function () {
   const nav = document.querySelector(".primary-nav");
   if (!nav) return;
 
   const toggle = nav.querySelector(".nav-toggle");
-  const menu = nav.querySelector("#primary-menu");
+  // Match CSS/markup: use .nav-menu
+  const menu = nav.querySelector(".nav-menu");
   const scrim = nav.querySelector(".nav-scrim");
   if (!toggle || !menu) return;
 
-  const TRANSITION_MS = 600;
+  // Keep in sync with CSS transition
+  const TRANSITION_MS = 700;
   const links = Array.from(nav.querySelectorAll(".nav-list a"));
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
 
   let suppressResizeUntil = 0;
   let ignoreOutsideClickOnce = false;
 
-  function setIcons(_open) {}
+  function setIcons(_open) {
+    // no-op by default; swap icons here if needed
+  }
 
   function applyState() {
     const open = isOpen();
@@ -37,14 +43,14 @@
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Close menu");
     setIcons(true);
-dd
+
     menu.hidden = false;
     if (scrim) scrim.hidden = false;
 
-
-    menu.style.transform = "translateX(100%)";
+    // Ensure transition starts from the off-screen state
+    menu.style.transform = "translate3d(calc(100% + 24px), 0, 0)";
     menu.style.visibility = "hidden";
-    menu.getBoundingClientRect();
+    menu.getBoundingClientRect(); // force reflow
 
     requestAnimationFrame(() => {
       menu.style.removeProperty("transform");
@@ -55,6 +61,7 @@ dd
 
       suppressResizeUntil = performance.now() + 500;
 
+      // Ignore the very first outside click that originated from the toggle
       ignoreOutsideClickOnce = true;
       setTimeout(() => {
         ignoreOutsideClickOnce = false;
@@ -74,6 +81,7 @@ dd
 
     nav.classList.remove("is-open");
 
+    // Wait for slide-out to finish before hiding for a11y/AT
     setTimeout(() => {
       menu.hidden = true;
       if (scrim) scrim.hidden = true;
@@ -93,10 +101,11 @@ dd
     toggleMenu();
   });
 
-  scrim &&
+  if (scrim) {
     scrim.addEventListener("click", () => {
       if (isOpen()) closeMenu();
     });
+  }
 
   document.addEventListener(
     "click",
@@ -120,7 +129,7 @@ dd
 
   links.forEach((a) => a.addEventListener("click", () => closeMenu()));
 
-  // keep transitions happy during resize; state is width-agnostic now
+  // Keep visual state consistent after resizes
   window.addEventListener(
     "resize",
     () => {
@@ -141,7 +150,9 @@ dd
   applyState();
 })();
 
-// mobile drawer accordions
+// =========================
+// MOBILE DRAWER ACCORDIONS
+// =========================
 (function () {
   const root = document;
   const nav = root.querySelector(".primary-nav");
@@ -213,49 +224,18 @@ dd
   });
 })();
 
-// desktop dropdown (hover + focus)
-document.addEventListener("DOMContentLoaded", () => {
-  const dropdown = document.querySelector(".nav-drop");
-  if (!dropdown) return;
-  const trigger = dropdown.querySelector(".nav-drop-trigger");
-
-  let hoverTimer;
-
-  function open() {
-    dropdown.classList.add("open");
-  }
-
-  function close() {
-    dropdown.classList.remove("open");
-  }
-
-  trigger.addEventListener("click", (e) => {
-    e.preventDefault();
-    dropdown.classList.toggle("open");
-  });
-
-  dropdown.addEventListener("mouseenter", () => {
-    clearTimeout(hoverTimer);
-    open();
-  });
-
-  dropdown.addEventListener("mouseleave", () => {
-    hoverTimer = setTimeout(close, 150);
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) close();
-  });
-});
-
-// desktop dropdown (chevron swap + keyboard focus mgmt)
+// =============================================
+// DESKTOP DROPDOWN (hover, click, keyboard, chevron)
+// =============================================
 document.addEventListener("DOMContentLoaded", () => {
   const drop = document.querySelector(".nav-drop");
   if (!drop) return;
 
   const trigger = drop.querySelector(".nav-drop-trigger");
   const menu = drop.querySelector(".nav-drop-menu");
-  const chev = trigger.querySelector(".chev");
+  const chev = trigger?.querySelector(".chev");
+
+  let hoverTimer;
 
   function open() {
     drop.classList.add("open");
@@ -267,19 +247,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (chev) chev.textContent = "▾";
   }
 
-  drop.addEventListener("mouseenter", open);
-  drop.addEventListener("mouseleave", close);
+  // Click toggles for mouse users
+  if (trigger) {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      drop.classList.contains("open") ? close() : open();
+    });
+  }
 
-  trigger.addEventListener("click", (e) => e.preventDefault());
+  // Hover with small delay on leave
+  drop.addEventListener("mouseenter", () => {
+    clearTimeout(hoverTimer);
+    open();
+  });
 
+  drop.addEventListener("mouseleave", () => {
+    hoverTimer = setTimeout(close, 150);
+  });
+
+  // Click outside closes
   document.addEventListener("click", (e) => {
     if (!drop.contains(e.target)) close();
   });
 
+  // Keyboard focus management
   drop.addEventListener("focusin", open);
   drop.addEventListener("focusout", (e) => {
     if (!drop.contains(e.relatedTarget)) close();
   });
 
+  // Init state
   close();
 });
