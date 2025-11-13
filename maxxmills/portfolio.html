@@ -24,223 +24,199 @@
     />
 
     <link rel="stylesheet" href="/maxxmills/portfolio.css" />
+    <link rel="stylesheet" href="/maxxmills/nav.css" />
   </head>
   <body>
-    <header class="site-header">
+    <div class="nav-panel" id="nav">
       <button
-        class="hamburger"
-        aria-label="Open menu"
-        aria-controls="site-drawer"
-        aria-expanded="false"
+        class="menu-toggle"
         type="button"
+        aria-expanded="false"
+        aria-controls="menu-panel"
       >
-        <span class="hamburger-lines" aria-hidden="true">
-          <i class="line line-top"></i>
-          <i class="line line-bottom"></i>
-        </span>
-      </button>
-    </header>
-    <div class="drawer-scrim" data-scrim hidden></div>
-    <aside class="drawer" id="site-drawer" aria-hidden="true">
-      <!-- X close in the exact same spot as the burger -->
-      <button class="drawer-x" type="button" aria-label="Close menu">
-        <span class="x-lines" aria-hidden="true">
-          <i class="x-line x-line-a"></i>
-          <i class="x-line x-line-b"></i>
-        </span>
+        <span class="menu-word">Menu</span>
+        <span class="plus" aria-hidden="true"></span>
+        <span class="visually-hidden">Open menu</span>
       </button>
 
-      <nav class="drawer-nav" aria-label="Site">
-        <ul class="drawer-list">
-          <!-- Consistent internal links -->
-          <li><a href="portfolio.html">Home</a></li>
-          <li><a href="resume.html">Resume</a></li>
-          <li><a href="work.html">Work</a></li>
-        </ul>
+      <div
+        class="panel"
+        id="menu-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        tabindex="-1"
+        aria-label="Site navigation"
+      >
+        <nav class="panel-links" aria-label="Primary">
+          <a href="/maxxmills/portfolio.html">Home</a>
+          <a href="/maxxmills/resume.html">Resume</a>
+          <a href="/maxxmills/work.html">Work</a>
 
-        <div class="drawer-actions">
-          <a
-            class="btn-accent2"
-            href="https://www.linkedin.com/in/maxxwatsonmills"
-            target="_blank"
-            rel="noopener noreferrer"
-            >LinkedIn</a
-          >
-          <a
-            class="btn-accent2"
-            href="https://github.com/Maxxmills123"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GitHub</a
-          >
-        </div>
-      </nav>
-    </aside>
-    <main>
-      <div id="pager">
-        <div class="track">
-          <section
-            class="intro full-screen panel"
-            id="home"
-            aria-labelledby="intro-title"
-          >
-            <div class="intro-wrapper">
-              <div class="intro-photo-wrap">
-                <img
-                  src="/maxxmills/headshot.webp"
-                  alt="Profile photo of Maxx"
-                  class="intro-photo"
-                />
-              </div>
-
-              <h1 class="intro-name" id="intro-title">Maxx Mills</h1>
-
-              <p class="intro-desc">
-                I am a website developer guided by clear UX principles and a
-                consistant creative vision.
-                <span class="intro-strong">Scroll to learn more...</span>
-              </p>
-            </div>
-          </section>
-          <section id="about" class="panel" aria-labelledby="about-title">
-            <div class="about-wrap">
-              <h2 id="about-title">
-                <span class="ink">What else should you know?</span>
-              </h2>
-
-              <p class="about-lede">
-                I’m a front-end developer currently completing a master’s in
-                Interaction Design. I strive for clear logic, smooth
-                interactions, and experiences that respect the person on the
-                other side of the screen.
-              </p>
-              <h3 class="about-subhead">My work is...</h3>
-              <ul class="about-points">
-                <li>
-                  <strong>grounded in UX research.</strong> Structures, flows,
-                  and decisions are shaped by real UX principles.
-                </li>
-                <li>
-                  <strong>accessibile.</strong> WCAG-aligned design, semantic
-                  markup, inclusive interactions, keyboard and assistive-tech
-                  friendly.
-                </li>
-                <li>
-                  <strong>built for SEO.</strong> Thoughtful content hierarchy,
-                  clean semantics, performance awareness, and search-ready
-                  architecture.
-                </li>
-                <li>
-                  <strong>responsive.</strong> My work works smoothly across
-                  devices without breaking at tablet widths.
-                </li>
-              </ul>
-              <h2 id="about-title">
-                <span class="ink">The tools I use:</span>
-              </h2>
-              <div class="about-grid">
-                <div class="about-card">
-                  <img src="css.png" alt="CSS logo" class="skill-icon" />
-                  <p class="skill-label">CSS</p>
-                </div>
-
-                <div class="about-card">
-                  <img src="html.png" alt="HTML logo" class="skill-icon" />
-                  <p class="skill-label">HTML</p>
-                </div>
-
-                <div class="about-card">
-                  <img
-                    src="javascript.png"
-                    alt="JavaScript logo"
-                    class="skill-icon"
-                  />
-                  <p class="skill-label">JavaScript</p>
-                </div>
-
-                <div class="about-card">
-                  <img src="figma.png" alt="Figma logo" class="skill-icon" />
-                  <p class="skill-label">Figma</p>
-                </div>
-
-                <div class="about-card">
-                  <img
-                    src="git.png"
-                    alt="Accessibility icon"
-                    class="skill-icon"
-                  />
-                  <p class="skill-label">Git/GitHub</p>
-                </div>
-
-                <div class="about-card">
-                  <img
-                    src="react.png"
-                    alt="Accessibility icon"
-                    class="skill-icon"
-                  />
-                  <p class="skill-label">React</p>
-                </div>
-                <div class="about-card">
-                  <img
-                    src="tailwind.png"
-                    alt="Accessibility icon"
-                    class="skill-icon"
-                  />
-                  <p class="skill-label">Tailwind</p>
-                </div>
-                <div class="about-card">
-                  <img
-                    src="bootstrap.png"
-                    alt="Accessibility icon"
-                    class="skill-icon"
-                  />
-                  <p class="skill-label">Bootstrap</p>
-                </div>
-              </div>
-            </div>
-          </section>
-          <footer class="mega-footer panel" id="end">
-            <div class="footer-stack" aria-labelledby="footer-title">
-              <div class="footer-top">
-                <h2 class="footer-name" id="footer-title">MAXX MILLS</h2>
-                <p class="footer-email">
-                  <a href="mailto:maxxmills37@gmail.com"
-                    >maxxmills37@gmail.com</a
-                  >
-                </p>
-              </div>
-
-              <!-- Consistent internal links -->
-              <nav class="footer-links" aria-label="Footer">
-                <a href="portfolio.html" class="footer-link">Home</a>
-                <a href="portfolio.html#about" class="footer-link">About</a>
-                <a href="work.html" class="footer-link">Work</a>
-              </nav>
-
-              <div class="footer-social">
-                <a
-                  href="https://github.com/Maxxmills123"
-                  target="_blank"
-                  rel="noopener"
-                  class="footer-btn"
-                  >GitHub</a
-                >
-                <a
-                  href="https://www.linkedin.com/in/maxxwatsonmills"
-                  target="_blank"
-                  rel="noopener"
-                  class="footer-btn"
-                  >LinkedIn</a
-                >
-              </div>
-            </div>
-
-            <p class="footer-copy">© <span id="year"></span> Maxx Mills</p>
-          </footer>
-        </div>
+          <!-- rename to match CSS that lays out two-per-row -->
+          <div class="nav-social">
+            <a
+              href="https://github.com/Maxxmills123"
+              target="_blank"
+              rel="noopener"
+              class="nav-btn"
+              >GitHub</a
+            >
+            <a
+              href="https://www.linkedin.com/in/maxxwatsonmills"
+              target="_blank"
+              rel="noopener"
+              class="nav-btn"
+              >LinkedIn</a
+            >
+          </div>
+        </nav>
       </div>
+    </div>
+
+    <main>
+      <section
+        class="intro full-screen"
+        id="home"
+        aria-labelledby="intro-title"
+      >
+        <div class="intro-wrapper">
+          <div class="intro-photo-wrap">
+            <img
+              src="/maxxmills/assets/headshot.webp"
+              alt="Profile photo of Maxx"
+              class="intro-photo"
+            />
+          </div>
+
+          <h1 class="intro-name" id="intro-title">Maxx Mills</h1>
+
+          <p class="intro-desc">
+            I am a website developer guided by clear UX principles and a
+            consistant creative vision.
+            <span class="intro-strong">Scroll to learn more...</span>
+          </p>
+        </div>
+      </section>
+
+      <section id="about" class="about-panel" aria-labelledby="about-title">
+        <div class="about-wrap">
+          <h2 id="about-title">
+            <span class="ink">Want to know a little about what I do?</span>
+          </h2>
+
+          <p class="about-lede">
+            I’m a front-end developer currently completing a master’s in
+            Interaction Design. I strive for clear logic, smooth interactions,
+            and experiences that respect the person on the other side of the
+            screen.
+          </p>
+
+          <h3 class="about-subhead">My work is...</h3>
+          <ul class="about-points">
+            <li>
+              <strong>grounded in UX research.</strong> Structures, flows, and
+              decisions are shaped by real UX principles.
+            </li>
+            <li>
+              <strong>accessibile.</strong> WCAG-aligned design, semantic
+              markup, inclusive interactions, keyboard and assistive-tech
+              friendly.
+            </li>
+            <li>
+              <strong>built for SEO.</strong> Thoughtful content hierarchy,
+              clean semantics, performance awareness, and search-ready
+              architecture.
+            </li>
+            <li>
+              <strong>responsive.</strong> My work works smoothly across devices
+              without breaking at tablet widths.
+            </li>
+          </ul>
+
+          <h2><span class="ink">The tools I use:</span></h2>
+          <div class="about-grid">
+            <div class="about-card">
+              <img src="assets/css.png" alt="CSS logo" class="skill-icon" />
+              <p class="skill-label">CSS</p>
+            </div>
+            <div class="about-card">
+              <img src="assets/html.png" alt="HTML logo" class="skill-icon" />
+              <p class="skill-label">HTML</p>
+            </div>
+            <div class="about-card">
+              <img
+                src="assets/javascript.png"
+                alt="JavaScript logo"
+                class="skill-icon"
+              />
+              <p class="skill-label">JavaScript</p>
+            </div>
+            <div class="about-card">
+              <img src="assets/figma.png" alt="Figma logo" class="skill-icon" />
+              <p class="skill-label">Figma</p>
+            </div>
+            <div class="about-card">
+              <img src="assets/git.png" alt="Git logo" class="skill-icon" />
+              <p class="skill-label">Git/GitHub</p>
+            </div>
+            <div class="about-card">
+              <img src="assets/react.png" alt="React logo" class="skill-icon" />
+              <p class="skill-label">React</p>
+            </div>
+            <div class="about-card">
+              <img
+                src="assets/tailwind.png"
+                alt="Tailwind logo"
+                class="skill-icon"
+              />
+              <p class="skill-label">Tailwind</p>
+            </div>
+            <div class="about-card">
+              <img
+                src="assets/bootstrap.png"
+                alt="Bootstrap logo"
+                class="skill-icon"
+              />
+              <p class="skill-label">Bootstrap</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <footer class="mega-footer" id="end">
+      <div class="footer-stack" aria-labelledby="footer-title">
+        <div class="footer-top">
+          <h2 class="footer-name" id="footer-title">MAXX MILLS</h2>
+          <p class="footer-email">
+            <a href="mailto:maxxmills37@gmail.com">maxxmills37@gmail.com</a>
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="portfolio.html" class="footer-link">Home</a>
+          <a href="portfolio.html#about" class="footer-link">About</a>
+          <a href="work.html" class="footer-link">Work</a>
+        </nav>
+        <div class="footer-social">
+          <a
+            href="https://github.com/Maxxmills123"
+            target="_blank"
+            rel="noopener"
+            class="footer-btn"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/maxxwatsonmills"
+            target="_blank"
+            rel="noopener"
+            class="footer-btn"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> Maxx Mills</p>
+    </footer>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
