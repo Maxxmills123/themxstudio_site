@@ -226,3 +226,26 @@
 
   keepNoGap();
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const accordion = document.querySelector("#skills-accordion");
+  if (!accordion) return;
+
+  const items = accordion.querySelectorAll(".about-accordion-item");
+
+  items.forEach((item) => {
+    const header = item.querySelector(".about-accordion-header");
+    const panel = item.querySelector(".about-accordion-panel");
+
+    if (!header || !panel) return;
+
+    header.addEventListener("click", () => {
+      const isExpanded = header.getAttribute("aria-expanded") === "true";
+      const newState = !isExpanded;
+
+      header.setAttribute("aria-expanded", String(newState));
+      item.classList.toggle("is-open", newState);
+      panel.hidden = !newState;
+    });
+  });
+});

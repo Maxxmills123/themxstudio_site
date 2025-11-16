@@ -99,10 +99,12 @@
         </div>
       </section>
 
+      <div class="full-width-gradient"></div>
+
       <section id="about" class="about-panel" aria-labelledby="about-title">
         <div class="about-wrap">
           <h2 id="about-title">
-            <span class="ink">Want to know a little about what I do?</span>
+            <span class="ink">Who I am & what I do</span>
           </h2>
 
           <p class="about-lede">
@@ -135,55 +137,168 @@
           </ul>
 
           <h2><span class="ink">The tools I use:</span></h2>
-          <div class="about-grid">
-            <div class="about-card">
-              <img src="assets/css.png" alt="CSS logo" class="skill-icon" />
-              <p class="skill-label">CSS</p>
+          <div class="about-accordion" id="skills-accordion">
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-css-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-css-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">CSS</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-css-panel"
+                role="region"
+                aria-labelledby="skill-css-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>Responsive layouts with Flexbox & Grid</li>
+                  <li>Design tokens & custom properties</li>
+                  <li>Transitions, animations & micro-interactions</li>
+                </ul>
+              </div>
             </div>
-            <div class="about-card">
-              <img src="assets/html.png" alt="HTML logo" class="skill-icon" />
-              <p class="skill-label">HTML</p>
+
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-html-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-html-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">HTML</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-html-panel"
+                role="region"
+                aria-labelledby="skill-html-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>Semantic structure for accessibility & SEO</li>
+                  <li>Clean, minimal markup patterns</li>
+                  <li>Forms with proper labels & states</li>
+                </ul>
+              </div>
             </div>
-            <div class="about-card">
-              <img
-                src="assets/javascript.png"
-                alt="JavaScript logo"
-                class="skill-icon"
-              />
-              <p class="skill-label">JavaScript</p>
+
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-js-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-js-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">JavaScript</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-js-panel"
+                role="region"
+                aria-labelledby="skill-js-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>DOM-driven UI behavior & state</li>
+                  <li>Modular scripts & reusable patterns</li>
+                  <li>APIs (fetch) & basic error handling</li>
+                </ul>
+              </div>
             </div>
-            <div class="about-card">
-              <img src="assets/figma.png" alt="Figma logo" class="skill-icon" />
-              <p class="skill-label">Figma</p>
+
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-figma-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-figma-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">Figma</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-figma-panel"
+                role="region"
+                aria-labelledby="skill-figma-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>Design systems, components & variants</li>
+                  <li>Auto layout for responsive frames</li>
+                  <li>Interactive prototypes & dev handoff</li>
+                </ul>
+              </div>
             </div>
-            <div class="about-card">
-              <img src="assets/git.png" alt="Git logo" class="skill-icon" />
-              <p class="skill-label">Git/GitHub</p>
+
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-git-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-git-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">Git / GitHub</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-git-panel"
+                role="region"
+                aria-labelledby="skill-git-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>Branching, commits & pull requests</li>
+                  <li>Collaboration & review workflows</li>
+                  <li>Version control for experiments & refactors</li>
+                </ul>
+              </div>
             </div>
-            <div class="about-card">
-              <img src="assets/react.png" alt="React logo" class="skill-icon" />
-              <p class="skill-label">React</p>
-            </div>
-            <div class="about-card">
-              <img
-                src="assets/tailwind.png"
-                alt="Tailwind logo"
-                class="skill-icon"
-              />
-              <p class="skill-label">Tailwind</p>
-            </div>
-            <div class="about-card">
-              <img
-                src="assets/bootstrap.png"
-                alt="Bootstrap logo"
-                class="skill-icon"
-              />
-              <p class="skill-label">Bootstrap</p>
+
+            <div class="about-accordion-item">
+              <button
+                class="about-accordion-header"
+                id="skill-react-header"
+                type="button"
+                aria-expanded="false"
+                aria-controls="skill-react-panel"
+              >
+                <span class="skill-toggle-symbol" aria-hidden="true"></span>
+                <span class="skill-title">React</span>
+              </button>
+              <div
+                class="about-accordion-panel"
+                id="skill-react-panel"
+                role="region"
+                aria-labelledby="skill-react-header"
+                hidden
+              >
+                <ul class="skill-points">
+                  <li>Component-based UIs with props & state</li>
+                  <li>Hooks for logic & side effects</li>
+                  <li>Routing & view composition patterns</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
+
+    <div class="full-width-gradient2"></div>
 
     <footer class="mega-footer" id="end">
       <div class="footer-stack" aria-labelledby="footer-title">
@@ -217,6 +332,7 @@
       </div>
       <p class="footer-copy">© <span id="year"></span> Maxx Mills</p>
     </footer>
+
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>

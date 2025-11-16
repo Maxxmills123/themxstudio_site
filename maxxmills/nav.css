@@ -242,7 +242,6 @@ html.no-scroll {
 .panel .nav-social .nav-btn:focus-visible {
   transform: translateY(-5px);
   opacity: 0.85;
-  background: var(--accent2);
 }
 
 @media (max-width: 380px) {
