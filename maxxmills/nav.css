@@ -6,6 +6,12 @@
   --toggle-offset: 16px;
   --toggle-height: 44px;
   --panel-width: 200px;
+
+  --panel-max-height: 30vh;
+  --nav-radius: 15px;
+
+  --nav-glass-bg: color-mix(in srgb, var(--accent2) 78%, transparent 22%);
+  --nav-glass-border: color-mix(in srgb, var(--accent2) 14%, transparent 86%);
 }
 
 html.no-scroll {
@@ -34,6 +40,25 @@ html.no-scroll {
   place-items: center;
 }
 
+.nav-panel::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  bottom: var(--toggle-offset);
+  transform: translateX(-50%);
+  width: max(var(--panel-width), 260px);
+  height: calc(var(--toggle-height) + var(--panel-max-height));
+  border-radius: var(--nav-radius);
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 0;
+}
+
 .menu-toggle {
   position: relative;
   left: 50%;
@@ -46,9 +71,9 @@ html.no-scroll {
   min-inline-size: fit-content;
   inline-size: auto;
   block-size: var(--toggle-height);
-  border: 0;
-  border-radius: 15px;
-  background: var(--accent2);
+  border: none;
+  border-radius: var(--nav-radius);
+  background: var(--nav-glass-bg);
   font: 600 1rem/1 var(--font-body);
   color: var(--accent);
   cursor: pointer;
@@ -58,8 +83,26 @@ html.no-scroll {
   white-space: nowrap;
   transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
     padding 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s ease,
-    border-radius 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    border-radius 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.3s ease,
+    border-color 0.3s ease, background-color 0.3s ease;
   overflow: hidden;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle::-moz-focus-inner {
+  border: 0;
+}
+
+.nav-panel.nav-closed .menu-toggle {
+  border: 1px solid var(--nav-glass-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .menu-word {
@@ -96,6 +139,7 @@ html.no-scroll {
   width: 18px;
   height: 2px;
 }
+
 .plus::after {
   width: 2px;
   height: 18px;
@@ -107,9 +151,9 @@ html.no-scroll {
   bottom: calc(var(--toggle-offset) + var(--toggle-height));
   transform: translateX(-50%) scaleY(0);
   transform-origin: 50% 100%;
-  background: var(--accent2);
+  background: var(--nav-glass-bg);
   color: var(--accent);
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--nav-radius) var(--nav-radius) 0 0;
   padding: 18px;
   display: inline-grid;
   grid-auto-flow: row;
@@ -117,7 +161,7 @@ html.no-scroll {
   width: fit-content;
   min-inline-size: 200px;
   max-inline-size: min(92vw, 90vw);
-  max-block-size: 60vh;
+  max-block-size: var(--panel-max-height);
   height: auto;
   overflow: auto;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
@@ -125,7 +169,11 @@ html.no-scroll {
   opacity: 0;
   pointer-events: none;
   transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.3s ease;
+    opacity 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+  border: 1px solid var(--nav-glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .nav-panel[data-open] .menu-toggle .menu-word {
@@ -133,11 +181,33 @@ html.no-scroll {
   opacity: 0;
 }
 
+.nav-panel[data-open]::before {
+  opacity: 1;
+}
+
 .nav-panel[data-open] .menu-toggle {
   width: var(--panel-width);
   padding: 0 16px;
   justify-content: center;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 var(--nav-radius) var(--nav-radius);
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+.nav-panel[data-open] .panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) scaleY(1);
+  border: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
 .nav-panel[data-open] .plus {
@@ -149,23 +219,21 @@ html.no-scroll {
     transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.nav-panel[data-closing]::before {
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.nav-panel[data-closing] .panel {
+  transform: translateX(-50%) scaleY(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
 .nav-panel[data-closing] .menu-toggle {
   width: auto;
   padding: 0 45px 0 16px;
-}
-
-.nav-panel[data-closing] .menu-toggle .menu-word {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.nav-panel[data-closing] .plus {
-  right: 12px;
-  margin-right: 0;
-  transform: translate(0, -50%) rotate(0deg);
-  transition: right 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-    margin-right 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  border-radius: var(--nav-radius);
 }
 
 .nav-panel[data-open] .plus::before {
@@ -180,6 +248,15 @@ html.no-scroll {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.nav-panel[data-closing] .plus {
+  right: 12px;
+  margin-right: 0;
+  transform: translate(0, -50%) rotate(0deg);
+  transition: right 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    margin-right 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 .nav-panel[data-closing] .plus::before {
   width: 18px;
   height: 2px;
@@ -190,12 +267,6 @@ html.no-scroll {
   width: 2px;
   height: 18px;
   transform: translate(-50%, -50%) rotate(0deg);
-}
-
-.nav-panel[data-open] .panel {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) scaleY(1);
 }
 
 .panel .panel-links {
@@ -259,7 +330,8 @@ html.no-scroll {
   .plus,
   .plus::before,
   .plus::after,
-  .panel {
+  .panel,
+  .nav-panel::before {
     transition: none;
     animation: none;
   }

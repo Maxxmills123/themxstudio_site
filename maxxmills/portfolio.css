@@ -702,9 +702,9 @@ body {
 }
 
 .about-lede {
-  max-width: 90%;
+  max-width: 60%;
   line-height: 1.6;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-left: auto;
   margin-right: auto;
   text-align: justify !important;
@@ -723,15 +723,14 @@ body {
   flex-direction: column;
   gap: 0.75rem;
   font-size: 1rem;
-  max-width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 30%;
+  margin: 0 auto;
   align-items: stretch;
 }
 
 .about-points li {
   line-height: 1.5;
-  text-align: left;
+  text-align: left !important;
   width: 100%;
 }
 
@@ -739,7 +738,9 @@ body {
   font-size: 4rem;
   line-height: 1;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
+  color: var(--accent2);
+  font-weight: 400;
 }
 
 #about h2:nth-of-type(2) {
@@ -749,11 +750,19 @@ body {
 .ink {
   font-size: inherit;
   line-height: 1.5;
-  background-color: color-mix(in srgb, var(--accent2) 35%, transparent);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
+  background-color: color-mix(
+    in srgb,
+    var(--accent2) 35%,
+    transparent
+  ) !important;
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
   padding: 0.05em 0.2em;
   border-radius: 0.15em;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .about-accordion {
@@ -809,6 +818,7 @@ body {
 .skill-title {
   font-size: 1.15rem;
   font-weight: 600;
+  color: var(--accent2);
 }
 
 .about-accordion-panel {
@@ -841,8 +851,7 @@ body {
 }
 
 .skill-points li::marker {
-  color: var(--accent2);
-  font-size: 0.8em;
+  font-size: .5rem;
 }
 
 .about-accordion-item:last-child {
@@ -953,7 +962,7 @@ body {
   }
 
   #about h2:nth-of-type(1) {
-    font-size: 2.75rem;
+    font-size: 3.5rem;
     margin-top: 1.5rem;
     margin-bottom: 1.25rem;
     text-align: left !important;
@@ -975,7 +984,7 @@ body {
   }
 
   .about-subhead {
-    font-size: 1.4rem !important;
+    font-size: 2rem !important;
     margin-bottom: 0.75rem;
     text-align: left !important;
   }
@@ -1062,5 +1071,18 @@ body {
   .intro-photo {
     width: 260px !important;
     height: 260px !important;
+  }
+}
+
+@media screen and (min-width: 744px) and (max-width: 1024px) {
+  .about-points {
+    max-width: 60%;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .about-points li {
+    width: 100%;
+    text-align: left;
   }
 }

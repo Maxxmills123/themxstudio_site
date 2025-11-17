@@ -226,6 +226,49 @@
 
   keepNoGap();
 })();
+const navPanel = document.querySelector(".nav-panel");
+const toggle = navPanel.querySelector(".menu-toggle");
+const panel = navPanel.querySelector(".panel");
+
+let isOpen = false;
+let isAnimating = false;
+
+// optional: ensure initial closed state has border
+navPanel.classList.add("nav-closed");
+
+toggle.addEventListener("click", () => {
+  if (isAnimating) return; // stop spamming the button
+  isAnimating = true;
+
+  if (!isOpen) {
+    // OPENING
+    navPanel.classList.remove("nav-closed"); // remove border immediately
+    navPanel.setAttribute("data-open", "");
+    navPanel.removeAttribute("data-closing");
+    toggle.setAttribute("aria-expanded", "true");
+    isOpen = true;
+  } else {
+    // CLOSING
+    navPanel.removeAttribute("data-open");
+    navPanel.setAttribute("data-closing", "");
+    toggle.setAttribute("aria-expanded", "false");
+    // border will come back ONLY after transitionend
+  }
+});
+
+// Only care about the panel's transform transition finishing
+panel.addEventListener("transitionend", (event) => {
+  if (event.propertyName !== "transform") return;
+
+  isAnimating = false;
+
+  // If we were closing, now it's fully closed
+  if (navPanel.hasAttribute("data-closing")) {
+    navPanel.removeAttribute("data-closing");
+    navPanel.classList.add("nav-closed"); // border ON now
+    isOpen = false;
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const accordion = document.querySelector("#skills-accordion");
@@ -248,4 +291,22 @@ document.addEventListener("DOMContentLoaded", () => {
       panel.hidden = !newState;
     });
   });
+});
+toggle.addEventListener("click", () => {
+  toggle.blur(); // no focus, no black line
+
+  if (isAnimating) return;
+  isAnimating = true;
+
+  if (!isOpen) {
+    navPanel.classList.remove("nav-closed");
+    navPanel.setAttribute("data-open", "");
+    navPanel.removeAttribute("data-closing");
+    toggle.setAttribute("aria-expanded", "true");
+    isOpen = true;
+  } else {
+    navPanel.removeAttribute("data-open");
+    navPanel.setAttribute("data-closing", "");
+    toggle.setAttribute("aria-expanded", "false");
+  }
 });
