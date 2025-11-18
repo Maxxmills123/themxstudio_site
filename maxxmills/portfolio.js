@@ -1,4 +1,3 @@
-// portfolio.js
 (function () {
   const root = document.querySelector(".nav-panel");
   if (!root) return;
@@ -25,17 +24,16 @@
   function syncMetrics() {
     const tg = toggle.getBoundingClientRect();
     const h = Math.max(44, Math.round(tg.height));
-    setVar("--toggle-height", `${h}px`);
+    setVar("--toggle-height", h + "px");
 
     const cs = getComputedStyle(toggle);
     let offset = parseFloat(cs.bottom);
     if (!Number.isFinite(offset)) offset = 16;
-    setVar("--toggle-offset", `${Math.round(offset)}px`);
+    setVar("--toggle-offset", Math.round(offset) + "px");
 
-    // Calculate panel width when it's visible
     if (panel && isOpen()) {
       const panelRect = panel.getBoundingClientRect();
-      setVar("--panel-width", `${Math.round(panelRect.width)}px`);
+      setVar("--panel-width", Math.round(panelRect.width) + "px");
     }
   }
 
@@ -65,7 +63,7 @@
   }
 
   function fitPanel() {
-    const vw = window.innerHeight;
+    const vh = window.innerHeight;
     const cs = getComputedStyle(document.documentElement);
     const safeTop =
       parseFloat(cs.getPropertyValue("--safe-area-inset-top")) || 0;
@@ -73,21 +71,13 @@
       parseFloat(cs.getPropertyValue("--safe-area-inset-bottom")) || 0;
 
     const toggleOffset =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--toggle-offset"
-        )
-      ) || 16;
+      parseFloat(cs.getPropertyValue("--toggle-offset")) || 16;
     const toggleHeight =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--toggle-height"
-        )
-      ) || 44;
+      parseFloat(cs.getPropertyValue("--toggle-height")) || 44;
 
     const available = Math.max(
       120,
-      Math.floor(vw - (toggleOffset + toggleHeight + safeBottom + 8))
+      Math.floor(vh - (toggleOffset + toggleHeight + safeBottom + 8))
     );
 
     panel.style.maxHeight = available + "px";
@@ -95,12 +85,16 @@
   }
 
   function openPanel() {
+    if (isOpen()) return;
+
     lastFocused = document.activeElement;
 
     syncMetrics();
     fitPanel();
 
+    root.classList.remove("nav-closed");
     root.setAttribute("data-open", "");
+    root.removeAttribute("data-closing");
     toggle.setAttribute("aria-expanded", "true");
     panel.setAttribute("aria-hidden", "false");
     lockScroll();
@@ -116,23 +110,20 @@
 
     requestAnimationFrame(() => {
       fitPanel();
-      // Set panel width after animation frame to ensure panel is rendered
       const panelRect = panel.getBoundingClientRect();
-      setVar("--panel-width", `${Math.round(panelRect.width)}px`);
+      setVar("--panel-width", Math.round(panelRect.width) + "px");
     });
 
     setTimeout(() => {
       fitPanel();
-      // Update panel width after animation
       const panelRect = panel.getBoundingClientRect();
-      setVar("--panel-width", `${Math.round(panelRect.width)}px`);
+      setVar("--panel-width", Math.round(panelRect.width) + "px");
     }, 180);
 
     setTimeout(() => {
       fitPanel();
-      // Final panel width sync
       const panelRect = panel.getBoundingClientRect();
-      setVar("--panel-width", `${Math.round(panelRect.width)}px`);
+      setVar("--panel-width", Math.round(panelRect.width) + "px");
     }, 360);
   }
 
@@ -143,12 +134,11 @@
     root.setAttribute("data-closing", "");
     toggle.setAttribute("aria-expanded", "false");
     panel.setAttribute("aria-hidden", "true");
-
-    // Reset panel width
     setVar("--panel-width", "auto");
 
-    const onDone = () => {
+    function onDone() {
       root.removeAttribute("data-closing");
+      root.classList.add("nav-closed");
       document.removeEventListener("keydown", onKeydown);
       document.removeEventListener("keydown", trapFocus);
       document.removeEventListener("click", onDocClick, true);
@@ -158,13 +148,14 @@
       } else {
         toggle.focus({ preventScroll: true });
       }
-    };
+    }
 
-    const onPanelEnd = (e) => {
+    function onPanelEnd(e) {
       if (e.target !== panel || e.propertyName !== "transform") return;
       panel.removeEventListener("transitionend", onPanelEnd);
       onDone();
-    };
+    }
+
     panel.addEventListener("transitionend", onPanelEnd);
   }
 
@@ -189,6 +180,7 @@
   }
 
   toggle.addEventListener("click", () => {
+    toggle.blur();
     syncMetrics();
     togglePanel();
   });
@@ -197,12 +189,12 @@
   window.addEventListener("orientationchange", keepNoGap);
 
   new ResizeObserver(keepNoGap).observe(toggle);
+
   new ResizeObserver(() => {
     if (isOpen()) {
       fitPanel();
-      // Update panel width when panel resizes
       const panelRect = panel.getBoundingClientRect();
-      setVar("--panel-width", `${Math.round(panelRect.width)}px`);
+      setVar("--panel-width", Math.round(panelRect.width) + "px");
     }
   }).observe(panel);
 
@@ -218,57 +210,28 @@
   const mo = new MutationObserver(() => {
     if (isOpen()) fitPanel();
   });
+
   mo.observe(contentTarget, {
     childList: true,
     subtree: true,
     characterData: true,
   });
 
+  const aboutLink =
+    panel.querySelector('a[href*="#about"]') ||
+    root.querySelector('a[href*="#about"]');
+
+  if (aboutLink) {
+    aboutLink.addEventListener("click", () => {
+      if (isOpen()) {
+        closePanel();
+      }
+    });
+  }
+
+  root.classList.add("nav-closed");
   keepNoGap();
 })();
-const navPanel = document.querySelector(".nav-panel");
-const toggle = navPanel.querySelector(".menu-toggle");
-const panel = navPanel.querySelector(".panel");
-
-let isOpen = false;
-let isAnimating = false;
-
-// optional: ensure initial closed state has border
-navPanel.classList.add("nav-closed");
-
-toggle.addEventListener("click", () => {
-  if (isAnimating) return; // stop spamming the button
-  isAnimating = true;
-
-  if (!isOpen) {
-    // OPENING
-    navPanel.classList.remove("nav-closed"); // remove border immediately
-    navPanel.setAttribute("data-open", "");
-    navPanel.removeAttribute("data-closing");
-    toggle.setAttribute("aria-expanded", "true");
-    isOpen = true;
-  } else {
-    // CLOSING
-    navPanel.removeAttribute("data-open");
-    navPanel.setAttribute("data-closing", "");
-    toggle.setAttribute("aria-expanded", "false");
-    // border will come back ONLY after transitionend
-  }
-});
-
-// Only care about the panel's transform transition finishing
-panel.addEventListener("transitionend", (event) => {
-  if (event.propertyName !== "transform") return;
-
-  isAnimating = false;
-
-  // If we were closing, now it's fully closed
-  if (navPanel.hasAttribute("data-closing")) {
-    navPanel.removeAttribute("data-closing");
-    navPanel.classList.add("nav-closed"); // border ON now
-    isOpen = false;
-  }
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const accordion = document.querySelector("#skills-accordion");
@@ -279,7 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
   items.forEach((item) => {
     const header = item.querySelector(".about-accordion-header");
     const panel = item.querySelector(".about-accordion-panel");
-
     if (!header || !panel) return;
 
     header.addEventListener("click", () => {
@@ -291,22 +253,4 @@ document.addEventListener("DOMContentLoaded", () => {
       panel.hidden = !newState;
     });
   });
-});
-toggle.addEventListener("click", () => {
-  toggle.blur(); // no focus, no black line
-
-  if (isAnimating) return;
-  isAnimating = true;
-
-  if (!isOpen) {
-    navPanel.classList.remove("nav-closed");
-    navPanel.setAttribute("data-open", "");
-    navPanel.removeAttribute("data-closing");
-    toggle.setAttribute("aria-expanded", "true");
-    isOpen = true;
-  } else {
-    navPanel.removeAttribute("data-open");
-    navPanel.setAttribute("data-closing", "");
-    toggle.setAttribute("aria-expanded", "false");
-  }
 });
