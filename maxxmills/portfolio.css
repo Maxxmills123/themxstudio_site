@@ -35,22 +35,17 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  background: var(--background-color);
-  color: var(--text);
   overflow-x: hidden;
-  width: 100%;
   overscroll-behavior: none;
-}
-
-html {
-  scroll-behavior: auto;
+  background-color: inherit;
 }
 
 body {
-  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+  min-height: 100dvh;
 }
 
 .visually-hidden {
@@ -68,9 +63,8 @@ body {
 .full-screen {
   display: grid;
   place-items: center;
-  min-height: 105vh;
-  min-height: 105svh;
-  min-height: 105dvh;
+  min-height: 100dvh;
+  min-height: 100dvh;
   width: 100%;
   position: relative;
   background: var(--accent) !important;
@@ -996,6 +990,7 @@ body {
   position: relative;
   text-align: center;
 }
+
 .mega-footer::before {
   content: "";
   position: absolute;
@@ -1021,6 +1016,7 @@ body {
   font-size: clamp(5rem, 12vw, 15rem);
   max-width: 92vw;
   text-wrap: balance;
+  color: var(--background-color);
 }
 
 .footer-email a {
@@ -1092,7 +1088,7 @@ body {
   .sample-grid {
     grid-template-columns: 1fr;
     column-gap: 0;
-    row-gap: 2.5rem;
+    row-gap: 4rem;
     justify-items: center;
   }
 
@@ -1154,7 +1150,7 @@ body {
   }
 
   .about-subhead {
-    font-size: 2.5rem !important;
+    font-size: 2rem !important;
     margin-bottom: 1rem;
     text-align: left !important;
   }
@@ -1164,6 +1160,12 @@ body {
     gap: 1rem;
     max-width: 100%;
     margin-bottom: 3rem;
+  }
+
+  .strong {
+    font-weight: 700;
+    color: var(--accent2);
+    font-size: 1.5rem;
   }
 
   .about-points li {
