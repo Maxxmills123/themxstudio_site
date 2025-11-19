@@ -15,6 +15,8 @@
 
   --nav-bottom-offset: 1rem;
   --nav-shell-width: min(var(--panel-width), 92vw);
+
+  --nav-blur: 20px;
 }
 
 html.no-scroll {
@@ -50,8 +52,8 @@ html.no-scroll {
   inset: 0;
   border-radius: var(--nav-radius);
   background: var(--nav-glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   opacity: 0;
   pointer-events: none;
@@ -84,8 +86,8 @@ html.no-scroll {
     border-radius 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.35s ease,
     background-color 0.35s ease;
   overflow: hidden;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -100,8 +102,8 @@ html.no-scroll {
   border: none;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   background: var(--nav-glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
 }
 
 .menu-word {
@@ -162,12 +164,11 @@ html.no-scroll {
   z-index: 1;
   opacity: 0;
   pointer-events: none;
-  transform-origin: 50% 100%;
   transform: translateY(10px) scaleY(0.85);
   transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1),
     opacity 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
 }
 
 .nav-panel[data-open] {
@@ -227,8 +228,8 @@ html.no-scroll {
   pointer-events: none;
   transform: translateY(10px) scaleY(0.85);
   background: var(--nav-glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -236,8 +237,8 @@ html.no-scroll {
   padding: 0 45px 0 16px;
   border-radius: var(--nav-radius);
   background: var(--nav-glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   align-self: center;
 }

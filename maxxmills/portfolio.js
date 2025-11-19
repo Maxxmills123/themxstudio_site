@@ -254,3 +254,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const link = document.querySelector(".resume-download-link");
+  if (!link) return;
+
+  link.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const url = link.getAttribute("href");
+    if (!url) return;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) return;
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = "Maxx-Mills-Resume.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error("Download failed", err);
+    }
+  });
+});

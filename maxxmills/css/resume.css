@@ -1,0 +1,69 @@
+.resume-main {
+  min-height: 100vh;
+  padding: 2rem 3rem 2.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 5rem;
+}
+
+.resume-frame {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 80px
+    color-mix(in srgb, var(--background-color) 30%, transparent 70%);
+  width: min(900px, 100%);
+}
+
+.resume-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.resume-download {
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.resume-download a,
+.resume-download a:visited,
+.resume-download a:hover,
+.resume-download a:focus-visible,
+.resume-download a:active {
+  color: var(--background-color);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .resume-main {
+    min-height: 100dvh;
+    height: 100dvh;
+    margin-top: 0;
+    padding: 2.5rem 2.5rem;
+    justify-content: center;
+  }
+
+  .resume-frame {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 40px
+      color-mix(in srgb, var(--background-color) 18%, transparent 82%);
+  }
+
+  .resume-image {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
+}

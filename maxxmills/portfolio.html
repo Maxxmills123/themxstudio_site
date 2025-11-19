@@ -23,8 +23,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/maxxmills/portfolio.css" />
-    <link rel="stylesheet" href="/maxxmills/nav.css" />
+    <link rel="stylesheet" href="/maxxmills/css/portfolio.css" />
+    <link rel="stylesheet" href="/maxxmills/css/nav.css" />
   </head>
   <body>
     <div class="nav-panel" id="nav">
@@ -85,6 +85,8 @@
               src="/maxxmills/assets/headshot.webp"
               alt="Profile photo of Maxx"
               class="intro-photo"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -388,7 +390,6 @@
       </div>
       <p class="footer-copy">© <span id="year"></span> Maxx Mills</p>
     </footer>
-
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
