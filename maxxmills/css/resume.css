@@ -13,10 +13,10 @@
 .resume-frame {
   display: inline-block;
   margin: 0 auto;
-  border-radius: 1rem;
+  border-radius: 2rem;
   overflow: hidden;
-  box-shadow: 0 0 80px
-    color-mix(in srgb, var(--background-color) 30%, transparent 70%);
+  box-shadow: 0 0 50px
+    color-mix(in srgb, var(--background-color) 10%, transparent 90%);
   width: min(900px, 100%);
 }
 
@@ -54,11 +54,11 @@
     width: auto;
     max-width: 100%;
     max-height: calc(100dvh - 4rem);
-    display: flex;
+    display: flex; 
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 40px
-      color-mix(in srgb, var(--background-color) 18%, transparent 82%);
+    box-shadow: 0 0 50px
+      color-mix(in srgb, var(--background-color) 10%, transparent 90%);
   }
 
   .resume-image {

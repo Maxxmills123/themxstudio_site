@@ -14,7 +14,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Maxx Mills" />
 
-    <link rel="icon" href="/favicon.ico?v=4" type="image/x-icon" />
+   <link rel="icon" href="assets/favicon.ico?v=4" type="image/x-icon" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +23,7 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="/maxxmills/css/work.css" />
     <link rel="stylesheet" href="/maxxmills/css/portfolio.css" />
     <link rel="stylesheet" href="/maxxmills/css/nav.css" />
   </head>
@@ -48,8 +49,8 @@
         aria-label="Site navigation"
       >
         <nav class="panel-links" aria-label="Primary">
-          <a href="/maxxmills/portfolio.html">Home</a>
-          <a href="/maxxmills/portfolio.html#about">About</a>
+          <a href="/maxxmills/index.html">Home</a>
+          <a href="/maxxmills/index.html#about">About</a>
           <a href="/maxxmills/resume.html">Resume</a>
           <a href="/maxxmills/work.html">Work</a>
 
@@ -74,7 +75,51 @@
       </div>
     </div>
 
-    <main>work</main>
+    <main>
+      <section class="sample-2">
+        <div class="sample-inner-2">
+          <div class="sample-grid-2">
+            <a href="platepals.html" class="sample-item-2">
+              <div class="sample-media-2">
+                <img
+                  src="assets/platepals/platepals.webp"
+                  alt="Preview of Project One"
+                />
+              </div>
+              <div class="sample-text-2">
+                <h2 class="sample-project-title-2">PlatePals</h2>
+                <p class="sample-project-desc-2">
+                  PlatePals is a community recipe platform I designed and coded
+                  end-to-end, grounded in UX research and accessibility. It’s
+                  powered by an API-driven structure that supports scalable
+                  recipe sharing and community features.
+                </p>
+                <span class="sample-link-label-2">Click to learn more</span>
+              </div>
+            </a>
+            <a href="themxstudio.html" class="sample-item-2">
+              <div class="sample-media-2">
+                <img
+                  src="assets/mxstudio/mxstudio.webp"
+                  alt="Preview of Project Two"
+                />
+              </div>
+              <div class="sample-text-2">
+                <h2 class="sample-project-title-2">theMXstudio</h2>
+                <p class="sample-project-desc-2">
+                  The MX Studio is my web design and UX studio site that I
+                  designed and coded from scratch, focusing on clean visual
+                  identity, accessibility, and responsive layouts. It showcases
+                  my client-focused process across branding, UX, and SEO-ready
+                  web builds.
+                </p>
+                <span class="sample-link-label-2">Click to learn more</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="mega-footer" id="end">
       <div class="footer-stack" aria-labelledby="footer-title">
@@ -111,6 +156,6 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-    <script src="/maxxmills/portfolio.js" defer></script>
+    <script src="/maxxmills/js/portfolio.js" defer></script>
   </body>
 </html>

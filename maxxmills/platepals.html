@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Maxx Mills</title>
+    <meta
+      name="description"
+      content="I am Maxx Mills - a front-end website developer. View my portfolio."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Maxx Mills" />
+
+    <link rel="icon" href="assets/favicon.ico?v=4" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/maxxmills/css/sample.css" />
+    <link rel="stylesheet" href="/maxxmills/css/portfolio.css" />
+    <link rel="stylesheet" href="/maxxmills/css/nav.css" />
+  </head>
+  <body>
+    <div class="nav-panel" id="nav">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-panel"
+      >
+        <span class="menu-word">Menu</span>
+        <span class="plus" aria-hidden="true"></span>
+        <span class="visually-hidden">Open menu</span>
+      </button>
+      <div
+        class="panel"
+        id="menu-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        tabindex="-1"
+        aria-label="Site navigation"
+      >
+        <nav class="panel-links" aria-label="Primary">
+          <a href="/maxxmills/index.html">Home</a>
+          <a href="/maxxmills/index.html#about">About</a>
+          <a href="/maxxmills/resume.html">Resume</a>
+          <a href="/maxxmills/work.html">Work</a>
+
+          <!-- rename to match CSS that lays out two-per-row -->
+          <div class="nav-social">
+            <a
+              href="https://github.com/Maxxmills123"
+              target="_blank"
+              rel="noopener"
+              class="nav-btn"
+              >GitHub</a
+            >
+            <a
+              href="https://www.linkedin.com/in/maxxwatsonmills"
+              target="_blank"
+              rel="noopener"
+              class="nav-btn"
+              >LinkedIn</a
+            >
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <main>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-inner">
+          <button
+            type="button"
+            class="breadcrumb-back"
+            onclick="window.history.back()"
+          >
+            ← Back
+          </button>
+        </div>
+      </nav>
+      <section class="case-study">
+        <div class="case-study-inner">
+          <h1 class="case-title">PlatePals</h1>
+          <p class="case-intro">
+            A community recipe platform born from intensive UX research and
+            delivered as a polished, accessible, production-ready front end.
+          </p>
+
+          <img
+            src="assets/platepals/platepals.webp"
+            alt="Overview of the PlatePals discovery and research phase"
+            class="case-image"
+          />
+
+          <h2 class="case-section-title">Context, Users & Problem Space</h2>
+          <p class="case-section-text">
+            PlatePals began as a response to a familiar problem: recipe
+            platforms are great at content volume, but weak at community and
+            cultural context. For this project, I focused on everyday home cooks
+            who wanted to share recipes as stories, not just instructions.
+            <span class="ink">
+              Through UX research including competitor analysis, user
+              interviews, and a short survey, I found consistent pain points:
+              long, cluttered recipe pages, difficulty filtering for dietary
+              needs and time constraints, and a lack of space to highlight the
+              cultural meaning behind a dish.</span
+            >
+            These insights framed the core design challenge: create a recipe
+            platform that feels lightweight to use, inclusive by default, and
+            structured around people and their stories, not just their
+            ingredients.
+          </p>
+
+          <div class="case-image-pair">
+            <img
+              src="assets/platepals/platepals_api.webp"
+              alt="Key research artifacts for PlatePals such as notes, affinity maps, or early frameworks"
+              class="case-image"
+            />
+
+            <img
+              src="assets/platepals/platepals_api2.webp"
+              alt="Key research artifacts for PlatePals such as notes, affinity maps, or early frameworks"
+              class="case-image"
+            />
+          </div>
+
+          <h2 class="case-section-title">
+            Research-Driven System & API Design
+          </h2>
+          <p class="case-section-text">
+            Research showed that people didn’t want another generic recipe
+            archive; they wanted to discover culturally meaningful dishes, save
+            favourites, and get ongoing updates. That led to a simple browsing
+            model by type and culture, backed by a structured tagging system,
+            user accounts with favourites, and an email-ready feed for new
+            recipes.
+            <span class="ink"
+              >I integrated the API to support these behaviours so the front end
+              stays fast and closely aligned with the research.</span
+            >
+          </p>
+
+          <img
+            src="assets/platepals/platepals_featured.webp"
+            alt="Final PlatePals interface screens showing the polished UI"
+            class="case-image"
+          />
+
+          <h2 class="case-section-title">
+            Featured Spotlight & Visual Outcomes
+          </h2>
+          <p class="case-section-text">
+            The visual design centres on a featured “spotlight” section that
+            highlights culturally rich dishes, pairing strong imagery with clear
+            hierarchy, high-contrast typography, and concise storytelling.
+            <span class="ink"
+              >The layout makes the origin, tags, and key details immediately
+              scannable, while the rest of the page stays quieter to keep
+              attention on the featured recipe.</span
+            >
+            Testers reported that the spotlight made the platform feel more
+            “curated” and “personal” than a standard recipe grid, and it became
+            a natural entry point into exploring more dishes. In future
+            iterations, I’d extend this pattern into rotating themed spotlights
+            (e.g. region, occasion, or dietary focus) powered by the same
+            tagging and API structure.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mega-footer" id="end">
+      <div class="footer-stack" aria-labelledby="footer-title">
+        <div class="footer-top">
+          <h2 class="footer-name" id="footer-title">MAXX MILLS</h2>
+          <p class="footer-email">
+            <a href="mailto:maxxmills37@gmail.com">maxxmills37@gmail.com</a>
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="portfolio.html" class="footer-link">Home</a>
+          <a href="portfolio.html#about" class="footer-link">About</a>
+          <a href="work.html" class="footer-link">Work</a>
+        </nav>
+        <div class="footer-social">
+          <a
+            href="https://github.com/Maxxmills123"
+            target="_blank"
+            rel="noopener"
+            class="footer-btn"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/maxxwatsonmills"
+            target="_blank"
+            rel="noopener"
+            class="footer-btn"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> Maxx Mills</p>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="/maxxmills/js/portfolio.js" defer></script>
+  </body>
+</html>

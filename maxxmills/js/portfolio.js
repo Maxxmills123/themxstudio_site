@@ -254,6 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
   const link = document.querySelector(".resume-download-link");
   if (!link) return;
