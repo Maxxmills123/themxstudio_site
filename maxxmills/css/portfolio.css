@@ -674,6 +674,7 @@ p {
   font-size: 0.98rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent) 80%, var(--background-color) 20%);
+  text-align: left !important;
 }
 
 .sample-link-label {
@@ -1292,4 +1293,8 @@ p {
     width: 100%;
     text-align: left;
   }
+}
+
+main .sample-2 .sample-text-2 p {
+  text-align: left !important;
 }

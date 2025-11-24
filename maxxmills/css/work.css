@@ -10,6 +10,7 @@
   min-height: 100dvh;
   display: flex;
   align-items: center;
+  text-align: left !important;
 }
 
 .sample-2::before {
@@ -28,6 +29,7 @@
   margin: 0 auto;
   padding: 0 1.5rem;
   width: 100%;
+  text-align: left !important;
 }
 
 .sample-grid-2 {
@@ -47,6 +49,7 @@
   align-items: center;
   width: 100%;
   max-width: 540px;
+  text-align: left;
 }
 
 .sample-item-2:focus-visible {
@@ -82,7 +85,7 @@
   width: 100%;
   max-width: none;
   margin: 0 auto;
-  text-align: left;
+  text-align: left !important;
 }
 
 .sample-project-title-2 {
@@ -97,6 +100,7 @@
   font-size: 0.98rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--background-color) 90%, var(--accent) 10%);
+  text-align: left !important;
 }
 
 .sample-link-label-2 {
