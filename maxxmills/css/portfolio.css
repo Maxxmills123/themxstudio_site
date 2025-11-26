@@ -13,9 +13,9 @@
   --accent2: #ff5ad6;
   --focus-ring: 2px solid #ffffff;
   --drawer-text: var(--accent);
-  --halo-band: 5px;
+  --halo-band: 2px;
   --ring-min: 5px;
-  --ring-max: 50px;
+  --ring-max: 30px;
   --fade-blur: 40px;
   --fade-blur-near: 40px;
   --seam-bloom: 8px;
@@ -24,7 +24,7 @@
   --feather-alpha-far: 20;
   --lift-1: 0 10px 10px rgba(0, 0, 0, 0.1);
   --lift-2: 0 3px 8px rgba(0, 0, 0, 0.1);
-  --pulse-speed: 3s;
+  --pulse-speed: 4s;
   --cycle-steps: 48;
   --cycle-speed: 50s;
   --ring-color: var(--background-color);
@@ -116,7 +116,7 @@ p {
 }
 
 .intro-desc {
-  font-size: 1.5rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--background-color);
   margin: 0 auto 1.5rem;
@@ -689,7 +689,7 @@ p {
 }
 
 .sample-link-label::after {
-  content: "↗";
+  content: "\2197\FE0E";
   font-size: 0.9rem;
   margin-left: 0.35rem;
 }
@@ -839,7 +839,7 @@ p {
 
 #about,
 #about * {
-  text-align: center;
+  text-align: left;
 }
 
 #about-title {
@@ -848,13 +848,12 @@ p {
 }
 
 .about-lede {
-  max-width: 80%;
+  max-width: 100%;
   line-height: 2;
   font-size: 1.5rem;
   font-weight: 100;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: justify !important;
+
+  text-align: left !important;
 }
 
 .about-subhead {
@@ -867,20 +866,17 @@ p {
 .about-points {
   list-style: none;
   padding-left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  margin: 0;
   font-size: 1.5rem;
-  max-width: 40%;
-  margin: 0 auto;
-  align-items: stretch;
   font-weight: 100;
+  text-align: left;
 }
 
 .about-points li {
   line-height: 1.5;
-  text-align: left !important;
-  width: 100%;
+  text-align: left;
+  width: 50%;
+  margin-bottom: 2rem;
 }
 
 #about h2:nth-of-type(1) {
@@ -894,6 +890,13 @@ p {
 
 #about h2:nth-of-type(2) {
   font-size: 4rem;
+  max-width: 10% !important;
+}
+
+#about .h2-secondchild {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 10ch;
 }
 
 .ink {
@@ -921,20 +924,37 @@ p {
   font-style: italic;
 }
 
+.muted {
+  margin-top: 0;
+  font-size: 1rem;
+  display: block;
+  font-weight: 700;
+  color: var(--accent2);
+}
+
 .about-accordion {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
   margin-top: 1.5rem;
   max-width: 52rem;
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
+  text-align: left;
+  align-items: flex-start;
 }
 
 .about-accordion-item {
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--accent) 20%, var(--background-color) 80%);
-  padding-bottom: 0.6rem;
+  width: min(100%, 32rem);
+  border-style: solid;
+  border-color: color-mix(
+    in srgb,
+    var(--accent) 20%,
+    var(--background-color) 80%
+  );
+  border-width: 1px 1px 1px 1px; /* no bottom border */
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.9rem 0.6rem;
 }
 
 .about-accordion-header {
@@ -942,7 +962,7 @@ p {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   background: transparent;
   border: none;
   color: inherit;
@@ -1007,10 +1027,6 @@ p {
 
 .skill-points li::marker {
   font-size: 0.5rem;
-}
-
-.about-accordion-item:last-child {
-  border-bottom: none;
 }
 
 .mega-footer {
@@ -1227,9 +1243,10 @@ p {
     font-size: 3rem !important;
   }
   .intro-desc {
-    font-size: 1.25rem !important;
+    font-size: 1.1rem !important;
     line-height: 1.7 !important;
-    max-width: 32ch !important;
+    max-width: 30ch !important;
+    text-align: center;
   }
   .intro-photo {
     width: 280px !important;
@@ -1242,7 +1259,7 @@ p {
     font-size: 2.7rem !important;
   }
   .intro-desc {
-    font-size: 1.18rem !important;
+    font-size: 1.1rem !important;
     max-width: 30ch !important;
   }
   .intro-photo {
