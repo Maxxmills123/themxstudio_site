@@ -835,6 +835,7 @@ p {
   margin: 0;
   position: relative;
   z-index: 0;
+  margin-bottom: 3rem;
 }
 
 #about,
@@ -896,7 +897,7 @@ p {
 #about .h2-secondchild {
   text-align: center;
   margin-bottom: 2rem;
-  max-width: 10ch;
+  max-width: 20ch;
 }
 
 .ink {
@@ -926,7 +927,7 @@ p {
 
 .muted {
   margin-top: 0;
-  font-size: 1rem;
+  font-size: 2rem;
   display: block;
   font-weight: 700;
   color: var(--accent2);
@@ -1309,6 +1310,19 @@ p {
   .about-points li {
     width: 100%;
     text-align: left;
+  }
+}
+
+@media (max-width: 520px) {
+  .sample-inner > h2 {
+    width: 92%;
+    font-size: 1.5rem;
+  }
+
+  .sample-heading-label {
+    white-space: normal;
+    max-inline-size: 100%;
+    overflow-wrap: anywhere;
   }
 }
 
