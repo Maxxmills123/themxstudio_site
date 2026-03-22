@@ -1,0 +1,146 @@
+:root {
+  --accent: #ff3eb2;
+  --accent-hover: #ffa5db;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__content,
+.hero__body {
+  width: var(--site-width);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 110px 0 clamp(3rem, 8vw, 6rem);
+  margin-bottom: 0;
+}
+
+.hero__body {
+  display: block;
+  padding-top: 0;
+}
+
+.hero__h1-window {
+  width: 100%;
+  min-height: 50vh;
+  min-width: 0;
+}
+
+.hero__title {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  color: var(--accent);
+  font-family: var(--font-accent);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 400;
+  line-height: 0.94;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero__sub {
+  margin-top: 2rem;
+  max-width: 52rem;
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.hero__sub .emph {
+  color: var(--accent);
+}
+
+.type {
+  display: inline;
+  max-width: 100%;
+  white-space: normal;
+  vertical-align: baseline;
+}
+
+.type__text,
+.type__caret {
+  color: currentColor;
+}
+
+.type__text {
+  display: inline;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.type__caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.75em;
+  margin-left: 0.1em;
+  background: currentColor;
+  vertical-align: middle;
+  font-size: inherit;
+  color: transparent;
+  animation: caretBlink 0.85s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  50% {
+    background: transparent;
+  }
+}
+
+.hero-points,
+.services,
+.offer-copy {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+}
+
+.discovery-call {
+  padding-bottom: 0;
+}
+
+@media (max-width: 1366px) {
+  :root:has(.hero__title) {
+    --site-gap: 2rem;
+  }
+
+  .discovery-call__title,
+  .discovery-call__copy {
+    text-align: center;
+  }
+
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .hero__title {
+    font-size: clamp(4.5rem, 10vw, 6.25rem);
+  }
+
+  .hero__content {
+    block-size: 50vh;
+    align-content: start;
+    overflow: visible;
+  }
+
+  .hero__h1-window {
+    min-height: auto;
+  }
+
+  .hero__sub {
+    margin-top: 1.25rem;
+    max-width: 30ch;
+  }
+}

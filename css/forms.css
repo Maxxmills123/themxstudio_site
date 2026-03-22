@@ -1,0 +1,154 @@
+.form-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.form-modal.is-open {
+  display: flex;
+}
+
+.form-modal__panel {
+  width: min(90vw, 480px);
+  max-height: min(88vh, 48rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem 2rem 2rem;
+  border-top: 3px solid var(--accent);
+}
+
+.form-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.form-modal__heading {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form-modal__title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.form-modal__desc {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.72;
+}
+
+.form-modal__note {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.72;
+}
+
+.form-modal__close {
+  background: none;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-size: 2.25rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.form-modal__close:hover {
+  opacity: 1;
+}
+
+.audit-form,
+.discovery-form {
+  display: grid;
+  gap: 0.85rem;
+  color: var(--bg);
+}
+
+.audit-form input,
+.audit-form textarea,
+.discovery-form input,
+.discovery-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.9rem 0.9rem;
+  background: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font);
+}
+
+.audit-form input::placeholder,
+.audit-form textarea::placeholder,
+.discovery-form input::placeholder,
+.discovery-form textarea::placeholder {
+  opacity: 0.45;
+}
+
+.audit-form input:focus,
+.audit-form textarea:focus,
+.discovery-form input:focus,
+.discovery-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.audit-form textarea,
+.discovery-form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.audit-form__submit,
+.discovery-form__submit {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 900;
+  font-size: 1rem;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.audit-form__submit:hover,
+.discovery-form__submit:hover {
+  background: var(--accent-hover);
+}
+
+.audit-thanks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.audit-thanks__message {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text);
+}

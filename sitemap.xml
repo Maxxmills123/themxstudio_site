@@ -1,23 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Core pages -->
-  <url><loc>https://themxstudio.com/</loc></url>
-  <url><loc>https://themxstudio.com/mainpages/about.html</loc></url>
-  <url><loc>https://themxstudio.com/mainpages/contact.html</loc></url>
-  <url><loc>https://themxstudio.com/mainpages/work.html</loc></url>
-  <url><loc>https://themxstudio.com/mainpages/faq.html</loc></url>
-  <url><loc>https://themxstudio.com/mainpages/terms.html</loc></url>
-  <url><loc>https://themxstudio.com/blog/blog.html</loc></url>
+  <url>
+    <loc>https://themxstudio.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-  <!-- Other services -->
-  <url><loc>https://themxstudio.com/otherservices/branding.html</loc></url>
-  <url><loc>https://themxstudio.com/otherservices/seo.html</loc></url>
-  <url><loc>https://themxstudio.com/otherservices/googlebusiness.html</loc></url>
+  <url>
+    <loc>https://themxstudio.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
-  <!-- Website services -->
-  <url><loc>https://themxstudio.com/websiteservices/webdesign.html</loc></url>
-  <url><loc>https://themxstudio.com/websiteservices/webredesign.html</loc></url>
-  <url><loc>https://themxstudio.com/websiteservices/webmaintenance.html</loc></url>
+  <url>
+    <loc>https://themxstudio.com/the-mx-studio-web-design/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/website-design/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/website-redesign/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/website-hosting/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/website-maintenance/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/seo/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/google-ads/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/ai-search-optimisation/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/brand-design/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/logo-design/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/services/copywriting/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/pricing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/locations/web-design-brisbane/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/locations/web-design-newstead/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/locations/web-design-eagle-farm/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/blog/how-much-does-a-website-cost-brisbane/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/blog/why-most-brisbane-businesses-websites-dont-rank/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/free-website-audit/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
 </urlset>

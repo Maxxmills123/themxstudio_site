@@ -1,0 +1,245 @@
+:root {
+  --accent: #ecff5a;
+  --accent-hover: #f5ffb5;
+  --contact-card-width: 54rem;
+}
+
+.page-hero__title {
+  color: var(--accent);
+}
+
+.contact-forms {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+}
+
+.contact-meta {
+  width: min(var(--site-width), var(--contact-card-width));
+  max-width: none;
+  margin-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+  margin-inline: auto;
+  padding-inline: 0;
+  display: grid;
+  gap: 0;
+}
+
+.contact-meta__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  width: 7rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  transform: translate(32%, -50%) rotate(10deg);
+  clip-path: polygon(
+    50% 0%,
+    59% 18%,
+    79% 9%,
+    73% 29%,
+    94% 34%,
+    78% 50%,
+    94% 66%,
+    73% 71%,
+    79% 91%,
+    59% 82%,
+    50% 100%,
+    41% 82%,
+    21% 91%,
+    27% 71%,
+    6% 66%,
+    22% 50%,
+    6% 34%,
+    27% 29%,
+    21% 9%,
+    41% 18%
+  );
+}
+
+.contact-meta__badge-label {
+  display: block;
+  max-width: 4.4rem;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--bg);
+}
+
+.contact-direct {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.8fr);
+  align-items: start;
+  width: min(100%, var(--contact-card-width));
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: 2rem 2.4rem 2rem;
+  border-top: 3px solid var(--accent);
+  background: var(--card-bg);
+  border-radius: 0 0 12px 12px;
+  color: var(--text);
+  position: relative;
+}
+
+.contact-direct__inner {
+  display: grid;
+  gap: 0.95rem;
+  align-content: start;
+}
+
+.contact-direct .page-hero__email,
+.contact-direct .page-hero__phone {
+  gap: 0.55rem;
+  font-size: clamp(1.1rem, 0.7vw + 1rem, 1.5rem);
+  line-height: 1.18;
+}
+
+.contact-direct .page-hero__lead-icon {
+  width: 0.72em;
+  height: 0.72em;
+}
+
+.contact-direct__hours {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  padding-top: 0.15rem;
+}
+
+.contact-direct__hours-title,
+.contact-direct__hours-text {
+  margin: 0;
+}
+
+.contact-direct__hours-title {
+  font-size: clamp(1.12rem, 0.85vw + 1rem, 1.45rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.contact-direct__hours-text {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  opacity: 0.72;
+}
+
+.contact-forms__inner {
+  width: var(--site-width);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.contact-forms__title {
+  margin: 0;
+  width: 100%;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -1px;
+  text-align: center;
+  font-style: italic;
+}
+
+.contact-forms__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.contact-forms__card {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 42rem);
+  margin-inline: auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+}
+
+.contact-forms__head {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.contact-forms__card-title,
+.contact-forms__card-desc,
+.contact-forms__card-note {
+  margin: 0;
+}
+
+.contact-forms__card-title {
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.contact-forms__card-desc,
+.contact-forms__card-note {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  opacity: 0.72;
+}
+
+@media (max-width: 1366px) {
+  .contact-meta__badge {
+    top: 0;
+    right: 0.75rem;
+    width: 6.1rem;
+    padding: 0.9rem;
+    transform: translate(32%, -50%) rotate(8deg);
+  }
+
+  .contact-meta__badge-label {
+    max-width: 3.8rem;
+    font-size: 0.56rem;
+    line-height: 1.05;
+  }
+
+  .contact-direct {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 1.25rem;
+    padding: 1.4rem 1rem 1.1rem;
+  }
+
+  .contact-forms__inner {
+    gap: 1rem;
+  }
+
+  .contact-forms__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-forms__title {
+    font-size: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 1367px) {
+  .page-hero__content {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .page-hero__title,
+  .page-hero__sub,
+  .contact-forms__title {
+    text-align: center;
+  }
+}

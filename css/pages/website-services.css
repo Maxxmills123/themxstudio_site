@@ -1,0 +1,85 @@
+:root {
+  --accent: #3eff88;
+  --accent-hover: #a9ffc7;
+}
+
+.website-services__hero .page-hero__content {
+  position: relative;
+}
+
+.website-services__hero .page-hero__title {
+  color: var(--accent);
+}
+
+.website-services__hero-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.website-services__hero {
+  margin-bottom: var(--site-gap);
+  padding-bottom: var(--site-gap);
+}
+
+.website-services__hero-wrap .hero-points {
+  margin-top: auto;
+}
+
+.website-services__h1 {
+  margin: 0;
+  max-width: 48rem;
+  font-size: clamp(0.98rem, 0.35vw + 0.95rem, 1.1rem);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.72;
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  transform: translateY(calc(-100% - 0.35rem));
+}
+
+.services__title {
+  margin: 0;
+  width: 100%;
+  font-size: clamp(1.05rem, 0.45vw + 0.98rem, 1.18rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--text);
+  font-style: normal;
+  opacity: 0.56;
+  text-align: left;
+}
+
+@media (max-width: 1366px) {
+  :root {
+    --site-gap: 2rem;
+  }
+
+  .website-services__hero-wrap {
+    min-height: auto;
+  }
+
+  .website-services__hero .page-hero__title {
+    max-width: 100%;
+  }
+
+  .website-services__h1 {
+    transform: translateY(calc(-100% - 0.2rem));
+  }
+}
+
+.hero-points,
+.brand-position-statement,
+.pricing-grid2,
+.offer-copy,
+.reviews,
+.discovery-call,
+.faq {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+  padding-bottom: var(--site-gap);
+}
