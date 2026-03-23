@@ -231,6 +231,13 @@
   }
 }
 
+@media (max-width: 767px) {
+  .contact-forms__title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
 @media (min-width: 1367px) {
   .page-hero__content {
     justify-items: center;
