@@ -98,6 +98,27 @@ let lockPaddingRight = "";
 let lockScrollBehavior = "";
 let menuCloseTimer = null;
 const menuTransitionMs = 140;
+const mobileUiAfterMenuClose = {
+  active: false,
+  anchorY: 0,
+};
+
+const armMobileUiAfterMenuClose = (
+  y = window.scrollY || window.pageYOffset || 0,
+) => {
+  mobileUiAfterMenuClose.active = true;
+  mobileUiAfterMenuClose.anchorY = y;
+};
+
+const shouldHoldMobileUiAfterMenuClose = (releaseThreshold = 4) => {
+  if (!mobileUiAfterMenuClose.active) return false;
+  const y = window.scrollY || window.pageYOffset || 0;
+  if (y > mobileUiAfterMenuClose.anchorY + releaseThreshold) {
+    mobileUiAfterMenuClose.active = false;
+    return false;
+  }
+  return true;
+};
 
 const getScrollbarWidth = () =>
   Math.max(
@@ -135,7 +156,10 @@ const syncMobilePanelHeight = () => {
     window.innerHeight ||
     document.documentElement.clientHeight ||
     0;
-  const availableHeight = Math.max(160, Math.floor(viewportHeight - anchorRect.bottom));
+  const availableHeight = Math.max(
+    160,
+    Math.floor(viewportHeight - anchorRect.bottom),
+  );
 
   mobilePanel.style.maxHeight = `${availableHeight}px`;
 };
@@ -159,6 +183,7 @@ const unlockScroll = () => {
 const openMenu = () => {
   if (!burger || !mobilePanel) return;
   if (menuCloseTimer) clearTimeout(menuCloseTimer);
+  mobileUiAfterMenuClose.active = false;
 
   syncMobilePanelHeight();
   mobilePanel.scrollTop = 0;
@@ -178,7 +203,9 @@ const closeMenu = () => {
   menuCloseTimer = setTimeout(() => {
     mobilePanel.hidden = true;
     mobilePanel.style.maxHeight = "";
+    armMobileUiAfterMenuClose(scrollY);
     unlockScroll();
+    window.dispatchEvent(new CustomEvent("mobilepanelclosed"));
   }, menuTransitionMs);
 };
 
@@ -356,107 +383,189 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
 })();
 
 (() => {
-  const section = document.querySelector(".reviews");
-  if (!section) return;
+  const sections = Array.from(document.querySelectorAll(".reviews"));
+  if (!sections.length) return;
 
-  const track = section.querySelector(".reviews__track");
-  const originalItems = Array.from(section.querySelectorAll(".reviews__item"));
-  const prev = section.querySelector('.reviews__arrow[data-direction="prev"]');
-  const next = section.querySelector('.reviews__arrow[data-direction="next"]');
-  if (!track || originalItems.length < 2 || !prev || !next) return;
-  const singleColReviewsMq = window.matchMedia("(max-width: 1366px)");
+  sections.forEach((section) => {
+    const track = section.querySelector(".reviews__track");
+    const viewport = section.querySelector(".reviews__viewport");
+    const originalItems = Array.from(
+      track?.querySelectorAll(".reviews__item") || [],
+    );
+    const prev = section.querySelector(
+      '.reviews__arrow[data-direction="prev"]',
+    );
+    const next = section.querySelector(
+      '.reviews__arrow[data-direction="next"]',
+    );
+    if (!track || originalItems.length < 2 || !prev || !next) return;
 
-  let startIndex = 0;
-  let isAnimating = false;
+    const singleColReviewsMq = window.matchMedia("(max-width: 1366px)");
+    const transitionMs = 320;
+    const swipeThreshold = 36;
 
-  const getVisibleCount = () => (singleColReviewsMq.matches ? 1 : 3);
+    let startIndex = 0;
+    let isAnimating = false;
+    let transitionHandler = null;
+    let transitionFallback = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isTouchTracking = false;
 
-  const applyBasis = () => {
-    const visibleCount = getVisibleCount();
-    Array.from(track.children).forEach((item) => {
-      item.style.flexBasis = `${100 / visibleCount}%`;
-    });
-  };
+    const getVisibleCount = () => (singleColReviewsMq.matches ? 1 : 3);
 
-  const render = () => {
-    const ordered = originalItems.map((_, offset) => {
-      const idx = (startIndex + offset) % originalItems.length;
-      return originalItems[idx];
-    });
+    const applyBasis = () => {
+      const visibleCount = getVisibleCount();
+      Array.from(track.children).forEach((item) => {
+        item.style.flexBasis = `${100 / visibleCount}%`;
+      });
+    };
 
-    track.innerHTML = "";
-    ordered.forEach((item) => track.appendChild(item.cloneNode(true)));
-    track.style.transform = "none";
-    track.style.transition = "none";
-    applyBasis();
-  };
+    const resetTrackPosition = () => {
+      track.style.transition = "none";
+      track.style.transform = "translate3d(0, 0, 0)";
+    };
 
-  prev.addEventListener("click", () => {
-    if (isAnimating) return;
-    isAnimating = true;
+    const clearTransitionState = () => {
+      if (transitionHandler) {
+        track.removeEventListener("transitionend", transitionHandler);
+        transitionHandler = null;
+      }
+      if (transitionFallback) {
+        clearTimeout(transitionFallback);
+        transitionFallback = null;
+      }
+    };
 
-    const children = Array.from(track.children);
-    const last = children[children.length - 1];
-    if (!last) {
+    const render = () => {
+      const ordered = originalItems.map((_, offset) => {
+        const idx = (startIndex + offset) % originalItems.length;
+        return originalItems[idx];
+      });
+
+      track.innerHTML = "";
+      ordered.forEach((item) => track.appendChild(item.cloneNode(true)));
+      resetTrackPosition();
+      applyBasis();
+    };
+
+    const finalizeMove = (direction) => {
+      clearTransitionState();
+      startIndex =
+        (startIndex + direction + originalItems.length) % originalItems.length;
       isAnimating = false;
-      return;
+      render();
+    };
+
+    const armTransitionFinish = (direction) => {
+      const finish = () => finalizeMove(direction);
+
+      transitionHandler = (event) => {
+        if (event.target !== track || event.propertyName !== "transform")
+          return;
+        finish();
+      };
+
+      track.addEventListener("transitionend", transitionHandler);
+      transitionFallback = window.setTimeout(finish, transitionMs + 120);
+    };
+
+    const move = (direction) => {
+      if (isAnimating) return;
+
+      const firstChild = track.firstElementChild;
+      const step = firstChild?.getBoundingClientRect().width || 0;
+      if (!step) return;
+
+      isAnimating = true;
+      clearTransitionState();
+
+      if (direction < 0) {
+        const last = track.lastElementChild;
+        if (last) track.insertBefore(last, track.firstChild);
+        applyBasis();
+        resetTrackPosition();
+        track.style.transform = `translate3d(-${step}px, 0, 0)`;
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            track.style.transition = `transform ${transitionMs}ms ease`;
+            track.style.transform = "translate3d(0, 0, 0)";
+          });
+        });
+      } else {
+        resetTrackPosition();
+        requestAnimationFrame(() => {
+          track.style.transition = `transform ${transitionMs}ms ease`;
+          track.style.transform = `translate3d(-${step}px, 0, 0)`;
+        });
+      }
+
+      armTransitionFinish(direction);
+    };
+
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+
+    if (viewport) {
+      viewport.addEventListener(
+        "touchstart",
+        (event) => {
+          if (isAnimating || getVisibleCount() !== 1) return;
+          const touch = event.changedTouches?.[0];
+          if (!touch) return;
+          isTouchTracking = true;
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true },
+      );
+
+      viewport.addEventListener(
+        "touchend",
+        (event) => {
+          if (!isTouchTracking) return;
+          isTouchTracking = false;
+          if (isAnimating || getVisibleCount() !== 1) return;
+
+          const touch = event.changedTouches?.[0];
+          if (!touch) return;
+
+          const dx = touch.clientX - touchStartX;
+          const dy = touch.clientY - touchStartY;
+
+          if (Math.abs(dx) < swipeThreshold) return;
+          if (Math.abs(dx) <= Math.abs(dy) * 1.15) return;
+
+          move(dx < 0 ? 1 : -1);
+        },
+        { passive: true },
+      );
+
+      viewport.addEventListener(
+        "touchcancel",
+        () => {
+          isTouchTracking = false;
+        },
+        { passive: true },
+      );
     }
 
-    track.insertBefore(last, track.firstChild);
-    applyBasis();
-
-    const step = track.firstElementChild?.getBoundingClientRect().width || 0;
-    track.style.transition = "none";
-    track.style.transform = `translateX(-${step}px)`;
-
-    requestAnimationFrame(() => {
-      track.style.transition = "transform 320ms ease";
-      track.style.transform = "translateX(0)";
-    });
-
-    const onEnd = () => {
-      track.removeEventListener("transitionend", onEnd);
-      track.style.transition = "none";
-      track.style.transform = "none";
-      startIndex =
-        (startIndex - 1 + originalItems.length) % originalItems.length;
+    const rerender = () => {
       isAnimating = false;
+      clearTransitionState();
+      render();
     };
 
-    track.addEventListener("transitionend", onEnd);
+    if (typeof singleColReviewsMq.addEventListener === "function") {
+      singleColReviewsMq.addEventListener("change", rerender);
+    } else if (typeof singleColReviewsMq.addListener === "function") {
+      singleColReviewsMq.addListener(rerender);
+    }
+
+    window.addEventListener("resize", rerender);
+    render();
   });
-
-  next.addEventListener("click", () => {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    const step = track.firstElementChild?.getBoundingClientRect().width || 0;
-    track.style.transition = "transform 320ms ease";
-    track.style.transform = `translateX(-${step}px)`;
-
-    const onEnd = () => {
-      track.removeEventListener("transitionend", onEnd);
-      const first = track.firstElementChild;
-      if (first) track.appendChild(first);
-      track.style.transition = "none";
-      track.style.transform = "none";
-      applyBasis();
-      startIndex = (startIndex + 1) % originalItems.length;
-      isAnimating = false;
-    };
-
-    track.addEventListener("transitionend", onEnd);
-  });
-
-  const handleReviewsMqChange = () => render();
-  if (typeof singleColReviewsMq.addEventListener === "function") {
-    singleColReviewsMq.addEventListener("change", handleReviewsMqChange);
-  } else if (typeof singleColReviewsMq.addListener === "function") {
-    singleColReviewsMq.addListener(handleReviewsMqChange);
-  }
-
-  window.addEventListener("resize", render);
-  render();
 })();
 
 (() => {
@@ -625,6 +734,13 @@ if (header) {
       return;
     }
 
+    if (shouldHoldMobileUiAfterMenuClose(threshold)) {
+      if (stopTimer) clearTimeout(stopTimer);
+      show();
+      lastY = y;
+      return;
+    }
+
     if (dy > threshold) {
       hide();
     } else if (dy < -threshold) {
@@ -648,6 +764,11 @@ if (header) {
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
+  window.addEventListener("mobilepanelclosed", () => {
+    if (stopTimer) clearTimeout(stopTimer);
+    show();
+    lastY = window.scrollY || 0;
+  });
   onScroll();
 }
 
@@ -682,7 +803,13 @@ if (header) {
   const els = document.querySelectorAll(".hero .type__text");
   if (!els.length) return;
 
-  const phrases = ["that work harder", "that look better", "that load faster", "that rank higher", "that get you calls"];
+  const phrases = [
+    "that work harder",
+    "that look better",
+    "that load faster",
+    "that rank higher",
+    "that get you calls",
+  ];
   const typeSpeed = 35;
   const deleteSpeed = 35;
   const holdAfterType = 2000;
@@ -814,8 +941,7 @@ if (header) {
   const statItems = Array.from(document.querySelectorAll(".hero-stats__item"));
   const statEls = Array.from(document.querySelectorAll(".hero-stats__figure"));
   if (!statsWrap || !statEls.length) return;
-  const statsSection =
-    statsWrap.closest(".hero-stats-section") || statsWrap;
+  const statsSection = statsWrap.closest(".hero-stats-section") || statsWrap;
 
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
@@ -1034,28 +1160,48 @@ if (header) {
       return;
     }
 
+    if (shouldHoldMobileUiAfterMenuClose()) {
+      btn.classList.remove("is-hidden-by-scroll");
+      return;
+    }
+
     if (isInTopZone()) {
       btn.classList.remove("is-hidden-by-scroll");
     }
   };
 
   // hide while scrolling, show when stopped
-  window.addEventListener("scroll", () => {
-    if (footerVisible) return;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (footerVisible) return;
 
-    if (isInTopZone()) {
-      clearTimeout(scrollTimer);
-      btn.classList.remove("is-hidden-by-scroll");
-      return;
-    }
+      if (shouldHoldMobileUiAfterMenuClose()) {
+        clearTimeout(scrollTimer);
+        btn.classList.remove("is-hidden-by-scroll");
+        return;
+      }
 
-    btn.classList.add("is-hidden-by-scroll");
-    queueShowAfterIdle();
-  }, { passive: true });
+      if (isInTopZone()) {
+        clearTimeout(scrollTimer);
+        btn.classList.remove("is-hidden-by-scroll");
+        return;
+      }
+
+      btn.classList.add("is-hidden-by-scroll");
+      queueShowAfterIdle();
+    },
+    { passive: true },
+  );
 
   if ("onscrollend" in window) {
     window.addEventListener("scrollend", () => {
       if (footerVisible) return;
+      if (shouldHoldMobileUiAfterMenuClose()) {
+        clearTimeout(scrollTimer);
+        btn.classList.remove("is-hidden-by-scroll");
+        return;
+      }
       if (isInTopZone()) {
         clearTimeout(scrollTimer);
         btn.classList.remove("is-hidden-by-scroll");
@@ -1067,18 +1213,28 @@ if (header) {
 
   // hide when footer is visible
   if (footer) {
-    new IntersectionObserver((entries) => {
-      footerVisible = entries[0].isIntersecting;
-      update();
-    }, { threshold: 0 }).observe(footer);
+    new IntersectionObserver(
+      (entries) => {
+        footerVisible = entries[0].isIntersecting;
+        update();
+      },
+      { threshold: 0 },
+    ).observe(footer);
   }
+
+  window.addEventListener("mobilepanelclosed", () => {
+    clearTimeout(scrollTimer);
+    btn.classList.remove("is-hidden-by-scroll");
+  });
 
   update();
 })();
 
 (() => {
   const syncModalScrollLock = () => {
-    document.documentElement.style.overflow = document.querySelector(".form-modal.is-open")
+    document.documentElement.style.overflow = document.querySelector(
+      ".form-modal.is-open",
+    )
       ? "hidden"
       : "";
   };

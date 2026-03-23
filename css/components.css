@@ -405,6 +405,8 @@
 
 .reviews__viewport {
   overflow: hidden;
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
 }
 
 .reviews__shell {
@@ -1351,7 +1353,7 @@
 
 .faq__qtext {
   font-size: clamp(1.05rem, 0.7vw + 1rem, 1.35rem);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.3;
 }
 

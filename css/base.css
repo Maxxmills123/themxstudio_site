@@ -235,6 +235,7 @@ main {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .site-header__logo {
@@ -469,7 +470,7 @@ main {
 .nav__menu {
   position: absolute;
   left: 380%;
-  top: calc(100% + 1.5rem);
+  top: calc(100% + 1.7rem);
   transform: translateX(-75%);
   width: fit-content;
   display: none;
