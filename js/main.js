@@ -1293,10 +1293,25 @@ if (header) {
     form?.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
-      await fetch("/", { method: "POST", body: data });
-      form.hidden = true;
-      if (heading) heading.hidden = true;
-      if (thanks) thanks.hidden = false;
+      const body = new URLSearchParams(data).toString();
+
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body,
+        });
+
+        if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+
+        form.hidden = true;
+        if (heading) heading.hidden = true;
+        if (thanks) thanks.hidden = false;
+      } catch (error) {
+        console.error(error);
+      }
     });
   };
 
