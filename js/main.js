@@ -815,8 +815,8 @@ if (header) {
   ];
   const typeSpeed = 35;
   const deleteSpeed = 35;
-  const holdAfterType = 3000;
-  const holdAfterDelete = 150;
+  const holdAfterType = 2000;
+  const holdAfterDelete = 1500;
 
   let phraseIndex = 0;
   let charIndex = 0;
