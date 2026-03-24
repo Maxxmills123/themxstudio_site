@@ -1,0 +1,120 @@
+:root {
+  --accent: #A970FF;
+  --accent-hover: #c8a0ff;
+}
+
+.hero-points,
+.pricing-grid,
+.pricing-grid3,
+.offer-copy,
+.services,
+.reviews,
+.discovery-call,
+.faq {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+  padding-bottom: var(--site-gap);
+}
+
+.pricing-grid3--three-col .pricing-grid3__cols {
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+.pricing-grid3__col {
+  position: relative;
+  min-width: 0;
+}
+
+.pricing-grid3__col--featured {
+  z-index: 1;
+}
+
+.pricing-grid3__col--featured .pricing-grid3__card {
+  border-color: var(--accent);
+  border-width: 3px;
+}
+
+.pricing-grid3__badge {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  width: 6.15rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0.9rem;
+  background: var(--accent);
+  color: var(--bg);
+  transform: translate(32%, -50%) rotate(10deg);
+  clip-path: polygon(
+    50% 0%,
+    59% 18%,
+    79% 9%,
+    73% 29%,
+    94% 34%,
+    78% 50%,
+    94% 66%,
+    73% 71%,
+    79% 91%,
+    59% 82%,
+    50% 100%,
+    41% 82%,
+    21% 91%,
+    27% 71%,
+    6% 66%,
+    22% 50%,
+    6% 34%,
+    27% 29%,
+    21% 9%,
+    41% 18%
+  );
+}
+
+.pricing-grid3__badge-label {
+  display: block;
+  max-width: 3.8rem;
+  padding: 0;
+  background: transparent;
+  color: var(--bg);
+  border-radius: 0;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1366px) {
+  :root {
+    --site-gap: 2rem;
+  }
+
+  .website-services__hero-wrap {
+    min-height: auto;
+  }
+
+  .website-services__hero .page-hero__title {
+    max-width: 100%;
+  }
+
+  .website-services__h1 {
+    transform: translateY(calc(-100% - 0.2rem));
+  }
+
+  .pricing-grid3--three-col .pricing-grid3__cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .pricing-grid3__badge {
+    top: -0.2rem;
+    width: 5.15rem;
+    transform: translate(20%, -50%) rotate(10deg);
+  }
+}

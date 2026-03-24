@@ -41,6 +41,7 @@ main {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  min-height: var(--hero-title-reserve, 0);
   color: var(--accent);
   font-family: var(--font-accent);
   font-size: clamp(4rem, 10vw, 9rem);
@@ -69,34 +70,15 @@ main {
   vertical-align: baseline;
 }
 
-.type__text,
-.type__caret {
+.type__text {
   color: currentColor;
 }
 
 .type__text {
   display: inline;
   white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
-.type__caret {
-  display: inline-block;
-  width: 0.08em;
-  height: 0.75em;
-  margin-left: 0.1em;
-  background: currentColor;
-  vertical-align: middle;
-  font-size: inherit;
-  color: transparent;
-  animation: caretBlink 0.85s steps(1) infinite;
-}
-
-@keyframes caretBlink {
-  50% {
-    background: transparent;
-  }
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .hero-points,

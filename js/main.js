@@ -803,6 +803,9 @@ if (header) {
   const els = document.querySelectorAll(".hero .type__text");
   if (!els.length) return;
 
+  const title = document.querySelector(".hero .hero__title");
+  if (!title) return;
+
   const phrases = [
     "that work harder",
     "that look better",
@@ -818,12 +821,60 @@ if (header) {
   let phraseIndex = 0;
   let charIndex = 0;
   let deleting = false;
+  let reserveFrame = 0;
+
+  const reserveHeroTitleHeight = () => {
+    const titleWidth = Math.ceil(title.getBoundingClientRect().width);
+    if (!titleWidth) return;
+
+    const measure = title.cloneNode(true);
+    const measureText = measure.querySelector(".type__text");
+    if (!measureText) return;
+
+    const measureCaret = measure.querySelector(".type__caret");
+    if (measureCaret) measureCaret.remove();
+
+    measure.setAttribute("aria-hidden", "true");
+    Object.assign(measure.style, {
+      position: "absolute",
+      left: "0",
+      top: "0",
+      visibility: "hidden",
+      pointerEvents: "none",
+      width: `${titleWidth}px`,
+      maxWidth: `${titleWidth}px`,
+      minHeight: "0",
+      height: "auto",
+      zIndex: "-1",
+    });
+
+    document.body.appendChild(measure);
+
+    let maxHeight = Math.ceil(title.getBoundingClientRect().height);
+    phrases.forEach((phrase) => {
+      measureText.textContent = phrase;
+      maxHeight = Math.max(maxHeight, Math.ceil(measure.getBoundingClientRect().height));
+    });
+
+    measure.remove();
+    title.style.setProperty("--hero-title-reserve", `${maxHeight}px`);
+  };
+
+  const queueHeroTitleReserve = () => {
+    cancelAnimationFrame(reserveFrame);
+    reserveFrame = requestAnimationFrame(reserveHeroTitleHeight);
+  };
 
   const setText = (t) => {
     els.forEach((node) => {
       node.textContent = t;
     });
   };
+
+  queueHeroTitleReserve();
+  window.addEventListener("resize", queueHeroTitleReserve, { passive: true });
+  window.addEventListener("load", queueHeroTitleReserve, { once: true });
+  if (document.fonts?.ready) document.fonts.ready.then(queueHeroTitleReserve);
 
   const tick = () => {
     const phrase = phrases[phraseIndex];
