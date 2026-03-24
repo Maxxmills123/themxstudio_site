@@ -44,7 +44,7 @@ main {
   min-height: var(--hero-title-reserve, 0);
   color: var(--accent);
   font-family: var(--font-accent);
-  font-size: clamp(4rem, 10vw, 9rem);
+  font-size: clamp(5rem, 15vw, 10rem);
   font-weight: 400;
   line-height: 0.94;
   word-break: break-word;

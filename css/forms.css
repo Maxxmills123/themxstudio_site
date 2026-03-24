@@ -153,9 +153,6 @@
   color: var(--text);
 }
 
-
-/* ── Offer-wrap toggle ────────────────────────────────── */
-
 .offer-wrap__toggle {
   position: fixed;
   right: clamp(1rem, 2vw, 1.5rem);

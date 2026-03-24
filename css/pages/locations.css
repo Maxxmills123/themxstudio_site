@@ -1,0 +1,66 @@
+:root {
+  --accent: #a970ff;
+  --accent-hover: #c8a0ff;
+}
+
+.locations-page .page-hero__content {
+  position: relative;
+  justify-items: center;
+  text-align: center;
+}
+
+.locations-page .page-hero__title {
+  display: flex;
+  justify-content: center;
+  color: var(--accent);
+  text-align: center;
+}
+
+.locations-page .pricing-type,
+.locations-page .pricing-type__text {
+  margin-inline: auto;
+  text-align: center;
+  transform-origin: center top;
+}
+
+.locations-page__h1 {
+  margin: 0;
+  width: min(100%, 48rem);
+  font-size: clamp(0.98rem, 0.35vw + 0.95rem, 1.1rem);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.72;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, calc(-100% - 0.35rem));
+  text-align: center;
+}
+
+.locations-page .page-hero__sub {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.locations-page .hero-points,
+.locations-page .pricing-grid,
+.locations-page .pricing-grid2,
+.locations-page .pricing-grid3,
+.locations-page .offer-copy,
+.locations-page .services,
+.locations-page .reviews,
+.locations-page .discovery-call,
+.locations-page .faq {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+  padding-bottom: var(--site-gap);
+}
+
+@media (max-width: 1366px) {
+  .locations-page__h1 {
+    transform: translate(-50%, calc(-100% - 0.2rem));
+  }
+}

@@ -1978,8 +1978,8 @@
     text-align: left;
   }
 
-  .pricing-grid3__title {
-    text-align: center;
+  .pricing-grid3__inner {
+    justify-items: stretch;
   }
 
   .pricing-grid__cols,
@@ -2069,5 +2069,201 @@
   .service-card__trigger {
     cursor: pointer;
     pointer-events: auto;
+  }
+}
+
+/* ============================================================
+   Photo Grid
+   ============================================================ */
+
+.photo-grid {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  padding-bottom: var(--site-gap);
+  margin-bottom: var(--site-gap);
+}
+
+.photo-grid__inner {
+  width: var(--site-width);
+  max-width: none;
+  margin-inline: auto;
+}
+
+.photo-grid__card {
+  --about-photo-width: 22rem;
+  --about-photo-height: calc(var(--about-photo-width) * 1.25);
+  display: grid;
+  grid-template-columns: minmax(0, 46rem) var(--about-photo-width);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.photo-grid__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  box-sizing: border-box;
+  height: var(--about-photo-height);
+  grid-column: 1;
+  grid-row: 1;
+  max-width: none;
+  justify-self: stretch;
+  align-self: stretch;
+  text-align: left;
+  padding: 2.9rem 2rem 2rem;
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.photo-grid__title,
+.photo-grid__subhead,
+.photo-grid__copy {
+  margin: 0;
+}
+
+.photo-grid__title {
+  font-size: clamp(2.2rem, 2.8vw, 2.55rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -1px;
+}
+
+.photo-grid__subhead {
+  color: var(--accent);
+  font-size: 0.84rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.photo-grid__copy {
+  font-size: clamp(0.94rem, 0.24vw + 0.9rem, 1rem);
+  line-height: 1.62;
+  opacity: 0.72;
+}
+
+.photo-grid__image-target {
+  width: var(--about-photo-width);
+  height: var(--about-photo-height);
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  align-self: stretch;
+  transform: translateX(-0.45rem);
+  background: var(--accent);
+  border-radius: 10px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.photo-grid__image-wrap {
+  --photo-base-offset-x: 0px;
+  --photo-scroll-x: 0px;
+  box-sizing: border-box;
+  width: var(--about-photo-width);
+  height: var(--about-photo-height);
+  grid-column: 2;
+  grid-row: 1;
+  max-width: none;
+  justify-self: center;
+  align-self: stretch;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 10px;
+  transform: translate3d(
+    calc(var(--photo-base-offset-x) + var(--photo-scroll-x)),
+    0,
+    0
+  );
+  z-index: 1;
+}
+
+.photo-grid__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center 6%;
+  transform: scale(1.03);
+  transform-origin: center;
+}
+
+@media (max-width: 1366px) {
+  .photo-grid__card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    justify-items: center;
+  }
+
+  .photo-grid__content,
+  .photo-grid__image-target,
+  .photo-grid__image-wrap {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .photo-grid__image-target {
+    display: block;
+    grid-row: 1;
+    width: min(56vw, 13.5rem);
+    height: auto;
+    max-width: 13.5rem;
+    justify-self: start;
+    margin-left: clamp(0.85rem, 2.3vw, 1.1rem);
+    align-self: start;
+    aspect-ratio: 4 / 5;
+    transform: translateX(-0.45rem);
+  }
+
+  .photo-grid__image-wrap {
+    grid-row: 1;
+    width: min(56vw, 13.5rem);
+    justify-self: start;
+    margin-left: clamp(0.85rem, 2.3vw, 1.1rem);
+    height: auto;
+    max-width: 13.5rem;
+    align-self: start;
+    aspect-ratio: 4 / 5;
+    --photo-base-offset-x: 0px;
+  }
+
+  .photo-grid__content {
+    grid-row: 2;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    justify-self: stretch;
+    align-self: auto;
+    gap: 0.7rem;
+    padding: 1.15rem 1.1rem 1.1rem;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .photo-grid__title {
+    font-size: clamp(1.95rem, 8vw, 2.2rem);
+    line-height: 0.98;
+  }
+
+  .photo-grid__subhead {
+    font-size: 0.78rem;
+  }
+
+  .photo-grid__copy {
+    font-size: 0.96rem;
+    line-height: 1.62;
+  }
+
+  .photo-grid__image {
+    border-radius: 0;
   }
 }

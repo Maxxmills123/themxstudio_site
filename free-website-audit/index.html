@@ -41,16 +41,16 @@
     />
 
     <meta property="og:site_name" content="The MX Studio" />
-    <meta
-      property="og:title"
-      content="Free Website Audit | The MX Studio"
-    />
+    <meta property="og:title" content="Free Website Audit | The MX Studio" />
     <meta
       property="og:description"
       content="Get a free website audit from The MX Studio. We’ll review your site for speed, SEO, messaging, and conversion issues, then show you the clearest next steps."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://themxstudio.com/free-website-audit/" />
+    <meta
+      property="og:url"
+      content="https://themxstudio.com/free-website-audit/"
+    />
     <meta
       property="og:image"
       content="https://themxstudio.com/assets/og-default.jpg?v=20260321b"
@@ -210,8 +210,16 @@
 
     <link rel="stylesheet" href="/css/base.css?v=20260323b" />
     <link rel="stylesheet" href="/css/components.css?v=20260322x" />
-    <link rel="stylesheet" href="/css/pages/contact.css?v=20260321b" />
+    <link rel="stylesheet" href="/css/pages/contact.css" />
+    <link rel="stylesheet" href="/css/pages/pricing.css?v=20260322b" />
+    <link rel="stylesheet" href="/css/pages/locations.css?v=20260324b" />
     <link rel="stylesheet" href="/css/forms.css" />
+    <style>
+      :root {
+        --accent: #ff3eb2;
+        --accent-hover: #ffa5db;
+      }
+    </style>
   </head>
 
   <body>
@@ -225,7 +233,7 @@
           >
             <img
               class="site-header__logo"
-              src="/assets/logos/logo.svg"
+              src="/assets/logos/logo-pink.svg"
               alt="The MX Studio"
             />
           </a>
@@ -266,7 +274,9 @@
                   d="M12 13.5L2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5zM20 4H4c-1.1 0-2 .9-2 2l10 6.25L22 6c0-1.1-.9-2-2-2z"
                 />
               </svg>
-              <span class="site-header__contact-text">hello@themxstudio.com</span>
+              <span class="site-header__contact-text"
+                >hello@themxstudio.com</span
+              >
             </a>
           </div>
         </div>
@@ -283,7 +293,11 @@
                 Websites <span class="nav__caret" aria-hidden="true"></span>
               </button>
 
-              <div class="nav__menu nav__menu--stack" role="menu" aria-label="Websites">
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Websites"
+              >
                 <div class="nav__group">
                   <a class="nav__menu-link" href="/services/website-design/">
                     Website<span class="link-arrow"
@@ -368,7 +382,11 @@
                 Growth <span class="nav__caret" aria-hidden="true"></span>
               </button>
 
-              <div class="nav__menu nav__menu--stack" role="menu" aria-label="Growth">
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Growth"
+              >
                 <div class="nav__group">
                   <a class="nav__menu-link" href="/services/google-ads/">
                     Google<span class="link-arrow"
@@ -436,7 +454,11 @@
                 Branding <span class="nav__caret" aria-hidden="true"></span>
               </button>
 
-              <div class="nav__menu nav__menu--stack" role="menu" aria-label="Branding">
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Branding"
+              >
                 <div class="nav__group">
                   <a class="nav__menu-link" href="/services/brand-design/">
                     Brand<span class="link-arrow"
@@ -499,16 +521,14 @@
               <a class="nav__link" href="/about/">About</a>
             </li>
             <li class="nav__item">
-              <a class="nav__link nav__link--contact" href="/contact/">Contact</a>
+              <a class="nav__link nav__link--contact" href="/contact/"
+                >Contact</a
+              >
             </li>
           </ul>
         </nav>
 
-        <button
-          class="site-header__cta"
-          type="button"
-          data-open-discovery
-        >
+        <button class="site-header__cta" type="button" data-open-discovery>
           Start Today
         </button>
 
@@ -534,226 +554,227 @@
         hidden
       >
         <nav class="mobile-nav" aria-label="Mobile primary">
-              <div class="mobile-acc">
-                <button
-                  class="nav__link mobile-acc__trigger"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="mobile-acc-websites"
-                >
-                  <span>Websites</span>
-                  <span class="nav__caret" aria-hidden="true"></span>
-                </button>
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-websites"
+            >
+              <span>Websites</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
 
-                <div class="mobile-acc__panel" id="mobile-acc-websites" hidden>
-                  <a class="nav__menu-link" href="/services/website-design/">
-                    Website<span class="link-arrow"
-                      >&nbsp;Design
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-
-                  <a class="nav__menu-link" href="/services/website-hosting/">
-                    Website<span class="link-arrow"
-                      >&nbsp;Hosting
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-
-                  <a class="nav__menu-link" href="/services/website-redesign/">
-                    Website<span class="link-arrow"
-                      >&nbsp;Redesign
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-
-                  <a
-                    class="nav__menu-link"
-                    href="/services/website-maintenance/"
+            <div class="mobile-acc__panel" id="mobile-acc-websites" hidden>
+              <a class="nav__menu-link" href="/services/website-design/">
+                Website<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
                   >
-                    Website<span class="link-arrow"
-                      >&nbsp;Maintenance
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
 
-              <div class="mobile-acc">
-                <button
-                  class="nav__link mobile-acc__trigger"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="mobile-acc-growth"
-                >
-                  <span>Growth</span>
-                  <span class="nav__caret" aria-hidden="true"></span>
-                </button>
-
-                <div class="mobile-acc__panel" id="mobile-acc-growth" hidden>
-                  <a class="nav__menu-link" href="/services/google-ads/">
-                    Google<span class="link-arrow"
-                      >&nbsp;Ads
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-
-                  <a
-                    class="nav__menu-link"
-                    href="/services/ai-search-optimisation/"
+              <a class="nav__menu-link" href="/services/website-hosting/">
+                Website<span class="link-arrow"
+                  >&nbsp;Hosting
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
                   >
-                    AI Search Optimisation<br /><span class="link-arrow"
-                      >(GEO)
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
 
-                  <a class="nav__menu-link" href="/services/seo/">
-                    Search Engine Optimisation<span class="link-arrow"
-                      >&nbsp;(SEO)
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
+              <a class="nav__menu-link" href="/services/website-redesign/">
+                Website<span class="link-arrow"
+                  >&nbsp;Redesign
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
 
-              <div class="mobile-acc">
-                <button
-                  class="nav__link mobile-acc__trigger"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="mobile-acc-branding"
-                >
-                  <span>Branding</span>
-                  <span class="nav__caret" aria-hidden="true"></span>
-                </button>
+              <a class="nav__menu-link" href="/services/website-maintenance/">
+                Website<span class="link-arrow"
+                  >&nbsp;Maintenance
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
 
-                <div class="mobile-acc__panel" id="mobile-acc-branding" hidden>
-                  <a class="nav__menu-link" href="/services/brand-design/">
-                    Brand<span class="link-arrow"
-                      >&nbsp;Design
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-growth"
+            >
+              <span>Growth</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
 
-                  <a class="nav__menu-link" href="/services/logo-design/">
-                    Logo<span class="link-arrow"
-                      >&nbsp;Design
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
+            <div class="mobile-acc__panel" id="mobile-acc-growth" hidden>
+              <a class="nav__menu-link" href="/services/google-ads/">
+                Google<span class="link-arrow"
+                  >&nbsp;Ads
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
 
-                  <a class="nav__menu-link" href="/services/copywriting/">
-                    Copywriting<span class="link-arrow"
-                      >&nbsp;
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                        />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
+              <a
+                class="nav__menu-link"
+                href="/services/ai-search-optimisation/"
+              >
+                AI Search Optimisation<br /><span class="link-arrow"
+                  >(GEO)
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/seo/">
+                Search Engine Optimisation<span class="link-arrow"
+                  >&nbsp;(SEO)
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-branding"
+            >
+              <span>Branding</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
+
+            <div class="mobile-acc__panel" id="mobile-acc-branding" hidden>
+              <a class="nav__menu-link" href="/services/brand-design/">
+                Brand<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/logo-design/">
+                Logo<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/copywriting/">
+                Copywriting<span class="link-arrow"
+                  >&nbsp;
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
           <a class="nav__link mobile-nav__link" href="/pricing/">Pricing</a>
           <a class="nav__link mobile-nav__link" href="/about/">About</a>
-          <a class="nav__link mobile-nav__link mobile-nav__link--contact" href="/contact/">Contact</a>
+          <a
+            class="nav__link mobile-nav__link mobile-nav__link--contact"
+            href="/contact/"
+            >Contact</a
+          >
           <div class="mobile-panel__direct" aria-label="Direct contact">
             <a
               class="mobile-panel__direct-link"
@@ -787,116 +808,931 @@
     </header>
 
     <main>
-      <section class="page-hero">
+      <section class="page-hero locations-page" aria-labelledby="free-audit-h1">
         <div class="page-hero__content">
-          <h1 class="page-hero__title">Free Website Audit</h1>
-          <p class="page-hero__sub">
-            Send us your site and we’ll give you a clear, practical review of
-            what’s helping, what’s hurting, and what to fix first.
+          <h1 class="locations-page__h1" id="free-audit-h1">
+            Free Website Audit
+          </h1>
+          <p class="page-hero__title">
+            <span
+              class="pricing-type"
+              data-type-text="We'll tell you exactly what you need to fix"
+              aria-live="off"
+            >
+              <span class="pricing-type__text">
+                We'll tell you what you need to fix
+              </span>
+            </span>
+          </p>
+        </div>
+
+        <section class="contact-forms" aria-labelledby="audit-form-title">
+          <div class="contact-forms__inner">
+            <h2 class="contact-forms__title" id="audit-form-title">
+              Submit your site for a free audit
+            </h2>
+            <div class="contact-forms__grid">
+              <article class="contact-forms__card">
+                <div class="contact-forms__head">
+                  <h3 class="contact-forms__card-title">Get your free audit</h3>
+                  <p class="contact-forms__card-desc">
+                    Share your website and we’ll review speed, mobile UX, SEO
+                    basics, messaging, and conversion friction — then tell you
+                    exactly what to fix first.
+                  </p>
+                </div>
+                <form
+                  class="audit-form"
+                  id="audit-form"
+                  name="free-audit"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                >
+                  <input type="hidden" name="form-name" value="free-audit" />
+                  <p style="display: none">
+                    <label
+                      >Don’t fill this out <input name="bot-field"
+                    /></label>
+                  </p>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    required
+                  />
+                  <input
+                    type="url"
+                    name="website"
+                    placeholder="Your Website URL"
+                    required
+                  />
+                  <textarea
+                    name="goals"
+                    placeholder="What are you trying to improve? (leads, SEO, conversions)"
+                  ></textarea>
+                  <button type="submit" class="audit-form__submit">
+                    Get My Free Audit
+                  </button>
+                </form>
+                <div class="audit-thanks" id="audit-thanks" hidden>
+                  <p class="audit-thanks__message">
+                    Thank you! We’ll be in touch sooner than you think.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact-meta" aria-label="Direct contact and hours">
+          <div class="contact-direct" aria-label="Direct contact">
+            <p class="contact-meta__badge" aria-hidden="true">
+              <span class="contact-meta__badge-label"
+                >We'll buy <br />
+                you coffee</span
+              >
+            </p>
+            <div class="contact-direct__inner">
+              <a class="page-hero__email" href="mailto:hello@themxstudio.com">
+                <svg
+                  class="page-hero__lead-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M3 7l9 6 9-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                hello@themxstudio.com
+              </a>
+
+              <a class="page-hero__phone" href="tel:+61421709047">
+                <svg
+                  class="page-hero__lead-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  />
+                </svg>
+                0421 709 047
+              </a>
+            </div>
+            <div
+              class="contact-direct__hours"
+              aria-labelledby="audit-includes-title"
+            >
+              <h2 class="contact-direct__hours-title" id="audit-includes-title">
+                Hours (on paper)
+              </h2>
+              <p class="contact-direct__hours-text">
+                Monday - Friday: 9:00 AM - 5:00 PM
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="hero-points" aria-label="What a free audit reveals">
+        <div class="hero-points__inner">
+          <div class="hero-points__grid">
+            <article class="hero-points__item">
+              <div class="hero-points__card">
+                <div class="hero-points__head">
+                  <p class="hero-points__title">
+                    We find what is<br />
+                    <span class="emph">losing you leads</span>
+                  </p>
+                  <span class="hero-points__icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" focusable="false">
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="20"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                      ></circle>
+                      <path
+                        d="M32 20v24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                      ></path>
+                      <path
+                        d="M36.5 24c-1.1-1-2.8-1.6-4.5-1.6-3 0-5.2 1.7-5.2 4.1 0 2.1 1.6 3.3 5.1 4.1 3.8.9 5.7 2.1 5.7 4.7 0 2.7-2.4 4.5-5.8 4.5-2.1 0-4-.6-5.6-1.9"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <p class="hero-points__sub">
+                  If your site looks outdated, loads slowly, or confuses
+                  visitors, people leave without enquiring. We pinpoint the
+                  exact friction points quietly costing you trust and
+                  conversions.
+                  <a class="hero-points__link" href="/services/website-design/"
+                    >See our web design service.</a
+                  >
+                </p>
+              </div>
+            </article>
+
+            <article class="hero-points__item">
+              <div class="hero-points__card">
+                <div class="hero-points__head">
+                  <p class="hero-points__title">
+                    We check if you are<br />
+                    <span class="emph">ranking or invisible</span>
+                  </p>
+                  <span class="hero-points__icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" focusable="false">
+                      <path
+                        d="M2 34c4-7 8.75-11 14-11s10 4 14 11c-4 7-8.75 11-14 11S6 41 2 34Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M34 34c4-7 8.75-11 14-11s10 4 14 11c-4 7-8.75 11-14 11S38 41 34 34Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <circle
+                        cx="16"
+                        cy="34"
+                        r="3.5"
+                        fill="currentColor"
+                      ></circle>
+                      <circle
+                        cx="48"
+                        cy="34"
+                        r="3.5"
+                        fill="currentColor"
+                      ></circle>
+                      <path
+                        d="M8 18 4 13M16 14V8M24 18l4-5M40 18l-4-5M48 14V8M56 18l4-5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <p class="hero-points__sub">
+                  We review your SEO basics, page structure, and messaging to
+                  see if search engines — and your visitors — can find and
+                  understand what you do.
+                  <a class="hero-points__link" href="/services/seo/"
+                    >Learn about our SEO services.</a
+                  >
+                </p>
+              </div>
+            </article>
+
+            <article class="hero-points__item">
+              <div class="hero-points__card">
+                <div class="hero-points__head">
+                  <p class="hero-points__title">
+                    We tell you<br />
+                    <span class="emph">what to fix first</span>
+                  </p>
+                  <span class="hero-points__icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" focusable="false">
+                      <path
+                        d="M20 10h24v20c0 9-5.5 16-12 18v4h4v4H28v-4h4v-4c-6.5-2-12-9-12-18V10z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M20 18H12a7 7 0 007 7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M44 18h8a7 7 0 01-7 7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <p class="hero-points__sub">
+                  No jargon, no endless report. You get a clear set of
+                  prioritised next steps so you know exactly where to focus to
+                  make the biggest difference.
+                  <a class="hero-points__link" href="/about/"
+                    >Learn about our approach.</a
+                  >
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="services">
+        <div class="services__inner">
+          <h2 class="services__title">What we can help you fix</h2>
+
+          <div class="services__card-shell">
+            <div class="services-group">
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-web-design"
+                  >
+                    <span class="service-card__trigger-text">Web </span>
+                    <span class="service-card__trigger-tail">
+                      Design
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-web-design"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    A website designed to turn traffic into calls, bookings, and
+                    enquiries. One hundred percent custom. Your business
+                    deserves its own thing.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">
+                    from <span class="service-card__price">$1500</span>
+                  </p>
+                  <a
+                    class="service-card__cta link-arrow"
+                    href="/services/website-design/"
+                  >
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-copywriting"
+                  >
+                    <span class="service-card__trigger-tail">
+                      Copywriting
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-copywriting"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    Clear, persuasive copy that sounds like your business and
+                    makes it easier for visitors to trust you and take action.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">
+                    from <span class="service-card__price">$100/page</span>
+                  </p>
+                  <a
+                    class="service-card__cta link-arrow"
+                    href="/services/copywriting/"
+                  >
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-seo"
+                  >
+                    <span class="service-card__trigger-tail">
+                      SEO
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-seo"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    Ongoing SEO. We’ll conduct market research, create new
+                    pages, and monitor your searches. Of course - keywords,
+                    structure, and on-page setup too.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">
+                    from <span class="service-card__price">$950/mo*</span>
+                  </p>
+                  <a class="service-card__cta link-arrow" href="/services/seo/">
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-maintenance"
+                  >
+                    <span class="service-card__trigger-text">Website </span>
+                    <span class="service-card__trigger-tail">
+                      Maintenance
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-maintenance"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    Sit back, relax, and let us do all the work. We will be
+                    available 24/7 for crisis support, bug fixes, and even minor
+                    content updates.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">
+                    from <span class="service-card__price">$250/mo*</span>
+                  </p>
+                  <a
+                    class="service-card__cta link-arrow"
+                    href="/services/website-maintenance/"
+                  >
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-hosting"
+                  >
+                    <span class="service-card__trigger-text">Website </span>
+                    <span class="service-card__trigger-tail">
+                      Hosting
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-hosting"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    Fast, managed hosting so your website stays online, secure,
+                    and running properly without you chasing technical issues.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">Included*</p>
+                  <a
+                    class="service-card__cta link-arrow"
+                    href="/services/website-hosting/"
+                  >
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-card__title">
+                  <button
+                    class="service-card__trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="service-card-panel-google-ads"
+                  >
+                    <span class="service-card__trigger-text">Google </span>
+                    <span class="service-card__trigger-tail">
+                      Ads
+                      <span class="service-card__caret" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path
+                            d="M8 5l8 7-8 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  class="service-card__panel"
+                  id="service-card-panel-google-ads"
+                  hidden
+                >
+                  <p class="service-card__desc">
+                    Get in front of people already searching for what you do. We
+                    build and manage campaigns that focus on real leads, not
+                    wasted clicks.
+                  </p>
+                </div>
+                <div class="service-card__footer">
+                  <p class="service-card__from">
+                    from <span class="service-card__price">$950/mo</span>
+                  </p>
+                  <a
+                    class="service-card__cta link-arrow"
+                    href="/services/google-ads/"
+                  >
+                    Learn more
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 5l7 7-7 7M20 12H4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <p class="services__after">
+            *When bundled, pricepoint at $1100/mo ($1200/mo value). Hosting
+            included in addition to Maintenance plans.
           </p>
         </div>
       </section>
 
-      <section class="contact-meta" aria-label="Free audit contact details">
-        <p class="contact-meta__badge" aria-hidden="true">
-          <span class="contact-meta__badge-label"
-            >Free review <br />
-            real fixes</span
-          >
-        </p>
-        <div class="contact-direct" aria-label="Free audit contact">
-          <div class="contact-direct__inner">
-            <a
-              class="page-hero__email"
-              href="mailto:hello@themxstudio.com?subject=Free%20Website%20Audit"
-            >
-              <svg
-                class="page-hero__lead-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <rect
-                  x="3"
-                  y="5"
-                  width="18"
-                  height="14"
-                  rx="2"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M3 7l9 6 9-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              hello@themxstudio.com
-            </a>
+      <section class="reviews" aria-labelledby="reviews-title">
+        <div class="reviews__inner">
+          <h2 class="reviews__title" id="reviews-title">
+            What clients have said
+          </h2>
 
-            <a class="page-hero__phone" href="tel:+61421709047">
-              <svg
-                class="page-hero__lead-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
+          <div class="reviews__carousel" aria-label="Review navigation">
+            <button
+              class="reviews__arrow"
+              type="button"
+              data-direction="prev"
+              aria-label="Show previous reviews"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path
-                  fill="currentColor"
-                  d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                />
+                  d="M15 5l-7 7 7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                ></path>
               </svg>
-              0421 709 047
-            </a>
-          </div>
-          <div
-            class="contact-direct__hours"
-            aria-labelledby="audit-includes-title"
-          >
-            <h2 class="contact-direct__hours-title" id="audit-includes-title">
-              What you'll get
-            </h2>
-            <p class="contact-direct__hours-text">
-              A quick manual review covering site speed, mobile UX, SEO basics,
-              messaging, and conversion friction, plus the clearest next steps.
-            </p>
+            </button>
+
+            <div class="reviews__shell">
+              <div class="reviews__viewport">
+                <div class="reviews__track">
+                  <article class="reviews__item">
+                    <blockquote class="reviews__quote">
+                      "Created a wonderful website for me. As a local artist,
+                      it’s hard to find ways to find business online, however
+                      the MX studio helped by positioning me in a unique way and
+                      with a clear SEO plan."
+                    </blockquote>
+                    <p class="reviews__name">Patricia, Gallery Owner</p>
+                    <div class="reviews__stars" aria-label="5 star review">
+                      <svg viewBox="0 0 120 24" aria-hidden="true">
+                        <path
+                          d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3 9.1l6.2-.9L12 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L36 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L60 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L84 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L108 2.5z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                  </article>
+
+                  <article class="reviews__item">
+                    <blockquote class="reviews__quote">
+                      "The MX Studio is very informative and provides good
+                      direction and insight on how to increase site visibility
+                      on google. Definitely an investment, but worth it."
+                    </blockquote>
+                    <p class="reviews__name">Jordan, Local Business Owner</p>
+                    <div class="reviews__stars" aria-label="5 star review">
+                      <svg viewBox="0 0 120 24" aria-hidden="true">
+                        <path
+                          d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3 9.1l6.2-.9L12 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L36 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L60 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L84 2.5z"
+                          fill="currentColor"
+                        ></path>
+                        <path
+                          d="M108 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L108 2.5z"
+                          fill="#7a7a7a"
+                        ></path>
+                      </svg>
+                    </div>
+                  </article>
+
+                  <article class="reviews__item">
+                    <blockquote class="reviews__quote">
+                      "Working with Max at The MX Studio has been a wonderful
+                      experience. Really happy with how it has all turned out.
+                      Looking forward to future projects!"
+                    </blockquote>
+                    <p class="reviews__name">Francisco, Photography Studio</p>
+                    <div class="reviews__stars" aria-label="5 star review">
+                      <svg viewBox="0 0 120 24" aria-hidden="true">
+                        <path
+                          d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3 9.1l6.2-.9L12 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L36 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L60 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L84 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L108 2.5z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                  </article>
+
+                  <article class="reviews__item">
+                    <blockquote class="reviews__quote">
+                      "Really responsive, no fluff, and the final site performs
+                      far better than our old setup."
+                    </blockquote>
+                    <p class="reviews__name">Chris, Trade Business Owner</p>
+                    <div class="reviews__stars" aria-label="5 star review">
+                      <svg viewBox="0 0 120 24" aria-hidden="true">
+                        <path
+                          d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3 9.1l6.2-.9L12 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L36 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L60 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L84 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L108 2.5z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="reviews__footer">
+                <a
+                  class="reviews__cta"
+                  href="https://www.google.com/search?q=The+MX+Studio+Brisbane"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read more on Google
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="#4285F4"
+                      d="M23.49 12.27c0-.79-.07-1.54-.2-2.27H12v4.3h6.46a5.53 5.53 0 0 1-2.4 3.63v3.01h3.88c2.27-2.09 3.55-5.17 3.55-8.67Z"
+                    ></path>
+                    <path
+                      fill="#34A853"
+                      d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.88-3.01c-1.07.72-2.45 1.15-4.06 1.15-3.12 0-5.76-2.11-6.71-4.95H1.29v3.11A12 12 0 0 0 12 24Z"
+                    ></path>
+                    <path
+                      fill="#FBBC05"
+                      d="M5.29 14.28A7.2 7.2 0 0 1 4.91 12c0-.79.14-1.56.38-2.28V6.61H1.29A12 12 0 0 0 0 12c0 1.94.46 3.78 1.29 5.39l4-3.11Z"
+                    ></path>
+                    <path
+                      fill="#EA4335"
+                      d="M12 4.77c1.76 0 3.34.6 4.58 1.78l3.43-3.43C17.94 1.17 15.23 0 12 0A12 12 0 0 0 1.29 6.61l4 3.11c.95-2.84 3.59-4.95 6.71-4.95Z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <button
+              class="reviews__arrow"
+              type="button"
+              data-direction="next"
+              aria-label="Show next reviews"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M9 5l7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
       </section>
-      <div class="form-modal" id="discovery-modal" role="dialog" aria-modal="true" aria-labelledby="discovery-modal-title">
-        <div class="form-modal__panel">
-          <div class="form-modal__header">
-            <div class="form-modal__heading">
-              <h2 class="form-modal__title" id="discovery-modal-title">Free Discovery Call</h2>
-              <p class="form-modal__desc">
-                Advice is free. Book a free discovery call to explore what you need and how we can help.
-              </p>
-              <p class="form-modal__note">
-                We're open Mon-Fri 9-5, but we're happy to call any time outside these hours.
-              </p>
-            </div>
-            <button class="form-modal__close" id="discovery-modal-close" aria-label="Close">&times;</button>
+    </main>
+
+    <div
+      class="form-modal"
+      id="discovery-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="discovery-modal-title"
+    >
+      <div class="form-modal__panel">
+        <div class="form-modal__header">
+          <div class="form-modal__heading">
+            <h2 class="form-modal__title" id="discovery-modal-title">
+              Free Discovery Call
+            </h2>
+            <p class="form-modal__desc">
+              Advice is free. Book a free discovery call to explore what you
+              need and how we can help.
+            </p>
+            <p class="form-modal__note">
+              We’re open Mon-Fri 9-5, but we’re happy to call any time outside
+              these hours.
+            </p>
           </div>
-          <form class="discovery-form" id="discovery-form" name="discovery-call" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="discovery-call">
-            <p style="display:none;"><label>Don't fill this out <input name="bot-field"></label></p>
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="url" name="website" placeholder="Your Website">
-            <textarea name="project" placeholder="What do you need done?" required></textarea>
-            <textarea name="availability" placeholder="Some dates and times you're available" required></textarea>
-            <button type="submit" class="discovery-form__submit">Book My Free Discovery Call</button>
-          </form>
-          <div class="audit-thanks" id="discovery-thanks" hidden>
-            <p class="audit-thanks__message">Thank you! We'll be in touch sooner than you think.</p>
-          </div>
+          <button
+            class="form-modal__close"
+            id="discovery-modal-close"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <form
+          class="discovery-form"
+          id="discovery-form"
+          name="discovery-call"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="discovery-call" />
+          <p style="display: none">
+            <label>Don’t fill this out <input name="bot-field" /></label>
+          </p>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="url" name="website" placeholder="Your Website" />
+          <textarea
+            name="project"
+            placeholder="What do you need done?"
+            required
+          ></textarea>
+          <textarea
+            name="availability"
+            placeholder="Some dates and times you’re available"
+            required
+          ></textarea>
+          <button type="submit" class="discovery-form__submit">
+            Book My Free Discovery Call
+          </button>
+        </form>
+        <div class="audit-thanks" id="discovery-thanks" hidden>
+          <p class="audit-thanks__message">
+            Thank you! We’ll be in touch sooner than you think.
+          </p>
         </div>
       </div>
-    </main>
+    </div>
 
     <footer class="site-footer">
       <div class="site-footer__container container">
@@ -905,252 +1741,261 @@
             <p class="site-footer__slogan">
               Your website should bring in business.
               <a class="site-footer__slogan-link" href="/contact/"
-                >Let's <span class="site-footer__slogan-link-tail">talk<span class="link-arrow">
-                  <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    width="14"
-                    height="14"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                    />
-                  </svg></span></span></a>
+                >Let's
+                <span class="site-footer__slogan-link-tail"
+                  >talk<span class="link-arrow">
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      width="14"
+                      height="14"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                      /></svg></span></span
+              ></a>
             </p>
           </div>
         </div>
 
         <div class="site-footer__info-grid">
           <div class="site-footer__contact" aria-label="Footer contact">
-              <a class="site-footer__email" href="mailto:hello@themxstudio.com">
-                hello@themxstudio.com
+            <a class="site-footer__email" href="mailto:hello@themxstudio.com">
+              hello@themxstudio.com
+            </a>
+            <a class="site-footer__phone" href="tel:+61421709047">
+              0421 709 047
+            </a>
+
+            <div
+              class="footer-social site-footer__top-social"
+              aria-label="Footer social"
+            >
+              <a
+                class="footer-social__link"
+                href="https://www.instagram.com/themxstudioweb/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm8.4 2H7.8C5.7 4 4 5.7 4 7.8v8.4C4 18.3 5.7 20 7.8 20h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8C20 5.7 18.3 4 16.2 4z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M12 7.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3zm0 2A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M17.6 6.6a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"
+                  />
+                </svg>
               </a>
-              <a class="site-footer__phone" href="tel:+61421709047">
-                0421 709 047
+
+              <a
+                class="footer-social__link"
+                href="https://www.tiktok.com/@themxstudio"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M16.7 3c.6 2.6 2.4 4.4 5.3 4.6v3.2c-1.9.1-3.6-.5-5.2-1.6v7.1c0 4-3.3 6.7-7.1 6.1-2.8-.4-5.1-2.9-5.3-5.8C4.1 12.8 7.4 10 11 10.5v3.5c-.3-.1-.7-.1-1 0-1.3.2-2.2 1.4-2 2.7.2 1.5 1.9 2.4 3.3 1.7.6-.3 1-1 1-1.7V3h3.4Z"
+                  />
+                </svg>
               </a>
 
-              <div class="footer-social site-footer__top-social" aria-label="Footer social">
-                <a
-                  class="footer-social__link"
-                  href="https://www.instagram.com/themxstudioweb/"
-                  aria-label="Instagram"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm8.4 2H7.8C5.7 4 4 5.7 4 7.8v8.4C4 18.3 5.7 20 7.8 20h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8C20 5.7 18.3 4 16.2 4z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M12 7.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3zm0 2A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M17.6 6.6a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"
-                    />
-                  </svg>
-                </a>
-
-                <a
-                  class="footer-social__link"
-                  href="https://www.tiktok.com/@themxstudio"
-                  aria-label="TikTok"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M16.7 3c.6 2.6 2.4 4.4 5.3 4.6v3.2c-1.9.1-3.6-.5-5.2-1.6v7.1c0 4-3.3 6.7-7.1 6.1-2.8-.4-5.1-2.9-5.3-5.8C4.1 12.8 7.4 10 11 10.5v3.5c-.3-.1-.7-.1-1 0-1.3.2-2.2 1.4-2 2.7.2 1.5 1.9 2.4 3.3 1.7.6-.3 1-1 1-1.7V3h3.4Z"
-                    />
-                  </svg>
-                </a>
-
-                <a
-                  class="footer-social__link"
-                  href="https://au.pinterest.com/themxstudio/"
-                  aria-label="Pinterest"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.846 6.356 9.301-.088-.791-.167-2.005.035-2.87.182-.782 1.172-4.98 1.172-4.98s-.298-.596-.298-1.477c0-1.383.802-2.416 1.8-2.416.849 0 1.259.637 1.259 1.4 0 .853-.543 2.128-.823 3.31-.235.993.499 1.803 1.48 1.803 1.776 0 3.141-1.873 3.141-4.576 0-2.393-1.72-4.067-4.177-4.067-2.846 0-4.518 2.134-4.518 4.339 0 .859.331 1.781.744 2.281.082.1.093.187.069.288-.075.317-.244 1.006-.277 1.147-.044.185-.145.224-.335.135-1.249-.582-2.03-2.411-2.03-3.881 0-3.159 2.294-6.059 6.614-6.059 3.472 0 6.17 2.475 6.17 5.784 0 3.452-2.176 6.23-5.198 6.23-1.015 0-1.971-.527-2.297-1.149l-.624 2.379c-.226.868-.837 1.956-1.246 2.619A10.04 10.04 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z"
-                    />
-                  </svg>
-                </a>
-              </div>
+              <a
+                class="footer-social__link"
+                href="https://au.pinterest.com/themxstudio/"
+                aria-label="Pinterest"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.846 6.356 9.301-.088-.791-.167-2.005.035-2.87.182-.782 1.172-4.98 1.172-4.98s-.298-.596-.298-1.477c0-1.383.802-2.416 1.8-2.416.849 0 1.259.637 1.259 1.4 0 .853-.543 2.128-.823 3.31-.235.993.499 1.803 1.48 1.803 1.776 0 3.141-1.873 3.141-4.576 0-2.393-1.72-4.067-4.177-4.067-2.846 0-4.518 2.134-4.518 4.339 0 .859.331 1.781.744 2.281.082.1.093.187.069.288-.075.317-.244 1.006-.277 1.147-.044.185-.145.224-.335.135-1.249-.582-2.03-2.411-2.03-3.881 0-3.159 2.294-6.059 6.614-6.059 3.472 0 6.17 2.475 6.17 5.784 0 3.452-2.176 6.23-5.198 6.23-1.015 0-1.971-.527-2.297-1.149l-.624 2.379c-.226.868-.837 1.956-1.246 2.619A10.04 10.04 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
 
           <div class="site-footer__nav" aria-label="Footer navigation">
-          <a class="footer-link" href="/about/">
-            About<span class="link-arrow"
-              >&nbsp;
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a class="footer-link" href="/about/">
+              About<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a class="footer-link" href="/pricing/">
-            Pricing<span class="link-arrow"
-              >&nbsp;
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a class="footer-link" href="/pricing/">
+              Pricing<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a class="footer-link" href="/blog/">
-            Industry Insights<span class="link-arrow"
-              >&nbsp;
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
-
-        </div>
+            <a class="footer-link" href="/blog/">
+              Industry Insights<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+          </div>
 
           <div class="site-footer__pages" aria-label="Footer page links">
-          <p class="site-footer__pages-label">You might be looking for...</p>
-          <a class="footer-link footer-link--muted" href="/services/seo/">
-            SEO Services<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <p class="site-footer__pages-label">You might be looking for...</p>
+            <a class="footer-link footer-link--muted" href="/services/seo/">
+              SEO Services<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a class="footer-link footer-link--muted" href="/services/google-ads/">
-            Google Ads<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a
+              class="footer-link footer-link--muted"
+              href="/services/google-ads/"
+            >
+              Google Ads<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a class="footer-link footer-link--muted" href="/free-website-audit/">
-            Free Website Audit<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a
+              class="footer-link footer-link--muted"
+              href="/free-website-audit/"
+            >
+              Free Website Audit<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
           </div>
 
           <div class="site-footer__where" aria-label="Footer locations">
-          <p class="site-footer__where-label">Based in Brisbane</p>
-          <a
-            class="footer-link footer-link--muted"
-            href="/locations/web-design-brisbane/"
-          >
-            Web design Brisbane<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <p class="site-footer__where-label">Based in Brisbane</p>
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-brisbane/"
+            >
+              Web design Brisbane<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a
-            class="footer-link footer-link--muted"
-            href="/locations/web-design-newstead/"
-          >
-            Web design Newstead<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-newstead/"
+            >
+              Web design Newstead<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
 
-          <a
-            class="footer-link footer-link--muted"
-            href="/locations/web-design-eagle-farm/"
-          >
-            Web design Eagle Farm<span class="link-arrow">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                width="14"
-                height="14"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                />
-              </svg>
-            </span>
-          </a>
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-eagle-farm/"
+            >
+              Web design Eagle Farm<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
           </div>
-
         </div>
 
         <div class="site-footer__bottom">
@@ -1169,10 +2014,8 @@
               </a>
             </div>
           </div>
-
         </div>
       </div>
-
     </footer>
 
     <script src="/js/main.js?v=20260323a" defer></script>
