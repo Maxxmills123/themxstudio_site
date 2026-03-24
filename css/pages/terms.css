@@ -95,6 +95,23 @@
   outline: none;
 }
 
+.error-page .error-links__card,
+.error-page .error-links__card:hover,
+.error-page .error-links__card:focus-visible {
+  text-decoration: none;
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    var(--card-bg);
+  transition: none;
+}
+
+.error-page .error-links__card:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 3px;
+}
+
 .error-links__eyebrow,
 .error-links__title,
 .error-links__copy,
@@ -204,9 +221,39 @@
     padding-bottom: 1rem;
   }
 
-  .error-links__grid {
+  .error-page .page-hero__content {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .error-page .page-hero__title,
+  .error-page .page-hero__sub {
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .error-page .error-links__inner {
+    justify-items: start;
+  }
+
+  .error-page .error-links__intro {
+    max-width: none;
+    text-align: left;
+  }
+
+  .error-page .error-links__grid {
     grid-template-columns: 1fr;
-    width: min(100%, 30rem);
+    width: 100%;
+  }
+
+  .error-page .error-links__card {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .error-page .error-links__cta {
+    justify-content: flex-start;
   }
 
   .terms__content {

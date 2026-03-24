@@ -60,7 +60,28 @@
 }
 
 @media (max-width: 1366px) {
+  .locations-page .page-hero__content {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .locations-page .page-hero__title {
+    display: block;
+    text-align: left;
+  }
+
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .locations-page .page-hero__sub {
+    margin-inline: 0;
+    text-align: left;
+    transform-origin: left top;
+  }
+
   .locations-page__h1 {
-    transform: translate(-50%, calc(-100% - 0.2rem));
+    width: 100%;
+    left: 0;
+    transform: translateY(calc(-100% - 0.2rem));
+    text-align: left;
   }
 }

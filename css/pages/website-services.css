@@ -62,6 +62,12 @@
     min-height: auto;
   }
 
+  .website-services__hero .page-hero__content,
+  .website-services__hero .page-hero__title,
+  .website-services__hero .page-hero__sub {
+    text-align: left;
+  }
+
   .website-services__hero .page-hero__title {
     max-width: 100%;
   }

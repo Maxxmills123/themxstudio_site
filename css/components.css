@@ -1653,8 +1653,8 @@
     padding: 1.5rem 1rem 1.1rem;
     gap: 0.85rem;
     row-gap: 1rem;
-    justify-items: center;
-    text-align: center;
+    justify-items: start;
+    text-align: left;
   }
 
   .discovery-call__badge {
@@ -1700,7 +1700,14 @@
 
   .discovery-call__title,
   .discovery-call__copy {
-    text-align: center;
+    text-align: left;
+    justify-self: start;
+  }
+
+  .discovery-call__title {
+    width: 100%;
+    white-space: normal;
+    line-height: 1.04;
   }
 
   .discovery-call__copy {
@@ -1711,7 +1718,7 @@
   .discovery-call__cta {
     grid-column: 1;
     grid-row: auto;
-    justify-self: center;
+    justify-self: start;
   }
 
   .pricing-grid__inner,

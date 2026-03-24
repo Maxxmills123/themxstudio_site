@@ -100,7 +100,7 @@ main {
 
   .discovery-call__title,
   .discovery-call__copy {
-    text-align: center;
+    text-align: left;
   }
 
   .hero {
