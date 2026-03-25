@@ -1,0 +1,731 @@
+:root {
+  --accent: #a970ff;
+  --accent-hover: #d0b3ff;
+  --landing-shell: min(var(--site-width), 72rem);
+  --landing-border: color-mix(in srgb, var(--accent) 42%, transparent);
+  --landing-panel: color-mix(in srgb, var(--card-bg) 92%, var(--accent) 8%);
+}
+
+.landing-brisbane-page {
+  --landing-site-gap: calc(var(--site-gap) / 2);
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--accent) 18%, transparent) 0,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--accent) 10%, transparent) 0,
+      transparent 26%
+    ),
+    var(--bg);
+}
+
+.landing-hero-wrap {
+  min-height: auto;
+}
+
+.landing-hero {
+  margin-bottom: 0;
+  padding-top: clamp(2.75rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.2rem, 4vw, 3rem);
+}
+
+.landing-hero .page-hero__sub {
+  max-width: 40rem;
+}
+
+.landing-hero__proof {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  width: fit-content;
+  max-width: min(100%, 34rem);
+  margin-top: 1rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--landing-panel);
+  border: 1px solid var(--landing-border);
+  border-radius: 999px;
+}
+
+.landing-hero__proof-stars {
+  color: var(--accent);
+  line-height: 0;
+}
+
+.landing-hero__proof-stars svg {
+  width: 5rem;
+  height: auto;
+}
+
+.landing-hero__proof-copy {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.landing-hero__proof-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.landing-hero__proof-link:hover,
+.landing-hero__proof-link:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.landing-hero__proof-link svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+.landing-hero__cta {
+  position: static;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  margin-top: 0.75rem;
+  inline-size: clamp(6.2rem, 7vw, 6.9rem);
+  align-self: start;
+  animation: none;
+  translate: 0 0;
+  transform: none;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.landing-hero__cta:hover,
+.landing-hero__cta:focus-visible {
+  text-decoration: none;
+  transform: scale(1.04);
+}
+
+.landing-hero__cta .offer-wrap__toggle-text {
+  max-inline-size: 3.6rem;
+}
+
+.landing-brand,
+.landing-steps,
+.live-sites,
+.reviews,
+.landing-pricing,
+.landing-audit {
+  width: var(--site-width);
+  max-width: none;
+  margin-inline: auto;
+  margin-top: var(--landing-site-gap);
+  padding-top: var(--landing-site-gap);
+  margin-bottom: var(--landing-site-gap);
+  padding-bottom: var(--landing-site-gap);
+}
+
+.landing-brand {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.landing-brand .brand-position-statement__title {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.landing-brand__icons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(100%, 58rem);
+  margin-inline: auto;
+}
+
+.landing-brand__icon-card {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  padding: 1.25rem 1rem 1.1rem;
+  background: var(--landing-panel);
+  border: 1px solid var(--landing-border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.landing-brand__icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      color-mix(in srgb, var(--accent) 26%, transparent),
+      transparent 72%
+    ),
+    color-mix(in srgb, var(--card-bg) 84%, var(--accent) 16%);
+  color: var(--accent);
+}
+
+.landing-brand__icon-wrap svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.landing-brand__icon-title,
+.landing-brand__icon-copy {
+  margin: 0;
+}
+
+.landing-brand__icon-title {
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.landing-brand__icon-copy {
+  max-width: 20ch;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0.72;
+}
+
+.landing-steps__inner,
+.live-sites__inner,
+.reviews__inner,
+.landing-audit__inner {
+  width: min(100%, var(--landing-shell));
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(1.25rem, 2.4vw, 1.75rem);
+}
+
+.landing-steps__title,
+.live-sites__title,
+.reviews__title,
+.landing-audit__title {
+  margin: 0;
+  font-size: clamp(2.2rem, 3vw, 3.1rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -1px;
+}
+
+.landing-steps__intro,
+.live-sites__intro,
+.landing-audit__intro {
+  margin: 0;
+  max-width: 42rem;
+  font-size: 1rem;
+  line-height: 1.62;
+  opacity: 0.72;
+}
+
+.landing-brisbane-page .reviews__inner {
+  background: var(--landing-panel);
+  border-top-color: var(--accent);
+}
+
+.landing-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.landing-steps__card {
+  display: grid;
+  gap: 0.95rem;
+  padding: 1.5rem;
+  background: var(--landing-panel);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 16px 16px;
+}
+
+.landing-steps__number,
+.landing-steps__card-title,
+.landing-steps__card-copy {
+  margin: 0;
+}
+
+.landing-steps__number {
+  color: var(--accent);
+  font-family: var(--font-accent);
+  font-size: clamp(2.7rem, 4vw, 3.25rem);
+  line-height: 0.92;
+}
+
+.landing-steps__card-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.landing-steps__card-copy {
+  font-size: 0.96rem;
+  line-height: 1.62;
+  opacity: 0.72;
+}
+
+.live-sites__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.live-sites__card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--landing-panel);
+  border: 1px solid var(--landing-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.live-sites__media {
+  aspect-ratio: 16 / 10;
+  background: color-mix(in srgb, var(--card-bg) 82%, var(--accent) 18%);
+  overflow: hidden;
+}
+
+.live-sites__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.live-sites__body {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 1rem 1.2rem;
+}
+
+.live-sites__name,
+.live-sites__copy {
+  margin: 0;
+}
+
+.live-sites__name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.live-sites__copy {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.72;
+}
+
+.live-sites__link {
+  width: fit-content;
+  margin-top: 0.25rem;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.live-sites__link:hover,
+.live-sites__link:focus-visible {
+  color: var(--accent-hover);
+}
+
+.landing-pricing .pricing-grid3__inner {
+  width: min(100%, var(--landing-shell));
+}
+
+.landing-pricing .pricing-grid3__title {
+  font-size: clamp(2.2rem, 3vw, 3.1rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -1px;
+  text-align: center;
+  opacity: 1;
+}
+
+.landing-pricing .pricing-grid3__cols {
+  width: min(100%, 62rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: none;
+  gap: 1rem;
+  margin-inline: auto;
+}
+
+.landing-pricing .pricing-grid3__col {
+  position: relative;
+  min-width: 0;
+}
+
+.landing-pricing .pricing-grid3__card {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.landing-pricing .pricing-grid3__col--featured {
+  z-index: 1;
+}
+
+.landing-pricing .pricing-grid3__col--featured .pricing-grid3__card {
+  border-width: 3px;
+  border-color: var(--accent);
+}
+
+.landing-pricing .pricing-grid3__badge {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  width: 6.15rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0.9rem;
+  background: var(--accent);
+  color: var(--bg);
+  transform: translate(32%, -50%) rotate(10deg);
+  clip-path: polygon(
+    50% 0%,
+    59% 18%,
+    79% 9%,
+    73% 29%,
+    94% 34%,
+    78% 50%,
+    94% 66%,
+    73% 71%,
+    79% 91%,
+    59% 82%,
+    50% 100%,
+    41% 82%,
+    21% 91%,
+    27% 71%,
+    6% 66%,
+    22% 50%,
+    6% 34%,
+    27% 29%,
+    21% 9%,
+    41% 18%
+  );
+}
+
+.landing-pricing .pricing-grid3__badge-label {
+  display: block;
+  max-width: 3.8rem;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.landing-pricing .pricing-grid3__card-title,
+.landing-pricing .pricing-grid3__card-copy,
+.landing-pricing .pricing-grid3__card-list {
+  overflow-wrap: anywhere;
+}
+
+.landing-pricing .pricing-grid3__card-copy,
+.landing-pricing .pricing-grid3__card-list {
+  max-width: 100%;
+}
+
+.landing-audit__card {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 44rem);
+  margin-inline: auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: var(--landing-panel);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 16px 16px;
+}
+
+.landing-audit__card-title,
+.landing-audit__card-copy,
+.landing-audit__note,
+.landing-audit__error {
+  margin: 0;
+}
+
+.landing-audit__card-title {
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.landing-audit__card-copy,
+.landing-audit__note {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  opacity: 0.72;
+}
+
+.landing-audit__error {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #ff9e9e;
+}
+
+.landing-audit__inline-link {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.landing-audit__inline-link:hover,
+.landing-audit__inline-link:focus-visible {
+  color: var(--accent-hover);
+}
+
+.landing-footer {
+  margin-top: var(--landing-site-gap);
+  padding: clamp(2rem, 4vw, 3rem) 0 1.5rem;
+  border-top: 1px solid var(--landing-border);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 55%
+    ),
+    color-mix(in srgb, var(--footer-bg) 88%, var(--accent) 12%);
+}
+
+.landing-footer__inner {
+  width: var(--site-width);
+  margin-inline: auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.landing-footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.landing-footer__contact {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.landing-footer__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.landing-footer__contact-link svg,
+.landing-footer__social-link svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+}
+
+.landing-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.landing-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--landing-border);
+  background: color-mix(in srgb, var(--card-bg) 84%, var(--accent) 16%);
+}
+
+.landing-footer__social-link:hover,
+.landing-footer__social-link:focus-visible {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--card-bg) 72%, var(--accent) 28%);
+}
+
+.landing-footer__bottom {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.landing-footer__brand {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.landing-footer__logo {
+  width: min(14rem, 48vw);
+  height: auto;
+}
+
+.landing-footer__copyright {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  opacity: 0.72;
+}
+
+.landing-footer__legal {
+  display: inline-flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.landing-footer__legal a {
+  color: var(--text);
+}
+
+@media (min-width: 1367px) {
+  .landing-audit__inner {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .landing-audit__intro {
+    margin-inline: auto;
+  }
+
+  .landing-audit__card-title,
+  .landing-audit__card-copy,
+  .landing-audit__note,
+  .landing-audit__error {
+    text-align: center;
+  }
+
+  .landing-brisbane-page .form-modal__header {
+    position: relative;
+    justify-content: center;
+  }
+
+  .landing-brisbane-page .form-modal__heading {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .landing-brisbane-page .form-modal__desc,
+  .landing-brisbane-page .form-modal__note {
+    max-width: 34ch;
+    text-align: center;
+  }
+
+  .landing-brisbane-page .form-modal__close {
+    position: absolute;
+    top: 1.15rem;
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 1366px) {
+  .landing-brand__icons,
+  .landing-steps__grid,
+  .live-sites__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-steps__title,
+  .live-sites__title,
+  .landing-audit__title,
+  .landing-pricing .pricing-grid3__title {
+    font-size: clamp(1.95rem, 8vw, 2.35rem);
+  }
+
+  .landing-pricing .pricing-grid3__title {
+    text-align: left;
+  }
+
+  .landing-footer__top,
+  .landing-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .landing-pricing .pricing-grid3__cols {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .landing-hero__proof {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .landing-hero__proof-copy {
+    width: 100%;
+  }
+
+  .landing-pricing .pricing-grid3__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .landing-pricing .pricing-grid3__card {
+    gap: 0.65rem;
+    padding: 0.85rem;
+  }
+
+  .landing-pricing .pricing-grid3__card-title {
+    font-size: 1.18rem;
+    line-height: 1.04;
+  }
+
+  .landing-pricing .pricing-grid3__card-label {
+    padding-bottom: 0.35rem;
+    font-size: 0.54rem;
+  }
+
+  .landing-pricing .pricing-grid3__card-copy {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  .landing-pricing .pricing-grid3__card-list {
+    gap: 0.34rem;
+    padding-left: 0.95rem;
+    font-size: 0.72rem;
+    line-height: 1.38;
+  }
+
+  .landing-pricing .pricing-grid3__card-cta {
+    margin-top: 0.6rem;
+    padding: 0.42rem 0.58rem;
+    font-size: 0.74rem;
+    line-height: 1.15;
+  }
+
+  .landing-pricing .pricing-grid3__badge {
+    top: 0.55rem;
+    width: 4.35rem;
+    padding: 0.55rem;
+    transform: translate(22%, -34%) rotate(10deg);
+  }
+
+  .landing-pricing .pricing-grid3__badge-label {
+    max-width: 3rem;
+    font-size: 0.48rem;
+  }
+}

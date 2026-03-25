@@ -5,7 +5,7 @@
   --section-bg: color-mix(in srgb, var(--bg) 15%, var(--text) 80%);
   --footer-bg: color-mix(in srgb, var(--text) 5%, var(--bg) 80%);
   --card-bg: color-mix(in srgb, var(--bg) 90%, var(--text) 5%);
-  --nav-border: 2px solid color-mix(in srgb, var(--text) 10%, transparent);
+  --nav-border: 2px solid color-mix(in srgb, var(--text) 5%, transparent);
   --nav-hover: rgba(255, 255, 255, 0.2);
   --site-width: 90vw;
   --site-gap: 4rem;
@@ -58,7 +58,18 @@ body {
   max-width: 100vw;
   overflow-x: clip;
   zoom: 1;
-  background: var(--bg);
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--accent, transparent) 18%, transparent) 0,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--accent, transparent) 10%, transparent) 0,
+      transparent 26%
+    ),
+    var(--bg);
   color: var(--text);
   font-family: var(--font);
   line-height: 1.5;
