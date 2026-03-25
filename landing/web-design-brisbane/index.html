@@ -765,7 +765,9 @@
               id="landing-audit-form"
               name="free-audit"
               method="POST"
+              action="/landing/web-design-brisbane/thank-you/"
               data-netlify="true"
+              data-success-url="/landing/web-design-brisbane/thank-you/"
               netlify-honeypot="bot-field"
             >
               <input type="hidden" name="form-name" value="free-audit" />
@@ -961,7 +963,9 @@
           id="audit-form"
           name="free-audit"
           method="POST"
+          action="/landing/web-design-brisbane/thank-you/"
           data-netlify="true"
+          data-success-url="/landing/web-design-brisbane/thank-you/"
           netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="free-audit" />
@@ -1027,7 +1031,9 @@
           id="discovery-form"
           name="discovery-call"
           method="POST"
+          action="/landing/web-design-brisbane/thank-you/"
           data-netlify="true"
+          data-success-url="/landing/web-design-brisbane/thank-you/"
           netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="discovery-call" />
@@ -1082,6 +1088,7 @@
         const thanks = document.getElementById("landing-audit-thanks");
         const error = document.getElementById("landing-audit-error");
         const submit = form?.querySelector(".audit-form__submit");
+        const successUrl = form?.dataset.successUrl?.trim();
 
         if (!form || !thanks || !error || !submit) return;
 
@@ -1104,6 +1111,11 @@
 
             if (!response.ok) {
               throw new Error(`Form submission failed: ${response.status}`);
+            }
+
+            if (successUrl) {
+              window.location.assign(successUrl);
+              return;
             }
 
             form.hidden = true;

@@ -1303,6 +1303,7 @@ if (header) {
     const form = document.getElementById(formId);
     const thanks = document.getElementById(thanksId);
     const heading = modal?.querySelector(".form-modal__heading");
+    const successUrl = form?.dataset.successUrl?.trim();
     if (!triggers.length || !modal) return;
 
     const open = () => {
@@ -1356,6 +1357,11 @@ if (header) {
         });
 
         if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+
+        if (successUrl) {
+          window.location.assign(successUrl);
+          return;
+        }
 
         form.hidden = true;
         if (heading) heading.hidden = true;
