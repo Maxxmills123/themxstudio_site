@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en-AU">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-41D0NFF4ZZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-41D0NFF4ZZ');
+      gtag('config', 'AW-18039650926');
+    </script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -470,31 +480,36 @@
               <a class="nav__link" href="/about/">About</a>
             </li>
             <li class="nav__item">
-              <a class="nav__link" href="/contact/">Contact</a>
+              <a class="nav__link nav__link--contact" href="/contact/"
+                >Contact</a
+              >
             </li>
           </ul>
         </nav>
 
-        <div class="site-header__right">
-          <button
-            class="site-header__burger"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-panel"
-          >
-            <span></span><span></span><span></span>
-          </button>
-        </div>
+        <button class="site-header__cta" type="button" data-open-discovery>
+          Start Today
+        </button>
+        <button
+          class="site-header__burger"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-panel"
+        >
+          <span class="burger" aria-hidden="true"
+            ><span></span><span></span><span></span
+          ></span>
+        </button>
       </div>
 
       <aside
         class="mobile-panel"
         id="mobile-panel"
         aria-label="Mobile navigation"
-        aria-hidden="true"
+        hidden
       >
-        <nav>
+        <nav class="mobile-nav" aria-label="Mobile primary">
           <div class="mobile-acc">
             <button
               class="nav__link mobile-acc__trigger"

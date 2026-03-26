@@ -1,6 +1,26 @@
 <!doctype html>
 <html lang="en-AU">
   <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-41D0NFF4ZZ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-41D0NFF4ZZ");
+      gtag("config", "AW-18039650926");
+    </script>
+    <script>
+      gtag("event", "conversion", {
+        send_to: "AW-18039650926/92fNCOWAkI8cEO70_JlD",
+      });
+    </script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -46,172 +66,7 @@
     <link rel="stylesheet" href="/css/base.css?v=20260325e" />
     <link rel="stylesheet" href="/css/components.css?v=20260322x" />
     <link rel="stylesheet" href="/css/pages/terms.css?v=20260325e" />
-    <style>
-      .thank-you-page {
-        --accent: #ecff5a;
-        --accent-hover: #f5ffb5;
-        --contact-card-width: 54rem;
-      }
-
-      .thank-you-page .contact-meta {
-        width: min(var(--site-width), var(--contact-card-width));
-        max-width: none;
-        margin-top: clamp(1.5rem, 4vw, 2.5rem);
-        margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-        margin-inline: auto;
-        padding-inline: 0;
-        display: grid;
-        gap: 0;
-      }
-
-      .thank-you-page .contact-meta__badge {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 2;
-        margin: 0;
-        width: 7rem;
-        aspect-ratio: 1;
-        display: grid;
-        place-items: center;
-        padding: 1rem;
-        background: var(--accent);
-        color: var(--bg);
-        transform: translate(32%, -50%) rotate(10deg);
-        clip-path: polygon(
-          50% 0%,
-          59% 18%,
-          79% 9%,
-          73% 29%,
-          94% 34%,
-          78% 50%,
-          94% 66%,
-          73% 71%,
-          79% 91%,
-          59% 82%,
-          50% 100%,
-          41% 82%,
-          21% 91%,
-          27% 71%,
-          6% 66%,
-          22% 50%,
-          6% 34%,
-          27% 29%,
-          21% 9%,
-          41% 18%
-        );
-      }
-
-      .thank-you-page .contact-meta__badge-label {
-        display: block;
-        max-width: 4.4rem;
-        font-size: 0.66rem;
-        font-weight: 900;
-        line-height: 1.05;
-        letter-spacing: 0.08em;
-        text-align: center;
-        text-transform: uppercase;
-        color: var(--bg);
-      }
-
-      .thank-you-page .contact-direct {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.8fr);
-        align-items: start;
-        width: min(100%, var(--contact-card-width));
-        gap: clamp(2rem, 5vw, 3.5rem);
-        padding: 2rem 2.4rem 2rem;
-        border-top: 3px solid var(--accent);
-        background: var(--card-bg);
-        border-radius: 0 0 12px 12px;
-        color: var(--text);
-        position: relative;
-      }
-
-      .thank-you-page .contact-direct__inner {
-        display: grid;
-        gap: 0.95rem;
-        align-content: start;
-      }
-
-      .thank-you-page .contact-direct .page-hero__email,
-      .thank-you-page .contact-direct .page-hero__phone {
-        gap: 0.55rem;
-        font-size: clamp(1.1rem, 0.7vw + 1rem, 1.5rem);
-        line-height: 1.18;
-      }
-
-      .thank-you-page .contact-direct .page-hero__lead-icon {
-        width: 0.72em;
-        height: 0.72em;
-      }
-
-      .thank-you-page .contact-direct__hours {
-        display: grid;
-        gap: 0.6rem;
-        align-content: start;
-        padding-top: 0.15rem;
-      }
-
-      .thank-you-page .contact-direct__hours-title,
-      .thank-you-page .contact-direct__hours-text {
-        margin: 0;
-      }
-
-      .thank-you-page .contact-direct__hours-title {
-        font-size: clamp(1.12rem, 0.85vw + 1rem, 1.45rem);
-        font-weight: 900;
-        line-height: 1.15;
-      }
-
-      .thank-you-page .contact-direct__hours-text {
-        font-size: 0.98rem;
-        line-height: 1.65;
-        opacity: 0.72;
-      }
-
-      .thank-you-page .terms__inner,
-      .thank-you-page .terms__content,
-      .thank-you-page .terms__card {
-        justify-items: center;
-      }
-
-      .thank-you-page .terms__meta {
-        display: none;
-      }
-
-      .thank-you-page .terms__card {
-        text-align: center;
-      }
-
-      .thank-you-page .terms__p {
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      @media (max-width: 1366px) {
-        .thank-you-page .contact-meta__badge {
-          top: 0;
-          right: 0.75rem;
-          width: 6.1rem;
-          padding: 0.9rem;
-          transform: translate(32%, -50%) rotate(8deg);
-        }
-
-        .thank-you-page .contact-meta__badge-label {
-          max-width: 3.8rem;
-          font-size: 0.56rem;
-          line-height: 1.05;
-        }
-
-        .thank-you-page .contact-direct {
-          grid-template-columns: 1fr;
-          width: 100%;
-          gap: 1.25rem;
-          padding: 1.4rem 1rem 1.1rem;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/css/pages/thank-you.css?v=20260326a" />
   </head>
 
   <body class="error-page thank-you-page">
@@ -266,7 +121,9 @@
                   d="M12 13.5L2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5zM20 4H4c-1.1 0-2 .9-2 2l10 6.25L22 6c0-1.1-.9-2-2-2z"
                 />
               </svg>
-              <span class="site-header__contact-text">hello@themxstudio.com</span>
+              <span class="site-header__contact-text"
+                >hello@themxstudio.com</span
+              >
             </a>
           </div>
         </div>
@@ -798,94 +655,18 @@
     <main>
       <section class="page-hero" aria-labelledby="thank-you-title">
         <div class="page-hero__content">
-          <h1 class="page-hero__title" id="thank-you-title">Thank you.</h1>
+          <h1 class="page-hero__title" id="thank-you-title">Thank you!</h1>
           <p class="page-hero__sub">
-            We&apos;ll get back sooner than you think.
+            We'll get back to you sooner than you think.'
           </p>
-        </div>
-      </section>
-
-      <section class="contact-meta" aria-label="Direct contact">
-        <div class="contact-direct" aria-label="Direct contact details">
-          <p class="contact-meta__badge" aria-hidden="true">
-            <span class="contact-meta__badge-label"
-              >We&apos;ll buy <br />
-              you coffee</span
-            >
-          </p>
-          <div class="contact-direct__inner">
+          <p class="thank-you-back">
             <a
-              class="page-hero__email"
-              href="mailto:hello@themxstudio.com?subject=Website%20Enquiry"
+              class="thank-you-back__link"
+              href="/landing/web-design-brisbane/"
             >
-              <svg
-                class="page-hero__lead-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <rect
-                  x="3"
-                  y="5"
-                  width="18"
-                  height="14"
-                  rx="2"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M3 7l9 6 9-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              hello@themxstudio.com
+              Go back
             </a>
-
-            <a class="page-hero__phone" href="tel:+61421709047">
-              <svg
-                class="page-hero__lead-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  fill="currentColor"
-                  d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                />
-              </svg>
-              0421 709 047
-            </a>
-          </div>
-          <div
-            class="contact-direct__hours"
-            aria-labelledby="contact-hours-title"
-          >
-            <h2 class="contact-direct__hours-title" id="contact-hours-title">
-              Hours (on paper)
-            </h2>
-            <p class="contact-direct__hours-text">
-              Monday - Friday: 9:00 AM - 5:00 PM
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="terms" aria-label="Next steps">
-        <div class="terms__inner">
-          <div class="terms__content">
-            <article class="terms__card">
-              <p class="terms__p">
-                <a class="terms__link" href="/landing/web-design-brisbane/"
-                  >Go back</a
-                >
-              </p>
-            </article>
-          </div>
+          </p>
         </div>
       </section>
     </main>
@@ -909,8 +690,7 @@
                       <path
                         fill="currentColor"
                         d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
-                      />
-                    </svg></span></span
+                      /></svg></span></span
               ></a>
             </p>
           </div>
