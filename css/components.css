@@ -71,10 +71,11 @@
 
 .page-hero__sub {
   margin: 0;
-  max-width: 42rem;
-  font-size: clamp(1.05rem, 0.9vw + 0.9rem, 1.55rem);
+  max-width: 60ch;
+  font-size: clamp(1rem, 0.58vw + 0.9rem, 1.38rem);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.58;
+  text-wrap: pretty;
 }
 
 .page-hero__email,
@@ -95,6 +96,187 @@
   flex: 0 0 auto;
   width: 0.8em;
   height: 0.8em;
+}
+
+.contact-forms {
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-bottom: var(--site-gap);
+}
+
+.contact-meta {
+  width: min(var(--site-width), var(--contact-layout-width, 40rem));
+  max-width: none;
+  margin-top: var(--site-gap);
+  margin-bottom: calc(var(--site-gap) * 1.2);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.contact-meta__badge {
+  margin: 0;
+  width: clamp(7.5rem, 9.5vw, 9.25rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  justify-self: start;
+  transform: rotate(8deg);
+  clip-path: polygon(
+    50% 0%,
+    59% 18%,
+    79% 9%,
+    73% 29%,
+    94% 34%,
+    78% 50%,
+    94% 66%,
+    73% 71%,
+    79% 91%,
+    59% 82%,
+    50% 100%,
+    41% 82%,
+    21% 91%,
+    27% 71%,
+    6% 66%,
+    22% 50%,
+    6% 34%,
+    27% 29%,
+    21% 9%,
+    41% 18%
+  );
+}
+
+.contact-meta__badge-label {
+  display: block;
+  max-width: 4.9rem;
+  font-size: clamp(0.68rem, 0.22vw + 0.62rem, 0.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--bg);
+  transform: rotate(-18deg);
+}
+
+.contact-direct {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  gap: clamp(0.95rem, 2vw, 1.35rem);
+  justify-items: center;
+  padding: clamp(3.1rem, 6vw, 4rem) clamp(1rem, 2.6vw, 1.7rem)
+    clamp(1.25rem, 2.6vw, 1.75rem);
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+  color: var(--text);
+}
+
+.contact-direct__inner {
+  display: grid;
+  order: 1;
+  gap: clamp(0.85rem, 1vw, 1.15rem);
+  justify-self: center;
+  justify-items: center;
+  width: max-content;
+  max-width: 100%;
+  text-align: center;
+}
+
+.contact-direct .contact-meta__badge {
+  order: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  justify-self: start;
+  transform: translate(-26%, -50%) rotate(8deg);
+}
+
+.contact-direct .page-hero__email,
+.contact-direct .page-hero__phone {
+  gap: 0.6rem;
+  font-size: clamp(1.7rem, 0.8vw + 1.35rem, 2.15rem);
+  line-height: 1.12;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-direct .page-hero__lead-icon {
+  width: 0.74em;
+  height: 0.74em;
+}
+
+.contact-forms__inner {
+  width: var(--site-width);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.contact-forms__title {
+  margin: 0;
+  width: 100%;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -1px;
+  text-align: center;
+  font-style: italic;
+}
+
+.contact-forms__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.contact-forms__card {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 42rem);
+  margin-inline: auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+}
+
+.contact-forms__head {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.contact-forms__card-title,
+.contact-forms__card-desc,
+.contact-forms__card-note {
+  margin: 0;
+}
+
+.contact-forms__card-title {
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.contact-forms__card-desc,
+.contact-forms__card-note {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  opacity: 0.72;
 }
 
 .service-page__h1-magnify {
@@ -666,7 +848,7 @@
   width: 100%;
   padding-top: 0.4rem;
   padding-bottom: 1.35rem;
-  border-bottom: 1px solid var(--text);
+  border-bottom: 1px solid var(--rule-color);
 }
 
 .intro-copy__item:last-child,
@@ -1168,13 +1350,15 @@
 
 .services__title {
   margin: 0;
-  font-size: clamp(2.6rem, 3.2vw, 3rem);
+  width: 100%;
+  font-size: clamp(1.05rem, 0.45vw + 0.98rem, 1.18rem);
   font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -1px;
+  line-height: 1.25;
+  letter-spacing: 0;
   color: var(--text);
   text-align: left;
-  font-style: italic;
+  font-style: normal;
+  opacity: 0.56;
 }
 
 .services__link,
@@ -1340,7 +1524,7 @@
 
 .faq__item {
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 1px solid var(--rule-color);
 }
 
 .faq__item:last-child {
@@ -1421,24 +1605,6 @@
 }
 
 @media (min-width: 1367px) {
-  .intro-copy__trigger,
-  .offer-copy__trigger {
-    cursor: default;
-    pointer-events: none;
-  }
-
-  .intro-copy__caret,
-  .offer-copy__caret {
-    display: none;
-  }
-
-  .intro-copy__panel,
-  .intro-copy__panel[hidden],
-  .offer-copy__panel,
-  .offer-copy__panel[hidden] {
-    display: grid;
-  }
-
   .reviews__inner {
     width: min(var(--site-width), 78rem);
     max-width: min(var(--site-width), 78rem);
@@ -1477,6 +1643,10 @@
 @media (max-width: 1366px) {
   .page-hero {
     padding: clamp(6rem, 10vw, 8rem) 0 0;
+  }
+
+  .page-hero__sub {
+    width: 80%;
   }
 
   .brand-position-statement__title {
@@ -1646,6 +1816,43 @@
     height: 1.7rem;
   }
 
+  .contact-meta {
+    margin-top: calc(var(--site-gap) * 0.9);
+  }
+
+  .contact-direct {
+    gap: 1.35rem;
+  }
+
+  .contact-meta__badge {
+    width: 6.6rem;
+    padding: 0.9rem;
+  }
+
+  .contact-meta__badge-label {
+    max-width: 4rem;
+    font-size: 0.58rem;
+    line-height: 1.05;
+  }
+
+  .contact-direct .page-hero__email,
+  .contact-direct .page-hero__phone {
+    font-size: clamp(1.45rem, 1vw + 1.1rem, 1.9rem);
+  }
+
+  .contact-forms__inner {
+    gap: 1rem;
+  }
+
+  .contact-forms__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-forms__title {
+    font-size: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+
   .discovery-call__inner {
     width: min(var(--site-width), calc(100vw - 1.5rem));
     grid-template-columns: 1fr;
@@ -1692,8 +1899,8 @@
   }
 
   .discovery-call__badge-text {
-    max-width: 3.8rem;
-    font-size: 0.56rem;
+    max-width: 3.5rem;
+    font-size: 0.5rem;
     line-height: 1.05;
     letter-spacing: 0.08em;
   }
@@ -1744,12 +1951,22 @@
     gap: calc(var(--site-gap) * 1.35);
   }
 
+  .pricing-grid3__cols {
+    width: 100%;
+  }
+
   .pricing-grid__badge,
   .pricing-grid2__badge {
     top: -0.2rem;
     width: 5.15rem;
     padding: 0.75rem;
     transform: translate(32%, -66%) rotate(10deg);
+  }
+
+  .pricing-grid__badge-label,
+  .pricing-grid2__badge-label {
+    max-width: 3.35rem;
+    font-size: 0.5rem;
   }
 
   .pricing-grid__card,
@@ -1760,6 +1977,8 @@
   }
 
   .pricing-grid3__card {
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    height: 100%;
     gap: 0.8rem;
     padding: 1rem;
   }
@@ -1770,7 +1989,7 @@
   }
 
   .pricing-grid3__card-title {
-    font-size: clamp(1.8rem, 1.25rem + 2vw, 2.1rem);
+    font-size: clamp(1.7rem, 1.2rem + 1.8vw, 1.95rem);
   }
 
   .pricing-grid__card-copy,
@@ -1782,6 +2001,8 @@
   .pricing-grid3__card-copy {
     font-size: 0.96rem;
     line-height: 1.58;
+    max-width: 31ch;
+    justify-self: start;
   }
 
   .pricing-grid__card-list,
@@ -1791,6 +2012,8 @@
 
   .pricing-grid3__card-list {
     gap: 0.45rem;
+    max-width: none;
+    justify-self: start;
   }
 
   .pricing-grid__card-cta,
@@ -1798,6 +2021,11 @@
   .pricing-grid3__card-cta {
     width: fit-content;
     justify-content: flex-start;
+  }
+
+  .pricing-grid3__card-cta {
+    align-self: end;
+    justify-self: start;
   }
 
   .offer-copy,
@@ -1843,8 +2071,8 @@
 
   .services__title {
     margin-bottom: 0.45rem;
-    font-size: 2.5rem;
-    line-height: 1.04;
+    font-size: clamp(1.05rem, 0.45vw + 0.98rem, 1.18rem);
+    line-height: 1.25;
   }
 
   .service-card__trigger {
@@ -1976,7 +2204,71 @@
   }
 }
 
+@media (max-width: 900px) {
+  .contact-direct {
+    width: 100%;
+    gap: 1.15rem;
+    padding: 3rem 1rem 1.2rem;
+  }
+
+  .contact-direct__inner {
+    justify-self: center;
+  }
+
+  .contact-direct .contact-meta__badge {
+    left: 0;
+    justify-self: start;
+    width: 5.5rem;
+    padding: 0.78rem;
+    transform: translate(-22%, -50%) rotate(8deg);
+  }
+
+  .contact-meta__badge-label {
+    max-width: 3.6rem;
+    font-size: 0.52rem;
+  }
+
+  .contact-direct .page-hero__email,
+  .contact-direct .page-hero__phone {
+    font-size: clamp(1.45rem, 2vw + 1rem, 1.85rem);
+  }
+}
+
 @media (max-width: 767px) {
+  .contact-meta {
+    width: min(var(--site-width), 26rem);
+    margin-bottom: var(--site-gap);
+  }
+
+  .contact-direct {
+    gap: 1rem;
+    padding: 2.75rem 0.95rem 1.1rem;
+  }
+
+  .contact-direct__inner {
+    width: 100%;
+    max-width: 17.5rem;
+    justify-self: start;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .contact-direct .page-hero__email,
+  .contact-direct .page-hero__phone {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .contact-forms__title {
+    font-size: 1.5rem;
+    text-align: left;
+    padding-bottom: 0.15rem;
+  }
+
+  .contact-forms__card-title {
+    text-align: left;
+  }
+
   .pricing-grid__title,
   .pricing-grid2__title,
   .pricing-grid3__title {
@@ -1998,7 +2290,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: none;
     row-gap: 0;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    gap: 2rem;
   }
 
   .pricing-grid3__card {
@@ -2021,7 +2313,7 @@
   }
 
   .pricing-grid3__card-title {
-    font-size: 1.48rem;
+    font-size: 1.42rem;
     line-height: 1.04;
   }
 

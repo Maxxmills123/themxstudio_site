@@ -92,10 +92,10 @@ if (dropdowns.length) {
 
 const burger = document.querySelector(".site-header__burger");
 const mobilePanel = document.querySelector(".mobile-panel");
+const mobileMenuBackdropClass = "is-mobile-menu-active";
+const mobileMenuHeader = burger?.closest(".site-header") || null;
 
 let scrollY = 0;
-let lockPaddingRight = "";
-let lockScrollBehavior = "";
 let menuCloseTimer = null;
 const menuTransitionMs = 140;
 const mobileUiAfterMenuClose = {
@@ -120,28 +120,8 @@ const shouldHoldMobileUiAfterMenuClose = (releaseThreshold = 4) => {
   return true;
 };
 
-const getScrollbarWidth = () =>
-  Math.max(
-    0,
-    (window.innerWidth || 0) - (document.documentElement.clientWidth || 0),
-  );
-
 const lockScroll = () => {
-  scrollY = window.scrollY || 0;
-
-  lockPaddingRight = document.body.style.paddingRight || "";
-  lockScrollBehavior = document.documentElement.style.scrollBehavior || "";
-
-  const sbw = getScrollbarWidth();
-  if (sbw) document.body.style.paddingRight = `${sbw}px`;
-
-  document.documentElement.style.scrollBehavior = "auto";
-
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
+  scrollY = window.scrollY || window.pageYOffset || 0;
 };
 
 const syncMobilePanelHeight = () => {
@@ -164,27 +144,20 @@ const syncMobilePanelHeight = () => {
   mobilePanel.style.maxHeight = `${availableHeight}px`;
 };
 
-const unlockScroll = () => {
-  const y = scrollY;
-
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.left = "";
-  document.body.style.right = "";
-  document.body.style.width = "";
-  document.body.style.paddingRight = lockPaddingRight;
-
+const unlockScroll = (afterUnlock) => {
   requestAnimationFrame(() => {
-    window.scrollTo(0, y);
-    document.documentElement.style.scrollBehavior = lockScrollBehavior;
+    afterUnlock?.();
   });
 };
 
 const openMenu = () => {
   if (!burger || !mobilePanel) return;
   if (menuCloseTimer) clearTimeout(menuCloseTimer);
+  menuCloseTimer = null;
   mobileUiAfterMenuClose.active = false;
 
+  mobileMenuHeader?.classList.remove("is-gone", "is-hidden", "is-hidden-footer");
+  document.body.classList.add(mobileMenuBackdropClass);
   syncMobilePanelHeight();
   mobilePanel.scrollTop = 0;
   mobilePanel.hidden = false;
@@ -201,11 +174,14 @@ const closeMenu = () => {
   burger.setAttribute("aria-expanded", "false");
 
   menuCloseTimer = setTimeout(() => {
+    menuCloseTimer = null;
     mobilePanel.hidden = true;
     mobilePanel.style.maxHeight = "";
     armMobileUiAfterMenuClose(scrollY);
-    unlockScroll();
-    window.dispatchEvent(new CustomEvent("mobilepanelclosed"));
+    unlockScroll(() => {
+      document.body.classList.remove(mobileMenuBackdropClass);
+      window.dispatchEvent(new CustomEvent("mobilepanelclosed"));
+    });
   }, menuTransitionMs);
 };
 
@@ -296,9 +272,9 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
       panel.hidden = !open;
     };
 
-    const syncState = () => {
+    const closeOthers = (activeItem) => {
       items.forEach((item) => {
-        setItemOpen(item, !mobileMq.matches);
+        if (item !== activeItem) setItemOpen(item, false);
       });
     };
 
@@ -307,23 +283,15 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
       if (!trigger) return;
 
       trigger.addEventListener("click", () => {
-        if (!mobileMq.matches) return;
         const isOpen = trigger.getAttribute("aria-expanded") === "true";
-        items.forEach((other) => setItemOpen(other, false));
-        if (!isOpen) setItemOpen(item, true);
+        closeOthers(item);
+        setItemOpen(item, !isOpen);
       });
     });
 
-    syncState();
-
-    if (typeof mobileMq.addEventListener === "function") {
-      mobileMq.addEventListener("change", syncState);
-    } else if (typeof mobileMq.addListener === "function") {
-      mobileMq.addListener(syncState);
-    }
+    closeOthers(items[0]);
+    setItemOpen(items[0], true);
   };
-
-  const mobileMq = window.matchMedia("(max-width: 1366px)");
 
   initCopyAccordion({
     itemSelector: ".intro-copy__item",
@@ -339,10 +307,31 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
 })();
 
 (() => {
+  const lists = Array.from(document.querySelectorAll(".faq__list"));
+  if (!lists.length) return;
+
+  lists.forEach((list) => {
+    const items = Array.from(list.querySelectorAll(".faq__item"));
+    if (!items.length) return;
+
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  });
+})();
+
+(() => {
   const items = Array.from(document.querySelectorAll(".service-card"));
   if (!items.length) return;
+  const groups = Array.from(document.querySelectorAll(".services-group"));
 
   const mobileMq = window.matchMedia("(max-width: 1366px)");
+  let heightSyncFrame = null;
 
   const setItemOpen = (item, open) => {
     const trigger = item.querySelector(".service-card__trigger");
@@ -352,12 +341,44 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
     panel.hidden = !open;
   };
 
+  const syncHeights = () => {
+    heightSyncFrame = null;
+
+    groups.forEach((group) => {
+      const cards = Array.from(group.querySelectorAll(".service-card"));
+      if (!cards.length) return;
+
+      cards.forEach((card) => {
+        card.style.minHeight = "";
+      });
+
+      if (mobileMq.matches || cards.length < 2) return;
+
+      const columns = new Set(
+        cards.map((card) => Math.round(card.getBoundingClientRect().left)),
+      );
+      if (columns.size < 2) return;
+
+      const maxHeight = Math.max(...cards.map((card) => card.offsetHeight));
+      cards.forEach((card) => {
+        card.style.minHeight = `${maxHeight}px`;
+      });
+    });
+  };
+
+  const queueHeightSync = () => {
+    if (heightSyncFrame) cancelAnimationFrame(heightSyncFrame);
+    heightSyncFrame = requestAnimationFrame(syncHeights);
+  };
+
   const syncState = () => {
     if (mobileMq.matches) {
       items.forEach((item) => setItemOpen(item, false));
     } else {
       items.forEach((item) => setItemOpen(item, true));
     }
+
+    queueHeightSync();
   };
 
   syncState();
@@ -371,6 +392,7 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
       const isOpen = trigger.getAttribute("aria-expanded") === "true";
       items.forEach((other) => setItemOpen(other, false));
       if (!isOpen) setItemOpen(item, true);
+      queueHeightSync();
     });
   });
 
@@ -380,6 +402,10 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
   } else if (typeof mobileMq.addListener === "function") {
     mobileMq.addListener(handleChange);
   }
+
+  window.addEventListener("resize", queueHeightSync);
+  window.addEventListener("load", queueHeightSync);
+  document.fonts?.ready?.then(queueHeightSync);
 })();
 
 (() => {
@@ -1036,6 +1062,32 @@ if (header) {
     requestAnimationFrame(step);
   };
 
+  const lockCountWidth = (el, token) => {
+    const probe = document.createElement("span");
+    const styles = window.getComputedStyle(el);
+
+    probe.textContent = `${token.prefix}${token.target}${token.suffix}`;
+    probe.style.position = "absolute";
+    probe.style.visibility = "hidden";
+    probe.style.pointerEvents = "none";
+    probe.style.whiteSpace = "nowrap";
+    probe.style.fontFamily = styles.fontFamily;
+    probe.style.fontSize = styles.fontSize;
+    probe.style.fontWeight = styles.fontWeight;
+    probe.style.fontStyle = styles.fontStyle;
+    probe.style.letterSpacing = styles.letterSpacing;
+    probe.style.lineHeight = styles.lineHeight;
+    probe.style.fontVariantNumeric = styles.fontVariantNumeric;
+
+    document.body.append(probe);
+    const width = Math.ceil(probe.getBoundingClientRect().width);
+    probe.remove();
+
+    el.style.display = "inline-block";
+    el.style.width = `${width}px`;
+    el.style.whiteSpace = "nowrap";
+  };
+
   const parsed = statEls
     .map((el) => ({ el, token: parseCountToken(el.textContent) }))
     .filter((item) => item.token);
@@ -1047,19 +1099,29 @@ if (header) {
     if (hasStarted) return;
     hasStarted = true;
 
-    const maxTarget = Math.max(
-      ...parsed.map((item) => Math.abs(item.token.target)),
-      1,
-    );
-    const sharedDuration = Math.min(2400, Math.max(900, maxTarget * 30));
+    const run = () => {
+      const maxTarget = Math.max(
+        ...parsed.map((item) => Math.abs(item.token.target)),
+        1,
+      );
+      const sharedDuration = Math.min(2400, Math.max(900, maxTarget * 30));
 
-    parsed.forEach(({ el, token }) => {
-      if (reducedMotion) {
-        el.textContent = `${token.prefix}${token.target}${token.suffix}`;
-        return;
-      }
-      animateCount(el, token, sharedDuration);
-    });
+      parsed.forEach(({ el, token }) => {
+        lockCountWidth(el, token);
+        if (reducedMotion) {
+          el.textContent = `${token.prefix}${token.target}${token.suffix}`;
+          return;
+        }
+        animateCount(el, token, sharedDuration);
+      });
+    };
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(run, run);
+      return;
+    }
+
+    run();
   };
 
   if (!("IntersectionObserver" in window)) {

@@ -8,9 +8,9 @@
 }
 
 .page-hero__sub {
-  max-width: 38rem;
-  font-size: clamp(1.08rem, 0.7vw + 0.96rem, 1.32rem);
-  line-height: 1.66;
+  max-width: 32ch;
+  font-size: clamp(1rem, 0.42vw + 0.94rem, 1.22rem);
+  line-height: 1.58;
 }
 
 .blog-article {
@@ -103,7 +103,7 @@
 .blog-share__action:focus-visible,
 .site-footer__top-social .footer-social__link:hover,
 .site-footer__top-social .footer-social__link:focus-visible {
-  color: var(--accent-hover);
+  color: var(--text);
 }
 
 .card-grid {
@@ -172,7 +172,7 @@
 }
 
 .site-footer__top-social .footer-social__link {
-  color: var(--accent);
+  color: var(--text);
 }
 
 @media (min-width: 1000px) {

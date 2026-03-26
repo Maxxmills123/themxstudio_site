@@ -33,7 +33,7 @@
 }
 
 .landing-hero .page-hero__sub {
-  max-width: 40rem;
+  max-width: 32ch;
 }
 
 .landing-hero__proof {
@@ -656,6 +656,15 @@
     text-align: left;
   }
 
+  .landing-brisbane-page .reviews__title {
+    width: 100%;
+    white-space: normal;
+    text-align: left;
+    font-size: clamp(1.95rem, 8vw, 2.35rem);
+    line-height: 0.98;
+    letter-spacing: -1px;
+  }
+
   .landing-footer__top,
   .landing-footer__bottom {
     flex-direction: column;
@@ -667,19 +676,284 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
+  .landing-brisbane-page {
+    --landing-site-gap: clamp(1.35rem, 4vw, 1.85rem);
+  }
+
+  .landing-hero {
+    padding-top: clamp(3.5rem, 10vw, 5.25rem);
+    padding-bottom: clamp(1.6rem, 4vw, 2.2rem);
+  }
+
+  .landing-hero .page-hero__content {
+    width: min(var(--site-width), 100%);
+    gap: 0.85rem;
+  }
+
+  .landing-hero .page-hero__title {
+    max-width: 11ch;
+    font-size: clamp(4.9rem, 12vw, 7.2rem);
+    line-height: 0.94;
+  }
+
+  .landing-hero .page-hero__sub {
+    width: auto;
+    max-width: 31ch;
+    font-size: clamp(1rem, 0.8vw + 0.92rem, 1.16rem);
+    line-height: 1.54;
+  }
+
   .landing-hero__proof {
+    display: inline-grid;
+    justify-items: start;
+    align-items: start;
+    justify-self: start;
+    width: fit-content;
+    max-width: min(100%, 18.5rem);
+    gap: 0.45rem;
+    padding: 0.72rem 0.82rem 0.78rem;
+    border-radius: 16px;
+  }
+
+  .landing-hero__proof-stars svg {
+    width: 4.1rem;
+  }
+
+  .landing-hero__proof-copy {
+    width: auto;
+    max-width: 18ch;
+    font-size: 0.84rem;
+    line-height: 1.2;
+  }
+
+  .landing-hero__proof-link {
+    gap: 0.4rem;
+    max-width: 16ch;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .landing-hero__proof-link svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .landing-hero__cta {
+    margin-top: 0.85rem;
+    inline-size: clamp(5.4rem, 11vw, 6.1rem);
+  }
+
+  .landing-brand,
+  .landing-steps,
+  .live-sites,
+  .landing-pricing,
+  .landing-audit {
+    margin-top: var(--landing-site-gap);
+    padding-top: var(--landing-site-gap);
+    margin-bottom: var(--landing-site-gap);
+    padding-bottom: var(--landing-site-gap);
+  }
+
+  .landing-brand {
+    gap: 1.1rem;
+  }
+
+  .landing-brand .brand-position-statement__title {
+    max-width: 17ch;
+    margin: 0;
+    font-size: clamp(2rem, 6.5vw, 2.55rem);
+    line-height: 1;
+  }
+
+  .landing-brand__icons {
+    width: min(100%, 32rem);
+    gap: 0.85rem;
+  }
+
+  .landing-brand__icon-card {
+    gap: 0.65rem;
+    padding: 1rem 0.95rem 0.95rem;
+  }
+
+  .landing-brand__icon-wrap {
+    width: 4rem;
+  }
+
+  .landing-brand__icon-copy {
+    max-width: 24ch;
+  }
+
+  .landing-steps__inner,
+  .live-sites__inner,
+  .landing-audit__inner {
+    gap: 1rem;
+  }
+
+  .landing-brisbane-page .reviews__title {
     width: 100%;
-    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+    font-size: clamp(1.95rem, 7vw, 2.55rem);
+    line-height: 0.98;
+    letter-spacing: -1px;
+  }
+
+  .landing-steps__intro,
+  .live-sites__intro,
+  .landing-audit__intro {
+    max-width: 34ch;
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+
+  .landing-steps__card {
+    gap: 0.8rem;
+    padding: 1.2rem 1.05rem;
+  }
+
+  .landing-steps__number {
+    font-size: clamp(2.3rem, 6vw, 2.8rem);
+  }
+
+  .live-sites__grid {
+    gap: 0.85rem;
+  }
+
+  .live-sites__body {
+    gap: 0.6rem;
+    padding: 0.95rem 0.95rem 1.05rem;
+  }
+
+  .landing-pricing .pricing-grid3__inner {
+    justify-items: stretch;
+  }
+
+  .landing-pricing .pricing-grid3__cols {
+    width: min(100%, 32rem);
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-inline: 0;
+  }
+
+  .landing-pricing .pricing-grid3__card {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .landing-pricing .pricing-grid3__card-copy,
+  .landing-pricing .pricing-grid3__card-list {
+    max-width: 95%;
+  }
+
+  .landing-pricing .pricing-grid3__badge {
+    top: 0.65rem;
+    right: 0.25rem;
+    width: 4.9rem;
+    padding: 0.62rem;
+    transform: translate(0, -34%) rotate(10deg);
+  }
+
+  .landing-pricing .pricing-grid3__badge-label {
+    max-width: 3.2rem;
+    font-size: 0.47rem;
+  }
+
+  .landing-audit__card {
+    width: min(100%, 34rem);
+    gap: 0.9rem;
+    padding: 1.15rem 1rem 1rem;
+  }
+
+  .landing-footer {
+    padding-top: clamp(1.6rem, 4vw, 2.2rem);
+  }
+
+  .landing-footer__inner {
+    gap: 1.1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .landing-brand__icons {
+    width: min(100%, 24.5rem);
+    gap: 0.7rem;
+  }
+
+  .landing-brand__icon-card {
+    gap: 0.55rem;
+    padding: 0.82rem 0.8rem 0.78rem;
+  }
+
+  .landing-brand__icon-wrap {
+    width: 3.45rem;
+  }
+
+  .landing-brand__icon-wrap svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .landing-brand__icon-title {
+    font-size: 0.92rem;
+  }
+
+  .landing-brand__icon-copy {
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .landing-hero__proof {
+    width: fit-content;
+    max-width: min(100%, 18.5rem);
     border-radius: 16px;
   }
 
   .landing-hero__proof-copy {
-    width: 100%;
+    width: auto;
+  }
+
+  .live-sites__grid {
+    width: min(100%, 24.75rem);
+    margin-inline: auto;
+  }
+
+  .live-sites__media {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0.85rem auto 0;
+    aspect-ratio: auto;
+    background: transparent;
+    overflow: visible;
+    border-radius: 12px;
+  }
+
+  .live-sites__image {
+    display: block;
+    width: min(100%, 20.75rem);
+    height: auto;
+    margin-inline: auto;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  .live-sites__body {
+    gap: 0.55rem;
+    padding: 0.85rem 0.85rem 0.95rem;
+  }
+
+  .live-sites__name {
+    font-size: 1rem;
+  }
+
+  .live-sites__copy {
+    font-size: 0.88rem;
+    line-height: 1.52;
   }
 
   .landing-pricing .pricing-grid3__cols {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 0.75rem;
   }
 
@@ -726,6 +1000,6 @@
 
   .landing-pricing .pricing-grid3__badge-label {
     max-width: 3rem;
-    font-size: 0.48rem;
+    font-size: 0.44rem;
   }
 }

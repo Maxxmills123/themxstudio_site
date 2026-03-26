@@ -23,6 +23,10 @@
   transform-origin: center top;
 }
 
+.locations-page .pricing-type__text {
+  white-space: pre-line;
+}
+
 .locations-page__h1 {
   margin: 0;
   width: min(100%, 48rem);
@@ -76,6 +80,10 @@
     margin-inline: 0;
     text-align: left;
     transform-origin: left top;
+  }
+
+  .locations-page .pricing-type__text {
+    white-space: normal;
   }
 
   .locations-page__h1 {

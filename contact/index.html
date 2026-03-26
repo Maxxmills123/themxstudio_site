@@ -215,9 +215,9 @@
       }
     </script>
 
-    <link rel="stylesheet" href="/css/base.css?v=20260325e" />
-    <link rel="stylesheet" href="/css/components.css?v=20260322x" />
-    <link rel="stylesheet" href="/css/pages/contact.css?v=20260321b" />
+    <link rel="stylesheet" href="/css/base.css?v=20260326av" />
+    <link rel="stylesheet" href="/css/components.css?v=20260326s" />
+    <link rel="stylesheet" href="/css/pages/contact.css?v=20260326g" />
     <link rel="stylesheet" href="/css/forms.css" />
   </head>
 
@@ -232,7 +232,7 @@
           >
             <img
               class="site-header__logo"
-              src="/assets/logos/logo-lime.svg"
+              src="/assets/logos/logo-pink.svg"
               alt="The MX Studio"
             />
           </a>
@@ -817,7 +817,7 @@
         </div>
       </section>
 
-      <section class="contact-meta" aria-label="Direct contact and hours">
+      <section class="contact-meta" aria-label="Direct contact">
         <div class="contact-direct" aria-label="Direct contact">
           <p class="contact-meta__badge" aria-hidden="true">
             <span class="contact-meta__badge-label"
@@ -870,17 +870,6 @@
               0421 709 047
             </a>
           </div>
-          <div
-            class="contact-direct__hours"
-            aria-labelledby="contact-hours-title"
-          >
-            <h2 class="contact-direct__hours-title" id="contact-hours-title">
-              Hours (on paper)
-            </h2>
-            <p class="contact-direct__hours-text">
-              Monday - Friday: 9:00 AM - 5:00 PM
-            </p>
-          </div>
         </div>
       </section>
 
@@ -899,8 +888,8 @@
                   need and how we can help.
                 </p>
                 <p class="contact-forms__card-note">
-                  We're open Mon-Fri 9-5, but we're happy to call any time
-                  outside these hours.
+                  Share a few times that suit you and we'll work around your
+                  schedule.
                 </p>
               </div>
 
@@ -947,170 +936,6 @@
           </div>
         </div>
       </section>
-
-      <section class="discovery-call" aria-labelledby="discovery-call-title">
-        <div class="discovery-call__inner">
-          <p class="discovery-call__badge">
-            <span class="discovery-call__badge-text">Free<br />Audit</span>
-          </p>
-          <h2
-            class="reviews__title discovery-call__title"
-            id="discovery-call-title"
-          >
-            Free Website Audit
-          </h2>
-          <p class="discovery-call__copy">
-            Not sure what your website actually needs yet? Well audit your
-            website and tell you what is not working, and what would make the
-            biggest difference first. To learn more, visit our
-            <a class="discovery-call__inline-link" href="/free-website-audit/">
-              free audit page.
-            </a>
-          </p>
-          <button class="discovery-call__cta" type="button" data-open-audit>
-            Book Audit Now
-          </button>
-        </div>
-      </section>
-
-      <div
-        class="form-modal"
-        id="audit-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="audit-modal-title"
-      >
-        <div class="form-modal__panel">
-          <div class="form-modal__header">
-            <div class="form-modal__heading">
-              <h2 class="form-modal__title" id="audit-modal-title">
-                Free Website Audit
-              </h2>
-              <p class="form-modal__desc">
-                We’ll send you a personalised breakdown of what’s holding your
-                site back and exactly how to fix it
-              </p>
-            </div>
-            <button
-              class="form-modal__close"
-              id="audit-modal-close"
-              aria-label="Close"
-            >
-              &times;
-            </button>
-          </div>
-          <form
-            class="audit-form"
-            id="audit-form"
-            name="free-audit"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-          >
-            <input type="hidden" name="form-name" value="free-audit" />
-            <p style="display: none">
-              <label>Don't fill this out <input name="bot-field" /></label>
-            </p>
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-            />
-            <input
-              type="url"
-              name="website"
-              placeholder="Your Website URL"
-              required
-            />
-            <textarea
-              name="goals"
-              placeholder="What are you trying to improve? (leads, SEO, conversions)"
-            ></textarea>
-            <button type="submit" class="audit-form__submit">
-              Get My Free Audit
-            </button>
-          </form>
-          <div class="audit-thanks" id="audit-thanks" hidden>
-            <p class="audit-thanks__message">
-              Thank you! We'll be in touch sooner than you think.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="form-modal"
-        id="discovery-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="discovery-modal-title"
-      >
-        <div class="form-modal__panel">
-          <div class="form-modal__header">
-            <div class="form-modal__heading">
-              <h2 class="form-modal__title" id="discovery-modal-title">
-                Free Discovery Call
-              </h2>
-              <p class="form-modal__desc">
-                Advice is free. Book a free discovery call to explore what you
-                need and how we can help.
-              </p>
-              <p class="form-modal__note">
-                We're open Mon-Fri 9-5, but we're happy to call any time outside
-                these hours.
-              </p>
-            </div>
-            <button
-              class="form-modal__close"
-              id="discovery-modal-close"
-              aria-label="Close"
-            >
-              &times;
-            </button>
-          </div>
-          <form
-            class="discovery-form"
-            id="discovery-form"
-            name="discovery-call"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-          >
-            <input type="hidden" name="form-name" value="discovery-call" />
-            <p style="display: none">
-              <label>Don't fill this out <input name="bot-field" /></label>
-            </p>
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-            />
-            <input type="url" name="website" placeholder="Your Website" />
-            <textarea
-              name="project"
-              placeholder="What do you need done?"
-              required
-            ></textarea>
-            <textarea
-              name="availability"
-              placeholder="Some dates and times you're available"
-              required
-            ></textarea>
-            <button type="submit" class="discovery-form__submit">
-              Book My Free Discovery Call
-            </button>
-          </form>
-          <div class="audit-thanks" id="discovery-thanks" hidden>
-            <p class="audit-thanks__message">
-              Thank you! We'll be in touch sooner than you think.
-            </p>
-          </div>
-        </div>
-      </div>
     </main>
 
     <footer class="site-footer">
@@ -1397,6 +1222,6 @@
       </div>
     </footer>
 
-    <script src="/js/main.js?v=20260323a" defer></script>
+    <script src="/js/main.js?v=20260326h" defer></script>
   </body>
 </html>

@@ -53,10 +53,11 @@ main {
 
 .hero__sub {
   margin-top: 2rem;
-  max-width: 52rem;
-  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  max-width: 26ch;
+  font-size: clamp(1.35rem, 1.55vw + 1.05rem, 2.15rem);
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.34;
+  text-wrap: pretty;
 }
 
 .hero__sub .emph {
@@ -123,6 +124,7 @@ main {
 
   .hero__sub {
     margin-top: 1.25rem;
-    max-width: 30ch;
+    width: 80%;
+    max-width: 24ch;
   }
 }

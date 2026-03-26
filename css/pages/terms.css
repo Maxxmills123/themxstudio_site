@@ -3,10 +3,6 @@
   --accent-hover: #c8c8c8;
 }
 
-body {
-  background: var(--bg);
-}
-
 body[class~="404body"] {
   min-height: 100svh;
 }
@@ -33,8 +29,8 @@ body[class~="404body"] .error-links {
 }
 
 .page-hero__sub {
-  max-width: 46rem;
-  font-size: clamp(1rem, 0.45vw + 0.95rem, 1.2rem);
+  max-width: 34ch;
+  font-size: clamp(0.98rem, 0.35vw + 0.94rem, 1.14rem);
 }
 
 .error-page .page-hero__content {

@@ -117,4 +117,9 @@
     width: 5.15rem;
     transform: translate(20%, -50%) rotate(10deg);
   }
+
+  .pricing-grid3__badge-label {
+    max-width: 3.35rem;
+    font-size: 0.5rem;
+  }
 }

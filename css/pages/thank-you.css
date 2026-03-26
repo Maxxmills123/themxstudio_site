@@ -1,6 +1,6 @@
 body.thank-you-page {
-  --accent: #ecff5a;
-  --accent-hover: #f5ffb5;
+  --accent: #ff3eb2;
+  --accent-hover: #ffa5db;
   background:
     radial-gradient(
       circle at top right,
@@ -42,8 +42,8 @@ body.thank-you-page {
 }
 
 .thank-you-page .page-hero__sub {
-  max-width: 28rem;
-  font-size: 2rem;
+  max-width: 20ch;
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
 }
 
 .thank-you-page .thank-you-back {
@@ -71,4 +71,19 @@ body.thank-you-page {
 .thank-you-page .site-footer {
   min-height: 10vh;
   margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .thank-you-page .page-hero__content,
+  .thank-you-page .page-hero__title,
+  .thank-you-page .page-hero__sub,
+  .thank-you-page .thank-you-back {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .thank-you-page .thank-you-back__link {
+    justify-content: center;
+    text-align: center;
+  }
 }

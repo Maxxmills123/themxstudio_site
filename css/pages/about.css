@@ -71,6 +71,10 @@
   font-size: clamp(2.4rem, 4vw, 3.5rem);
   font-weight: 400;
   line-height: 0.96;
+  display: inline-block;
+  min-height: 1em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
 .hero-stats__text {
@@ -208,6 +212,37 @@
   object-position: center 6%;
   transform: scale(1.03);
   transform-origin: center;
+}
+
+@media (min-width: 1367px) {
+  .page-hero__content {
+    display: grid;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .hero-stats {
+    --hero-stat-first-col: 11rem;
+    --hero-stat-third-col: 6rem;
+    grid-template-columns:
+      minmax(var(--hero-stat-first-col), 12.4rem)
+      minmax(13rem, 14.25rem)
+      minmax(var(--hero-stat-third-col), 7rem);
+    justify-content: start;
+    justify-items: stretch;
+    gap: clamp(1.55rem, 2.7vw, 2.25rem);
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: 0;
+    transform: none;
+  }
+
+  .hero-stats__item {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 1.05rem;
+  }
 }
 
 @media (max-width: 1366px) {
