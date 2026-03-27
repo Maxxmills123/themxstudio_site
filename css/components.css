@@ -844,7 +844,8 @@
 }
 
 .intro-copy,
-.offer-copy {
+.offer-copy,
+.steps-copy {
   width: var(--site-width);
   max-width: none;
   margin-inline: auto;
@@ -855,7 +856,8 @@
   margin-bottom: var(--site-gap);
 }
 
-.offer-copy {
+.offer-copy,
+.steps-copy {
   margin-top: var(--site-gap);
   padding-top: var(--site-gap);
   margin-bottom: var(--site-gap);
@@ -867,7 +869,8 @@
 }
 
 .intro-copy__inner,
-.offer-copy__inner {
+.offer-copy__inner,
+.steps-copy__inner {
   width: min(70%, var(--site-width));
   max-width: none;
   margin-inline: auto;
@@ -879,7 +882,8 @@
 }
 
 .intro-copy__item,
-.offer-copy__item {
+.offer-copy__item,
+.steps-copy__item {
   display: grid;
   gap: 1rem;
   width: 100%;
@@ -889,14 +893,16 @@
 }
 
 .intro-copy__item:last-child,
-.offer-copy__item:last-child {
+.offer-copy__item:last-child,
+.steps-copy__item:last-child {
   padding-top: 0.4rem;
   padding-bottom: 0;
   border-bottom: 0;
 }
 
 .intro-copy__title,
-.offer-copy__title {
+.offer-copy__title,
+.steps-copy__title {
   margin: 0;
   font-size: clamp(2.1rem, 2.35vw, 2.4rem);
   font-weight: 600;
@@ -1038,13 +1044,15 @@
 }
 
 .intro-copy__panel,
-.offer-copy__panel {
+.offer-copy__panel,
+.steps-copy__panel {
   display: grid;
   gap: 0.9rem;
 }
 
 .intro-copy__desc,
-.offer-copy__desc {
+.offer-copy__desc,
+.steps-copy__desc {
   margin: 0;
   font-size: clamp(1rem, 0.35vw + 0.95rem, 1.12rem);
   line-height: 1.75;
@@ -1052,7 +1060,8 @@
 }
 
 .intro-copy__inline-link,
-.offer-copy__inline-link {
+.offer-copy__inline-link,
+.steps-copy__inline-link {
   font-weight: 900;
   text-decoration-line: underline;
   text-decoration-thickness: 0.06em;
@@ -1064,7 +1073,9 @@
 .intro-copy__inline-link:hover,
 .intro-copy__inline-link:focus-visible,
 .offer-copy__inline-link:hover,
-.offer-copy__inline-link:focus-visible {
+.offer-copy__inline-link:focus-visible,
+.steps-copy__inline-link:hover,
+.steps-copy__inline-link:focus-visible {
   color: var(--text);
 }
 
@@ -2312,7 +2323,8 @@
   }
 
   .intro-copy__inner,
-  .offer-copy__inner {
+  .offer-copy__inner,
+  .steps-copy__inner {
     width: 100%;
     max-width: none;
     grid-template-columns: 1fr;
@@ -2339,7 +2351,8 @@
   }
 
   .intro-copy__title,
-  .offer-copy__title {
+  .offer-copy__title,
+  .steps-copy__title {
     text-align: left;
     font-size: clamp(1.65rem, 5.5vw, 1.92rem);
     line-height: 0.99;
@@ -2352,13 +2365,15 @@
   }
 
   .intro-copy__item,
-  .offer-copy__item {
+  .offer-copy__item,
+  .steps-copy__item {
     gap: 0.9rem;
     padding-bottom: 1.25rem;
   }
 
   .intro-copy__panel,
-  .offer-copy__panel {
+  .offer-copy__panel,
+  .steps-copy__panel {
     gap: 0.85rem;
   }
 
