@@ -57,6 +57,7 @@ main {
   justify-content: center;
   width: 100%;
   max-width: 100%;
+  min-height: var(--page-hero-title-reserve, 0);
   color: var(--accent);
   font-family: var(--font-accent);
   font-size: clamp(4rem, 10vw, 9rem);
@@ -92,6 +93,7 @@ main {
     display: block;
     font-size: clamp(3rem, 13vw, 5.25rem);
     max-width: 100%;
+    min-height: var(--page-hero-title-reserve, 0);
     text-align: left;
   }
 

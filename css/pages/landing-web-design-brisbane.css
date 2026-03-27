@@ -8,18 +8,7 @@
 
 .landing-brisbane-page {
   --landing-site-gap: calc(var(--site-gap) / 2);
-  background:
-    radial-gradient(
-      circle at top right,
-      color-mix(in srgb, var(--accent) 18%, transparent) 0,
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at top left,
-      color-mix(in srgb, var(--accent) 10%, transparent) 0,
-      transparent 26%
-    ),
-    var(--bg);
+  background: var(--page-ombre), var(--bg);
 }
 
 .landing-hero-wrap {
@@ -36,6 +25,10 @@
   max-width: 32ch;
 }
 
+.page-hero__title {
+  color: var(--accent);
+  max-width: 20ch;
+}
 .landing-hero__proof {
   display: inline-flex;
   align-items: center;
@@ -218,6 +211,7 @@
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -1px;
+  color: var(--accent);
 }
 
 .landing-steps__intro,
@@ -461,6 +455,7 @@
   font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
   font-weight: 900;
   line-height: 1.12;
+  color: var(--accent);
 }
 
 .landing-audit__card-copy,

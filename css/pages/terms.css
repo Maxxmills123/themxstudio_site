@@ -22,7 +22,7 @@ body[class~="404body"] .error-links {
 
 .page-hero__title {
   max-width: none;
-  color: var(--text);
+  color: var(--accent);
   font-size: clamp(3rem, 8vw, 7rem);
   line-height: 0.98;
   letter-spacing: 0.01em;

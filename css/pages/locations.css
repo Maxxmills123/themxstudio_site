@@ -3,24 +3,32 @@
   --accent-hover: #c8a0ff;
 }
 
+.locations-page .page-hero {
+  min-height: 60svh;
+}
+
 .locations-page .page-hero__content {
   position: relative;
-  justify-items: center;
-  text-align: center;
+  justify-items: start;
+  text-align: left;
 }
 
 .locations-page .page-hero__title {
-  display: flex;
-  justify-content: center;
+  display: block;
   color: var(--accent);
-  text-align: center;
+  text-align: left;
+}
+
+.locations-page:not(.free-audit-page)
+  .page-hero__title:has(.pricing-type[data-type-text]) {
+  min-height: max(var(--page-hero-title-reserve, 0px), 2.05em);
 }
 
 .locations-page .pricing-type,
 .locations-page .pricing-type__text {
-  margin-inline: auto;
-  text-align: center;
-  transform-origin: center top;
+  margin-inline: 0;
+  text-align: left;
+  transform-origin: left top;
 }
 
 .locations-page .pricing-type__text {
@@ -36,16 +44,34 @@
   color: var(--text);
   opacity: 0.72;
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 0;
-  transform: translate(-50%, calc(-100% - 0.35rem));
-  text-align: center;
+  transform: translateY(calc(-100% - 0.35rem));
+  text-align: left;
 }
 
 .locations-page .page-hero__sub {
   max-width: 48rem;
-  margin-inline: auto;
-  text-align: center;
+  margin-inline: 0;
+  text-align: left;
+}
+
+.seo-brisbane-page .page-hero__title {
+  position: relative;
+}
+
+.seo-brisbane-page__title-reserve {
+  display: block;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+  white-space: pre-line;
+}
+
+.seo-brisbane-page .page-hero__title > .pricing-type {
+  position: absolute;
+  inset: 0 auto auto 0;
 }
 
 .locations-page .hero-points,
@@ -63,6 +89,30 @@
   padding-bottom: var(--site-gap);
 }
 
+.free-audit-page .page-hero.locations-page .page-hero__content {
+  justify-items: center;
+  text-align: center;
+}
+
+.free-audit-page .page-hero.locations-page .page-hero__title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.free-audit-page .page-hero.locations-page .pricing-type,
+.free-audit-page .page-hero.locations-page .pricing-type__text {
+  margin-inline: auto;
+  text-align: center;
+  transform-origin: center top;
+}
+
+.free-audit-page .page-hero.locations-page .locations-page__h1 {
+  left: 50%;
+  transform: translate(-50%, calc(-100% - 0.35rem));
+  text-align: center;
+}
+
 @media (max-width: 1366px) {
   .locations-page .page-hero__content {
     justify-items: start;
@@ -72,6 +122,11 @@
   .locations-page .page-hero__title {
     display: block;
     text-align: left;
+  }
+
+  .locations-page:not(.free-audit-page)
+    .page-hero__title:has(.pricing-type[data-type-text]) {
+    min-height: max(var(--page-hero-title-reserve, 0px), 2.15em);
   }
 
   .locations-page .pricing-type,
@@ -86,7 +141,35 @@
     white-space: normal;
   }
 
+  .seo-brisbane-page__title-reserve {
+    white-space: normal;
+  }
+
   .locations-page__h1 {
+    width: 100%;
+    left: 0;
+    transform: translateY(calc(-100% - 0.2rem));
+    text-align: left;
+  }
+
+  .free-audit-page .page-hero.locations-page .page-hero__content {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .free-audit-page .page-hero.locations-page .page-hero__title {
+    display: block;
+    text-align: left;
+  }
+
+  .free-audit-page .page-hero.locations-page .pricing-type,
+  .free-audit-page .page-hero.locations-page .pricing-type__text {
+    margin-inline: 0;
+    text-align: left;
+    transform-origin: left top;
+  }
+
+  .free-audit-page .page-hero.locations-page .locations-page__h1 {
     width: 100%;
     left: 0;
     transform: translateY(calc(-100% - 0.2rem));

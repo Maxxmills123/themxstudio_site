@@ -92,7 +92,6 @@ if (dropdowns.length) {
 
 const burger = document.querySelector(".site-header__burger");
 const mobilePanel = document.querySelector(".mobile-panel");
-const mobileMenuBackdropClass = "is-mobile-menu-active";
 const mobileMenuHeader = burger?.closest(".site-header") || null;
 
 let scrollY = 0;
@@ -157,7 +156,6 @@ const openMenu = () => {
   mobileUiAfterMenuClose.active = false;
 
   mobileMenuHeader?.classList.remove("is-gone", "is-hidden", "is-hidden-footer");
-  document.body.classList.add(mobileMenuBackdropClass);
   syncMobilePanelHeight();
   mobilePanel.scrollTop = 0;
   mobilePanel.hidden = false;
@@ -179,7 +177,6 @@ const closeMenu = () => {
     mobilePanel.style.maxHeight = "";
     armMobileUiAfterMenuClose(scrollY);
     unlockScroll(() => {
-      document.body.classList.remove(mobileMenuBackdropClass);
       window.dispatchEvent(new CustomEvent("mobilepanelclosed"));
     });
   }, menuTransitionMs);
@@ -602,6 +599,9 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
 
   const heading = document.querySelector(".service-page .page-hero__title");
   if (!heading || heading.dataset.magnifyReady === "true") return;
+  const headerWrap =
+    document.querySelector(".site-header__wrap") ||
+    document.querySelector(".site-header");
 
   const rawText = (heading.textContent || "").replace(/\s+/g, " ").trim();
   if (!rawText) return;
@@ -658,6 +658,22 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
     char.style.willChange = "transform";
   });
 
+  const syncMagnifyClearance = () => {
+    const ceilingBottom = headerWrap?.getBoundingClientRect().bottom || 0;
+    const headingTop = heading.getBoundingClientRect().top;
+    const fontSize = parseFloat(window.getComputedStyle(heading).fontSize) || 0;
+    const minGap = Math.max(8, fontSize * 0.14);
+    const clearance = Math.max(
+      0,
+      Math.ceil(ceilingBottom + minGap - headingTop),
+    );
+
+    heading.style.setProperty(
+      "--service-title-top-clearance",
+      `${clearance}px`,
+    );
+  };
+
   const animate = (startTime) => {
     const step = (now) => {
       const progress = Math.min(1, (now - startTime) / durationMs);
@@ -691,10 +707,14 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
   };
 
   const startAnimation = () => {
+    syncMagnifyClearance();
     requestAnimationFrame((time) => {
+      syncMagnifyClearance();
       animate(time);
     });
   };
+
+  window.addEventListener("resize", syncMagnifyClearance, { passive: true });
 
   if (document.fonts?.ready) {
     document.fonts.ready.then(startAnimation).catch(startAnimation);
@@ -943,6 +963,7 @@ if (header) {
 
   const textEl = typeWrap.querySelector(".pricing-type__text");
   if (!textEl) return;
+  const titleEl = typeWrap.closest(".page-hero__title");
 
   const fullText = (
     typeWrap.dataset.typeText ||
@@ -956,7 +977,7 @@ if (header) {
   ).matches;
   const mobileMq = window.matchMedia("(max-width: 1366px)");
 
-  const syncWrapBox = () => {
+  const syncWrapBox = ({ allowShrink = false } = {}) => {
     const currentText = textEl.textContent;
     typeWrap.style.width = "";
     typeWrap.style.height = "";
@@ -971,11 +992,30 @@ if (header) {
       typeWrap.style.width = `${measuredWidth}px`;
     }
     if (measuredHeight > 0) typeWrap.style.height = `${measuredHeight}px`;
+    if (measuredHeight > 0 && titleEl) {
+      const currentReserve =
+        Number.parseFloat(
+          getComputedStyle(titleEl).getPropertyValue(
+            "--page-hero-title-reserve",
+          ),
+        ) || 0;
+      const nextReserve = allowShrink
+        ? measuredHeight
+        : Math.max(currentReserve, measuredHeight);
+
+      titleEl.style.setProperty("--page-hero-title-reserve", `${nextReserve}px`);
+    }
     textEl.textContent = currentText;
   };
 
   syncWrapBox();
-  window.addEventListener("resize", syncWrapBox, { passive: true });
+  window.addEventListener(
+    "resize",
+    () => {
+      syncWrapBox({ allowShrink: true });
+    },
+    { passive: true },
+  );
   document.fonts?.ready
     ?.then(() => {
       syncWrapBox();
@@ -987,8 +1027,6 @@ if (header) {
     typeWrap.classList.remove("is-pop");
     return;
   }
-
-  textEl.textContent = "";
 
   let charIndex = 0;
   const typeSpeed = 38;
@@ -1010,7 +1048,10 @@ if (header) {
     }, 260);
   };
 
-  setTimeout(tick, 160);
+  requestAnimationFrame(() => {
+    textEl.textContent = "";
+    setTimeout(tick, 160);
+  });
 })();
 
 (() => {

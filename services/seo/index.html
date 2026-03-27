@@ -273,11 +273,11 @@
       }
     </script>
 
-    <link rel="stylesheet" href="/css/base.css?v=20260326av" />
-    <link rel="stylesheet" href="/css/components.css?v=20260326s" />
-    <link rel="stylesheet" href="/css/pages/website-services.css?v=20260322c" />
+    <link rel="stylesheet" href="/css/base.css?v=20260327v" />
+    <link rel="stylesheet" href="/css/components.css?v=20260327s" />
+    <link rel="stylesheet" href="/css/pages/website-services.css?v=20260327a" />
     <link rel="stylesheet" href="/css/pages/growth.css?v=20260326a" />
-    <link rel="stylesheet" href="/css/forms.css" />
+    <link rel="stylesheet" href="/css/forms.css?v=20260327d" />
   </head>
 
   <body class="service-page seo-page">
@@ -291,7 +291,7 @@
           >
             <img
               class="site-header__logo"
-              src="/assets/logos/logo-sky-blue.svg"
+              src="/assets/logos/logo-orange.svg"
               alt="The MX Studio"
             />
           </a>
@@ -836,6 +836,45 @@
               We won't give you any useless metrics. Just work that improves how
               your site ranks, gets found, and brings in real enquiries.
             </p>
+            <a
+              class="page-hero__google-proof"
+              href="https://www.google.com/search?q=The+MX+Studio+Brisbane"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View The MX Studio on Google"
+            >
+              <span class="page-hero__google-stars" aria-hidden="true">
+                <svg viewBox="0 0 120 24" focusable="false">
+                  <path
+                    d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3 9.1l6.2-.9L12 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L36 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L60 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L84 2.5zm24 0l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2-4.5-4.4 6.2-.9L108 2.5z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </span>
+              <span class="page-hero__google-copy">5 stars on Google</span>
+              <svg
+                class="page-hero__google-logo"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M23.49 12.27c0-.79-.07-1.54-.2-2.27H12v4.3h6.46a5.53 5.53 0 0 1-2.4 3.63v3.01h3.88c2.27-2.09 3.55-5.17 3.55-8.67Z"
+                ></path>
+                <path
+                  fill="#34A853"
+                  d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.88-3.01c-1.07.72-2.45 1.15-4.06 1.15-3.12 0-5.76-2.11-6.71-4.95H1.29v3.11A12 12 0 0 0 12 24Z"
+                ></path>
+                <path
+                  fill="#FBBC05"
+                  d="M5.29 14.28A7.2 7.2 0 0 1 4.91 12c0-.79.14-1.56.38-2.28V6.61H1.29A12 12 0 0 0 0 12c0 1.94.46 3.78 1.29 5.39l4-3.11Z"
+                ></path>
+                <path
+                  fill="#EA4335"
+                  d="M12 4.77c1.76 0 3.34.6 4.58 1.78l3.43-3.43C17.94 1.17 15.23 0 12 0A12 12 0 0 0 1.29 6.61l4 3.11c.95-2.84 3.59-4.95 6.71-4.95Z"
+                ></path>
+              </svg>
+            </a>
           </div>
         </section>
         <section class="hero-points" aria-label="What good SEO actually does">
@@ -909,7 +948,13 @@
                   <p class="hero-points__sub">
                     Good SEO starts by targeting the pages, keywords, and intent
                     that actually matter to your business. More traffic means
-                    very little if it is not the right traffic.
+                    very little if it is not the right traffic. If you're
+                    targeting the Brisbane market specifically,
+                    <a
+                      class="hero-points__link"
+                      href="/locations/seo-brisbane/"
+                      >see our SEO Brisbane page.</a
+                    >
                   </p>
                 </div>
               </article>
@@ -1020,6 +1065,45 @@
                 </div>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section class="email-capture" aria-labelledby="seo-email-capture-title">
+          <div class="email-capture__inner">
+            <h2 class="email-capture__title" id="seo-email-capture-title">
+              Advice is free, and we'll send you it weekly.
+            </h2>
+            <p class="email-capture__copy">
+              Get weekly updates about SEO strategy, website conversion tips,
+              and website checklists from The MX Studio. Free.
+            </p>
+            <form
+              class="email-capture__form"
+              name="seo-weekly-updates"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+            >
+              <input
+                type="hidden"
+                name="form-name"
+                value="seo-weekly-updates"
+              />
+              <p style="display: none">
+                <label>Email <input name="bot-field" /></label>
+              </p>
+              <input
+                class="email-capture__input"
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+              />
+              <button class="email-capture__submit" type="submit">
+                Get weekly updates
+              </button>
+            </form>
           </div>
         </section>
       </div>
@@ -2135,7 +2219,7 @@
         <div class="site-footer__top">
           <div class="site-footer__top-grid">
             <p class="site-footer__slogan">
-              Your website should bring in business.
+              Your website should bring in business
               <a class="site-footer__slogan-link" href="/contact/"
                 >Let's
                 <span class="site-footer__slogan-link-tail"
@@ -2331,8 +2415,8 @@
             ></a>
             <a
               class="footer-link footer-link--muted"
-              href="/locations/web-design-newstead/"
-              >Web design Newstead<span class="link-arrow"
+              href="/locations/seo-brisbane/"
+              >SEO Brisbane<span class="link-arrow"
                 ><svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -2367,7 +2451,7 @@
             <div class="site-footer__logo-wrap">
               <img
                 class="site-footer__logo"
-                src="/assets/logos/logo2.svg"
+                src="/assets/logos/logo-orange.svg"
                 alt="The MX Studio"
               />
             </div>
@@ -2382,6 +2466,6 @@
       </div>
     </footer>
 
-    <script src="/js/main.js?v=20260326h" defer></script>
+    <script src="/js/main.js?v=20260327c" defer></script>
   </body>
 </html>

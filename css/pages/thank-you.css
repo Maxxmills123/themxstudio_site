@@ -1,18 +1,7 @@
 body.thank-you-page {
   --accent: #ff3eb2;
   --accent-hover: #ffa5db;
-  background:
-    radial-gradient(
-      circle at top right,
-      color-mix(in srgb, var(--accent) 18%, transparent) 0,
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at top left,
-      color-mix(in srgb, var(--accent) 10%, transparent) 0,
-      transparent 26%
-    ),
-    var(--bg);
+  background: var(--page-ombre), var(--bg);
 }
 
 .thank-you-page main {
