@@ -39,7 +39,7 @@
   margin: 0;
   font-size: 1.4rem;
   font-weight: 900;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .form-modal__desc {
@@ -63,7 +63,7 @@
 .form-modal__close {
   background: none;
   border: 0;
-  color: var(--accent);
+  color: var(--text);
   cursor: pointer;
   padding: 0;
   line-height: 1;
@@ -73,7 +73,7 @@
 }
 
 .form-modal__close:hover {
-  color: var(--accent-hover);
+  color: var(--text);
   opacity: 1;
 }
 
@@ -112,7 +112,7 @@
 .discovery-form input:focus,
 .discovery-form textarea:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--surface-border-strong);
 }
 
 .audit-form textarea,

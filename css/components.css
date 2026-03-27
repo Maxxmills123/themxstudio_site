@@ -71,9 +71,8 @@
 
 .service-page .page-hero__title {
   position: relative;
-  overflow: hidden;
-  overflow: clip;
-  padding-top: var(--service-title-top-clearance, 0px);
+  overflow: visible;
+  padding-top: 0;
 }
 
 .page-hero__sub {
@@ -94,9 +93,9 @@
   margin-top: 0.95rem;
   padding: 0.58rem 0.82rem;
   justify-self: start;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--text-line));
+  border: 1px solid var(--surface-border);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--card-bg) 92%, var(--accent) 8%);
+  background: var(--surface-fill);
   color: var(--text);
   text-decoration: none;
   transition:
@@ -107,14 +106,14 @@
 
 .page-hero__google-proof:hover,
 .page-hero__google-proof:focus-visible {
-  border-color: color-mix(in srgb, var(--accent) 46%, var(--text-line));
-  background: color-mix(in srgb, var(--card-bg) 88%, var(--accent) 12%);
+  border-color: var(--surface-border-strong);
+  background: var(--surface-fill-strong);
   text-decoration: none;
   transform: translateY(-1px);
 }
 
 .page-hero__google-stars {
-  color: var(--accent);
+  color: var(--text);
   line-height: 0;
 }
 
@@ -215,8 +214,8 @@
 
 .contact-meta__badge-label {
   display: block;
-  max-width: 5.1rem;
-  font-size: clamp(0.7rem, 0.24vw + 0.64rem, 0.82rem);
+  max-width: 4.8rem;
+  font-size: clamp(0.64rem, 0.2vw + 0.6rem, 0.76rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: 0.08em;
@@ -263,7 +262,7 @@
   left: 0;
   z-index: 2;
   justify-self: start;
-  transform: translate(-26%, -50%) rotate(8deg);
+  transform: translate(-50%, -50%) rotate(8deg);
 }
 
 .contact-direct .page-hero__email,
@@ -292,7 +291,7 @@
 .contact-forms__title {
   margin: 0;
   width: 100%;
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font);
   font-size: 2rem;
   font-weight: 600;
@@ -335,7 +334,7 @@
   font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
   font-weight: 900;
   line-height: 1.15;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .contact-forms__card-desc,
@@ -343,34 +342,6 @@
   font-size: 0.98rem;
   line-height: 1.6;
   opacity: 0.72;
-}
-
-.service-page__h1-magnify {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: 0.22em;
-  row-gap: 0;
-  max-width: 100%;
-  overflow: visible;
-}
-
-.service-page__h1-word {
-  display: inline-flex;
-  white-space: nowrap;
-}
-
-.service-page__h1-char,
-.service-page__h1-space {
-  display: inline-block;
-  white-space: pre;
-  line-height: inherit;
-}
-
-.service-page__h1-char {
-  position: relative;
-  transform-origin: 50% 72%;
-  backface-visibility: hidden;
 }
 
 .brand-position-statement {
@@ -390,7 +361,7 @@
 }
 
 .brand-position-statement__accent {
-  color: var(--accent);
+  color: var(--text);
   font-style: italic;
 }
 
@@ -415,13 +386,13 @@
   gap: 0.35rem;
   padding: 0.25rem 0 0.25rem 1.25rem;
   background: transparent;
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--surface-border-strong);
   border-radius: 0;
 }
 
 .hero-stats__figure {
   margin: 0;
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font-accent);
   font-size: clamp(2.4rem, 4vw, 3.5rem);
   font-weight: 400;
@@ -486,7 +457,7 @@
   flex-direction: column;
   gap: 0.75rem;
   background: transparent;
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--surface-border-strong);
   border-radius: 0;
   padding: 0.25rem 0 0.25rem 1.25rem;
 }
@@ -515,7 +486,7 @@
   justify-content: center;
   width: 3.25rem;
   height: 3.25rem;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .hero-points__icon svg {
@@ -549,7 +520,7 @@
 .discovery-call__inline-link:focus-visible,
 .reviews__cta:hover,
 .reviews__cta:focus-visible {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .reviews {
@@ -642,7 +613,7 @@
 
 .reviews__arrow:hover,
 .reviews__arrow:focus-visible {
-  color: var(--accent);
+  color: var(--text);
   border-color: var(--text);
 }
 
@@ -669,7 +640,7 @@
 }
 
 .reviews__stars {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .reviews__item {
@@ -764,7 +735,7 @@
 
 .discovery-call__badge {
   position: absolute;
-  top: 50%;
+  top: 0;
   right: auto;
   left: 0;
   z-index: 2;
@@ -803,8 +774,8 @@
 
 .discovery-call__badge-text {
   display: block;
-  max-width: 4.55rem;
-  font-size: 0.68rem;
+  max-width: 4.15rem;
+  font-size: 0.62rem;
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: 0.08em;
@@ -1094,7 +1065,7 @@
 .intro-copy__inline-link:focus-visible,
 .offer-copy__inline-link:hover,
 .offer-copy__inline-link:focus-visible {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .pricing-grid,
@@ -1178,7 +1149,7 @@
 .pricing-grid__badge,
 .pricing-grid2__badge {
   position: absolute;
-  top: 1rem;
+  top: 0;
   right: 0;
   z-index: 2;
   margin: 0;
@@ -1189,7 +1160,7 @@
   padding: 0.95rem;
   background: var(--accent);
   color: var(--bg);
-  transform: translate(32%, -50%) rotate(10deg);
+  transform: translate(50%, -50%) rotate(10deg);
   clip-path: polygon(
     50% 0%,
     59% 18%,
@@ -1217,12 +1188,12 @@
 .pricing-grid__badge-label,
 .pricing-grid2__badge-label {
   display: block;
-  max-width: 3.95rem;
+  max-width: 3.7rem;
   padding: 0;
   background: transparent;
   color: var(--bg);
   border-radius: 0;
-  font-size: 0.6rem;
+  font-size: 0.54rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1.05;
@@ -1238,7 +1209,7 @@
   height: 100%;
   padding: var(--pricing-card-padding);
   background: var(--card-bg);
-  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  border: 1px solid var(--accent);
   border-radius: 12px;
   color: var(--text);
   min-width: 0;
@@ -1252,7 +1223,7 @@
   align-content: start;
   padding: var(--pricing-card-padding);
   background: var(--card-bg);
-  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  border: 1px solid var(--accent);
   border-radius: 12px;
   color: var(--text);
   min-width: 0;
@@ -1269,7 +1240,7 @@
   font-size: clamp(1.55rem, 0.45vw + 1.46rem, 1.72rem);
   font-weight: 900;
   line-height: 1.04;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .pricing-grid3__card-label {
@@ -1278,7 +1249,7 @@
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1.05;
-  color: var(--accent);
+  color: var(--text);
   opacity: 0.72;
   text-transform: uppercase;
   padding-bottom: 1rem;
@@ -1289,7 +1260,7 @@
   font-size: clamp(1.8rem, 0.9vw + 1.56rem, 2.45rem);
   font-weight: 900;
   line-height: 1.02;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .pricing-grid__card-copy,
@@ -1451,7 +1422,7 @@
 .card__cta:focus-visible,
 .offer-card__cta:hover,
 .offer-card__cta:focus-visible {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .services__title .services__link {
@@ -1499,7 +1470,7 @@
 
 .service-card__title {
   margin: 0;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .service-card__trigger {
@@ -1513,7 +1484,7 @@
   font-weight: 900;
   line-height: 1.1;
   white-space: normal;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .service-card__panel {
@@ -1626,9 +1597,9 @@
   width: 100%;
   box-sizing: border-box;
   padding: 0.85rem 1rem;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--surface-border-strong);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--card-bg) 96%, var(--bg) 4%);
+  background: var(--surface-fill);
   color: var(--text);
   font-size: 1rem;
   font-family: var(--font);
@@ -1640,7 +1611,7 @@
 
 .email-capture__input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--surface-border-strong);
 }
 
 .email-capture__submit {
@@ -2014,11 +1985,13 @@
   .contact-meta__badge {
     width: 6.85rem;
     padding: 0.94rem;
+    left: 0.35rem;
+    transform: translate(-42%, -50%) rotate(8deg);
   }
 
   .contact-meta__badge-label {
-    max-width: 4.15rem;
-    font-size: 0.6rem;
+    max-width: 3.9rem;
+    font-size: 0.56rem;
     line-height: 1.05;
   }
 
@@ -2047,14 +2020,14 @@
     padding: 1.5rem 1rem 1.1rem;
     gap: 0.85rem;
     row-gap: 1rem;
-    justify-items: start;
-    text-align: left;
+    justify-items: center;
+    text-align: center;
   }
 
   .discovery-call__badge {
     top: 0;
     right: auto;
-    left: 0.75rem;
+    left: 0.45rem;
     width: 5.45rem;
     min-width: 0;
     aspect-ratio: 1;
@@ -2082,20 +2055,20 @@
       21% 9%,
       41% 18%
     );
-    transform: translate(-50%, -50%) rotate(-8deg);
+    transform: translate(-42%, -50%) rotate(-8deg);
   }
 
   .discovery-call__badge-text {
-    max-width: 3.65rem;
-    font-size: 0.52rem;
+    max-width: 3.35rem;
+    font-size: 0.48rem;
     line-height: 1.05;
     letter-spacing: 0.08em;
   }
 
   .discovery-call__title,
   .discovery-call__copy {
-    text-align: left;
-    justify-self: start;
+    text-align: center;
+    justify-self: center;
   }
 
   .discovery-call__title {
@@ -2112,7 +2085,7 @@
   .discovery-call__cta {
     grid-column: 1;
     grid-row: auto;
-    justify-self: start;
+    justify-self: center;
   }
 
   .pricing-grid__inner,
@@ -2144,16 +2117,17 @@
 
   .pricing-grid__badge,
   .pricing-grid2__badge {
-    top: -0.2rem;
+    top: 0;
+    right: 0.35rem;
     width: 5.3rem;
     padding: 0.78rem;
-    transform: translate(32%, -66%) rotate(10deg);
+    transform: translate(42%, -50%) rotate(10deg);
   }
 
   .pricing-grid__badge-label,
   .pricing-grid2__badge-label {
-    max-width: 3.45rem;
-    font-size: 0.52rem;
+    max-width: 3.2rem;
+    font-size: 0.48rem;
   }
 
   .pricing-grid__card,
@@ -2428,16 +2402,16 @@
   }
 
   .contact-direct .contact-meta__badge {
-    left: 0;
+    left: 0.35rem;
     justify-self: start;
     width: 5.8rem;
     padding: 0.82rem;
-    transform: translate(-22%, -50%) rotate(8deg);
+    transform: translate(-42%, -50%) rotate(8deg);
   }
 
   .contact-meta__badge-label {
-    max-width: 3.8rem;
-    font-size: 0.54rem;
+    max-width: 3.65rem;
+    font-size: 0.5rem;
   }
 
   .contact-direct .page-hero__email,
@@ -2648,7 +2622,7 @@
 }
 
 .photo-grid__subhead {
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.84rem;
   font-weight: 900;
   line-height: 1.2;
@@ -2670,7 +2644,7 @@
   justify-self: center;
   align-self: stretch;
   transform: translateX(-0.45rem);
-  background: var(--accent);
+  background: var(--text);
   border-radius: 10px;
   opacity: 1;
   pointer-events: none;

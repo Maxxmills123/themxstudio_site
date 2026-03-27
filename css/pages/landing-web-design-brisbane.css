@@ -2,13 +2,16 @@
   --accent: #a970ff;
   --accent-hover: #d0b3ff;
   --landing-shell: min(var(--site-width), 72rem);
-  --landing-border: color-mix(in srgb, var(--accent) 42%, transparent);
-  --landing-panel: color-mix(in srgb, var(--card-bg) 92%, var(--accent) 8%);
+  --landing-border: color-mix(in srgb, var(--text) 14%, transparent);
+  --landing-border-strong: color-mix(in srgb, var(--text) 28%, transparent);
+  --landing-panel: color-mix(in srgb, var(--bg) 92%, var(--accent) 8%);
+  --landing-panel-strong: color-mix(in srgb, var(--bg) 88%, var(--accent) 12%);
 }
 
 .landing-brisbane-page {
   --landing-site-gap: calc(var(--site-gap) / 2);
-  background: var(--page-ombre), var(--bg);
+  --card-bg: var(--landing-panel);
+  background: var(--bg);
 }
 
 .landing-hero-wrap {
@@ -25,8 +28,8 @@
   max-width: 32ch;
 }
 
-.page-hero__title {
-  color: var(--accent);
+.landing-brisbane-page .page-hero__title {
+  color: var(--text) !important;
   max-width: 20ch;
 }
 .landing-hero__proof {
@@ -44,7 +47,7 @@
 }
 
 .landing-hero__proof-stars {
-  color: var(--accent);
+  color: var(--text);
   line-height: 0;
 }
 
@@ -73,7 +76,7 @@
 
 .landing-hero__proof-link:hover,
 .landing-hero__proof-link:focus-visible {
-  color: var(--accent-hover);
+  color: var(--text);
   text-decoration: none;
 }
 
@@ -134,6 +137,10 @@
   margin: 0 auto;
 }
 
+.landing-brisbane-page .brand-position-statement__accent {
+  color: var(--text);
+}
+
 .landing-brand__icons {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -148,7 +155,7 @@
   justify-items: center;
   padding: 1.25rem 1rem 1.1rem;
   background: var(--landing-panel);
-  border: 1px solid var(--landing-border);
+  border: 1px solid var(--accent);
   border-radius: 16px;
   text-align: center;
 }
@@ -159,14 +166,8 @@
   width: 4.5rem;
   aspect-ratio: 1;
   border-radius: 999px;
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      color-mix(in srgb, var(--accent) 26%, transparent),
-      transparent 72%
-    ),
-    color-mix(in srgb, var(--card-bg) 84%, var(--accent) 16%);
-  color: var(--accent);
+  background: var(--landing-panel-strong);
+  color: var(--text);
 }
 
 .landing-brand__icon-wrap svg {
@@ -211,7 +212,7 @@
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -1px;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .landing-steps__intro,
@@ -251,7 +252,7 @@
 }
 
 .landing-steps__number {
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font-accent);
   font-size: clamp(2.7rem, 4vw, 3.25rem);
   line-height: 0.92;
@@ -279,14 +280,14 @@
   display: grid;
   grid-template-rows: auto 1fr;
   background: var(--landing-panel);
-  border: 1px solid var(--landing-border);
+  border: 1px solid var(--accent);
   border-radius: 16px;
   overflow: hidden;
 }
 
 .live-sites__media {
   aspect-ratio: 16 / 10;
-  background: color-mix(in srgb, var(--card-bg) 82%, var(--accent) 18%);
+  background: var(--landing-panel-strong);
   overflow: hidden;
 }
 
@@ -322,13 +323,13 @@
 .live-sites__link {
   width: fit-content;
   margin-top: 0.25rem;
-  color: var(--accent);
+  color: var(--text);
   font-weight: 900;
 }
 
 .live-sites__link:hover,
 .live-sites__link:focus-visible {
-  color: var(--accent-hover);
+  color: var(--text);
 }
 
 .landing-pricing .pricing-grid3__inner {
@@ -362,6 +363,7 @@
   grid-template-rows: auto auto auto 1fr auto;
   gap: 0.75rem;
   height: 100%;
+  border-color: var(--accent);
 }
 
 .landing-pricing .pricing-grid3__col--featured {
@@ -375,7 +377,7 @@
 
 .landing-pricing .pricing-grid3__badge {
   position: absolute;
-  top: 1rem;
+  top: 0;
   right: 0;
   z-index: 2;
   margin: 0;
@@ -386,7 +388,7 @@
   padding: 0.9rem;
   background: var(--accent);
   color: var(--bg);
-  transform: translate(32%, -50%) rotate(10deg);
+  transform: translate(50%, -50%) rotate(10deg);
   clip-path: polygon(
     50% 0%,
     59% 18%,
@@ -413,8 +415,8 @@
 
 .landing-pricing .pricing-grid3__badge-label {
   display: block;
-  max-width: 3.8rem;
-  font-size: 0.58rem;
+  max-width: 3.6rem;
+  font-size: 0.54rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1.05;
@@ -426,6 +428,11 @@
 .landing-pricing .pricing-grid3__card-copy,
 .landing-pricing .pricing-grid3__card-list {
   overflow-wrap: anywhere;
+}
+
+.landing-pricing .pricing-grid3__card-title,
+.landing-pricing .pricing-grid3__card-label {
+  color: var(--text);
 }
 
 .landing-pricing .pricing-grid3__card-copy,
@@ -455,7 +462,7 @@
   font-size: clamp(1.25rem, 1vw + 1rem, 1.55rem);
   font-weight: 900;
   line-height: 1.12;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .landing-audit__card-copy,
@@ -475,26 +482,20 @@
   padding: 0;
   background: none;
   border: 0;
-  color: var(--accent);
+  color: var(--text);
   font-weight: 900;
 }
 
 .landing-audit__inline-link:hover,
 .landing-audit__inline-link:focus-visible {
-  color: var(--accent-hover);
+  color: var(--text);
 }
 
 .landing-footer {
   margin-top: var(--landing-site-gap);
   padding: clamp(2rem, 4vw, 3rem) 0 1.5rem;
   border-top: 1px solid var(--landing-border);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--accent) 7%, transparent),
-      transparent 55%
-    ),
-    color-mix(in srgb, var(--footer-bg) 88%, var(--accent) 12%);
+  background: var(--footer-bg);
 }
 
 .landing-footer__inner {
@@ -546,13 +547,44 @@
   height: 2.5rem;
   border-radius: 999px;
   border: 1px solid var(--landing-border);
-  background: color-mix(in srgb, var(--card-bg) 84%, var(--accent) 16%);
+  background: var(--landing-panel);
 }
 
 .landing-footer__social-link:hover,
 .landing-footer__social-link:focus-visible {
   text-decoration: none;
-  background: color-mix(in srgb, var(--card-bg) 72%, var(--accent) 28%);
+  background: var(--landing-panel-strong);
+}
+
+.landing-brisbane-page .reviews__stars,
+.landing-brisbane-page .reviews__cta,
+.landing-brisbane-page .reviews__cta:hover,
+.landing-brisbane-page .reviews__cta:focus-visible,
+.landing-brisbane-page .reviews__arrow:hover,
+.landing-brisbane-page .reviews__arrow:focus-visible {
+  color: var(--text);
+}
+
+.landing-brisbane-page .reviews__footer {
+  border-color: var(--accent);
+}
+
+.landing-brisbane-page .form-modal__panel {
+  border-top-color: var(--accent);
+}
+
+.landing-brisbane-page .form-modal__title,
+.landing-brisbane-page .form-modal__close,
+.landing-brisbane-page .form-modal__close:hover,
+.landing-brisbane-page .form-modal__close:focus-visible {
+  color: var(--text);
+}
+
+.landing-brisbane-page .audit-form input:focus,
+.landing-brisbane-page .audit-form textarea:focus,
+.landing-brisbane-page .discovery-form input:focus,
+.landing-brisbane-page .discovery-form textarea:focus {
+  border-color: var(--landing-border-strong);
 }
 
 .landing-footer__bottom {
@@ -843,16 +875,16 @@
   }
 
   .landing-pricing .pricing-grid3__badge {
-    top: 0.65rem;
-    right: 0.25rem;
+    top: 0;
+    right: 0.35rem;
     width: 4.9rem;
     padding: 0.62rem;
-    transform: translate(0, -34%) rotate(10deg);
+    transform: translate(42%, -50%) rotate(10deg);
   }
 
   .landing-pricing .pricing-grid3__badge-label {
-    max-width: 3.2rem;
-    font-size: 0.47rem;
+    max-width: 3rem;
+    font-size: 0.44rem;
   }
 
   .landing-audit__card {
@@ -987,14 +1019,15 @@
   }
 
   .landing-pricing .pricing-grid3__badge {
-    top: 0.55rem;
+    top: 0;
+    right: 0.3rem;
     width: 4.35rem;
     padding: 0.55rem;
-    transform: translate(22%, -34%) rotate(10deg);
+    transform: translate(40%, -50%) rotate(10deg);
   }
 
   .landing-pricing .pricing-grid3__badge-label {
-    max-width: 3rem;
-    font-size: 0.44rem;
+    max-width: 2.8rem;
+    font-size: 0.41rem;
   }
 }

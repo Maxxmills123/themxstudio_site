@@ -92,6 +92,12 @@
   </url>
 
   <url>
+    <loc>https://themxstudio.com/locations/seo-brisbane/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://themxstudio.com/locations/web-design-newstead/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

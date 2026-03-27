@@ -38,7 +38,7 @@
 
 .pricing-grid3__badge {
   position: absolute;
-  top: 1rem;
+  top: 0;
   right: 0;
   z-index: 2;
   margin: 0;
@@ -49,7 +49,7 @@
   padding: 0.9rem;
   background: var(--accent);
   color: var(--bg);
-  transform: translate(32%, -50%) rotate(10deg);
+  transform: translate(50%, -50%) rotate(10deg);
   clip-path: polygon(
     50% 0%,
     59% 18%,
@@ -76,12 +76,12 @@
 
 .pricing-grid3__badge-label {
   display: block;
-  max-width: 3.8rem;
+  max-width: 3.6rem;
   padding: 0;
   background: transparent;
   color: var(--bg);
   border-radius: 0;
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1.05;
@@ -102,10 +102,6 @@
     max-width: 100%;
   }
 
-  .website-services__h1 {
-    transform: translateY(calc(-100% - 0.2rem));
-  }
-
   .pricing-grid3--three-col .pricing-grid3__cols {
     grid-template-columns: 1fr;
   }
@@ -113,13 +109,14 @@
 
 @media (max-width: 900px) {
   .pricing-grid3__badge {
-    top: -0.2rem;
+    top: 0;
+    right: 0.35rem;
     width: 5.15rem;
-    transform: translate(20%, -50%) rotate(10deg);
+    transform: translate(42%, -50%) rotate(10deg);
   }
 
   .pricing-grid3__badge-label {
-    max-width: 3.35rem;
-    font-size: 0.5rem;
+    max-width: 3.1rem;
+    font-size: 0.47rem;
   }
 }

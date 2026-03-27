@@ -1,7 +1,7 @@
 body.thank-you-page {
   --accent: #ff3eb2;
   --accent-hover: #ffa5db;
-  background: var(--page-ombre), var(--bg);
+  background: var(--bg);
 }
 
 .thank-you-page main {
@@ -23,7 +23,7 @@ body.thank-you-page {
 }
 
 .thank-you-page .page-hero__title {
-  color: var(--accent);
+  color: var(--text);
   font-size: clamp(4rem, 10vw, 9rem);
   font-weight: 400;
   line-height: 0.94;
@@ -53,7 +53,7 @@ body.thank-you-page {
 
 .thank-you-page .thank-you-back__link:hover,
 .thank-you-page .thank-you-back__link:focus-visible {
-  color: var(--accent-hover);
+  color: var(--text);
   text-decoration: underline;
 }
 

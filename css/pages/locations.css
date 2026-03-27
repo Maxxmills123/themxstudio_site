@@ -15,7 +15,7 @@
 
 .locations-page .page-hero__title {
   display: block;
-  color: var(--accent);
+  color: var(--text);
   text-align: left;
 }
 
@@ -43,10 +43,10 @@
   line-height: 1.55;
   color: var(--text);
   opacity: 0.72;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(calc(-100% - 0.35rem));
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
   text-align: left;
 }
 
@@ -108,8 +108,8 @@
 }
 
 .free-audit-page .page-hero.locations-page .locations-page__h1 {
-  left: 50%;
-  transform: translate(-50%, calc(-100% - 0.35rem));
+  left: auto;
+  transform: none;
   text-align: center;
 }
 
@@ -147,8 +147,8 @@
 
   .locations-page__h1 {
     width: 100%;
-    left: 0;
-    transform: translateY(calc(-100% - 0.2rem));
+    left: auto;
+    transform: none;
     text-align: left;
   }
 
@@ -171,8 +171,8 @@
 
   .free-audit-page .page-hero.locations-page .locations-page__h1 {
     width: 100%;
-    left: 0;
-    transform: translateY(calc(-100% - 0.2rem));
+    left: auto;
+    transform: none;
     text-align: left;
   }
 }

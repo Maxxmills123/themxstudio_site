@@ -42,7 +42,7 @@ main {
   max-width: 100%;
   min-width: 0;
   min-height: var(--hero-title-reserve, 0);
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font-accent);
   font-size: clamp(5rem, 15vw, 10rem);
   font-weight: 400;
@@ -101,7 +101,7 @@ main {
 
   .discovery-call__title,
   .discovery-call__copy {
-    text-align: left;
+    text-align: center;
   }
 
   .hero {
