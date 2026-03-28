@@ -56,6 +56,30 @@
   text-align: left;
 }
 
+.locations-page .location-brand {
+  width: var(--site-width);
+  max-width: none;
+  margin-top: var(--site-gap);
+  padding-top: var(--site-gap);
+  margin-inline: auto;
+  margin-bottom: 0;
+  padding-inline: 0;
+}
+
+.locations-page .location-brand .brand-position-statement__title {
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.locations-page .brand-position-statement__accent {
+  color: var(--text);
+}
+
+.locations-page .offer-copy__title {
+  color: var(--accent);
+}
+
 .seo-brisbane-page .page-hero__title {
   position: relative;
 }
@@ -167,6 +191,14 @@
     margin-inline: 0;
     text-align: left;
     transform-origin: left top;
+  }
+
+  .locations-page .location-brand .brand-position-statement__title {
+    max-width: 17ch;
+    margin: 0 auto;
+    font-size: clamp(2rem, 6.5vw, 2.55rem);
+    line-height: 1;
+    text-align: center;
   }
 
   .free-audit-page .page-hero.locations-page .locations-page__h1 {

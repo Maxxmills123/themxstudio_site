@@ -552,6 +552,7 @@
   justify-items: center;
   text-align: center;
   background: var(--card-bg);
+  color: var(--accent);
   border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
   border-radius: 12px;
 }
@@ -575,6 +576,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  color: var(--accent);
   font-size: clamp(1.15rem, 0.9vw + 0.95rem, 1.55rem);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -590,6 +592,7 @@
 }
 
 .showcase-promo__link {
+  color: var(--accent);
   font-weight: 900;
   text-decoration-line: underline;
   text-decoration-thickness: 0.06em;
@@ -600,7 +603,7 @@
 
 .showcase-promo__link:hover,
 .showcase-promo__link:focus-visible {
-  color: var(--text);
+  color: var(--accent);
 }
 
 .reviews {
@@ -1121,7 +1124,7 @@
   padding: 0.95rem 1.2rem;
   border-radius: 10px;
   background: var(--accent);
-  color: var(--text);
+  color: var(--bg);
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1;
