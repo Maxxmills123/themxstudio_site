@@ -82,16 +82,600 @@
     <meta property="og:image:height" content="630" />
 
     <link rel="stylesheet" href="/css/base.css?v=20260327z" />
-    <link rel="stylesheet" href="/css/components.css?v=20260328i" />
+    <link rel="stylesheet" href="/css/components.css?v=20260328j" />
     <link rel="stylesheet" href="/css/pages/website-services.css?v=20260327c" />
     <link rel="stylesheet" href="/css/forms.css?v=20260327f" />
     <link
       rel="stylesheet"
-      href="/css/pages/landing-web-design-brisbane.css?v=20260328d"
+      href="/css/pages/landing-web-design-brisbane.css?v=20260328i"
     />
   </head>
 
   <body class="service-page landing-brisbane-page">
+    <header class="site-header">
+      <div class="site-header__wrap">
+        <div class="site-header__left">
+          <a
+            class="site-header__brand"
+            href="/"
+            aria-label="The MX Studio home"
+          >
+            <img
+              class="site-header__logo"
+              src="/assets/logos/logo.svg"
+              alt="The MX Studio"
+            />
+          </a>
+
+          <div class="site-header__contacts" aria-label="Contact links">
+            <a
+              class="site-header__contact"
+              href="tel:+61421709047"
+              aria-label="Call +61 421 709 047"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                />
+              </svg>
+              <span class="site-header__contact-text">+61 421 709 047</span>
+            </a>
+
+            <a
+              class="site-header__contact"
+              href="mailto:hello@themxstudio.com?subject=Website%20Enquiry"
+              aria-label="Email hello@themxstudio.com"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 13.5L2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5zM20 4H4c-1.1 0-2 .9-2 2l10 6.25L22 6c0-1.1-.9-2-2-2z"
+                />
+              </svg>
+              <span class="site-header__contact-text"
+                >hello@themxstudio.com</span
+              >
+            </a>
+          </div>
+        </div>
+
+        <nav class="site-header__nav" aria-label="Primary">
+          <ul class="nav">
+            <li class="nav__item nav__item--dropdown">
+              <button
+                class="nav__link nav__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                Websites <span class="nav__caret" aria-hidden="true"></span>
+              </button>
+
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Websites"
+              >
+                <div class="nav__group">
+                  <a class="nav__menu-link" href="/services/website-design/">
+                    Website<span class="link-arrow"
+                      >&nbsp;Design
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a class="nav__menu-link" href="/services/website-hosting/">
+                    Website<span class="link-arrow"
+                      >&nbsp;Hosting
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a class="nav__menu-link" href="/services/website-redesign/">
+                    Website<span class="link-arrow"
+                      >&nbsp;Redesign
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a
+                    class="nav__menu-link"
+                    href="/services/website-maintenance/"
+                  >
+                    Website<span class="link-arrow"
+                      >&nbsp;Maintenance
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav__item nav__item--dropdown">
+              <button
+                class="nav__link nav__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                Growth <span class="nav__caret" aria-hidden="true"></span>
+              </button>
+
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Growth"
+              >
+                <div class="nav__group">
+                  <a class="nav__menu-link" href="/services/google-ads/">
+                    Google<span class="link-arrow"
+                      >&nbsp;Ads
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a
+                    class="nav__menu-link"
+                    href="/services/ai-search-optimisation/"
+                  >
+                    AI Search <br />Optimisation<span class="link-arrow"
+                      >&nbsp;(GEO)
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a class="nav__menu-link" href="/services/seo/">
+                    Search Engine <br />Optimisation<span class="link-arrow"
+                      >&nbsp;(SEO)
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav__item nav__item--dropdown">
+              <button
+                class="nav__link nav__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                Branding <span class="nav__caret" aria-hidden="true"></span>
+              </button>
+
+              <div
+                class="nav__menu nav__menu--stack"
+                role="menu"
+                aria-label="Branding"
+              >
+                <div class="nav__group">
+                  <a class="nav__menu-link" href="/services/brand-design/">
+                    Brand<span class="link-arrow"
+                      >&nbsp;Design
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a class="nav__menu-link" href="/services/logo-design/">
+                    Logo<span class="link-arrow"
+                      >&nbsp;Design
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+
+                  <a class="nav__menu-link" href="/services/copywriting/">
+                    Copywriting<span class="link-arrow"
+                      >&nbsp;
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav__item">
+              <a class="nav__link" href="/pricing/">Pricing</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="/about/">About</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link nav__link--contact" href="/contact/"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <button class="site-header__cta" type="button" data-open-discovery>
+          Start Today
+        </button>
+
+        <button
+          class="site-header__burger"
+          type="button"
+          aria-label="Open menu"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="burger" aria-hidden="true"
+            ><span></span><span></span><span></span
+          ></span>
+        </button>
+      </div>
+
+      <div class="mobile-overlay" hidden></div>
+
+      <aside
+        class="mobile-panel"
+        id="mobile-menu"
+        aria-label="Mobile menu"
+        hidden
+      >
+        <nav class="mobile-nav" aria-label="Mobile primary">
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-websites"
+            >
+              <span>Websites</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
+
+            <div class="mobile-acc__panel" id="mobile-acc-websites" hidden>
+              <a class="nav__menu-link" href="/services/website-design/">
+                Website<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/website-hosting/">
+                Website<span class="link-arrow"
+                  >&nbsp;Hosting
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/website-redesign/">
+                Website<span class="link-arrow"
+                  >&nbsp;Redesign
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/website-maintenance/">
+                Website<span class="link-arrow"
+                  >&nbsp;Maintenance
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-growth"
+            >
+              <span>Growth</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
+
+            <div class="mobile-acc__panel" id="mobile-acc-growth" hidden>
+              <a class="nav__menu-link" href="/services/google-ads/">
+                Google<span class="link-arrow"
+                  >&nbsp;Ads
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a
+                class="nav__menu-link"
+                href="/services/ai-search-optimisation/"
+              >
+                AI Search Optimisation<br /><span class="link-arrow"
+                  >(GEO)
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/seo/">
+                Search Engine Optimisation<span class="link-arrow"
+                  >&nbsp;(SEO)
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mobile-acc">
+            <button
+              class="nav__link mobile-acc__trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-acc-branding"
+            >
+              <span>Branding</span>
+              <span class="nav__caret" aria-hidden="true"></span>
+            </button>
+
+            <div class="mobile-acc__panel" id="mobile-acc-branding" hidden>
+              <a class="nav__menu-link" href="/services/brand-design/">
+                Brand<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/logo-design/">
+                Logo<span class="link-arrow"
+                  >&nbsp;Design
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="nav__menu-link" href="/services/copywriting/">
+                Copywriting<span class="link-arrow"
+                  >&nbsp;
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+          <a class="nav__link mobile-nav__link" href="/pricing/">Pricing</a>
+          <a class="nav__link mobile-nav__link" href="/about/">About</a>
+          <a
+            class="nav__link mobile-nav__link mobile-nav__link--contact"
+            href="/contact/"
+            >Contact</a
+          >
+          <div class="mobile-panel__direct" aria-label="Direct contact">
+            <a
+              class="mobile-panel__direct-link"
+              href="mailto:hello@themxstudio.com?subject=Website%20Enquiry"
+              aria-label="Email hello@themxstudio.com"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 13.5L2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5zM20 4H4c-1.1 0-2 .9-2 2l10 6.25L22 6c0-1.1-.9-2-2-2z"
+                />
+              </svg>
+              <span>hello@themxstudio.com</span>
+            </a>
+            <a
+              class="mobile-panel__direct-link"
+              href="tel:+61421709047"
+              aria-label="Call +61 421 709 047"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                />
+              </svg>
+              <span>+61 421 709 047</span>
+            </a>
+          </div>
+        </nav>
+      </aside>
+    </header>
+
     <main>
       <div class="website-services__hero-wrap landing-hero-wrap">
         <section
@@ -99,13 +683,18 @@
           aria-labelledby="landing-web-design-brisbane-h1"
         >
           <div class="page-hero__content">
-            <h1
-              class="website-services__h1"
-              id="landing-web-design-brisbane-h1"
-            >
-              Web design Brisbane
+            <h1 class="page-hero__title" id="landing-web-design-brisbane-h1">
+              Get a Website Built to
+              <span class="emph landing-hero__title-accent">
+                <span
+                  class="pricing-type"
+                  data-type-text="Generate Real Leads"
+                  aria-live="off"
+                >
+                  <span class="pricing-type__text">Generate Real Leads</span>
+                </span>
+              </span>
             </h1>
-            <p class="page-hero__title">Make your website make you money.</p>
             <p class="page-hero__sub">
               We build custom-coded websites that load fast, communicate
               clearly, and guide users toward real points of conversion. The
@@ -168,121 +757,23 @@
         class="brand-position-statement landing-brand"
         aria-labelledby="landing-brand-title"
       >
+        <div class="landing-brand__media">
+          <img
+            class="landing-brand__image"
+            src="/assets/images/animo-showcase.webp"
+            alt="Animo Studio website showcase"
+            loading="lazy"
+            decoding="async"
+            width="1836"
+            height="1177"
+          />
+        </div>
         <h2 class="brand-position-statement__title" id="landing-brand-title">
           Good websites get found. Great websites
           <span class="brand-position-statement__accent"
             >turn that into business.</span
           >
         </h2>
-
-        <div
-          class="landing-brand__icons"
-          aria-label="What this page is built for"
-        >
-          <article class="landing-brand__icon-card">
-            <div class="landing-brand__icon-wrap" aria-hidden="true">
-              <svg viewBox="0 0 64 64" focusable="false">
-                <path
-                  d="M32 8 36.5 19.5 49 15l-4.5 12.5L56 32l-11.5 4.5L49 49l-12.5-4.5L32 56l-4.5-11.5L15 49l4.5-12.5L8 32l11.5-4.5L15 15l12.5 4.5L32 8Z"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-                <circle cx="32" cy="32" r="5.5" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <p class="landing-brand__icon-title">Be Memorable</p>
-            <p class="landing-brand__icon-copy">
-              Standing out means your business will be remembered.
-            </p>
-          </article>
-
-          <article class="landing-brand__icon-card">
-            <div class="landing-brand__icon-wrap" aria-hidden="true">
-              <svg viewBox="0 0 64 64" focusable="false">
-                <path
-                  d="M14 50h36"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.75"
-                  stroke-linecap="round"
-                ></path>
-                <rect
-                  x="14"
-                  y="34"
-                  width="6"
-                  height="16"
-                  rx="1"
-                  fill="currentColor"
-                ></rect>
-                <rect
-                  x="24"
-                  y="26"
-                  width="6"
-                  height="24"
-                  rx="1"
-                  fill="currentColor"
-                ></rect>
-                <rect
-                  x="34"
-                  y="18"
-                  width="6"
-                  height="32"
-                  rx="1"
-                  fill="currentColor"
-                ></rect>
-                <rect
-                  x="44"
-                  y="10"
-                  width="6"
-                  height="40"
-                  rx="1"
-                  fill="currentColor"
-                ></rect>
-              </svg>
-            </div>
-            <p class="landing-brand__icon-title">Rank Higher</p>
-            <p class="landing-brand__icon-copy">
-              Clean SEO structure that supports local search and long-term
-              growth.
-            </p>
-          </article>
-
-          <article class="landing-brand__icon-card">
-            <div class="landing-brand__icon-wrap" aria-hidden="true">
-              <svg viewBox="0 0 64 64" focusable="false">
-                <path
-                  d="M32 10c-9.39 0-17 7.35-17 16.41 0 5.17 2.45 8.67 5.86 11.83 2.12 1.97 3.74 3.83 4.24 6.26h13.8c.5-2.43 2.12-4.29 4.24-6.26 3.41-3.16 5.86-6.66 5.86-11.83C49 17.35 41.39 10 32 10Z"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-                <path
-                  d="M27 48h10"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.75"
-                  stroke-linecap="round"
-                ></path>
-                <path
-                  d="M28 53h8"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.75"
-                  stroke-linecap="round"
-                ></path>
-              </svg>
-            </div>
-            <p class="landing-brand__icon-title">Convince people</p>
-            <p class="landing-brand__icon-copy">
-              Clear messaging so people know exactly what to do next.
-            </p>
-          </article>
-        </div>
       </section>
 
       <section class="steps-copy" aria-label="Three-step website process">
@@ -353,7 +844,6 @@
               </p>
             </div>
           </article>
-          <a class="steps-copy__cta" href="/contact/">Let's talk today</a>
         </div>
       </section>
 
@@ -878,97 +1368,284 @@
       </section>
     </main>
 
-    <footer class="landing-footer">
-      <div class="landing-footer__inner">
-        <div class="landing-footer__top">
-          <div class="landing-footer__contact">
-            <a
-              class="landing-footer__contact-link"
-              href="mailto:hello@themxstudio.com"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 13.5L2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5zM20 4H4c-1.1 0-2 .9-2 2l10 6.25L22 6c0-1.1-.9-2-2-2z"
-                />
-              </svg>
+    <footer class="site-footer">
+      <div class="site-footer__container container">
+        <div class="site-footer__top">
+          <div class="site-footer__top-grid">
+            <p class="site-footer__slogan">
+              Your website should bring in business
+              <a class="site-footer__slogan-link" href="/contact/"
+                >Let&apos;s
+                <span class="site-footer__slogan-link-tail"
+                  >talk<span class="link-arrow">
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      width="14"
+                      height="14"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                      /></svg></span></span
+              ></a>
+            </p>
+          </div>
+        </div>
+
+        <div class="site-footer__info-grid">
+          <div class="site-footer__contact" aria-label="Footer contact">
+            <a class="site-footer__email" href="mailto:hello@themxstudio.com">
               hello@themxstudio.com
             </a>
-            <a class="landing-footer__contact-link" href="tel:+61421709047">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                />
-              </svg>
+            <a class="site-footer__phone" href="tel:+61421709047">
               0421 709 047
+            </a>
+
+            <div
+              class="footer-social site-footer__top-social"
+              aria-label="Footer social"
+            >
+              <a
+                class="footer-social__link"
+                href="https://www.instagram.com/themxstudioweb/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm8.4 2H7.8C5.7 4 4 5.7 4 7.8v8.4C4 18.3 5.7 20 7.8 20h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8C20 5.7 18.3 4 16.2 4z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M12 7.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3zm0 2A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M17.6 6.6a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                class="footer-social__link"
+                href="https://www.tiktok.com/@themxstudio"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M16.7 3c.6 2.6 2.4 4.4 5.3 4.6v3.2c-1.9.1-3.6-.5-5.2-1.6v7.1c0 4-3.3 6.7-7.1 6.1-2.8-.4-5.1-2.9-5.3-5.8C4.1 12.8 7.4 10 11 10.5v3.5c-.3-.1-.7-.1-1 0-1.3.2-2.2 1.4-2 2.7.2 1.5 1.9 2.4 3.3 1.7.6-.3 1-1 1-1.7V3h3.4Z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                class="footer-social__link"
+                href="https://au.pinterest.com/themxstudio/"
+                aria-label="Pinterest"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.846 6.356 9.301-.088-.791-.167-2.005.035-2.87.182-.782 1.172-4.98 1.172-4.98s-.298-.596-.298-1.477c0-1.383.802-2.416 1.8-2.416.849 0 1.259.637 1.259 1.4 0 .853-.543 2.128-.823 3.31-.235.993.499 1.803 1.48 1.803 1.776 0 3.141-1.873 3.141-4.576 0-2.393-1.72-4.067-4.177-4.067-2.846 0-4.518 2.134-4.518 4.339 0 .859.331 1.781.744 2.281.082.1.093.187.069.288-.075.317-.244 1.006-.277 1.147-.044.185-.145.224-.335.135-1.249-.582-2.03-2.411-2.03-3.881 0-3.159 2.294-6.059 6.614-6.059 3.472 0 6.17 2.475 6.17 5.784 0 3.452-2.176 6.23-5.198 6.23-1.015 0-1.971-.527-2.297-1.149l-.624 2.379c-.226.868-.837 1.956-1.246 2.619A10.04 10.04 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="site-footer__nav" aria-label="Footer navigation">
+            <a class="footer-link" href="/about/">
+              About<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+
+            <a class="footer-link" href="/pricing/">
+              Pricing<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+
+            <a class="footer-link" href="/blog/">
+              Industry Insights<span class="link-arrow"
+                >&nbsp;
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
             </a>
           </div>
 
-          <div class="landing-footer__social" aria-label="Social links">
-            <a
-              class="landing-footer__social-link"
-              href="https://www.instagram.com/themxstudioweb/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm8.4 2H7.8C5.7 4 4 5.7 4 7.8v8.4C4 18.3 5.7 20 7.8 20h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8C20 5.7 18.3 4 16.2 4z"
-                />
-                <path
-                  fill="currentColor"
-                  d="M12 7.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3zm0 2A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3z"
-                />
-                <path
-                  fill="currentColor"
-                  d="M17.6 6.6a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"
-                />
-              </svg>
+          <div class="site-footer__pages" aria-label="Footer page links">
+            <p class="site-footer__pages-label">You might be looking for...</p>
+            <a class="footer-link footer-link--muted" href="/services/seo/">
+              SEO Services<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
             </a>
+
             <a
-              class="landing-footer__social-link"
-              href="https://www.tiktok.com/@themxstudio"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="TikTok"
+              class="footer-link footer-link--muted"
+              href="/services/google-ads/"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M16.7 3c.6 2.6 2.4 4.4 5.3 4.6v3.2c-1.9.1-3.6-.5-5.2-1.6v7.1c0 4-3.3 6.7-7.1 6.1-2.8-.4-5.1-2.9-5.3-5.8C4.1 12.8 7.4 10 11 10.5v3.5c-.3-.1-.7-.1-1 0-1.3.2-2.2 1.4-2 2.7.2 1.5 1.9 2.4 3.3 1.7.6-.3 1-1 1-1.7V3h3.4Z"
-                />
-              </svg>
+              Google Ads<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
             </a>
+
             <a
-              class="landing-footer__social-link"
-              href="https://au.pinterest.com/themxstudio/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Pinterest"
+              class="footer-link footer-link--muted"
+              href="/free-website-audit/"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.846 6.356 9.301-.088-.791-.167-2.005.035-2.87.182-.782 1.172-4.98 1.172-4.98s-.298-.596-.298-1.477c0-1.383.802-2.416 1.8-2.416.849 0 1.259.637 1.259 1.4 0 .853-.543 2.128-.823 3.31-.235.993.499 1.803 1.48 1.803 1.776 0 3.141-1.873 3.141-4.576 0-2.393-1.72-4.067-4.177-4.067-2.846 0-4.518 2.134-4.518 4.339 0 .859.331 1.781.744 2.281.082.1.093.187.069.288-.075.317-.244 1.006-.277 1.147-.044.185-.145.224-.335.135-1.249-.582-2.03-2.411-2.03-3.881 0-3.159 2.294-6.059 6.614-6.059 3.472 0 6.17 2.475 6.17 5.784 0 3.452-2.176 6.23-5.198 6.23-1.015 0-1.971-.527-2.297-1.149l-.624 2.379c-.226.868-.837 1.956-1.246 2.619A10.04 10.04 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z"
-                />
-              </svg>
+              Free Website Audit<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <div class="site-footer__where" aria-label="Footer locations">
+            <p class="site-footer__where-label">Based in Brisbane</p>
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-brisbane/"
+            >
+              Web design Brisbane<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-newstead/"
+            >
+              Web design Newstead<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
+            </a>
+
+            <a
+              class="footer-link footer-link--muted"
+              href="/locations/web-design-eagle-farm/"
+            >
+              Web design Eagle Farm<span class="link-arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.7l-4.6-4.6L13.5 5z"
+                  />
+                </svg>
+              </span>
             </a>
           </div>
         </div>
 
-        <div class="landing-footer__bottom">
-          <div class="landing-footer__brand">
-            <div class="landing-footer__copyright">
-              <span
-                >&copy; <span id="footer-year">2026</span> The MX Studio</span
-              >
-              <span class="landing-footer__legal">
-                <a href="/terms/#privacy">Privacy</a>
-                <a href="/terms/">Terms</a>
-              </span>
+        <div class="site-footer__bottom">
+          <div class="site-footer__bottom-brand">
+            <div class="site-footer__logo-wrap">
+              <img
+                class="site-footer__logo"
+                src="/assets/logos/logo-orange.svg"
+                alt="The MX Studio"
+              />
+            </div>
+            <div class="site-footer__copyright">
+              &copy; 2026 The MX Studio <span aria-hidden="true">|</span>
+              <a class="site-footer__copyright-link" href="/terms/">
+                Terms and Conditions
+              </a>
             </div>
           </div>
         </div>
@@ -1107,7 +1784,7 @@
       </div>
     </div>
 
-    <script src="/js/main.js?v=20260327d" defer></script>
+    <script src="/js/main.js?v=20260328a" defer></script>
     <script>
       (() => {
         const legacyAuditHashes = new Set([

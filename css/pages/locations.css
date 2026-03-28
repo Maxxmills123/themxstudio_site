@@ -59,8 +59,8 @@
 .locations-page .location-brand {
   width: var(--site-width);
   max-width: none;
-  margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
+  margin-top: 0;
+  padding-top: 0;
   margin-inline: auto;
   margin-bottom: 0;
   padding-inline: 0;
@@ -72,12 +72,19 @@
   text-align: center;
 }
 
-.locations-page .brand-position-statement__accent {
-  color: var(--text);
+.locations-page .location-brand__media {
+  width: min(100%, 34rem);
+  margin: 0 auto 1.25rem;
 }
 
-.locations-page .offer-copy__title {
-  color: var(--accent);
+.locations-page .location-brand__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.locations-page .brand-position-statement__accent {
+  color: var(--text);
 }
 
 .seo-brisbane-page .page-hero__title {

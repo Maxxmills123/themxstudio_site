@@ -596,8 +596,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const header = document.querySelector(".site-header");
 const burgerBtn = document.querySelector(".site-header__burger");
+const isLandingBrisbanePage = document.body?.classList.contains(
+  "landing-brisbane-page",
+);
 
 if (header) {
+  if (isLandingBrisbanePage) {
+    header.classList.remove("is-gone", "is-hidden", "is-hidden-footer");
+  }
+
   let lastY = window.scrollY || 0;
   let stopTimer = null;
   let isHidden = false;
@@ -626,6 +633,13 @@ if (header) {
     burgerBtn && burgerBtn.getAttribute("aria-expanded") === "true";
 
   const onScroll = () => {
+    if (isLandingBrisbanePage) {
+      if (stopTimer) clearTimeout(stopTimer);
+      show();
+      lastY = window.scrollY || 0;
+      return;
+    }
+
     const y = window.scrollY || 0;
     const dy = y - lastY;
 

@@ -988,7 +988,7 @@
   gap: 0.95rem;
   padding-top: 0.4rem;
   padding-bottom: 1.35rem;
-  border-bottom: 1px solid var(--rule-color);
+  border-bottom: 0;
   background: none;
   border-radius: 0;
 }
@@ -1078,7 +1078,7 @@
   padding-bottom: 1.35rem;
   background: none;
   border-top: 0;
-  border-bottom: 1px solid var(--rule-color);
+  border-bottom: 0;
   border-radius: 0;
 }
 
@@ -1114,26 +1114,6 @@
 .steps-copy .steps-copy__desc {
   font-size: 1rem;
   line-height: 1.64;
-}
-
-.steps-copy__cta {
-  display: inline-flex;
-  justify-self: start;
-  align-self: start;
-  width: fit-content;
-  padding: 0.95rem 1.2rem;
-  border-radius: 10px;
-  background: var(--accent);
-  color: var(--bg);
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.steps-copy__cta:hover,
-.steps-copy__cta:focus-visible {
-  text-decoration: none;
 }
 
 .faq__title {
@@ -2637,7 +2617,7 @@
     gap: 1rem;
     padding-top: 0.35rem;
     padding-bottom: 1.1rem;
-    border-bottom: 1px solid var(--rule-color);
+    border-bottom: 0;
   }
 
   .steps-copy__item:last-child {
@@ -2698,11 +2678,6 @@
   .steps-copy .steps-copy__desc {
     font-size: 0.97rem;
     line-height: 1.58;
-  }
-
-  .steps-copy__cta {
-    padding: 0.9rem 1.1rem;
-    font-size: 0.92rem;
   }
 
   .faq__head {

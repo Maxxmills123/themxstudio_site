@@ -20,7 +20,7 @@
 
 .landing-hero {
   margin-bottom: 0;
-  padding-top: clamp(2.75rem, 6vw, 4.5rem);
+  padding-top: 110px;
   padding-bottom: clamp(2.2rem, 4vw, 3rem);
 }
 
@@ -31,6 +31,37 @@
 .landing-brisbane-page .page-hero__title {
   color: var(--text) !important;
   max-width: 20ch;
+}
+
+.landing-hero__title-accent {
+  display: block;
+}
+
+.landing-brisbane-page .landing-hero .pricing-type,
+.landing-brisbane-page .landing-hero .pricing-type__text {
+  margin-inline: 0;
+  text-align: left;
+  transform-origin: left top;
+}
+
+.landing-brisbane-page .landing-hero .pricing-type {
+  display: block;
+  max-width: 100%;
+}
+
+.landing-brisbane-page .landing-hero .pricing-type.is-pop {
+  animation: landing-pricing-pop 260ms ease-out 1;
+}
+
+.landing-brisbane-page .landing-hero .pricing-type__text {
+  display: block;
+  color: currentColor;
+}
+
+@keyframes landing-pricing-pop {
+  50% {
+    transform: scale(1.04);
+  }
 }
 
 .landing-hero__cta {
@@ -89,6 +120,17 @@
 .landing-brand {
   display: grid;
   gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.landing-brand__media {
+  width: min(100%, 34rem);
+  margin: 0 auto;
+}
+
+.landing-brand__image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .landing-brand .brand-position-statement__title {
@@ -238,15 +280,15 @@
 .live-sites__card {
   display: grid;
   grid-template-rows: auto 1fr;
-  background: var(--landing-panel);
-  border: 1px solid var(--accent);
+  background: transparent;
+  border: 0;
   border-radius: 16px;
   overflow: hidden;
 }
 
 .live-sites__media {
   aspect-ratio: 16 / 10;
-  background: var(--landing-panel-strong);
+  background: transparent;
   overflow: hidden;
 }
 
@@ -657,13 +699,19 @@
   }
 }
 
+@media (max-width: 1366px) {
+  .landing-hero {
+    padding-top: clamp(6rem, 10vw, 8rem);
+  }
+}
+
 @media (max-width: 1024px) {
   .landing-brisbane-page {
     --landing-site-gap: clamp(1.35rem, 4vw, 1.85rem);
   }
 
   .landing-hero {
-    padding-top: clamp(3.5rem, 10vw, 5.25rem);
+    padding-top: clamp(6rem, 10vw, 8rem);
     padding-bottom: clamp(1.6rem, 4vw, 2.2rem);
   }
 
@@ -827,22 +875,22 @@
 
 @media (max-width: 767px) {
   .landing-hero .page-hero__content {
-    justify-items: center;
-    text-align: center;
+    justify-items: start;
+    text-align: left;
   }
 
   .landing-hero .website-services__h1,
   .landing-hero .page-hero__title,
   .landing-hero .page-hero__sub {
-    margin-inline: auto;
-    text-align: center;
+    margin-inline: 0;
+    text-align: left;
   }
 
   .landing-hero .page-hero__google-proof,
   .landing-hero__cta {
-    justify-self: center;
-    align-self: center;
-    margin-inline: auto;
+    justify-self: start;
+    align-self: start;
+    margin-inline: 0;
   }
 
   .landing-brand {
