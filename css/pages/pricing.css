@@ -75,10 +75,6 @@ main {
 }
 
 @media (max-width: 1366px) {
-  :root {
-    --site-gap: 2rem;
-  }
-
   .page-hero {
     min-height: auto;
     padding: clamp(6rem, 10vw, 8rem) 0 0.5rem;

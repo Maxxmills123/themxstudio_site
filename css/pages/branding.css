@@ -87,10 +87,6 @@
 }
 
 @media (max-width: 1366px) {
-  :root {
-    --site-gap: 2rem;
-  }
-
   .website-services__hero-wrap {
     min-height: auto;
   }

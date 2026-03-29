@@ -19,7 +19,8 @@
   --nav-hover: rgba(255, 255, 255, 0.2);
   --page-ombre: none;
   --site-width: 90vw;
-  --site-gap: 5rem;
+  --site-gap: 10rem;
+  --site-gap-mobile: 5rem;
   --section-shell-width: 80%;
   --footer-logo-width: 100px;
 
@@ -1219,6 +1220,10 @@ main {
 }
 
 @media (max-width: 1366px) {
+  :root {
+    --site-gap: var(--site-gap-mobile);
+  }
+
   html,
   body {
     width: 100%;

@@ -84,10 +84,6 @@
 }
 
 @media (max-width: 1366px) {
-  :root {
-    --site-gap: 2rem;
-  }
-
   .service-page .website-services__hero .page-hero__title {
     display: block;
     text-align: left;

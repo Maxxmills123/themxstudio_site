@@ -93,10 +93,6 @@ main {
 }
 
 @media (max-width: 1366px) {
-  :root:has(.hero__title) {
-    --site-gap: 2rem;
-  }
-
   .discovery-call__title,
   .discovery-call__copy {
     text-align: center;
