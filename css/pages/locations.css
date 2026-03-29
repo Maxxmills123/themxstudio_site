@@ -59,7 +59,7 @@
 .locations-page .location-brand {
   width: var(--site-width);
   max-width: none;
-  margin-top: 0;
+  margin-top: var(--site-gap);
   padding-top: 0;
   margin-inline: auto;
   margin-bottom: 0;

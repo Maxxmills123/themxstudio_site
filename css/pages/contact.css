@@ -5,16 +5,43 @@
 
 .page-hero__title {
   color: var(--text);
+  text-align: center;
 }
 
-@media (min-width: 1367px) {
-  .page-hero__content {
-    justify-items: center;
-    text-align: center;
-  }
+.page-hero__content {
+  justify-items: center;
+  text-align: center;
+}
 
-  .page-hero__title,
-  .page-hero__sub {
-    text-align: center;
-  }
+.page-hero__sub {
+  text-align: center;
+}
+
+.contact-meta {
+  margin-top: var(--site-gap);
+}
+
+.contact-meta__badge {
+  display: none;
+}
+
+.contact-direct {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.contact-direct__inner {
+  width: fit-content;
+  max-width: 100%;
+  justify-items: center;
+  text-align: center;
+}
+
+.contact-direct .page-hero__email,
+.contact-direct .page-hero__phone {
+  justify-content: center;
+  text-align: center;
 }

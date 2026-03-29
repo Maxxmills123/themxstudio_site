@@ -115,10 +115,10 @@
 .photo-grid__content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.8rem;
   box-sizing: border-box;
-  height: var(--about-photo-height);
+  min-height: var(--about-photo-height);
   grid-column: 1;
   grid-row: 1;
   max-width: none;
@@ -126,9 +126,9 @@
   align-self: stretch;
   text-align: left;
   padding: 2.9rem 2rem 2rem;
-  background: var(--card-bg2);
-  border-top: 3px solid var(--accent);
-  border-radius: 0 0 12px 12px;
+  background: transparent;
+  border: 3px solid var(--accent);
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -168,8 +168,8 @@
   justify-self: center;
   align-self: stretch;
   transform: translateX(-0.45rem);
-  background: var(--text);
-  border-radius: 10px;
+  background: var(--accent);
+  border-radius: 12px;
   opacity: 1;
   pointer-events: none;
   z-index: 0;
@@ -188,7 +188,7 @@
   align-self: stretch;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   transform: translate3d(
     calc(var(--photo-base-offset-x) + var(--photo-scroll-x)),
     0,
@@ -301,13 +301,13 @@
   .photo-grid__content {
     grid-row: 2;
     width: 100%;
-    height: auto;
+    min-height: 0;
     justify-content: flex-start;
     justify-self: stretch;
     align-self: auto;
     gap: 0.7rem;
     padding: 1.15rem 1.1rem 1.1rem;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
   }
 
   .photo-grid__title {

@@ -253,51 +253,32 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
 });
 
 (() => {
-  const initCopyAccordion = ({
-    itemSelector,
-    triggerSelector,
-    panelSelector,
-  }) => {
-    const items = Array.from(document.querySelectorAll(itemSelector));
-    if (!items.length) return;
+  const flattenCopySections = ({ triggerSelector, panelSelector }) => {
+    const triggers = Array.from(document.querySelectorAll(triggerSelector));
+    if (!triggers.length) return;
 
-    const setItemOpen = (item, open) => {
-      const trigger = item.querySelector(triggerSelector);
-      const panel = item.querySelector(panelSelector);
-      if (!trigger || !panel) return;
-      trigger.setAttribute("aria-expanded", open ? "true" : "false");
-      panel.hidden = !open;
-    };
+    triggers.forEach((trigger) => {
+      const replacement = document.createElement("span");
+      replacement.className = trigger.className;
 
-    const closeOthers = (activeItem) => {
-      items.forEach((item) => {
-        if (item !== activeItem) setItemOpen(item, false);
-      });
-    };
+      while (trigger.firstChild) {
+        replacement.appendChild(trigger.firstChild);
+      }
 
-    items.forEach((item) => {
-      const trigger = item.querySelector(triggerSelector);
-      if (!trigger) return;
-
-      trigger.addEventListener("click", () => {
-        const isOpen = trigger.getAttribute("aria-expanded") === "true";
-        closeOthers(item);
-        setItemOpen(item, !isOpen);
-      });
+      trigger.replaceWith(replacement);
     });
 
-    closeOthers(items[0]);
-    setItemOpen(items[0], true);
+    document.querySelectorAll(panelSelector).forEach((panel) => {
+      panel.hidden = false;
+    });
   };
 
-  initCopyAccordion({
-    itemSelector: ".intro-copy__item",
+  flattenCopySections({
     triggerSelector: ".intro-copy__trigger",
     panelSelector: ".intro-copy__panel",
   });
 
-  initCopyAccordion({
-    itemSelector: ".offer-copy__item",
+  flattenCopySections({
     triggerSelector: ".offer-copy__trigger",
     panelSelector: ".offer-copy__panel",
   });
