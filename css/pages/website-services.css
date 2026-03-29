@@ -3,55 +3,55 @@
   --accent-hover: #a9ffc7;
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero .page-hero__content {
+.service-page .website-services__hero .page-hero__content {
   position: relative;
   justify-items: start;
   text-align: left;
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero .page-hero__title {
+.service-page .website-services__hero .page-hero__title {
   display: block;
   color: var(--text);
   max-width: 100%;
   text-align: left;
 }
 
-.service-page:not(.landing-brisbane-page)
+.service-page
   .website-services__hero
   .page-hero__title:has(.pricing-type[data-type-text]) {
   min-height: max(var(--page-hero-title-reserve, 0px), 2.05em);
 }
 
-.service-page:not(.landing-brisbane-page) .pricing-type,
-.service-page:not(.landing-brisbane-page) .pricing-type__text {
+.service-page .pricing-type,
+.service-page .pricing-type__text {
   margin-inline: 0;
   text-align: left;
   transform-origin: left top;
 }
 
-.service-page:not(.landing-brisbane-page) .pricing-type__text {
+.service-page .pricing-type__text {
   white-space: pre-line;
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero .page-hero__sub {
+.service-page .website-services__hero .page-hero__sub {
   max-width: 48rem;
   margin-inline: 0;
   text-align: left;
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero-wrap {
+.service-page .website-services__hero-wrap {
   min-height: auto;
   display: flex;
   flex-direction: column;
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero {
+.service-page .website-services__hero {
   min-height: 60svh;
   margin-bottom: var(--site-gap);
   padding-bottom: var(--site-gap);
 }
 
-.service-page:not(.landing-brisbane-page) .website-services__hero-wrap .hero-points {
+.service-page .website-services__hero-wrap .hero-points {
   margin-top: auto;
 }
 
@@ -88,26 +88,26 @@
     --site-gap: 2rem;
   }
 
-  .service-page:not(.landing-brisbane-page) .website-services__hero .page-hero__title {
+  .service-page .website-services__hero .page-hero__title {
     display: block;
     text-align: left;
   }
 
-  .service-page:not(.landing-brisbane-page)
+  .service-page
     .website-services__hero
     .page-hero__title:has(.pricing-type[data-type-text]) {
     min-height: max(var(--page-hero-title-reserve, 0px), 2.15em);
   }
 
-  .service-page:not(.landing-brisbane-page) .pricing-type,
-  .service-page:not(.landing-brisbane-page) .pricing-type__text,
-  .service-page:not(.landing-brisbane-page) .website-services__hero .page-hero__sub {
+  .service-page .pricing-type,
+  .service-page .pricing-type__text,
+  .service-page .website-services__hero .page-hero__sub {
     margin-inline: 0;
     text-align: left;
     transform-origin: left top;
   }
 
-  .service-page:not(.landing-brisbane-page) .pricing-type__text {
+  .service-page .pricing-type__text {
     white-space: normal;
   }
 
@@ -127,7 +127,4 @@
 .discovery-call,
 .faq {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
-  padding-bottom: var(--site-gap);
 }

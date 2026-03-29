@@ -14,8 +14,7 @@
 }
 
 .blog-article {
-  padding-bottom: var(--site-gap);
-  margin-bottom: var(--site-gap);
+  margin-top: var(--site-gap);
 }
 
 .blog-article__inner {
@@ -108,8 +107,6 @@
 
 .card-grid {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
 }
 
 .card-grid__grid {
@@ -132,7 +129,7 @@
   padding: clamp(1.5rem, 4vw, 3rem);
   border: 0;
   border-radius: 12px;
-  background: var(--card-bg);
+  background: var(--card-bg2);
   color: var(--text);
   min-width: 0;
 }

@@ -90,13 +90,6 @@
 .intro-copy,
 .photo-grid {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
-}
-
-.photo-grid {
-  padding-bottom: var(--site-gap);
-  margin-bottom: var(--site-gap);
 }
 
 .photo-grid__inner {
@@ -133,7 +126,7 @@
   align-self: stretch;
   text-align: left;
   padding: 2.9rem 2rem 2rem;
-  background: var(--card-bg);
+  background: var(--card-bg2);
   border-top: 3px solid var(--accent);
   border-radius: 0 0 12px 12px;
   overflow: hidden;

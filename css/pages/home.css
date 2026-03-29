@@ -86,8 +86,6 @@ main {
 .services,
 .offer-copy {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
 }
 
 .discovery-call {

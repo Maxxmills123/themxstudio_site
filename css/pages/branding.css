@@ -12,9 +12,6 @@
 .discovery-call,
 .faq {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
-  padding-bottom: var(--site-gap);
 }
 
 .pricing-grid3--three-col .pricing-grid3__cols {

@@ -115,9 +115,6 @@
 .locations-page .discovery-call,
 .locations-page .faq {
   margin-top: var(--site-gap);
-  padding-top: var(--site-gap);
-  margin-bottom: var(--site-gap);
-  padding-bottom: var(--site-gap);
 }
 
 .free-audit-page .page-hero.locations-page .page-hero__content {

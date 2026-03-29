@@ -874,7 +874,14 @@ if (header) {
       typeWrap.style.width = `${measuredWidth}px`;
     }
     if (measuredHeight > 0) typeWrap.style.height = `${measuredHeight}px`;
-    if (measuredHeight > 0 && titleEl) {
+    if (titleEl) {
+      const measuredTitleHeight = Math.ceil(
+        titleEl.getBoundingClientRect().height,
+      );
+      if (measuredTitleHeight <= 0) {
+        textEl.textContent = currentText;
+        return;
+      }
       const currentReserve =
         Number.parseFloat(
           getComputedStyle(titleEl).getPropertyValue(
@@ -882,8 +889,8 @@ if (header) {
           ),
         ) || 0;
       const nextReserve = allowShrink
-        ? measuredHeight
-        : Math.max(currentReserve, measuredHeight);
+        ? measuredTitleHeight
+        : Math.max(currentReserve, measuredTitleHeight);
 
       titleEl.style.setProperty("--page-hero-title-reserve", `${nextReserve}px`);
     }

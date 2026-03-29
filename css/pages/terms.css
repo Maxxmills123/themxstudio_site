@@ -13,7 +13,7 @@ body[class~="404body"] .error-page__main {
 }
 
 body[class~="404body"] .error-links {
-  margin-top: clamp(0.5rem, 2vw, 1rem);
+  margin-top: var(--site-gap);
 }
 
 .page-hero {
@@ -51,7 +51,7 @@ body[class~="404body"] .error-links {
 
 
 .error-links {
-  margin-bottom: var(--site-gap);
+  margin-top: var(--site-gap);
 }
 
 .error-links__inner {
@@ -95,7 +95,7 @@ body[class~="404body"] .error-links {
 }
 
 .terms {
-  margin-bottom: var(--site-gap);
+  margin-top: var(--site-gap);
 }
 
 .terms__inner {

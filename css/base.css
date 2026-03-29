@@ -1,23 +1,25 @@
 :root {
-  --bg: #fcfcfc;
-  --text: #101010;
+  --text: #fcfcfc;
+  --bg: #101010;
 
-  --accent: #ff3eb2 !important;
+  --accent: #ff7ad5 !important;
   --accent-hover: #ff84ce !important;
   --surface-border: color-mix(in srgb, var(--text) 12%, transparent);
   --surface-border-strong: color-mix(in srgb, var(--text) 28%, transparent);
   --surface-fill: color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
   --surface-fill-strong: color-mix(in srgb, var(--bg) 88%, var(--text) 12%);
   --rule-color: color-mix(in srgb, var(--text) 38%, transparent);
-  --nav-bg: color-mix(in srgb, var(--text) 95%, transparent);
+  --nav-bg: color-mix(in srgb, var(--bg) 95%, var(--text) 0%);
   --section-bg: color-mix(in srgb, var(--bg) 15%, var(--text) 80%);
   --footer-bg: color-mix(in srgb, var(--text) 5%, var(--bg) 80%);
+  --footer-bg: var(--nav-bg);
   --card-bg: color-mix(in srgb, var(--bg) 85%, var(--accent) 10%);
-  --nav-border: color-mix(in srgb, var(--text) 12%, transparent);
+  --card-bg2: color-mix(in srgb, var(--bg) 85%, var(--text) 10%);
+  --nav-border: solid 2px color-mix(in srgb, var(--text) 30%, transparent);
   --nav-hover: rgba(255, 255, 255, 0.2);
   --page-ombre: none;
   --site-width: 90vw;
-  --site-gap: 4rem;
+  --site-gap: 5rem;
   --section-shell-width: 80%;
   --footer-logo-width: 100px;
 
@@ -416,7 +418,7 @@ main {
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--bg);
+  color: var(--text);
   display: inline-flex;
   align-items: center;
   padding: 8px 15px;
@@ -429,25 +431,25 @@ main {
   margin-top: 0;
   border-radius: 10px;
 }
-.site-header__nav .nav__link:not(.nav__link--contact):hover,
-.site-header__nav .nav__link:not(.nav__link--contact):focus-visible {
+.site-header__nav .nav__link:hover,
+.site-header__nav .nav__link:focus-visible {
   outline: none;
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.22em;
-  color: var(--bg);
+  color: var(--text);
   background: transparent;
   box-shadow: none;
 }
 
-.site-header__nav .nav__link:not(.nav__link--contact)[aria-current="page"] {
+.site-header__nav .nav__link[aria-current="page"] {
   outline: none;
   background: transparent;
   box-shadow: none;
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.22em;
-  color: var(--bg);
+  color: var(--text);
 }
 
 .nav__caret,
@@ -527,7 +529,7 @@ main {
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 0.02em;
-  color: var(--bg);
+  color: var(--text);
   line-height: 1;
   white-space: nowrap;
   user-select: none;
@@ -540,7 +542,7 @@ main {
   display: inline-block;
   padding: 10px;
   border-radius: 10px;
-  color: var(--bg);
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 600;
   text-underline-offset: 6px;
@@ -553,7 +555,7 @@ main {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.22em;
-  color: var(--bg);
+  color: var(--text);
   background: transparent;
   box-shadow: none;
 }
@@ -775,7 +777,7 @@ main {
 
 .site-footer {
   margin-top: var(--site-gap);
-  background: var(--card-bg);
+  background: var(--footer-bg);
   border-radius: 200px 200px 0 0;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -1287,7 +1289,7 @@ main {
     display: inline-flex;
     margin-left: 0;
     flex: 0 0 auto;
-    color: var(--bg);
+    color: var(--text);
   }
 
   .site-header:has(.mobile-panel.is-open) .site-header__wrap {
@@ -1328,14 +1330,14 @@ main {
     box-shadow: none;
     text-decoration: none;
     outline: none;
-    color: var(--bg);
+    color: var(--text);
   }
 
   .mobile-nav__link--contact:hover,
   .mobile-nav__link--contact:focus-visible,
   .mobile-panel__direct-link:hover,
   .mobile-panel__direct-link:focus-visible {
-    color: var(--bg);
+    color: var(--text);
   }
 
   .mobile-nav__link,
@@ -1346,7 +1348,15 @@ main {
   .mobile-cat__trigger .nav__caret,
   .mobile-acc__panel .nav__menu-link,
   .mobile-panel__direct-link {
-    color: var(--bg);
+    color: var(--text);
+  }
+
+  .mobile-nav__link[aria-current="page"],
+  .mobile-acc__panel .nav__menu-link[aria-current="page"] {
+    background: none;
+    box-shadow: none;
+    color: var(--text);
+    text-decoration: none;
   }
 
   .mobile-nav__link,
