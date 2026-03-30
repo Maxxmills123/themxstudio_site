@@ -18,7 +18,8 @@
 }
 
 .contact-meta {
-  margin-top: var(--site-gap);
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .contact-meta__badge {
