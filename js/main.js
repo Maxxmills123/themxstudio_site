@@ -291,13 +291,27 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
   lists.forEach((list) => {
     const items = Array.from(list.querySelectorAll(".faq__item"));
     if (!items.length) return;
+    const firstItem = items[0];
+
+    if (firstItem) {
+      firstItem.open = true;
+      items.forEach((item) => {
+        if (item !== firstItem) item.open = false;
+      });
+    }
 
     items.forEach((item) => {
       item.addEventListener("toggle", () => {
-        if (!item.open) return;
-        items.forEach((other) => {
-          if (other !== item) other.open = false;
-        });
+        if (item.open) {
+          items.forEach((other) => {
+            if (other !== item) other.open = false;
+          });
+          return;
+        }
+
+        if (!items.some((other) => other.open) && firstItem) {
+          firstItem.open = true;
+        }
       });
     });
   });

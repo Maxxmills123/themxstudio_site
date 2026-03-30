@@ -16,10 +16,10 @@
   width: min(90vw, 480px);
   max-height: min(88vh, 48rem);
   overflow-y: auto;
-  background: var(--card-bg2);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1.5rem 2rem 2rem;
-  border-top: 3px solid var(--accent);
+  border: 0;
 }
 
 .form-modal__header {

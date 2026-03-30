@@ -1,7 +1,10 @@
 body.thank-you-page {
   --accent: #ff3eb2;
   --accent-hover: #ffa5db;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: var(--page-ombre);
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 .thank-you-page main {

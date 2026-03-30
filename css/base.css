@@ -1,9 +1,11 @@
 :root {
   --text: #fcfcfc;
   --bg: #101010;
+  --bg: #fcfcfc;
+  --text: #101010;
 
-  --accent: #ff7ad5 !important;
-  --accent-hover: #ff84ce !important;
+  --accent: #A970FF !important;
+  --accent-hover: #d8c2f8  !important;
   --surface-border: color-mix(in srgb, var(--text) 12%, transparent);
   --surface-border-strong: color-mix(in srgb, var(--text) 28%, transparent);
   --surface-fill: color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
@@ -13,14 +15,17 @@
   --section-bg: color-mix(in srgb, var(--bg) 15%, var(--text) 80%);
   --footer-bg: color-mix(in srgb, var(--text) 5%, var(--bg) 80%);
   --footer-bg: var(--nav-bg);
-  --card-bg: color-mix(in srgb, var(--bg) 85%, var(--accent) 10%);
-  --card-bg2: color-mix(in srgb, var(--bg) 85%, var(--text) 10%);
-  --nav-border: solid 2px color-mix(in srgb, var(--text) 30%, transparent);
+  --nav-border: solid 1px var(--accent);
+  --card-bg: color-mix(in srgb, var(--bg) 85%, var(--accent) 5%);
+  --card-bg2: color-mix(in srgb, var(--bg) 85%, var(--accent) 5%);
   --nav-hover: rgba(255, 255, 255, 0.2);
-  --page-ombre: radial-gradient(
-    100rem 42rem at 50% 0,
-    color-mix(in srgb, var(--accent) 22%, transparent) 0%,
-    transparent 82%
+  --page-ombre: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg) 58%, var(--accent) 42%) 0%,
+    color-mix(in srgb, var(--bg) 68%, var(--accent) 32%) 26%,
+    color-mix(in srgb, var(--bg) 80%, var(--accent) 20%) 56%,
+    color-mix(in srgb, var(--bg) 91%, var(--accent) 9%) 84%,
+    transparent 100%
   );
   --site-width: 90vw;
   --site-gap: 10rem;
@@ -86,6 +91,7 @@ body {
   background-image: var(--page-ombre);
   background-repeat: no-repeat;
   background-position: top center;
+  background-size: 100% clamp(36rem, 68vw, 58rem);
   color: var(--text);
   font-family: var(--font);
   line-height: 1.5;
@@ -339,7 +345,7 @@ main {
   font-family: var(--font);
   font-size: 1.1rem;
   font-weight: 750;
-  line-height: 1.2;
+  line-height: 1.5;
   letter-spacing: 0;
   color: var(--bg);
   background: var(--accent);
@@ -1244,6 +1250,17 @@ main {
 
   body {
     zoom: 1;
+  }
+
+  :root {
+    --page-ombre: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 54%, var(--accent) 46%) 0%,
+      color-mix(in srgb, var(--bg) 66%, var(--accent) 34%) 28%,
+      color-mix(in srgb, var(--bg) 80%, var(--accent) 20%) 58%,
+      color-mix(in srgb, var(--bg) 92%, var(--accent) 8%) 86%,
+      transparent 100%
+    );
   }
 
   .site-header {
