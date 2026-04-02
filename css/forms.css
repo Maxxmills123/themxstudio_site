@@ -16,7 +16,7 @@
   width: min(90vw, 480px);
   max-height: min(88vh, 48rem);
   overflow-y: auto;
-  background: var(--card-bg);
+  background: color-mix(in srgb, var(--bg) 85%, var(--accent) 5%);
   border-radius: 12px;
   padding: 1.5rem 2rem 2rem;
   border: 0;

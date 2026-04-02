@@ -1,0 +1,52 @@
+.contact-meta {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.contact-meta__badge {
+  display: none;
+}
+
+.contact-direct {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.contact-direct__inner {
+  width: fit-content;
+  max-width: 100%;
+  justify-items: center;
+  text-align: center;
+}
+
+.contact-direct .page-hero__email,
+.contact-direct .page-hero__phone {
+  justify-content: center;
+  color: var(--text);
+  text-align: center;
+  text-decoration: none;
+}
+
+.contact-direct .page-hero__email:hover,
+.contact-direct .page-hero__email:focus-visible,
+.contact-direct .page-hero__phone:hover,
+.contact-direct .page-hero__phone:focus-visible {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-forms__card {
+  background: color-mix(in srgb, var(--bg) 85%, var(--accent) 5%);
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .contact-direct .page-hero__email,
+  .contact-direct .page-hero__phone {
+    font-size: clamp(2.4rem, 1.5vw + 1.85rem, 3.35rem);
+    line-height: 1.06;
+  }
+}

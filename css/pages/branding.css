@@ -29,7 +29,7 @@
 }
 
 .pricing-grid3__col--featured .pricing-grid3__card {
-  border-color: var(--accent);
+  border-color: var(--card-border);
   border-width: 3px;
 }
 

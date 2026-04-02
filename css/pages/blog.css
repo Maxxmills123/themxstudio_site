@@ -3,12 +3,16 @@
   --accent-hover: #b8e9ff;
 }
 
+body.blog-post-page {
+  --blog-post-width: var(--site-width);
+}
+
 .page-hero__title {
   color: var(--text);
 }
 
-.page-hero__sub {
-  max-width: 32ch;
+body.blog-post-page .page-hero__sub {
+  max-width: min(100%, 705px);
   font-size: clamp(1rem, 0.42vw + 0.94rem, 1.22rem);
   line-height: 1.58;
 }
@@ -17,13 +21,61 @@
   margin-top: var(--site-gap);
 }
 
+.blog-post-page .page-hero__content,
+.blog-article__inner,
+.blog-post-page .discovery-call,
+.blog-post-page .faq__inner {
+  width: var(--blog-post-width, var(--site-width));
+}
+
 .blog-article__inner {
-  width: var(--site-width);
   max-width: none;
   margin-inline: auto;
   padding-inline: 0;
   display: grid;
   gap: 1rem;
+}
+
+.blog-toc {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.blog-toc__title,
+.blog-toc__list {
+  margin: 0;
+}
+
+.blog-toc__title {
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.blog-toc__list {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-toc__list a {
+  color: var(--accent);
+  opacity: 1;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.blog-toc__list a:hover,
+.blog-toc__list a:focus-visible {
+  color: var(--accent-hover);
 }
 
 .blog-article h2,
@@ -42,6 +94,10 @@
 
 .blog-article h2:first-child {
   margin-top: 0;
+}
+
+.blog-toc + h2 {
+  margin-top: 0.2rem;
 }
 
 .blog-article h3 {
@@ -76,6 +132,10 @@
 .blog-article a:hover,
 .blog-article a:focus-visible {
   color: var(--text);
+}
+
+.blog-article .blog-toc__list a {
+  text-decoration: none;
 }
 
 .blog-share {
@@ -127,7 +187,7 @@
   gap: 0.75rem;
   align-content: start;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 0;
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   background: var(--card-bg2);
   color: var(--text);
@@ -173,6 +233,34 @@
 }
 
 @media (min-width: 1000px) {
+  body.blog-post-page {
+    --blog-post-width: 80%;
+  }
+
+  .page-hero__content {
+    justify-items: start;
+    text-align: left;
+  }
+
+  body.blog-post-page .page-hero__sub {
+    margin-inline: 0;
+    max-width: min(100%, 705px);
+  }
+
+  .blog-share {
+    justify-content: flex-start;
+  }
+
+  .blog-article__inner {
+    max-width: none;
+  }
+
+  .blog-toc {
+    width: 100%;
+    justify-self: stretch;
+    text-align: left;
+  }
+
   .card-grid__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

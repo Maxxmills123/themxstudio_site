@@ -47,12 +47,12 @@
 
 .service-page .website-services__hero {
   min-height: 60svh;
-  margin-bottom: var(--site-gap);
-  padding-bottom: var(--site-gap);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .service-page .website-services__hero-wrap .hero-points {
-  margin-top: auto;
+  margin-top: var(--site-gap);
 }
 
 .website-services__h1 {
@@ -83,10 +83,10 @@
   text-align: left;
 }
 
-@media (max-width: 1366px) {
+@media (min-width: 768px) {
   .service-page .website-services__hero .page-hero__title {
     display: block;
-    text-align: left;
+    text-align: center;
   }
 
   .service-page
@@ -98,20 +98,62 @@
   .service-page .pricing-type,
   .service-page .pricing-type__text,
   .service-page .website-services__hero .page-hero__sub {
-    margin-inline: 0;
-    text-align: left;
-    transform-origin: left top;
+    margin-inline: auto;
+    text-align: center;
+    transform-origin: center top;
   }
 
   .service-page .pricing-type__text {
     white-space: normal;
   }
 
+  .service-page .website-services__hero .page-hero__content {
+    justify-items: center;
+    text-align: center;
+  }
+
   .website-services__h1 {
     width: 100%;
     left: auto;
     transform: none;
+    text-align: center;
+  }
+
+  .service-page .website-services__hero .page-hero__google-proof {
+    justify-self: center;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .service-page .website-services__hero .page-hero__content {
+    justify-items: start;
     text-align: left;
+  }
+
+  .service-page .website-services__hero .page-hero__title,
+  .service-page .website-services__hero .page-hero__sub,
+  .service-page .website-services__hero .pricing-type,
+  .service-page .website-services__hero .pricing-type__text,
+  .service-page .website-services__hero .website-services__h1 {
+    text-align: left;
+  }
+
+  .service-page .website-services__hero .page-hero__sub,
+  .service-page .website-services__hero .pricing-type,
+  .service-page .website-services__hero .pricing-type__text,
+  .service-page .website-services__hero .website-services__h1 {
+    margin-inline: 0;
+  }
+
+  .service-page .website-services__hero .pricing-type,
+  .service-page .website-services__hero .pricing-type__text {
+    transform-origin: left top;
+  }
+
+  .service-page .website-services__hero .page-hero__google-proof {
+    justify-self: start;
+    margin-inline: 0;
   }
 }
 

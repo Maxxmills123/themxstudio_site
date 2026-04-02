@@ -155,7 +155,11 @@ const openMenu = () => {
   menuCloseTimer = null;
   mobileUiAfterMenuClose.active = false;
 
-  mobileMenuHeader?.classList.remove("is-gone", "is-hidden", "is-hidden-footer");
+  mobileMenuHeader?.classList.remove(
+    "is-gone",
+    "is-hidden",
+    "is-hidden-footer",
+  );
   syncMobilePanelHeight();
   mobilePanel.scrollTop = 0;
   mobilePanel.hidden = false;
@@ -253,34 +257,157 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
 });
 
 (() => {
-  const flattenCopySections = ({ triggerSelector, panelSelector }) => {
-    const triggers = Array.from(document.querySelectorAll(triggerSelector));
-    if (!triggers.length) return;
+  const createCopyCaret = (prefix) => {
+    const caret = document.createElement("span");
+    caret.className = `${prefix}__caret`;
+    caret.setAttribute("aria-hidden", "true");
+    caret.innerHTML =
+      '<svg viewBox="0 0 24 24" focusable="false"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+    return caret;
+  };
 
-    triggers.forEach((trigger) => {
-      const replacement = document.createElement("span");
-      replacement.className = trigger.className;
+  const rebuildCopyTitle = (trigger, prefix) => {
+    if (
+      trigger.querySelector(`.${prefix}__trigger-text`) &&
+      trigger.querySelector(`.${prefix}__trigger-tail`)
+    ) {
+      return;
+    }
 
-      while (trigger.firstChild) {
-        replacement.appendChild(trigger.firstChild);
-      }
+    const textWrap = document.createElement("span");
+    textWrap.className = `${prefix}__trigger-text`;
 
-      trigger.replaceWith(replacement);
+    const tailWrap = document.createElement("span");
+    tailWrap.className = `${prefix}__trigger-tail`;
+
+    const nodes = Array.from(trigger.childNodes);
+    if (!nodes.length) return;
+
+    let splitIndex = -1;
+    let tailNode = null;
+
+    for (let index = nodes.length - 1; index >= 0; index -= 1) {
+      const node = nodes[index];
+      if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) continue;
+      splitIndex = index;
+      tailNode = node;
+      break;
+    }
+
+    if (!tailNode) return;
+
+    nodes.slice(0, splitIndex).forEach((node) => {
+      textWrap.appendChild(node);
     });
 
-    document.querySelectorAll(panelSelector).forEach((panel) => {
-      panel.hidden = false;
+    if (tailNode.nodeType === Node.TEXT_NODE) {
+      const raw = tailNode.textContent || "";
+      const trimmed = raw.replace(/\s+$/, "");
+      const lastSpace = trimmed.lastIndexOf(" ");
+
+      if (lastSpace > -1) {
+        const head = trimmed.slice(0, lastSpace + 1);
+        const tail = trimmed.slice(lastSpace + 1);
+        if (head) textWrap.appendChild(document.createTextNode(head));
+        if (tail) tailWrap.appendChild(document.createTextNode(tail));
+      } else if (trimmed) {
+        tailWrap.appendChild(document.createTextNode(trimmed));
+      }
+    } else {
+      tailWrap.appendChild(tailNode);
+    }
+
+    tailWrap.appendChild(createCopyCaret(prefix));
+    trigger.replaceChildren();
+    if (textWrap.childNodes.length) trigger.appendChild(textWrap);
+    trigger.appendChild(tailWrap);
+  };
+
+  const initCopyAccordions = ({
+    itemSelector,
+    titleSelector,
+    triggerSelector,
+    panelSelector,
+    prefix,
+  }) => {
+    const items = Array.from(document.querySelectorAll(itemSelector));
+    if (!items.length) return;
+
+    const getTrigger = (item) =>
+      item.querySelector(triggerSelector) ||
+      item.querySelector(`${titleSelector}[data-copy-trigger="true"]`);
+
+    const setOpen = (item, open) => {
+      const trigger = getTrigger(item);
+      const panel = item.querySelector(panelSelector);
+      if (!trigger || !panel) return;
+      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.hidden = !open;
+    };
+
+    items.forEach((item, index) => {
+      const title = item.querySelector(titleSelector);
+      const panel = item.querySelector(panelSelector);
+      if (!title || !panel) return;
+
+      if (!panel.id) panel.id = `${prefix}-panel-auto-${index + 1}`;
+
+      let trigger = item.querySelector(triggerSelector);
+
+      if (!trigger) {
+        title.dataset.copyTrigger = "true";
+        title.setAttribute("role", "button");
+        title.setAttribute("tabindex", "0");
+        title.setAttribute("aria-controls", panel.id);
+        title.setAttribute("aria-expanded", "false");
+        rebuildCopyTitle(title, prefix);
+        trigger = title;
+      } else {
+        trigger.setAttribute("aria-controls", panel.id);
+      }
+
+      setOpen(item, false);
+
+      if (trigger.dataset.copyAccordionBound === "true") return;
+      trigger.dataset.copyAccordionBound = "true";
+
+      const toggle = (event) => {
+        if (event.target instanceof Element && event.target.closest("a")) return;
+
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        const siblings = Array.from(item.parentElement?.querySelectorAll(itemSelector) || []);
+        siblings.forEach((other) => {
+          if (other !== item) setOpen(other, false);
+        });
+        setOpen(item, !isOpen);
+      };
+
+      trigger.addEventListener("click", toggle);
+
+      if (trigger === title) {
+        trigger.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          toggle(event);
+        });
+      }
     });
   };
 
-  flattenCopySections({
+  initCopyAccordions({
+    itemSelector: ".intro-copy__item",
+    titleSelector: ".intro-copy__title",
     triggerSelector: ".intro-copy__trigger",
     panelSelector: ".intro-copy__panel",
+    prefix: "intro-copy",
   });
 
-  flattenCopySections({
+  initCopyAccordions({
+    itemSelector: ".offer-copy__item",
+    titleSelector: ".offer-copy__title",
     triggerSelector: ".offer-copy__trigger",
     panelSelector: ".offer-copy__panel",
+    prefix: "offer-copy",
   });
 })();
 
@@ -730,11 +857,11 @@ if (header) {
   if (!title) return;
 
   const phrases = [
-    "that work harder",
-    "that look better",
-    "that load faster",
-    "that rank higher",
-    "that get you calls",
+    "work harder",
+    "look better",
+    "load faster",
+    "rank higher",
+    "get you calls",
   ];
   const typeSpeed = 35;
   const deleteSpeed = 35;
@@ -776,7 +903,10 @@ if (header) {
     let maxHeight = Math.ceil(title.getBoundingClientRect().height);
     phrases.forEach((phrase) => {
       measureText.textContent = phrase;
-      maxHeight = Math.max(maxHeight, Math.ceil(measure.getBoundingClientRect().height));
+      maxHeight = Math.max(
+        maxHeight,
+        Math.ceil(measure.getBoundingClientRect().height),
+      );
     });
 
     measure.remove();
@@ -887,7 +1017,10 @@ if (header) {
         ? measuredTitleHeight
         : Math.max(currentReserve, measuredTitleHeight);
 
-      titleEl.style.setProperty("--page-hero-title-reserve", `${nextReserve}px`);
+      titleEl.style.setProperty(
+        "--page-hero-title-reserve",
+        `${nextReserve}px`,
+      );
     }
     textEl.textContent = currentText;
   };
@@ -1343,7 +1476,8 @@ if (header) {
           body,
         });
 
-        if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`Form submission failed: ${response.status}`);
 
         if (successUrl) {
           window.location.assign(successUrl);

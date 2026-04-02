@@ -20,79 +20,67 @@
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/website-design/</loc>
+    <loc>https://themxstudio.com/services/website-design-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/website-redesign/</loc>
+    <loc>https://themxstudio.com/services/website-redesign-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/website-hosting/</loc>
+    <loc>https://themxstudio.com/services/website-hosting-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/website-maintenance/</loc>
+    <loc>https://themxstudio.com/services/website-maintenance-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/seo/</loc>
+    <loc>https://themxstudio.com/services/seo-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/google-ads/</loc>
+    <loc>https://themxstudio.com/services/google-ads-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/ai-search-optimisation/</loc>
+    <loc>https://themxstudio.com/services/ai-search-optimisation-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/brand-design/</loc>
+    <loc>https://themxstudio.com/services/brand-design-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/logo-design/</loc>
+    <loc>https://themxstudio.com/services/logo-design-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://themxstudio.com/services/copywriting/</loc>
+    <loc>https://themxstudio.com/services/copywriting-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://themxstudio.com/pricing/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://themxstudio.com/locations/web-design-brisbane/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://themxstudio.com/locations/seo-brisbane/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -113,6 +101,18 @@
     <loc>https://themxstudio.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/blog/local-seo-brisbane-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://themxstudio.com/blog/seo-vs-google-ads-brisbane/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <url>

@@ -211,5 +211,93 @@
     transform: none;
     text-align: left;
   }
+}
 
+@media (max-width: 1024px) {
+  .locations-page .page-hero__content,
+  .free-audit-page .page-hero.locations-page .page-hero__content {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .locations-page .page-hero__title,
+  .locations-page .page-hero__sub,
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .locations-page .locations-page__h1,
+  .free-audit-page .page-hero.locations-page .page-hero__title,
+  .free-audit-page .page-hero.locations-page .pricing-type,
+  .free-audit-page .page-hero.locations-page .pricing-type__text,
+  .free-audit-page .page-hero.locations-page .locations-page__h1 {
+    text-align: center;
+  }
+
+  .locations-page .page-hero__sub,
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .locations-page .locations-page__h1,
+  .free-audit-page .page-hero.locations-page .pricing-type,
+  .free-audit-page .page-hero.locations-page .pricing-type__text,
+  .free-audit-page .page-hero.locations-page .locations-page__h1 {
+    margin-inline: auto;
+  }
+
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .free-audit-page .page-hero.locations-page .pricing-type,
+  .free-audit-page .page-hero.locations-page .pricing-type__text {
+    transform-origin: center top;
+  }
+
+  .free-audit-page .page-hero.locations-page .page-hero__title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .locations-page .page-hero .page-hero__google-proof {
+    justify-self: center;
+  }
+
+  .seo-brisbane-page .page-hero__title > .pricing-type {
+    inset: 0 0 auto 0;
+    width: fit-content;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .locations-page .page-hero__content {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .locations-page .page-hero__title,
+  .locations-page .page-hero__sub,
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .locations-page .locations-page__h1 {
+    text-align: center;
+  }
+
+  .locations-page .page-hero__sub,
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text,
+  .locations-page .locations-page__h1 {
+    margin-inline: auto;
+  }
+
+  .locations-page .pricing-type,
+  .locations-page .pricing-type__text {
+    transform-origin: center top;
+  }
+
+  .locations-page .page-hero__google-proof {
+    justify-self: center;
+  }
+
+  .seo-brisbane-page .page-hero__title > .pricing-type {
+    inset: 0 0 auto 0;
+    width: fit-content;
+    margin-inline: auto;
+  }
 }

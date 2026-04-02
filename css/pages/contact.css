@@ -16,33 +16,3 @@
 .page-hero__sub {
   text-align: center;
 }
-
-.contact-meta {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.contact-meta__badge {
-  display: none;
-}
-
-.contact-direct {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-  padding: 0;
-}
-
-.contact-direct__inner {
-  width: fit-content;
-  max-width: 100%;
-  justify-items: center;
-  text-align: center;
-}
-
-.contact-direct .page-hero__email,
-.contact-direct .page-hero__phone {
-  justify-content: center;
-  text-align: center;
-}
