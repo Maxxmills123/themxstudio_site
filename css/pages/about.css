@@ -92,6 +92,11 @@
   margin-top: var(--site-gap);
 }
 
+.home-maxx {
+  margin-top: var(--site-gap);
+  padding-top: 3rem;
+}
+
 .photo-grid__inner {
   width: var(--site-width);
   max-width: none;
@@ -260,6 +265,10 @@
   .page-hero {
     min-height: auto;
     padding: clamp(6rem, 10vw, 8rem) 0 0;
+  }
+
+  .home-maxx {
+    margin-top: var(--site-gap);
   }
 
   .hero-divider {

@@ -7,6 +7,10 @@ body.blog-post-page {
   --blog-post-width: var(--site-width);
 }
 
+body.blog-index-page {
+  background-image: none;
+}
+
 .page-hero__title {
   color: var(--text);
 }
@@ -187,9 +191,10 @@ body.blog-post-page .page-hero__sub {
   gap: 0.75rem;
   align-content: start;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid var(--card-border);
+  border: 0;
   border-radius: 12px;
   background: var(--card-bg2);
+  box-shadow: var(--card-shadow);
   color: var(--text);
   min-width: 0;
 }

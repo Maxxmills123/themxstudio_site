@@ -39,7 +39,7 @@
 }
 
 .contact-forms__card {
-  background: color-mix(in srgb, var(--bg) 85%, var(--accent) 5%);
+  background: var(--card-bg);
   border: 0;
 }
 

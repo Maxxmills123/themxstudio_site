@@ -1,23 +1,26 @@
 :root {
   --text: #fcfcfc;
   --bg: #101010;
-  --bg: #f8f4fc;
+  --bg: #fdfbff;
   --text: #101010;
 
-  --accent: #FE276B !important;
-  --accent-hover: #ff75a1!important;
+  --accent: #ff3964 !important;
+  --accent-hover: #ff7f9b!important;
   --surface-border: color-mix(in srgb, var(--text) 12%, transparent);
   --surface-border-strong: color-mix(in srgb, var(--text) 28%, transparent);
   --surface-fill: color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
   --surface-fill-strong: color-mix(in srgb, var(--bg) 88%, var(--text) 12%);
   --rule-color: color-mix(in srgb, var(--text) 38%, transparent);
-  --nav-bg: color-mix(in srgb, var(--bg) 90%, #ffffff 5%);
+  --nav-bg: color-mix(in srgb, var(--bg) 97%, transparent 3%);
   --section-bg: color-mix(in srgb, var(--bg) 15%, var(--text) 80%);
   --bg-footer: color-mix(in srgb, var(--bg) 80%, var(--accent) 20%);
   --nav-border: 0 2px 8px color-mix(in srgb, var(--text) 35%, transparent);
-  --card-border: color-mix(in srgb, var(--accent) 42%, transparent);
-  --card-bg: color-mix(in srgb, var(--bg) 94%, var(--accent) 6%);
-  --card-bg2: color-mix(in srgb, var(--bg) 94%, var(--accent) 6%);
+  --card-border: color-mix(in srgb, var(--text) 24%, transparent);
+  --card-bg: color-mix(in srgb, var(--bg) 84%, var(--accent) 16%);
+  --card-bg2: color-mix(in srgb, var(--bg) 84%, var(--accent) 16%);
+  --card-shadow:
+    0 22px 34px color-mix(in srgb, var(--text) 18%, transparent),
+    0 8px 18px rgba(0, 0, 0, 0.06);
   --nav-hover: rgba(255, 255, 255, 0.2);
   --page-ombre: linear-gradient(
     180deg,
@@ -782,20 +785,24 @@ main {
   pointer-events: none;
 }
 
+.site-footer {
+  --footer-accent-radius: clamp(2.75rem, 4vw, 3rem);
+}
+
 .site-footer,
 .site-footer__container {
   margin: 0;
   padding: 0;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .site-footer {
   margin-top: var(--site-gap);
-  background: var(--bg-footer);
-  border-top-left-radius: 200px;
-  border-top-right-radius: 200px;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: var(--text);
+  border-top-left-radius: var(--footer-accent-radius);
+  border-top-right-radius: var(--footer-accent-radius);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   overflow: hidden;
 }
 
@@ -819,7 +826,7 @@ main {
     a,
     span
   ) {
-  color: var(--text);
+  color: var(--bg);
 }
 
 .site-footer__container {
@@ -876,7 +883,7 @@ main {
 }
 
 .site-footer__info-grid > * {
-  border-left: 1px solid var(--text);
+  border-left: 1px solid var(--bg);
   padding-left: clamp(0.9rem, 1.4vw, 1.35rem);
 }
 
@@ -922,13 +929,13 @@ main {
   margin: 0;
   padding: 0;
   line-height: 0;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .footer-social__link svg {
   display: block;
   margin: 0;
-  color: var(--text);
+  color: var(--bg);
   fill: currentColor;
 }
 
@@ -936,7 +943,7 @@ main {
 .site-footer__copyright,
 .footer-social__link {
   margin: 0;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .footer-link {
@@ -961,7 +968,7 @@ main {
 .site-footer__contact .site-footer__phone {
   font-size: clamp(1.28rem, 1.6vw, 1.72rem);
   font-weight: 700;
-  color: var(--text);
+  color: var(--bg);
   text-decoration-line: underline;
   text-decoration-thickness: 0.06em;
   text-underline-offset: 0.08em;
@@ -985,7 +992,7 @@ main {
   padding-top: 0;
   font-size: clamp(1.28rem, 1.6vw, 1.72rem);
   font-weight: 700;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .site-footer__slogan {
@@ -995,7 +1002,7 @@ main {
   line-height: 0.92;
   letter-spacing: 0.01em;
   margin-bottom: 2.75rem;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .site-footer__slogan-link {
@@ -1080,7 +1087,7 @@ main {
 
 .site-footer__copyright {
   font-weight: 600;
-  color: var(--text);
+  color: var(--bg);
 }
 
 .site-footer__slogan-link .link-arrow svg {
@@ -1504,7 +1511,7 @@ main {
 
 @media (max-width: 767px) {
   .site-footer {
-    border-radius: 2.75rem 2.75rem 0 0;
+    border-radius: var(--footer-accent-radius) var(--footer-accent-radius) 0 0;
   }
 
   .site-footer__container {

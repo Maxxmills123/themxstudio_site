@@ -3,6 +3,10 @@
   --accent-hover: #ffa5db;
 }
 
+body.contact-page {
+  background-image: none;
+}
+
 .page-hero__title {
   color: var(--text);
   text-align: center;

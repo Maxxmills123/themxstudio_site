@@ -1,6 +1,54 @@
 const dropdowns = Array.from(document.querySelectorAll(".nav__item--dropdown"));
 
 (() => {
+  const portraits = document.querySelectorAll(".home-maxx__portrait");
+  if (!portraits.length) return;
+
+  const waitForImageReady = async (image) => {
+    if (!(image instanceof HTMLImageElement)) return false;
+
+    if (!image.complete || image.naturalWidth === 0) {
+      await new Promise((resolve) => {
+        const finish = () => resolve();
+        image.addEventListener("load", finish, { once: true });
+        image.addEventListener("error", finish, { once: true });
+      });
+    }
+
+    if (!image.complete || image.naturalWidth === 0) return false;
+
+    if (typeof image.decode === "function") {
+      try {
+        await image.decode();
+      } catch {
+        // decode() can reject for already-renderable images; ignore it.
+      }
+    }
+
+    return image.naturalWidth > 0;
+  };
+
+  portraits.forEach((portrait) => {
+    const blob = portrait.querySelector(".home-maxx__blob");
+    const image = portrait.querySelector(".home-maxx__image");
+    if (!(blob instanceof SVGElement) || !(image instanceof HTMLImageElement))
+      return;
+
+    blob.style.visibility = "hidden";
+    blob.style.opacity = "0";
+
+    waitForImageReady(image).then((isReady) => {
+      if (!isReady) return;
+
+      requestAnimationFrame(() => {
+        blob.style.visibility = "";
+        blob.style.opacity = "";
+      });
+    });
+  });
+})();
+
+(() => {
   const normalizePath = (value) => {
     if (!value) return "/";
     const path = value
@@ -337,6 +385,16 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
       item.querySelector(triggerSelector) ||
       item.querySelector(`${titleSelector}[data-copy-trigger="true"]`);
 
+    const getSiblings = (item) =>
+      Array.from(item.parentElement?.querySelectorAll(itemSelector) || []);
+
+    const isItemOpen = (item) => {
+      const trigger = getTrigger(item);
+      const panel = item.querySelector(panelSelector);
+      if (!panel) return false;
+      return trigger?.getAttribute("aria-expanded") === "true" || !panel.hidden;
+    };
+
     const setOpen = (item, open) => {
       const trigger = getTrigger(item);
       const panel = item.querySelector(panelSelector);
@@ -366,20 +424,27 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
         trigger.setAttribute("aria-controls", panel.id);
       }
 
-      setOpen(item, false);
-
       if (trigger.dataset.copyAccordionBound === "true") return;
       trigger.dataset.copyAccordionBound = "true";
 
       const toggle = (event) => {
         if (event.target instanceof Element && event.target.closest("a")) return;
 
-        const isOpen = trigger.getAttribute("aria-expanded") === "true";
-        const siblings = Array.from(item.parentElement?.querySelectorAll(itemSelector) || []);
+        const isCurrentlyOpen = trigger.getAttribute("aria-expanded") === "true";
+        const siblings = getSiblings(item);
+
+        if (isCurrentlyOpen) {
+          setOpen(item, false);
+          if (!siblings.some((other) => isItemOpen(other)) && siblings[0]) {
+            setOpen(siblings[0], true);
+          }
+          return;
+        }
+
         siblings.forEach((other) => {
           if (other !== item) setOpen(other, false);
         });
-        setOpen(item, !isOpen);
+        setOpen(item, true);
       };
 
       trigger.addEventListener("click", toggle);
@@ -391,6 +456,23 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
           toggle(event);
         });
       }
+    });
+
+    const groups = new Map();
+    items.forEach((item) => {
+      const parent = item.parentElement;
+      if (!parent) return;
+      const group = groups.get(parent) || [];
+      group.push(item);
+      groups.set(parent, group);
+    });
+
+    groups.forEach((group) => {
+      if (!group.length) return;
+      const activeItem = group[0];
+      group.forEach((item) => {
+        setOpen(item, item === activeItem);
+      });
     });
   };
 
@@ -1308,7 +1390,7 @@ if (header) {
 
   let scrollTimer = null;
   let footerVisible = false;
-  const idleDelayMs = 2000;
+  const idleDelayMs = 500;
   const isInTopZone = () => {
     const y = window.scrollY || window.pageYOffset || 0;
     const vh = window.innerHeight || document.documentElement.clientHeight || 0;

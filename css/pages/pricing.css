@@ -3,6 +3,10 @@
   --accent-hover: #a7ff93;
 }
 
+body.pricing-page {
+  background-image: none;
+}
+
 main {
   display: flex;
   flex-direction: column;

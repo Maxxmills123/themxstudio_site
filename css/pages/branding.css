@@ -30,7 +30,7 @@
 
 .pricing-grid3__col--featured .pricing-grid3__card {
   border-color: var(--card-border);
-  border-width: 3px;
+  border-width: 1px;
 }
 
 .pricing-grid3__badge {
