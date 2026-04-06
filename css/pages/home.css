@@ -20,7 +20,7 @@ body.home-page .site-header {
 .home-maxx {
   width: var(--site-width);
   max-width: none;
-  margin: 0 auto 0;
+  margin: 5rem auto 0;
   overflow: visible;
 }
 

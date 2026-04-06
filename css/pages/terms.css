@@ -3,11 +3,6 @@
   --accent-hover: #c8c8c8;
 }
 
-body.terms-page,
-body[class~="404body"] {
-  background-image: none;
-}
-
 body[class~="404body"] {
   min-height: 100svh;
 }
@@ -53,7 +48,6 @@ body[class~="404body"] .error-links {
   margin-inline: auto;
   text-align: center;
 }
-
 
 .error-links {
   margin-top: var(--site-gap);
@@ -101,6 +95,12 @@ body[class~="404body"] .error-links {
 
 .terms {
   margin-top: var(--site-gap);
+}
+
+body.terms-page,
+body.thank-you-page,
+body.error-page {
+  background-image: none;
 }
 
 .terms-page .page-hero__content,
