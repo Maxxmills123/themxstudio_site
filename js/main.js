@@ -1150,6 +1150,7 @@ if (header) {
   };
 
   requestAnimationFrame(() => {
+    syncWrapBox();
     textEl.textContent = "";
     setTimeout(tick, 160);
   });

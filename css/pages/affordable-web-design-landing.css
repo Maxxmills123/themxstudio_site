@@ -109,12 +109,11 @@
 .ads-landing-page .page-hero__title {
   overflow: visible;
   clip-path: none;
-  padding-bottom: 0.15em;
   display: flex;
   justify-content: center;
   width: 100%;
   max-width: 100%;
-  min-height: var(--page-hero-title-reserve, 0);
+  min-height: var(--page-hero-title-reserve, 10rem);
   color: var(--text);
   font-family: var(--font-accent);
   font-size: clamp(4rem, 10vw, 9rem);
@@ -123,6 +122,7 @@
   text-align: center;
   word-break: break-word;
   overflow-wrap: anywhere;
+    margin-bottom: 5rem;
 }
 
 .landing-hero__promo {
@@ -357,7 +357,7 @@
     place-items: center;
     font-size: clamp(3rem, 13vw, 5.25rem);
     max-width: 100%;
-    min-height: var(--page-hero-title-reserve, 0);
+    min-height: var(--page-hero-title-reserve, 10rem);
     text-align: center;
   }
 
