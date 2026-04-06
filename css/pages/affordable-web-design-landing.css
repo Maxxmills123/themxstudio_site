@@ -95,7 +95,6 @@
 }
 
 .landing-hero.page-hero {
-  margin-top: 5rem;
   margin-bottom: 5rem;
   min-height: auto;
   padding-bottom: clamp(1rem, 3vw, 2rem);
@@ -108,7 +107,9 @@
 }
 
 .ads-landing-page .page-hero__title {
-  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  padding-bottom: 0.15em;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -220,11 +221,13 @@
   transform: none;
   border-radius: 0;
   box-shadow: none;
+  overflow: visible;
 }
 
 .ads-landing-page .photo-grid__image {
-  transform: none;
+  transform: scale(0.8);
   border-radius: 0;
+  object-fit: contain;
   object-position: center top;
 }
 

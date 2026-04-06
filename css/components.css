@@ -4453,7 +4453,7 @@
   .home-maxx__inner {
     grid-template-columns: 1fr;
     justify-items: center;
-    gap: clamp(1.5rem, 2.2vw, 2rem);
+    gap: 5rem;
     min-height: 0;
   }
   .home-maxx__copy {

@@ -39,8 +39,6 @@ button {
   content: none;
 }
 :root {
-  --text: #fcfcfc;
-  --bg: #101010;
   --bg: #fdfbff;
   --text: #101010;
   --accent: #ff3964 !important;
