@@ -378,7 +378,9 @@ document.querySelectorAll(".mobile-acc__trigger").forEach((btn) => {
     panelSelector,
     prefix,
   }) => {
-    const items = Array.from(document.querySelectorAll(itemSelector));
+    const items = Array.from(document.querySelectorAll(itemSelector)).filter(
+      (item) => !item.closest('[data-copy-static="true"]')
+    );
     if (!items.length) return;
 
     const getTrigger = (item) =>

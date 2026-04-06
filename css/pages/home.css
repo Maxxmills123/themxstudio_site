@@ -17,6 +17,12 @@ body.home-page .site-header {
   inset-inline: 0;
 }
 
+.home-maxx {
+  width: var(--site-width);
+  max-width: none;
+  margin: 0 auto 0;
+  overflow: visible;
+}
 
 
 .hero__content,
@@ -206,9 +212,6 @@ body.home-page .site-header {
 }
 
 @media (max-width: 1366px) {
-  body.home-page .home-maxx {
-    padding-top: var(--site-gap-mobile);
-  }
 
   .discovery-call__title,
   .discovery-call__copy {

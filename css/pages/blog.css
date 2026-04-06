@@ -164,9 +164,9 @@ body.blog-post-page .page-hero__sub {
 
 .blog-share__action:hover,
 .blog-share__action:focus-visible,
-.site-footer__top-social .footer-social__link:hover,
-.site-footer__top-social .footer-social__link:focus-visible {
-  color: var(--text);
+.site-footer__social-row .footer-social__link:hover,
+.site-footer__social-row .footer-social__link:focus-visible {
+  color: var(--accent-hover);
 }
 
 .card-grid {
@@ -233,8 +233,8 @@ body.blog-post-page .page-hero__sub {
   text-decoration-color: currentColor;
 }
 
-.site-footer__top-social .footer-social__link {
-  color: var(--text);
+.site-footer__social-row .footer-social__link {
+  color: var(--bg);
 }
 
 @media (min-width: 1000px) {
