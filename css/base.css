@@ -38,11 +38,12 @@ button {
 .site-footer__top-grid::after {
   content: none;
 }
+
 :root {
   --bg: #fdfbff;
   --text: #101010;
-  --accent: #ff3964 !important;
-  --accent-hover: #ff7f9b !important;
+  --accent: #FF6B58 !important;
+  --accent-hover: #ff9d90!important;
   --surface-border: color-mix(in srgb, var(--text) 12%, transparent);
   --surface-border-strong: color-mix(in srgb, var(--text) 28%, transparent);
   --surface-fill: color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
